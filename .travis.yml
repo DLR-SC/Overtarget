@@ -6,3 +6,275 @@ jdk:
 cache:
   directories:
   - $HOME/.m2
+
+addons:
+  # -----------------------------------------------------------
+  # Make the sourceforge hosts known, thus ssh connections will
+  # not ask to accept the finger print of the server
+  # -----------------------------------------------------------
+  ssh_known_hosts: frs.sourceforge.net
+
+install:
+- true
+
+stages:
+# ------------------------------------
+# Just one stage, multiple stages 
+# with maven overcomplicate the things
+# ------------------------------------
+- name: clean-install
+
+env:
+  global:
+  # ---------------------------------------------
+  # API Token for access to github
+  # ---------------------------------------------
+  secure: qN2PDhJ+30l8wLE9euWQhTny9CziOfzq38pfSsb8f3AikiFz4IdX757NJAi3optIlpFU4GBa9zwvGGx9QgCIoZZrchtyx/9J0/mH5DTYjis+e6El3AU8dMejRtCwRRHktUCDS4V36tjxhUMjZ4KXMPKmkhBBfuyUJgcew3QddPt+LadMmfh0lJbuBbEjJNGh55hzZcgmMJvn5IrO5E7mquETr3d67WN85BlxvPHCSSn2mbKwVCWDzVgtNVXzTL9BjdjvlwuqjNm6/RsetQIeIdDeO0FORwGcMYG4i/95keuZvMz2Jx5Ai2Arsl3hUqHZJabE87zS1axSWV35Q0CQqF4R/kzK3ndmjtAqAUjD1LKRLCyFMO7QpYNsFmVEtEd7iYgtjEq9CscWf/tPEkmlyT45VkYWMMWgF4/yOqnz/+aVfitHVFVo1uJqtmf6B//8FB6hIZVRtqe4ZjG0L2jcvTpulfgxCHOmJ2dy5hMHuOIZi+KNfn7EueHCgM6WhyC5OXxbbRsxUvzpoicr4htNVN9i6T+JsDQBOZIFVwSnKwibjwjn06PNznE4+7Ayrz5NzEQ5FXTfd0yZIczXR2plwtinQVWeBQ1teqO2wQQ+WI+YytA+rcqasCSePQvCKPs843yAmHaw/Kd+cGu/xCJoz+UapcdO2jQBe0L6VgHfQBk=
+
+after_success:
+  # ---------------------------------------------
+  # Dowload the codecov analysis script and 
+  # execute it
+  # ---------------------------------------------
+  - bash <(curl -s https://codecov.io/bash)
+
+jobs:
+  include:
+    # -----------------------------------------------------------
+    # Setup of the project name in global place. These variables
+    # are used in a lot of places in this script, e.g. for
+    # deployment to sourceforge etc.
+    # ----------------------------------------------------------- 
+    - PROJECT_NAME = Overtarget
+    - PROJECT_NAME_GH = DLR-SC/Overtarget
+    - PROJECT_NAME_SF = overtarget 
+
+    # ***********************************************************
+    # FEATURE BUILD - For all other branches, no deploy
+    # ***********************************************************
+    
+    # -----------------------------------------------------------
+    # Build job for general feature builds that do not deploy 
+    # any artifacts nor create releases and tags, this is
+    # applicable for master branches as well, they should only 
+    # deploy when tagged.
+    #------------------------------------------------------------
+    - stage: clean-install
+      if: branch NOT IN (integration, development, integration_snapshot, development_snapshot) AND NOT (tag =~ /^Release/)
+      name: Clean Install Feature Build
+      script:
+      # -------------------------------------------------------
+      # call the maven build and store the output in a log file
+      # use this log file to analyze it for compiler warnings
+      # -------------------------------------------------------
+      - mvn clean install -P development,deployUnsecured -B -V | tee maven.log
+      - echo "Check for warnings:"
+      - cat maven.log
+      - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
+      - echo "Check for failed test cases:"
+      - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
+    
+    # ***********************************************************
+    # DEVELOPMENT BUILD - for development branch, continous 
+    # deployment and always overwriting last deployment
+    # ***********************************************************
+    - stage: clean-install
+      if: branch = development
+      name: Clean Install Deploy Development
+      script:
+      # -------------------------------------------------------
+      # call the maven build and store the output in a log file
+      # use this log file to analyze it for compiler warnings
+      # -------------------------------------------------------
+      - mvn clean install -P development,deployUnsecured -B -V | tee maven.log
+      - echo "Check for warnings:"
+      - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
+      - echo "Check for failed test cases:"
+      - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
+      before_deploy:
+        # --------------------------------------
+        # Start the ssh agent
+        # --------------------------------------
+        - eval "$(ssh-agent -s)"
+        # ----------------------------------------
+        # Decrypt the key for accessign the 
+        # deployment store and add it to ssh-agent
+        # ----------------------------------------
+        - mkdir -p -m 700 /tmp/.sourceforge_ssh
+        - openssl aes-256-cbc -K $encrypted_cb83e9dfc4f3_key -iv $encrypted_cb83e9dfc4f3_iv -in id_ed25519.enc -in id_ed25519.enc -out /tmp/.sourceforge_ssh/id_ed25519 -d
+        - chmod 600 /tmp/.sourceforge_ssh/id_ed25519
+        - ssh-add /tmp/.sourceforge_ssh/id_ed25519
+        # -----------------------------------------------------------
+        # Update the development tag beforehand
+        # And send it back to the origin, otherwise travis will 
+        # apparently perform a git fetch before, and overwrite the
+        # moved tag back to the previous state.
+        #------------------------------------------------------------
+        - git tag -f development_snapshot
+        - git remote add github-mtd  https://${GITHUB_API_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+        - git push -f github-mtd development_snapshot
+        - git remote remove github-mtd
+      deploy:
+        # -----------------------------------------------------------
+        # Now attach the release to the newly created tag.
+        # release is attached to the tag on the current commit.
+        # -----------------------------------------------------------
+      - provider: releases
+        api_key: $GITHUB_API_TOKEN
+        file_glob: true
+        file:
+        - deploy/unsecured/p2/**/zip/*_p2.zip
+        - deploy/unsecured/bin/**/*.zip
+        - deploy/unsecured/bin/**/*.tar.gz
+        skip_cleanup: true
+        name: $PROJECT_NAME Development Build
+        body: Development build on latest commit by Travis CI - $TRAVIS_BRANCH ($TRAVIS_COMMIT) - $(date +'%F %T %Z'). This release is subject to constant change.
+        prerelease: true
+        overwrite: true
+        target_commitish: $TRAVIS_COMMIT
+        on:
+          repo: $PROJECT_NAME_GH
+          branch: development
+      # ---------------------------------------------
+      # push build to sourceforge repo for deployment
+      # ---------------------------------------------    
+      - provider: script
+        skip_cleanup: true
+        script: #
+        - rsync -e ssh -avP --delete $TRAVIS_BUILD_DIR/deploy/unsecured/p2/$PROJECT_NAME/development/  dlrscmns@frs.sourceforge.net:/home/frs/project/$PROJECT_NAME_SF/development/
+        on:
+          repo: $PROJECT_NAME_GH
+          branch: development
+    
+    # ***********************************************************
+    # INTEGRATION BUILD - for integration branch, continous
+    # deployment and overwriting same version.
+    # ***********************************************************
+    - stage: clean-install
+      if: branch = integration
+      name: Clean Install Deploy Integration
+      script:
+      # -------------------------------------------------------
+      # call the maven build and store the output in a log file
+      # use this log file to analyze it for compiler warnings
+      # -------------------------------------------------------
+      - mvn clean install -P integration,deployUnsecured -B -V | tee maven.log
+      - echo "Check for warnings:"
+      - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
+      - echo "Check for failed test cases:"
+      - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
+      before_deploy:
+        # --------------------------------------
+        # Start the ssh agent
+        # --------------------------------------
+        - eval "$(ssh-agent -s)"
+        # ----------------------------------------
+        # Decrypt the key for accessign the 
+        # deployment store and add it to ssh-agent
+        # ----------------------------------------
+        - mkdir -p -m 700 /tmp/.sourceforge_ssh
+        - openssl aes-256-cbc -K $encrypted_cb83e9dfc4f3_key -iv $encrypted_cb83e9dfc4f3_iv -in id_ed25519.enc -in id_ed25519.enc -out /tmp/.sourceforge_ssh/id_ed25519 -d
+        - chmod 600 /tmp/.sourceforge_ssh/id_ed25519
+        - ssh-add /tmp/.sourceforge_ssh/id_ed25519
+        # -----------------------------------------------------------
+        # Update the development tag beforehand
+        # And send it back to the origin, otherwise travis will 
+        # apparently perform a git fetch before, and overwrite the
+        # moved tag back to the previous state.
+        #------------------------------------------------------------
+        - git tag -f integration_snapshot
+        - git remote add github-mtd  https://${GITHUB_API_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+        - git push -f github-mtd integration_snapshot
+        - git remote remove github-mtd
+      deploy:
+        # -----------------------------------------------------------
+        # Now attach the release to the newly created tag.
+        # release is attached to the tag on the current commit.
+        # -----------------------------------------------------------
+      - provider: releases
+        api_key: $GITHUB_API_TOKEN
+        file_glob: true
+        file: 
+        - deploy/unsecured/p2/**/zip/*_p2.zip
+        - deploy/unsecured/bin/**/*.zip
+        - deploy/unsecured/bin/**/*.tar.gz
+        skip_cleanup: true
+        name: $PROJECT_NAME Integration Build
+        body: Integration build on latest commit by Travis CI - $TRAVIS_BRANCH ($TRAVIS_COMMIT) - $(date +'%F %T %Z'). This release is subject to constant change.
+        prerelease: true
+        overwrite: true
+        target_commitish: $TRAVIS_COMMIT
+        on:
+          repo: $PROJECT_NAME_GH
+          branch: integration
+      # ---------------------------------------------
+      # push build to sourceforge repo for deployment
+      # ---------------------------------------------    
+      - provider: script
+        skip_cleanup: true
+        script: # 
+        - rsync -e ssh -avP $TRAVIS_BUILD_DIR/deploy/unsecured/p2/$PROJECT_NAME/integration/  dlrscmns@frs.sourceforge.net:/home/frs/project/$PROJECT_NAME_SF/integration/
+        on:
+          repo: $PROJECT_NAME_GH
+          branch: integration
+    
+    # ***********************************************************
+    # RELEASE BUILD - only triggered by RELEASE_* -tags in the
+    # repository, deployment always into folder with build
+    # number, therefore no overwriting of previous build
+    # ***********************************************************
+    - stage: clean-install
+      if: tag =~ /^Release/
+      name: Clean Install Deploy Release
+      script:
+      # -------------------------------------------------------
+      # call the maven build and store the output in a log file
+      # use this log file to analyze it for compiler warnings
+      # -------------------------------------------------------
+      - mvn clean install -P release,deployBackuped -B -V | tee maven.log
+      - echo "Check for warnings:"
+      - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
+      - echo "Check for failed test cases:"
+      - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
+      before_deploy:
+        # --------------------------------------
+        # Start the ssh agent
+        # --------------------------------------
+        - eval "$(ssh-agent -s)"
+        # ----------------------------------------
+        # Decrypt the key for accessign the 
+        # deployment store and add it to ssh-agent
+        # ----------------------------------------
+        - mkdir -p -m 700 /tmp/.sourceforge_ssh
+        - openssl aes-256-cbc -K $encrypted_cb83e9dfc4f3_key -iv $encrypted_cb83e9dfc4f3_iv -in id_ed25519.enc -in id_ed25519.enc -out /tmp/.sourceforge_ssh/id_ed25519 -d
+        - chmod 600 /tmp/.sourceforge_ssh/id_ed25519
+        - ssh-add /tmp/.sourceforge_ssh/id_ed25519
+      deploy:
+        # -----------------------------------------------------------
+        # Now attach the release to the Release Tag.
+        # -----------------------------------------------------------
+      - provider: releases
+        api_key: $GITHUB_API_TOKEN
+        file_glob: true
+        file: 
+        - deploy/secured/p2/**/zip/*_p2.zip
+        - deploy/secured/bin/**/*.zip
+        - deploy/secured/bin/**/*.tar.gz
+        skip_cleanup: true
+        name: $PROJECT_NAME Release Build
+        body: Release build on latest commit by Travis CI - $TRAVIS_BRANCH ($TRAVIS_COMMIT) - $(date +'%F %T %Z'). This is a stable release.
+        prerelease: true
+        on:
+          repo: $PROJECT_NAME_GH
+          tags: true
+      # ---------------------------------------------
+      # push build to sourceforge repo for deployment
+      # ---------------------------------------------    
+      - provider: script
+        skip_cleanup: true
+        script: # 
+        - rsync -e ssh -avP $TRAVIS_BUILD_DIR/deploy/secured/p2/$PROJECT_NAME/release/  dlrscmns@frs.sourceforge.net:/home/frs/project/$PROJECT_NAME_SF/release/
+        on:
+          repo: $PROJECT_NAME_GH
+          tags: true
+          
