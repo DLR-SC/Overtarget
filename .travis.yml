@@ -26,6 +26,15 @@ stages:
 
 env:
   global:
+  # -----------------------------------------------------------
+  # Setup of the project name in global place. These variables
+  # are used in a lot of places in this script, e.g. for
+  # deployment to sourceforge etc.
+  # ----------------------------------------------------------- 
+  - PROJECT_NAME=Overtarget
+  - PROJECT_NAME_GH=DLR-SC/Overtarget
+  - PROJECT_NAME_SF=overtarget 
+
   # ---------------------------------------------
   # API Token for access to github
   # ---------------------------------------------
@@ -40,15 +49,7 @@ after_success:
 
 jobs:
   include:
-    # -----------------------------------------------------------
-    # Setup of the project name in global place. These variables
-    # are used in a lot of places in this script, e.g. for
-    # deployment to sourceforge etc.
-    # ----------------------------------------------------------- 
-    - PROJECT_NAME = Overtarget
-    - PROJECT_NAME_GH = DLR-SC/Overtarget
-    - PROJECT_NAME_SF = overtarget 
-
+    
     # ***********************************************************
     # FEATURE BUILD - For all other branches, no deploy
     # ***********************************************************
