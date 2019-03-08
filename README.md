@@ -4,11 +4,11 @@ Overtarget is an eclipse plug-in that helps you managing your target platform fi
 
 ## Project Status
 
-Status [![Build Status](https://travis-ci.org/DLR-SC/overtarget.svg?branch=development)](https://travis-ci.org/DLR-SC/overtarget) [![Coverage Status](https://codecov.io/gh/DLR-SC/overtarget/branch/development/graph/badge.svg)](https://codecov.io/gh/DLR-SC/overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/development/) for *Development* build.
+Status [![Build Status](https://travis-ci.org/DLR-SC/Overtarget.svg?branch=development)](https://travis-ci.org/DLR-SC/Overtarget) [![Coverage Status](https://codecov.io/gh/DLR-SC/overtarget/branch/development/graph/badge.svg)](https://codecov.io/gh/DLR-SC/overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/development/) for *Development* build.
 
-Status [![Build Status](https://travis-ci.org/DLR-SC/overtarget.svg?branch=integration)](https://travis-ci.org/DLR-SC/overtarget) [![Coverage Status](https://codecov.io/gh/DLR-SC/overtarget/branch/integration/graph/badge.svg)](https://codecov.io/gh/DLR-SC/overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/integration/) for *Integration* build.
+Status [![Build Status](https://travis-ci.org/DLR-SC/Overtarget.svg?branch=integration)](https://travis-ci.org/DLR-SC/Overtarget) [![Coverage Status](https://codecov.io/gh/DLR-SC/Overtarget/branch/integration/graph/badge.svg)](https://codecov.io/gh/DLR-SC/Overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/integration/) for *Integration* build.
 
-Status [![Build Status](https://travis-ci.org/DLR-SC/overtarget.svg?branch=master)](https://travis-ci.org/DLR-SC/overtarget) [![Coverage Status](https://codecov.io/gh/DLR-SC/overtarget/branch/master/graph/badge.svg)](https://codecov.io/gh/DLR-SC/overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/release/) for *Master* build.
+Status [![Build Status](https://travis-ci.org/DLR-SC/Overtarget.svg?branch=master)](https://travis-ci.org/DLR-SC/Overtarget) [![Coverage Status](https://codecov.io/gh/DLR-SC/Overtarget/branch/master/graph/badge.svg)](https://codecov.io/gh/DLR-SC/Overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/release/) for *Master* build.
 
 ## Purpose
 

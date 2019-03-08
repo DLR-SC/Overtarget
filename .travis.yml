@@ -38,7 +38,7 @@ env:
   # ---------------------------------------------
   # API Token for access to github
   # ---------------------------------------------
-  secure: qN2PDhJ+30l8wLE9euWQhTny9CziOfzq38pfSsb8f3AikiFz4IdX757NJAi3optIlpFU4GBa9zwvGGx9QgCIoZZrchtyx/9J0/mH5DTYjis+e6El3AU8dMejRtCwRRHktUCDS4V36tjxhUMjZ4KXMPKmkhBBfuyUJgcew3QddPt+LadMmfh0lJbuBbEjJNGh55hzZcgmMJvn5IrO5E7mquETr3d67WN85BlxvPHCSSn2mbKwVCWDzVgtNVXzTL9BjdjvlwuqjNm6/RsetQIeIdDeO0FORwGcMYG4i/95keuZvMz2Jx5Ai2Arsl3hUqHZJabE87zS1axSWV35Q0CQqF4R/kzK3ndmjtAqAUjD1LKRLCyFMO7QpYNsFmVEtEd7iYgtjEq9CscWf/tPEkmlyT45VkYWMMWgF4/yOqnz/+aVfitHVFVo1uJqtmf6B//8FB6hIZVRtqe4ZjG0L2jcvTpulfgxCHOmJ2dy5hMHuOIZi+KNfn7EueHCgM6WhyC5OXxbbRsxUvzpoicr4htNVN9i6T+JsDQBOZIFVwSnKwibjwjn06PNznE4+7Ayrz5NzEQ5FXTfd0yZIczXR2plwtinQVWeBQ1teqO2wQQ+WI+YytA+rcqasCSePQvCKPs843yAmHaw/Kd+cGu/xCJoz+UapcdO2jQBe0L6VgHfQBk=
+  - secure: "UQEpG33ddXR01fB6h+sFXBolWaFRfr6PyemwpiHEb0X9/FVxqsXnXdIWAHHvhWnvyC0hNtAmMu+j2jWSkoaquqmRHrN78VqMoSgN+2GWAfJ06KzTLm7ueuJKn+3BzAYskfXba7VBQz0MjmCyG7II73CNqB+u4zeIzsp76By2hzXyKpV4V2s+3i2GiSg87DKZ5Lz2R0E9aGcOqvGjk9Y1zad2RAyl+Yvf9fyK3z3wLtut+VRx6mdGeoeKHbIYnDDEPFToKY0VgmPyyMpKu9QEZM+oAFzAN7AkbSFkybELOYh5sDyFmHed66W6bzu6RJ3/3k/apPwEMTh1d99U2Te77p3rd2Vfhv0emwe3r1ICcnUXmPHmvcxM51CAg1nEqVF4EOkXdWcyprxiu4fadawChx5YuGQnUsTHTSGnCoK2Qgqon4buBLpN/KqN+3oXf7wit4L/PyqDx6ncG1y97fXrfCYPKso3Ax5aAjRJKL+iGdo+UiqZpntWysO+OAyQT3vwQQI2e9POGFiZyY7Hd6LT9i58IzgzK4t2AMah2ri060Xk91jX8p/ZjhOPIwXWv1nZPuvfkh93nTNKZIIFxTjnB8dQhd/CYqONY2Pjki5tAcRYpWAkQeJbouY3XIAsoLd7bisa/aOkh0gB0AzvtG41gSxJzbRyM267Q/EhBtZ9bMs="
 
 after_success:
   # ---------------------------------------------
