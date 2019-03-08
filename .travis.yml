@@ -12,7 +12,7 @@ addons:
   # Make the sourceforge hosts known, thus ssh connections will
   # not ask to accept the finger print of the server
   # -----------------------------------------------------------
-  ssh_known_hosts: frs.sourceforge.net
+  - ssh_known_hosts: frs.sourceforge.net
 
 install:
 - true
