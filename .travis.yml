@@ -38,7 +38,7 @@ env:
   # ---------------------------------------------
   # API Token for access to github
   # ---------------------------------------------
-  secure: qN2PDhJ+30l8wLE9euWQhTny9CziOfzq38pfSsb8f3AikiFz4IdX757NJAi3optIlpFU4GBa9zwvGGx9QgCIoZZrchtyx/9J0/mH5DTYjis+e6El3AU8dMejRtCwRRHktUCDS4V36tjxhUMjZ4KXMPKmkhBBfuyUJgcew3QddPt+LadMmfh0lJbuBbEjJNGh55hzZcgmMJvn5IrO5E7mquETr3d67WN85BlxvPHCSSn2mbKwVCWDzVgtNVXzTL9BjdjvlwuqjNm6/RsetQIeIdDeO0FORwGcMYG4i/95keuZvMz2Jx5Ai2Arsl3hUqHZJabE87zS1axSWV35Q0CQqF4R/kzK3ndmjtAqAUjD1LKRLCyFMO7QpYNsFmVEtEd7iYgtjEq9CscWf/tPEkmlyT45VkYWMMWgF4/yOqnz/+aVfitHVFVo1uJqtmf6B//8FB6hIZVRtqe4ZjG0L2jcvTpulfgxCHOmJ2dy5hMHuOIZi+KNfn7EueHCgM6WhyC5OXxbbRsxUvzpoicr4htNVN9i6T+JsDQBOZIFVwSnKwibjwjn06PNznE4+7Ayrz5NzEQ5FXTfd0yZIczXR2plwtinQVWeBQ1teqO2wQQ+WI+YytA+rcqasCSePQvCKPs843yAmHaw/Kd+cGu/xCJoz+UapcdO2jQBe0L6VgHfQBk=
+  - secure: qN2PDhJ+30l8wLE9euWQhTny9CziOfzq38pfSsb8f3AikiFz4IdX757NJAi3optIlpFU4GBa9zwvGGx9QgCIoZZrchtyx/9J0/mH5DTYjis+e6El3AU8dMejRtCwRRHktUCDS4V36tjxhUMjZ4KXMPKmkhBBfuyUJgcew3QddPt+LadMmfh0lJbuBbEjJNGh55hzZcgmMJvn5IrO5E7mquETr3d67WN85BlxvPHCSSn2mbKwVCWDzVgtNVXzTL9BjdjvlwuqjNm6/RsetQIeIdDeO0FORwGcMYG4i/95keuZvMz2Jx5Ai2Arsl3hUqHZJabE87zS1axSWV35Q0CQqF4R/kzK3ndmjtAqAUjD1LKRLCyFMO7QpYNsFmVEtEd7iYgtjEq9CscWf/tPEkmlyT45VkYWMMWgF4/yOqnz/+aVfitHVFVo1uJqtmf6B//8FB6hIZVRtqe4ZjG0L2jcvTpulfgxCHOmJ2dy5hMHuOIZi+KNfn7EueHCgM6WhyC5OXxbbRsxUvzpoicr4htNVN9i6T+JsDQBOZIFVwSnKwibjwjn06PNznE4+7Ayrz5NzEQ5FXTfd0yZIczXR2plwtinQVWeBQ1teqO2wQQ+WI+YytA+rcqasCSePQvCKPs843yAmHaw/Kd+cGu/xCJoz+UapcdO2jQBe0L6VgHfQBk=
 
 after_success:
   # ---------------------------------------------
