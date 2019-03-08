@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="******************************************************************************&#xD;&#xA;Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.&#xD;&#xA; *&#xD;&#xA;This program and the accompanying materials are made available under the&#xD;&#xA;terms of the Eclipse Public License 2.0 which is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-2.0.&#xD;&#xA; *&#xD;&#xA;SPDX-License-Identifier: EPL-2.0&#xD;&#xA; ******************************************************************************"
+    modelDirectory="/de.dlr.sc.overtarget.language/src-gen" modelPluginID="de.dlr.sc.overtarget.language"
+    forceOverwrite="true" modelName="Overtarget" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.13">
+  <genPackages prefix="Targetmodel" basePackage="de.dlr.sc.overtarget.language" disposableProviderFactory="true"
+      fileExtensions="tmodel" ecorePackage="Overtarget.ecore#/">
+    <genClasses ecoreClass="Overtarget.ecore#//TargetFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetFile/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//TargetFile/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//TargetFile/repositoryLocations"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//TargetLibrary"/>
+    <genClasses ecoreClass="Overtarget.ecore#//BaseModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//BaseModel/importedModels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/os"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/ws"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/arch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/loc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/targetJre"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//BaseModel/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//BaseModel/excludedLocations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//BaseModel/repositoryLocations"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//TargetModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//TargetModel/super"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//TargetModel/importedModels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/os"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/ws"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/arch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/loc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/targetJre"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//TargetModel/excludedLocations"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//Unit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//Unit/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//Unit/vers"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//UrlExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//UrlExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//UrlExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//UrlElement"/>
+    <genClasses ecoreClass="Overtarget.ecore#//UrlElementString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//UrlElementString/content"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//UrlElementVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//UrlElementVariable/content"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//RepositoryLocation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//RepositoryLocation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//RepositoryLocation/url"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//RepositoryLocation/units"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//ExcludeLocation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//ExcludeLocation/repositoryLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//ExcludeLocation/units"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//VariableDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//VariableDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//AlreadyDeclaredVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//AlreadyDeclaredVariable/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="Overtarget.ecore#//NewVariableDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//NewVariableDefinition/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

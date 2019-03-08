@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OverTarget IDE
+Bundle-Vendor: DLR (German Aerospace Center)
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.dlr.sc.overtarget.language.ide;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.dlr.sc.overtarget.language,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: de.dlr.sc.overtarget.language.ide,
+ de.dlr.sc.overtarget.language.ide.contentassist.antlr,
+ de.dlr.sc.overtarget.language.ide.contentassist.antlr.internal
+Automatic-Module-Name: de.dlr.sc.overtarget.language.ide
+
