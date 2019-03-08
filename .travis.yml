@@ -134,7 +134,7 @@ jobs:
         overwrite: true
         target_commitish: $TRAVIS_COMMIT
         on:
-          repo: $PROJECT_NAME_GH
+          repo: DLR-SC/Overtarget
           branch: development
       # ---------------------------------------------
       # push build to sourceforge repo for deployment
@@ -144,7 +144,7 @@ jobs:
         script: #
         - rsync -e ssh -avP --delete $TRAVIS_BUILD_DIR/deploy/unsecured/p2/$PROJECT_NAME/development/  dlrscmns@frs.sourceforge.net:/home/frs/project/$PROJECT_NAME_SF/development/
         on:
-          repo: $PROJECT_NAME_GH
+          repo: DLR-SC/Overtarget
           branch: development
     
     # ***********************************************************
