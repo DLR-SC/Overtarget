@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/de.dlr.sc.overtarget.feature_1.0.0.qualifier.jar" id="de.dlr.sc.overtarget.feature" version="1.0.0.qualifier">
+   <feature url="features/de.dlr.sc.overtarget.feature_1.1.0.qualifier.jar" id="de.dlr.sc.overtarget.feature" version="1.1.0.qualifier">
       <category name="OverTarget_Features"/>
    </feature>
    <category-def name="OverTarget_Features" label="OverTarget Features">
