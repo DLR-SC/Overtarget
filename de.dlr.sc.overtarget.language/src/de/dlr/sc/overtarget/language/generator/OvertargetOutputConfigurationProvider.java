@@ -1,0 +1,49 @@
+/*******************************************************************************
+ * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+package de.dlr.sc.overtarget.language.generator;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.generator.OutputConfiguration;
+
+/**
+ * Output Configuration provider that sets up output directories of XTend
+ * generated output.
+ * 
+ * @author fisc_ph
+ *
+ */
+public class OvertargetOutputConfigurationProvider implements IOutputConfigurationProvider {
+
+	public static final String GENERATOR_OUTPUT_ID_OVERTARGET = "de.dlr.sc.overtarget.output";
+	public static final String GENERATOR_OUTPUT_FOLDER_CONCEPT = "./target-gen";
+	public static final String GENERATOR_OUTPUT_DESCRIPTION_OVERTARGET = "Xtend Overtarget Serialzation Output";
+
+	/**
+	 * @return a set of {@link OutputConfiguration} available for the generator
+	 */
+	public Set<OutputConfiguration> getOutputConfigurations() {
+		Set<OutputConfiguration> outputConfigurations = new HashSet<>();
+		
+		OutputConfiguration conceptOutput = new OutputConfiguration(GENERATOR_OUTPUT_ID_OVERTARGET);
+		conceptOutput.setDescription(GENERATOR_OUTPUT_DESCRIPTION_OVERTARGET);
+		conceptOutput.setOutputDirectory(GENERATOR_OUTPUT_FOLDER_CONCEPT);
+		conceptOutput.setOverrideExistingResources(true);
+		conceptOutput.setCreateOutputDirectory(true);
+		conceptOutput.setCleanUpDerivedResources(false);
+		conceptOutput.setSetDerivedProperty(false);
+		
+		outputConfigurations.add(conceptOutput);
+		
+		return outputConfigurations;
+	}
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "de.dlr.sc.overtarget.language"
+			class = "de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage"
+			genModel = "model/generated/Overtarget.genmodel" />
+	</extension>
+</plugin>
