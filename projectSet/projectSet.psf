@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/DLR-SC/Overtarget.git,development,."/>
+<project reference="1.0,https://github.com/DLR-SC/Overtarget.git,development,de.dlr.sc.overtarget.feature"/>
+<project reference="1.0,https://github.com/DLR-SC/Overtarget.git,development,de.dlr.sc.overtarget.language"/>
+<project reference="1.0,https://github.com/DLR-SC/Overtarget.git,development,de.dlr.sc.overtarget.language.ide"/>
+<project reference="1.0,https://github.com/DLR-SC/Overtarget.git,development,de.dlr.sc.overtarget.language.tests"/>
+<project reference="1.0,https://github.com/DLR-SC/Overtarget.git,development,de.dlr.sc.overtarget.language.ui"/>
+<project reference="1.0,https://github.com/DLR-SC/Overtarget.git,development,de.dlr.sc.overtarget.p2updatesite"/>
+</provider>
+</psf>
