@@ -12,6 +12,7 @@ package de.dlr.sc.overtarget.language.generator;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 
@@ -27,6 +28,10 @@ public class OvertargetOutputConfigurationProvider implements IOutputConfigurati
 	public static final String GENERATOR_OUTPUT_ID_OVERTARGET = "de.dlr.sc.overtarget.output";
 	public static final String GENERATOR_OUTPUT_FOLDER_CONCEPT = "./target-gen";
 	public static final String GENERATOR_OUTPUT_DESCRIPTION_OVERTARGET = "Xtend Overtarget Serialzation Output";
+	
+	public static final String GENERATOR_OUTPUT_ID_DEFAULT = IFileSystemAccess.DEFAULT_OUTPUT;
+	public static final String GENERATOR_OUTPUT_FOLDER_DEFAULT = "./default-gen";
+	public static final String GENERATOR_OUTPUT_DESCRIPTION_DEFAULT = "Xtend Default Output";
 
 	/**
 	 * @return a set of {@link OutputConfiguration} available for the generator
@@ -43,6 +48,17 @@ public class OvertargetOutputConfigurationProvider implements IOutputConfigurati
 		conceptOutput.setSetDerivedProperty(false);
 		
 		outputConfigurations.add(conceptOutput);
+		
+		OutputConfiguration defaultOutput = new OutputConfiguration(GENERATOR_OUTPUT_ID_DEFAULT);
+		defaultOutput.setDescription(GENERATOR_OUTPUT_DESCRIPTION_DEFAULT);
+		defaultOutput.setOutputDirectory(GENERATOR_OUTPUT_FOLDER_DEFAULT);
+		defaultOutput.setOverrideExistingResources(true);
+		defaultOutput.setCreateOutputDirectory(true);
+		defaultOutput.setCleanUpDerivedResources(false);
+		defaultOutput.setSetDerivedProperty(false);
+		
+		outputConfigurations.add(defaultOutput);
+		
 		
 		return outputConfigurations;
 	}
