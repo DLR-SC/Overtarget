@@ -26,7 +26,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 public class OvertargetOutputConfigurationProvider implements IOutputConfigurationProvider {
 
 	public static final String GENERATOR_OUTPUT_ID_OVERTARGET = "de.dlr.sc.overtarget.output";
-	public static final String GENERATOR_OUTPUT_FOLDER_CONCEPT = "./target-gen";
+	public static final String GENERATOR_OUTPUT_FOLDER_CONCEPT = "./";
 	public static final String GENERATOR_OUTPUT_DESCRIPTION_OVERTARGET = "Xtend Overtarget Serialzation Output";
 	
 	public static final String GENERATOR_OUTPUT_ID_DEFAULT = IFileSystemAccess.DEFAULT_OUTPUT;
