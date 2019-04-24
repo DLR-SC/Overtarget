@@ -7,7 +7,7 @@ http://www.eclipse.org/legal/epl-2.0.
 
 SPDX-License-Identifier: EPL-2.0
 -->
-<project name="OverTarget" default="updateVersions" basedir=".">
+<project name="OverTarget" default="updateVersions" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
 	<description>
   	  Additional Build Preparations e.g. Updating Version Numbers
   	</description>
@@ -18,6 +18,82 @@ SPDX-License-Identifier: EPL-2.0
 	<property name="version.pattern">[\s]?[0-9]+\.[0-9]+\.[0-9]+</property>
 	<property name="m2.directory">${user.home}/.m2/</property>
 	<property environment="env"/>
+
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+		<classpath path="${user.home}/.ant/lib/jacoco.jar"/>
+	</taskdef>
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath path="${user.home}/.ant/lib/ant-contrib.jar"/>
+	</taskdef>
+
+	<!-- =====================================================
+			 Task: Create Jacoco Reports
+		     ===================================================== -->
+	<target name="jacocoPrepareDependencies" description="Install Jacoco Dependencies">
+		<mkdir dir="${user.home}/.ant/lib"/>
+		<get dest="${user.home}/.ant/lib/jacoco.jar" src="http://repo1.maven.org/maven2/org/jacoco/org.jacoco.ant/0.8.3/org.jacoco.ant-0.8.3-nodeps.jar"/>
+		<get dest="${user.home}/.ant/lib/ant-contrib.jar" src="http://repo1.maven.org/maven2/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar"/>
+	</target>
+
+	<target name="jacocoReport">
+		<description>Create Jacoco Report over all projects</description>
+		<foreach target="jacocoReportProject" param="projectDir">
+			<path>
+				<dirset dir="." casesensitive="yes">
+					<include name="de.dlr.sc.*"/>
+					<exclude name="de.dlr.sc.*ui"/>
+					<exclude name="de.dlr.sc.*feature"/>
+					<exclude name="de.dlr.sc.*ide"/>
+					<exclude name="de.dlr.sc.*test*"/>
+					<exclude name="de.dlr.sc.*p2updatesite"/>
+				</dirset>
+			</path>
+		</foreach>
+	</target>
+
+	<target name="jacocoReportProject">
+		<description>Create single Jacoco Report for each project</description>
+		<echo>Creating Jacoco Report for: ${projectDir}</echo>
+		<jacoco:report>
+			<executiondata>
+				<fileset dir="." >
+					<include name="**/jacoco.exec"/>
+				</fileset>
+			</executiondata>
+			<structure name="Jacoco Report for ${projectDir}">
+				<classfiles>
+					<fileset dir="${projectDir}/target/classes">
+						<include name="**/*"/>
+						<exclude name="**/internal/**/*"/>
+						<exclude name="**/impl/**/*"/>
+						<exclude name="**/targetmodel/**/*"/>
+						<exclude name="**/Overtarget*Sequencer*"/>
+						<exclude name="**/OvertargetGrammarAccess*"/>
+					</fileset>
+				</classfiles>
+				<sourcefiles encoding="UTF-8">
+					<fileset dir="${projectDir}/src" erroronmissingdir="no" />
+					<fileset dir="${projectDir}/src-gen" erroronmissingdir="no" />
+					<fileset dir="${projectDir}/xtend-gen" erroronmissingdir="no" />
+				</sourcefiles>
+			</structure>
+			<html destdir="${projectDir}/target/jacocoreport" />
+			<xml destfile="${projectDir}/target/jacocoreport/jacoco.xml" encoding="UTF-8" />
+			<check failonviolation="false">
+				<rule element="BUNDLE">
+					<limit counter="INSTRUCTION" value="COVEREDRATIO" minimum="75%"/>
+					<limit counter="LINE" value="COVEREDRATIO" minimum="70%"/>
+					<limit counter="BRANCH" value="COVEREDRATIO" minimum="65%"/>
+					<limit counter="METHOD" value="COVEREDRATIO" minimum="75%"/>
+					<limit counter="CLASS" value="COVEREDRATIO" minimum="85%"/>
+				</rule>
+				<rule element="METHOD">
+					<limit counter="COMPLEXITY" value="TOTALCOUNT" maximum="10"/>
+				</rule>
+			</check>
+		</jacoco:report>
+	</target>
 
 	<!-- =====================================================
 		 Task: flushAll
@@ -86,7 +162,7 @@ SPDX-License-Identifier: EPL-2.0
 				<include name="**/pom.xml" />
 			</fileset>
 		</replaceregexp>
-		
+
 		<replaceregexp byline="true">
 			<regexp pattern="&lt;version&gt;${version.pattern}-SNAPSHOT&lt;/version&gt;" />
 			<substitution expression="&lt;version&gt;${version.new}-SNAPSHOT&lt;/version&gt;" />

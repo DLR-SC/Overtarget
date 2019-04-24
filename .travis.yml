@@ -13,6 +13,13 @@ addons:
   # not ask to accept the finger print of the server
   # -----------------------------------------------------------
   ssh_known_hosts: frs.sourceforge.net
+  # ----------------------------------
+  # Install ant for the jacoco reports
+  # ----------------------------------
+  apt:
+     packages:
+     - ant
+  
 
 install:
 - true
@@ -74,7 +81,10 @@ jobs:
       - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
       - echo "Check for failed test cases:"
       - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
-    
+      - ant jacocoPrepareDependencies
+      - ant jacocoReport 2>&1 | tee ant.log
+      - (grep -n "Rule violated" ant.log || exit 0 && exit 1;)
+          
     # ***********************************************************
     # DEVELOPMENT BUILD - for development branch, continous 
     # deployment and always overwriting last deployment
@@ -92,6 +102,9 @@ jobs:
       - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
       - echo "Check for failed test cases:"
       - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
+      - ant jacocoPrepareDependencies
+      - ant jacocoReport 2>&1 | tee ant.log
+      - (grep -n "Rule violated" ant.log || exit 0 && exit 1;)
       before_deploy:
         # --------------------------------------
         # Start the ssh agent
@@ -164,6 +177,9 @@ jobs:
       - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
       - echo "Check for failed test cases:"
       - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
+      - ant jacocoPrepareDependencies
+      - ant jacocoReport 2>&1 | tee ant.log
+      - (grep -n "Rule violated" ant.log || exit 0 && exit 1;)
       before_deploy:
         # --------------------------------------
         # Start the ssh agent
@@ -237,6 +253,9 @@ jobs:
       - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
       - echo "Check for failed test cases:"
       - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
+      - ant jacocoPrepareDependencies
+      - ant jacocoReport 2>&1 | tee ant.log
+      - (grep -n "Rule violated" ant.log || exit 0 && exit 1;)
       before_deploy:
         # --------------------------------------
         # Start the ssh agent
