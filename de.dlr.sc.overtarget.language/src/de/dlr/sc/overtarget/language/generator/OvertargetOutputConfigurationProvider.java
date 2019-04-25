@@ -39,15 +39,15 @@ public class OvertargetOutputConfigurationProvider implements IOutputConfigurati
 	public Set<OutputConfiguration> getOutputConfigurations() {
 		Set<OutputConfiguration> outputConfigurations = new HashSet<>();
 		
-		OutputConfiguration conceptOutput = new OutputConfiguration(GENERATOR_OUTPUT_ID_OVERTARGET);
-		conceptOutput.setDescription(GENERATOR_OUTPUT_DESCRIPTION_OVERTARGET);
-		conceptOutput.setOutputDirectory(GENERATOR_OUTPUT_FOLDER_CONCEPT);
-		conceptOutput.setOverrideExistingResources(true);
-		conceptOutput.setCreateOutputDirectory(true);
-		conceptOutput.setCleanUpDerivedResources(false);
-		conceptOutput.setSetDerivedProperty(false);
+		OutputConfiguration overtargetOutput = new OutputConfiguration(GENERATOR_OUTPUT_ID_OVERTARGET);
+		overtargetOutput.setDescription(GENERATOR_OUTPUT_DESCRIPTION_OVERTARGET);
+		overtargetOutput.setOutputDirectory(GENERATOR_OUTPUT_FOLDER_CONCEPT);
+		overtargetOutput.setOverrideExistingResources(true);
+		overtargetOutput.setCreateOutputDirectory(true);
+		overtargetOutput.setCleanUpDerivedResources(false);
+		overtargetOutput.setSetDerivedProperty(false);
 		
-		outputConfigurations.add(conceptOutput);
+		outputConfigurations.add(overtargetOutput);
 		
 		OutputConfiguration defaultOutput = new OutputConfiguration(GENERATOR_OUTPUT_ID_DEFAULT);
 		defaultOutput.setDescription(GENERATOR_OUTPUT_DESCRIPTION_DEFAULT);
