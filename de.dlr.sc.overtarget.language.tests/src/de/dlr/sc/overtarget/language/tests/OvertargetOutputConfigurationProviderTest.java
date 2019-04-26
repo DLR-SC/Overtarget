@@ -29,11 +29,13 @@ public class OvertargetOutputConfigurationProviderTest {
 
 	@Test
 	public void testGetOutputConfigurations() {
-
+		
+		final int NUMBER_OF_OUTPUTS = 2;
+		
 		OvertargetOutputConfigurationProvider oocp = new OvertargetOutputConfigurationProvider();
 		Set<OutputConfiguration> outputConfigurations = oocp.getOutputConfigurations();
 		
-		assertEquals("The number of Output Configurations is correct", 2, outputConfigurations.size());
+		assertEquals("The number of Output Configurations is correct", NUMBER_OF_OUTPUTS, outputConfigurations.size());
 		
 		for (OutputConfiguration outputConf : outputConfigurations) {
 			String confName = outputConf.getName();
