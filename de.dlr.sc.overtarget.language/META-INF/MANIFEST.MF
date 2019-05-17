@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.equinox.p2.repository,
  org.eclipse.equinox.p2.metadata,
  org.eclipse.core.resources
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: de.dlr.sc.overtarget.language,
  de.dlr.sc.overtarget.language.generator,
  de.dlr.sc.overtarget.language.parser.antlr,
