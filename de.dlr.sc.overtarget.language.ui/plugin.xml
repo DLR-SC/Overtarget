@@ -327,7 +327,7 @@
 			point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator
 			class="de.dlr.sc.overtarget.language.ui.OvertargetExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-			markerType="de.dlr.sc.overtarget.ui.overtarget.check.fast">
+			markerType="de.dlr.sc.overtarget.language.ui.overtarget.check.fast">
 			<attribute
 				name="FIXABLE_KEY"
 				value="true">
@@ -335,7 +335,7 @@
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
 			class="de.dlr.sc.overtarget.language.ui.OvertargetExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-			markerType="de.dlr.sc.overtarget.ui.overtarget.check.normal">
+			markerType="de.dlr.sc.overtarget.language.ui.overtarget.check.normal">
 			<attribute
 				name="FIXABLE_KEY"
 				value="true">
@@ -343,7 +343,7 @@
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
 			class="de.dlr.sc.overtarget.language.ui.OvertargetExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-			markerType="de.dlr.sc.overtarget.ui.overtarget.check.expensive">
+			markerType="de.dlr.sc.overtarget.language.ui.overtarget.check.expensive">
 			<attribute
 				name="FIXABLE_KEY"
 				value="true">
@@ -421,7 +421,7 @@
  <extension
        point="org.eclipse.ui.handlers">
     <handler
-          class="de.dlr.sc.overtarget.language.ui.VersionHandler"
+          class="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
           commandId="de.dlr.sc.overtarget.language.version">
     </handler>
  </extension>

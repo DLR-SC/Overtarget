@@ -37,7 +37,6 @@ class OvertargetParsingTest {
 	TargetModel oldVersionModel;
 	TargetModel extendedModel;
 	TargetModel extendedModelWithEnvironment;
-	TargetModel importedModel;
 	CharSequence target;
 	CharSequence extendedTarget; 
 	CharSequence extendedTargetWithEnvironment; 
@@ -104,7 +103,7 @@ class OvertargetParsingTest {
 	 	''', resourceSet )
 	 
 	 
-	 importedModel = parse('''		Target toBeImported {
+	 	parse('''		Target toBeImported {
 	 	OperatingSystem aix  
 	 	WorkingSystem carbon   
 	 	Architecture ia64_32  

@@ -50,8 +50,6 @@ public class OvertargetParsingTest {
   
   private TargetModel extendedModelWithEnvironment;
   
-  private TargetModel importedModel;
-  
   private CharSequence target;
   
   private CharSequence extendedTarget;
@@ -267,7 +265,7 @@ public class OvertargetParsingTest {
       _builder_2.append("\t ");
       _builder_2.append("}");
       _builder_2.newLine();
-      this.importedModel = this._parseHelper.parse(_builder_2, resourceSet);
+      this._parseHelper.parse(_builder_2, resourceSet);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("    ");
       _builder_3.append("Target  extendedTarget  extends baseTarget {    ");
