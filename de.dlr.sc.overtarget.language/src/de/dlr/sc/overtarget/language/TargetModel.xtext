@@ -15,8 +15,6 @@ generate targetmodel "de.dlr.sc.overtarget.language"
 TargetFile:
 	TargetModel | TargetLibrary
 ;
-  
-
 
 TargetLibrary:
 	'TargetLibrary'  name= ID '{'
@@ -28,7 +26,7 @@ TargetLibrary:
 BaseModel:
 	'Target' name= ID '{'
 		 ('Import' importedModels+=[TargetFile])*
-        'OperatingSystem' os=OperatningSys
+        'OperatingSystem' os=OperatingSys
         'WorkingSystem'  ws=WorkingSys
         'Architecture' arch=Architecture
         'Locale' loc=Locale
@@ -43,7 +41,7 @@ TargetModel:
 	'Target' name= ID ('extends' super=[TargetModel])? '{'
       
        ('Import' importedModels+=[TargetFile])*
-       ('OperatingSystem' os=OperatningSys )?
+       ('OperatingSystem' os=OperatingSys )?
        ('WorkingSystem'  ws=WorkingSys )?
        ('Architecture' arch=Architecture )?
        ('Locale' loc=Locale )?
@@ -114,12 +112,12 @@ qualifier:
 	(INT|ID)+('-'(INT|ID))?
 ;
 
-OperatningSys:
+OperatingSys:
 	'aix' |'hpux' |'linux'| 'macosx'| 'qnx' | 'solaris'| 'win32'
 ;
 
 WorkingSys: 
-	'carbon' | 'cocoa' | 'gta'| 'motif'| 'photon' | 'wpf'| 'win32'
+	'carbon' | 'cocoa' | 'gtk'| 'motif'| 'photon' | 'wpf'| 'win32'
 ;
 
 Architecture:
@@ -157,6 +155,7 @@ ValidID:
 KEYWORD:
 	'Unit' | 'Target'
 ;
+
 QualifiedName:
 	ID ('.' ID)*
 ;
