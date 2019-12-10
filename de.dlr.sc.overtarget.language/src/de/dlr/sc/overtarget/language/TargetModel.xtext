@@ -22,7 +22,7 @@ TargetLibrary:
 	     (repositoryLocations+=RepositoryLocation)* 
     '}'	
 ; 
-
+ 
 BaseModel:
 	'Target' name= ID '{'
 		 ('Import' importedModels+=[TargetFile])*
