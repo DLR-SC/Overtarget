@@ -277,9 +277,9 @@ ruleTargetModel returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0());
+						newCompositeNode(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0());
 					}
-					lv_os_8_0=ruleOperatningSys
+					lv_os_8_0=ruleOperatingSys
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -288,7 +288,7 @@ ruleTargetModel returns [EObject current=null]
 							$current,
 							"os",
 							lv_os_8_0,
-							"de.dlr.sc.overtarget.language.Overtarget.OperatningSys");
+							"de.dlr.sc.overtarget.language.Overtarget.OperatingSys");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -1302,15 +1302,15 @@ rulequalifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 	)
 ;
 
-// Entry rule entryRuleOperatningSys
-entryRuleOperatningSys returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getOperatningSysRule()); }
-	iv_ruleOperatningSys=ruleOperatningSys
-	{ $current=$iv_ruleOperatningSys.current.getText(); }
+// Entry rule entryRuleOperatingSys
+entryRuleOperatingSys returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getOperatingSysRule()); }
+	iv_ruleOperatingSys=ruleOperatingSys
+	{ $current=$iv_ruleOperatingSys.current.getText(); }
 	EOF;
 
-// Rule OperatningSys
-ruleOperatningSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+// Rule OperatingSys
+ruleOperatingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
 }
@@ -1321,43 +1321,43 @@ ruleOperatningSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 		kw='aix'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getAixKeyword_0());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getAixKeyword_0());
 		}
 		    |
 		kw='hpux'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getHpuxKeyword_1());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getHpuxKeyword_1());
 		}
 		    |
 		kw='linux'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getLinuxKeyword_2());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getLinuxKeyword_2());
 		}
 		    |
 		kw='macosx'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getMacosxKeyword_3());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getMacosxKeyword_3());
 		}
 		    |
 		kw='qnx'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getQnxKeyword_4());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getQnxKeyword_4());
 		}
 		    |
 		kw='solaris'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getSolarisKeyword_5());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getSolarisKeyword_5());
 		}
 		    |
 		kw='win32'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getWin32Keyword_6());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getWin32Keyword_6());
 		}
 	)
 ;
@@ -1390,10 +1390,10 @@ ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCocoaKeyword_1());
 		}
 		    |
-		kw='gta'
+		kw='gtk'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtaKeyword_2());
+			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtkKeyword_2());
 		}
 		    |
 		kw='motif'

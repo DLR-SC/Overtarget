@@ -116,7 +116,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (
 	 *         name=ID 
 	 *         importedModels+=[TargetFile|ID]* 
-	 *         os=OperatningSys 
+	 *         os=OperatingSys 
 	 *         ws=WorkingSys 
 	 *         arch=Architecture 
 	 *         loc=Locale 
@@ -200,7 +200,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         name=ID 
 	 *         super=[TargetModel|ID]? 
 	 *         importedModels+=[TargetFile|ID]* 
-	 *         os=OperatningSys? 
+	 *         os=OperatingSys? 
 	 *         ws=WorkingSys? 
 	 *         arch=Architecture? 
 	 *         loc=Locale? 
