@@ -24,9 +24,6 @@
     <module name="IllegalImport"/>
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
-    <module name="LineLength">
-      <property name="max" value="300"/>
-    </module>
     <module name="MethodLength"/>
     <module name="EmptyForIteratorPad"/>
     <module name="MethodParamPad"/>
@@ -94,6 +91,9 @@
     <module name="SuppressionCommentFilter">
       <property name="onCommentFormat" value="CHECKSTYLE\:(ON|On|on)"/>
     </module>
+  </module>
+  <module name="LineLength">
+	  <property name="max" value="300"/>
   </module>
   <module name="NewlineAtEndOfFile">
     <property name="severity" value="ignore"/>
