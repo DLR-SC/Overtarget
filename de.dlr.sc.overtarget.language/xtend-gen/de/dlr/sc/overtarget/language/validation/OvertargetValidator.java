@@ -11,6 +11,8 @@ package de.dlr.sc.overtarget.language.validation;
 
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.validation.AbstractOvertargetValidator;
+import de.dlr.sc.overtarget.language.validation.ValidatorHelper;
+import org.eclipse.xtext.validation.Check;
 
 /**
  * This class contains custom validation rules.
@@ -19,13 +21,14 @@ import de.dlr.sc.overtarget.language.validation.AbstractOvertargetValidator;
  */
 @SuppressWarnings("all")
 public class OvertargetValidator extends AbstractOvertargetValidator {
-  /* @Check
-   */public Object checkFileNameAndTargetNamel(final TargetFile target) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method getFileName(TargetFile) is undefined for the type ValidatorHelper"
-      + "\nThe method warning(String, TargetFile, Object) is undefined"
-      + "\nThe method or field eContainingFeature is undefined for the type TargetFile"
-      + "\nequals cannot be resolved"
-      + "\n! cannot be resolved");
+  @Check
+  public void checkFileNameAndTargetNamel(final TargetFile target) {
+    ValidatorHelper helper = new ValidatorHelper();
+    final String fileName = helper.getFileName(target);
+    boolean _equals = fileName.equals(target.getName());
+    boolean _not = (!_equals);
+    if (_not) {
+      this.warning("File name and model name are not the same!!!", target, target.eContainingFeature());
+    }
   }
 }

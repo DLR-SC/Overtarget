@@ -9,12 +9,27 @@
  */
 package de.dlr.sc.overtarget.language.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
+import de.dlr.sc.overtarget.language.targetmodel.TargetmodelFactory;
+import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
+import de.dlr.sc.overtarget.language.util.QueryManager;
+import de.dlr.sc.overtarget.language.util.VersionHandlerHelper;
+import java.util.ArrayList;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,17 +40,17 @@ import org.junit.runner.RunWith;
 public class OvertargetParsingTest {
   @Inject
   @Extension
-  private /* ParseHelper<TargetModel> */Object _parseHelper;
+  private ParseHelper<TargetModel> _parseHelper;
   
-  private /* TargetModel */Object baseModel;
+  private TargetModel baseModel;
   
-  private /* TargetModel */Object oldVersionModel;
+  private TargetModel oldVersionModel;
   
-  private /* TargetModel */Object extendedModel;
+  private TargetModel extendedModel;
   
-  private /* TargetModel */Object extendedModelWithEnvironment;
+  private TargetModel extendedModelWithEnvironment;
   
-  private /* TargetModel */Object importedModel;
+  private TargetModel importedModel;
   
   private CharSequence target;
   
@@ -45,155 +60,859 @@ public class OvertargetParsingTest {
   
   @Before
   public void setUp() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.oldVersionModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.importedModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.extendedModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.extendedModelWithEnvironment refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\neResource cannot be resolved"
-      + "\nresourceSet cannot be resolved");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("       ");
+      _builder.append("Target baseTarget   { ");
+      _builder.newLine();
+      _builder.append("\t \t");
+      _builder.append("OperatingSystem aix ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("WorkingSystem carbon   ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Architecture ia64_32  ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Locale ar_AE  ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("TargetJRE JavaSE-1.1   ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("RepositoryLocation V url \"http://p2-mirror.sc.dlr.de/tools/orbit/downloads/drops/R20160520211859/repository/\" {  ");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.antlr.runtime version 4.3.0.v201502022030;");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}  ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("RepositoryLocation A url \"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"{  ");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837 ;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.swtbot.eclipse.test.junit.feature.group version 2.5.0.201609021837;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.swtbot.feature.group version newest;");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}  ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("RepositoryLocation B url \"http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/\" {   ");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.emf.edapt.runtime.feature.feature.group version 1.2.0.201606020942;   ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}   ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("RepositoryLocation C url \"http://download.eclipse.org/nebula/releases/latest\"{   ");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.nebula.widgets.gallery.feature.feature.group version 1.0.0.201706221838;   ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}  ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("RepositoryLocation D url \"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"{  ");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.polarion.eclipse.team.svn.connector.svnkit18.feature.group version 6.0.4.I20161211-1700;   ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("RepositoryLocation E url \"http://p2-mirror.sc.dlr.de/releases/oxygen/\" {  ");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.emf.compare.ide.ui.feature.group version 3.3.2.201709090201;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.emf.sdk.feature.group version 2.13.0.v20170609-0928;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.emf.transaction.sdk.feature.group version 1.11.0.201706061339;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.equinox.executable.feature.group version 3.7.1.v20170811-1325;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.graphiti.sdk.feature.feature.group version 0.14.0.201705161212;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.jdt.source.feature.group version 3.13.1.v20170906-1700; ");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.ocl.all.sdk.feature.group version 5.3.0.v20170607-1133;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.pde.source.feature.group version 3.13.1.v20170906-1700;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.platform.sdk version 4.7.1.M20170906-1700;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Unit org.eclipse.xtext.sdk.feature.group version 2.12.0.v20170519-1412;");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}   ");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("}       ");
+      this.baseModel = this._parseHelper.parse(_builder);
+      final ResourceSet resourceSet = this.baseModel.eResource().getResourceSet();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\t\t");
+      _builder_1.append("Target oldVersionTarget {");
+      _builder_1.newLine();
+      _builder_1.append("\t \t");
+      _builder_1.append("OperatingSystem aix  ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t\t \t");
+      _builder_1.append("WorkingSystem carbon   ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t\t \t");
+      _builder_1.append("Architecture ia64_32  ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t\t \t");
+      _builder_1.append("Locale ar_AE  ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t\t \t");
+      _builder_1.append("TargetJRE JavaSE-1.1   ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t\t \t");
+      _builder_1.newLine();
+      _builder_1.append("\t ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t");
+      _builder_1.append("RepositoryLocation F url \"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"{  ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t\t");
+      _builder_1.append("Unit org.polarion.eclipse.team.svn.connector.svnkit18.feature.group version 1.1.1;   ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t");
+      _builder_1.append("RepositoryLocation G url \"http://p2-mirror.sc.dlr.de/releases/oxygen/\" {  ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t\t");
+      _builder_1.append("Unit org.eclipse.emf.compare.ide.ui.feature.group version 1.1.1;");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t\t");
+      _builder_1.append("Unit org.eclipse.emf.sdk.feature.group version 1.1.1;");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t\t");
+      _builder_1.append("Unit org.eclipse.emf.transaction.sdk.feature.group version newest;;");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t\t");
+      _builder_1.append("Unit org.eclipse.equinox.executable.feature.group version newest;;");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t");
+      _builder_1.append("} ");
+      _builder_1.newLine();
+      _builder_1.append("\t \t \t\t\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.oldVersionModel = this._parseHelper.parse(_builder_1, resourceSet);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("\t\t");
+      _builder_2.append("Target toBeImported {");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("OperatingSystem aix  ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("WorkingSystem carbon   ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("Architecture ia64_32  ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("Locale ar_AE  ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("TargetJRE JavaSE-1.1   ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("RepositoryLocation H url \"http://p2-misdsdrror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"{  ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t\t");
+      _builder_2.append("Unit org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group version 6.0.4.I20161211-1700;   ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("RepositoryLocation I url \"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"{");
+      _builder_2.newLine();
+      _builder_2.append("\t \t\t");
+      _builder_2.append("Unit org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group version 6.0.4.I20161211-1700;   ");
+      _builder_2.newLine();
+      _builder_2.append("\t \t");
+      _builder_2.append("} ");
+      _builder_2.newLine();
+      _builder_2.append("\t ");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.importedModel = this._parseHelper.parse(_builder_2, resourceSet);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("    ");
+      _builder_3.append("Target  extendedTarget  extends baseTarget {    ");
+      _builder_3.newLine();
+      _builder_3.append("\t \t");
+      _builder_3.append("Import toBeImported    ");
+      _builder_3.newLine();
+      _builder_3.append("\t \t");
+      _builder_3.append("ExcludeLocation baseTarget.V ");
+      _builder_3.newLine();
+      _builder_3.append("\t\t");
+      _builder_3.append("}     ");
+      _builder_3.newLine();
+      _builder_3.append("\t\t");
+      _builder_3.append("ExcludeLocation baseTarget.E{");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t");
+      _builder_3.append("Unit org.eclipse.equinox.executable.feature.group version 3.7.1.v20170811-1325;");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t");
+      _builder_3.append("Unit org.eclipse.graphiti.sdk.feature.feature.group version 0.14.0.201705161212; ");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t");
+      _builder_3.append("Unit org.eclipse.jdt.source.feature.group version 3.13.1.v20170906-1700;   ");
+      _builder_3.newLine();
+      _builder_3.append("\t\t");
+      _builder_3.append("}         ");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("}      ");
+      _builder_3.newLine();
+      this.extendedModel = this._parseHelper.parse(_builder_3, resourceSet);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("    ");
+      _builder_4.append("Target  extendedTargetWithEnvironment  extends baseTarget {    ");
+      _builder_4.newLine();
+      _builder_4.append("\t \t");
+      _builder_4.append("Import toBeImported    ");
+      _builder_4.newLine();
+      _builder_4.append("\t \t");
+      _builder_4.append("OperatingSystem win32 ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t");
+      _builder_4.append("WorkingSystem win32   ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t");
+      _builder_4.append("Architecture x86_64  ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t");
+      _builder_4.append("Locale de_DE  ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t");
+      _builder_4.append("TargetJRE JavaSE-1.4   ");
+      _builder_4.newLine();
+      _builder_4.append("\t \t");
+      _builder_4.append("ExcludeLocation baseTarget.V {  ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t");
+      _builder_4.append("Unit org.antlr.runtime version 4.3.0.v201502022030;");
+      _builder_4.newLine();
+      _builder_4.append("\t\t");
+      _builder_4.append("}     ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t");
+      _builder_4.append("ExcludeLocation baseTarget.E{");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t");
+      _builder_4.append("Unit org.eclipse.equinox.executable.feature.group version 3.7.1.v20170811-1325;");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t");
+      _builder_4.append("Unit org.eclipse.graphiti.sdk.feature.feature.group version 0.14.0.201705161212; ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t");
+      _builder_4.append("Unit org.eclipse.jdt.source.feature.group version 3.13.1.v20170906-1700;   ");
+      _builder_4.newLine();
+      _builder_4.append("\t\t");
+      _builder_4.append("}         ");
+      _builder_4.newLine();
+      _builder_4.append("\t");
+      _builder_4.append("}      ");
+      _builder_4.newLine();
+      this.extendedModelWithEnvironment = this._parseHelper.parse(_builder_4, resourceSet);
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<?pde version=\"3.8\"?><target name=\"baseTarget\" sequenceNumber=\"1\">");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<locations>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.antlr.runtime\" version=\"4.3.0.v201502022030\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/tools/orbit/downloads/drops/R20160520211859/repository/\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</location>              ");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.swtbot.eclipse.feature.group\" version=\"2.5.0.v201609021837\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.swtbot.eclipse.test.junit.feature.group\" version=\"2.5.0.201609021837\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.swtbot.feature.group\" version=\"0.0.0\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<repository location=\"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</location>              ");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.emf.edapt.runtime.feature.feature.group\" version=\"1.2.0.201606020942\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</location>              ");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.nebula.widgets.gallery.feature.feature.group\" version=\"1.0.0.201706221838\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<repository location=\"http://download.eclipse.org/nebula/releases/latest\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</location>              ");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.polarion.eclipse.team.svn.connector.svnkit18.feature.group\" version=\"6.0.4.I20161211-1700\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</location>              ");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.emf.compare.ide.ui.feature.group\" version=\"3.3.2.201709090201\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.emf.sdk.feature.group\" version=\"2.13.0.v20170609-0928\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.emf.transaction.sdk.feature.group\" version=\"1.11.0.201706061339\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.equinox.executable.feature.group\" version=\"3.7.1.v20170811-1325\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.graphiti.sdk.feature.feature.group\" version=\"0.14.0.201705161212\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.jdt.source.feature.group\" version=\"3.13.1.v20170906-1700\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.ocl.all.sdk.feature.group\" version=\"5.3.0.v20170607-1133\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.pde.source.feature.group\" version=\"3.13.1.v20170906-1700\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.platform.sdk\" version=\"4.7.1.M20170906-1700\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"2.12.0.v20170519-1412\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/releases/oxygen/\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</location>              ");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</locations>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<environment>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<os>aix</os>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<ws>carbon</ws>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<arch>ia64_32</arch>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<nl>ar_AE</nl> ");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</environment>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("<targetJRE path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.1\"/>");
+      _builder_5.newLine();
+      _builder_5.append("\t\t");
+      _builder_5.append("</target>");
+      _builder_5.newLine();
+      this.target = _builder_5;
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<?pde version=\"3.8\"?><target name=\"extendedTarget\" sequenceNumber=\"1\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<locations>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.swtbot.eclipse.feature.group\" version=\"2.5.0.v201609021837\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.swtbot.eclipse.test.junit.feature.group\" version=\"2.5.0.201609021837\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.swtbot.feature.group\" version=\"0.0.0\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<repository location=\"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</location>              ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.emf.edapt.runtime.feature.feature.group\" version=\"1.2.0.201606020942\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</location>              ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.nebula.widgets.gallery.feature.feature.group\" version=\"1.0.0.201706221838\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<repository location=\"http://download.eclipse.org/nebula/releases/latest\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</location>              ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.polarion.eclipse.team.svn.connector.svnkit18.feature.group\" version=\"6.0.4.I20161211-1700\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</location>              ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.emf.compare.ide.ui.feature.group\" version=\"3.3.2.201709090201\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.emf.sdk.feature.group\" version=\"2.13.0.v20170609-0928\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.emf.transaction.sdk.feature.group\" version=\"1.11.0.201706061339\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.ocl.all.sdk.feature.group\" version=\"5.3.0.v20170607-1133\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.pde.source.feature.group\" version=\"3.13.1.v20170906-1700\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.platform.sdk\" version=\"4.7.1.M20170906-1700\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"2.12.0.v20170519-1412\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/releases/oxygen/\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</location>              ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group\" version=\"6.0.4.I20161211-1700\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<repository location=\"http://p2-misdsdrror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</location>              ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<unit id=\"org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group\" version=\"6.0.4.I20161211-1700\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</location>              ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</locations>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<environment>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<os>aix</os>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<ws>carbon</ws>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<arch>ia64_32</arch>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<nl>ar_AE</nl> ");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</environment>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("<targetJRE path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.1\"/>");
+      _builder_6.newLine();
+      _builder_6.append("\t\t");
+      _builder_6.append("</target>");
+      _builder_6.newLine();
+      this.extendedTarget = _builder_6;
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<?pde version=\"3.8\"?><target name=\"extendedTargetWithEnvironment\" sequenceNumber=\"1\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<locations>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.swtbot.eclipse.feature.group\" version=\"2.5.0.v201609021837\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.swtbot.eclipse.test.junit.feature.group\" version=\"2.5.0.201609021837\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.swtbot.feature.group\" version=\"0.0.0\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<repository location=\"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</location>              ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.emf.edapt.runtime.feature.feature.group\" version=\"1.2.0.201606020942\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</location>              ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.nebula.widgets.gallery.feature.feature.group\" version=\"1.0.0.201706221838\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<repository location=\"http://download.eclipse.org/nebula/releases/latest\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</location>              ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.polarion.eclipse.team.svn.connector.svnkit18.feature.group\" version=\"6.0.4.I20161211-1700\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</location>              ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.emf.compare.ide.ui.feature.group\" version=\"3.3.2.201709090201\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.emf.sdk.feature.group\" version=\"2.13.0.v20170609-0928\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.emf.transaction.sdk.feature.group\" version=\"1.11.0.201706061339\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.ocl.all.sdk.feature.group\" version=\"5.3.0.v20170607-1133\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.pde.source.feature.group\" version=\"3.13.1.v20170906-1700\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.platform.sdk\" version=\"4.7.1.M20170906-1700\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"2.12.0.v20170519-1412\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/releases/oxygen/\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</location>              ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group\" version=\"6.0.4.I20161211-1700\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<repository location=\"http://p2-misdsdrror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</location>              ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<unit id=\"org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group\" version=\"6.0.4.I20161211-1700\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</location>              ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</locations>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<environment>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<os>win32</os>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<ws>win32</ws>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<arch>x86_64</arch>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<nl>de_DE</nl> ");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</environment>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("<targetJRE path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.4\"/>");
+      _builder_7.newLine();
+      _builder_7.append("\t\t");
+      _builder_7.append("</target>");
+      _builder_7.newLine();
+      this.extendedTargetWithEnvironment = _builder_7;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testName() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\nname cannot be resolved");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("        ");
+      _builder.append("Target baseTarget {}      ");
+      final TargetModel targetModel = this._parseHelper.parse(_builder);
+      Assert.assertEquals("baseTarget", targetModel.getName());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testSuperName() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\neResource cannot be resolved"
-      + "\nresourceSet cannot be resolved"
-      + "\nsuper cannot be resolved"
-      + "\nname cannot be resolved"
-      + "\nname cannot be resolved");
+    try {
+      final ResourceSet resourceSet = this.baseModel.eResource().getResourceSet();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("        ");
+      _builder.append("Target testTarget extends baseTarget {Import importedModel}      ");
+      final TargetModel targetModel = this._parseHelper.parse(_builder, resourceSet);
+      final TargetModel superTarget = targetModel.getSuper();
+      Assert.assertEquals(this.baseModel.getName(), superTarget.getName());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testEnvironment() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest._parseHelper refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\neResource cannot be resolved"
-      + "\nresourceSet cannot be resolved"
-      + "\nsuper cannot be resolved"
-      + "\nws cannot be resolved"
-      + "\nws cannot be resolved"
-      + "\nos cannot be resolved"
-      + "\nos cannot be resolved"
-      + "\nloc cannot be resolved"
-      + "\nloc cannot be resolved"
-      + "\narch cannot be resolved"
-      + "\narch cannot be resolved"
-      + "\ntargetJre cannot be resolved"
-      + "\ntargetJre cannot be resolved"
-      + "\nvariables cannot be resolved"
-      + "\nvariables cannot be resolved"
-      + "\nrepositoryLocations cannot be resolved"
-      + "\nsize cannot be resolved"
-      + "\nrepositoryLocations cannot be resolved"
-      + "\nsize cannot be resolved");
+    try {
+      final ResourceSet resourceSet = this.baseModel.eResource().getResourceSet();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("        ");
+      _builder.append("Target testTarget extends baseTarget {Import importedModel}      ");
+      final TargetModel targetModel = this._parseHelper.parse(_builder, resourceSet);
+      final TargetModel superTarget = targetModel.getSuper();
+      Assert.assertEquals(this.baseModel.getWs(), superTarget.getWs());
+      Assert.assertEquals(this.baseModel.getOs(), superTarget.getOs());
+      Assert.assertEquals(this.baseModel.getLoc(), superTarget.getLoc());
+      Assert.assertEquals(this.baseModel.getArch(), superTarget.getArch());
+      Assert.assertEquals(this.baseModel.getTargetJre(), superTarget.getTargetJre());
+      Assert.assertEquals(this.baseModel.getVariables(), superTarget.getVariables());
+      Assert.assertEquals(this.baseModel.getRepositoryLocations().size(), superTarget.getRepositoryLocations().size());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testExtendedModel() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nOvertargetGenerator cannot be resolved."
-      + "\nThe field OvertargetParsingTest.baseModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.extendedModel refers to the missing type TargetModel"
-      + "\ncompile cannot be resolved"
-      + "\ncompile cannot be resolved"
-      + "\ntoString cannot be resolved"
-      + "\ntoString cannot be resolved");
+    OvertargetGenerator generator = new OvertargetGenerator();
+    CharSequence generatedTarget = generator.compile(this.baseModel);
+    CharSequence generatedExtendedTarget = generator.compile(this.extendedModel);
+    Assert.assertEquals(this.target.toString(), generatedTarget.toString());
+    Assert.assertEquals(this.extendedTarget.toString(), generatedExtendedTarget.toString());
   }
   
   @Test
   public void testExtendedModelWithEnvironment() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nOvertargetGenerator cannot be resolved."
-      + "\nThe field OvertargetParsingTest.extendedModelWithEnvironment refers to the missing type TargetModel"
-      + "\ncompile cannot be resolved"
-      + "\ntoString cannot be resolved");
+    OvertargetGenerator generator = new OvertargetGenerator();
+    CharSequence generatedExtendedTargetWithEnvironment = generator.compile(this.extendedModelWithEnvironment);
+    Assert.assertEquals(this.extendedTargetWithEnvironment.toString(), generatedExtendedTargetWithEnvironment.toString());
   }
   
   @Test
   public void testUpdateVersions() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nUnit cannot be resolved to a type."
-      + "\nQueryManager cannot be resolved."
-      + "\nThe method or field VersionHandlerHelper is undefined"
-      + "\nThe method or field VersionHandlerHelper is undefined"
-      + "\nThe method or field TargetmodelFactory is undefined"
-      + "\nThe method or field TargetmodelFactory is undefined"
-      + "\nThe method or field TargetmodelFactory is undefined"
-      + "\nThe method or field TargetmodelFactory is undefined"
-      + "\nThe method or field TargetmodelFactory is undefined"
-      + "\nThe method getUnits(EObject) of type new Object(){} must override a superclass method."
-      + "\nThe field OvertargetParsingTest.oldVersionModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.oldVersionModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.oldVersionModel refers to the missing type TargetModel"
-      + "\nThe field OvertargetParsingTest.oldVersionModel refers to the missing type TargetModel"
-      + "\ngetNewestUnits cannot be resolved"
-      + "\nupdateVersions cannot be resolved"
-      + "\nrepositoryLocations cannot be resolved"
-      + "\nget cannot be resolved"
-      + "\nunits cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\n== cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\nrepositoryLocations cannot be resolved"
-      + "\nget cannot be resolved"
-      + "\nunits cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nequals cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nequals cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nequals cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nequals cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\neINSTANCE cannot be resolved"
-      + "\ncreateUnit cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\neINSTANCE cannot be resolved"
-      + "\ncreateUnit cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\neINSTANCE cannot be resolved"
-      + "\ncreateUnit cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\neINSTANCE cannot be resolved"
-      + "\ncreateUnit cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nvers cannot be resolved"
-      + "\neINSTANCE cannot be resolved"
-      + "\ncreateUnit cannot be resolved"
-      + "\nsource cannot be resolved"
-      + "\nvers cannot be resolved");
+    String selectedLines = "TextSelection [offset: 123, startLine: 5, endLine: 16, length: 645, text: \t TargetJRE JavaSE-1.1   \n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/{  \n\t\t\t \t Unit org.polarion.eclipse.team.svn.connector.svnkit18.feature.group version 1.1.1;   \n\t\t\t }\n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/releases/oxygen/ {  \n\t\t\t\t Unit org.eclipse.emf.compare.ide.ui.feature.group version 1.1.1;\n\t\t\t \t Unit org.eclipse.emf.sdk.feature.group version 1.1.1;\n\t\t\t \t Unit org.eclipse.emf.transaction.sdk.feature.group version newest;\n\t\t\t \t Unit org.eclipse.equinox.executable.feature.group version newest;\n\t\t\t } \n\t\t}, document: org.eclipse.xtext.ui.editor.model.XtextDocument@1e060d4b]";
+    QueryManager mockQueryManager = new QueryManager() {
+      @Override
+      public ArrayList<Unit> getUnits(final EObject model) {
+        ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
+        Unit unit = TargetmodelFactory.eINSTANCE.createUnit();
+        unit.setSource("org.polarion.eclipse.team.svn.connector.svnkit18.feature.group");
+        unit.setVers("6.6.6");
+        resultsAsUnits.add(unit);
+        unit = TargetmodelFactory.eINSTANCE.createUnit();
+        unit.setSource("org.eclipse.emf.compare.ide.ui.feature.group");
+        unit.setVers("6.6.6");
+        resultsAsUnits.add(unit);
+        unit = TargetmodelFactory.eINSTANCE.createUnit();
+        unit.setSource("org.eclipse.emf.sdk.feature.group");
+        unit.setVers("6.6.6");
+        resultsAsUnits.add(unit);
+        unit = TargetmodelFactory.eINSTANCE.createUnit();
+        unit.setSource("org.eclipse.emf.transaction.sdk.feature.group");
+        unit.setVers("newest");
+        resultsAsUnits.add(unit);
+        unit = TargetmodelFactory.eINSTANCE.createUnit();
+        unit.setSource("org.eclipse.equinox.executable.feature.group");
+        unit.setVers("newest");
+        resultsAsUnits.add(unit);
+        return resultsAsUnits;
+      }
+    };
+    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+    ArrayList<Unit> units = VersionHandlerHelper.getNewestUnits(this.oldVersionModel, selectedLines, mockQueryManager, _nullProgressMonitor);
+    VersionHandlerHelper.updateVersions(this.oldVersionModel, units);
+    EList<Unit> _units = this.oldVersionModel.getRepositoryLocations().get(0).getUnits();
+    for (final Unit unit : _units) {
+      String _source = unit.getSource();
+      boolean _equals = Objects.equal(_source, "org.polarion.eclipse.team.svn.connector.svnkit18.feature.group");
+      if (_equals) {
+        Assert.assertEquals("6.6.6", unit.getVers());
+      }
+    }
+    EList<Unit> _units_1 = this.oldVersionModel.getRepositoryLocations().get(1).getUnits();
+    for (final Unit unit_1 : _units_1) {
+      {
+        boolean _equals_1 = unit_1.getSource().equals("org.eclipse.emf.compare.ide.ui.feature.group");
+        if (_equals_1) {
+          Assert.assertEquals("6.6.6", unit_1.getVers());
+        }
+        boolean _equals_2 = unit_1.getSource().equals("org.eclipse.emf.sdk.feature.group");
+        if (_equals_2) {
+          Assert.assertEquals("6.6.6", unit_1.getVers());
+        }
+        boolean _equals_3 = unit_1.getSource().equals("org.eclipse.emf.transaction.sdk.feature.group");
+        if (_equals_3) {
+          Assert.assertEquals("newest", unit_1.getVers());
+        }
+        boolean _equals_4 = unit_1.getSource().equals("org.eclipse.equinox.executable.feature.group");
+        if (_equals_4) {
+          Assert.assertEquals("newest", unit_1.getVers());
+        }
+      }
+    }
   }
 }

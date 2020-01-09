@@ -9,7 +9,11 @@
  */
 package de.dlr.sc.overtarget.language;
 
+import com.google.inject.Binder;
+import com.google.inject.Singleton;
 import de.dlr.sc.overtarget.language.AbstractOvertargetRuntimeModule;
+import de.dlr.sc.overtarget.language.generator.OvertargetOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -17,13 +21,8 @@ import de.dlr.sc.overtarget.language.AbstractOvertargetRuntimeModule;
 @SuppressWarnings("all")
 public class OvertargetRuntimeModule extends AbstractOvertargetRuntimeModule {
   @Override
-  public Object configure(final /* Binder */Object binder) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method configure(Binder) is undefined for the type AbstractOvertargetRuntimeModule"
-      + "\nThe method or field IOutputConfigurationProvider is undefined"
-      + "\nThe method or field Singleton is undefined"
-      + "\nbind cannot be resolved"
-      + "\nto cannot be resolved"
-      + "\nin cannot be resolved");
+  public void configure(final Binder binder) {
+    super.configure(binder);
+    binder.<IOutputConfigurationProvider>bind(IOutputConfigurationProvider.class).to(OvertargetOutputConfigurationProvider.class).in(Singleton.class);
   }
 }

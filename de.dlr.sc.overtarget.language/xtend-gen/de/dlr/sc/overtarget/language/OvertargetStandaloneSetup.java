@@ -17,7 +17,6 @@ import de.dlr.sc.overtarget.language.OvertargetStandaloneSetupGenerated;
 @SuppressWarnings("all")
 public class OvertargetStandaloneSetup extends OvertargetStandaloneSetupGenerated {
   public static void doSetup() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method createInjectorAndDoEMFRegistration() is undefined for the type OvertargetStandaloneSetup");
+    new OvertargetStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }
