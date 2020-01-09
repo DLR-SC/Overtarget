@@ -37,9 +37,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
   @Override
-  public Object complete_OperatningSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method complete_OperatningSys(EObject, RuleCall, ContentAssistContext, ICompletionProposalAcceptor) is undefined for the type AbstractOvertargetProposalProvider");
+  public void complete_OperatingSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final Consumer<String> _function = (String it) -> {
+      acceptor.accept(this.createCompletionProposal(it, context));
+    };
+    ((List<String>)Conversions.doWrapArray(Platform.knownOSValues())).forEach(_function);
+    super.complete_OperatingSys(model, ruleCall, context, acceptor);
   }
   
   @Override
