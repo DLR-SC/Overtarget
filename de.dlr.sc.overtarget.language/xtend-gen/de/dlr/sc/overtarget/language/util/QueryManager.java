@@ -9,68 +9,39 @@
  */
 package de.dlr.sc.overtarget.language.util;
 
-import de.dlr.sc.overtarget.language.Activator;
-import de.dlr.sc.overtarget.language.generator.GeneratorHelper;
-import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
-import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
-import de.dlr.sc.overtarget.language.targetmodel.TargetmodelFactory;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
-import java.net.URI;
 import java.util.ArrayList;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
-import org.eclipse.equinox.p2.metadata.IInstallableUnit;
-import org.eclipse.equinox.p2.query.IQuery;
-import org.eclipse.equinox.p2.query.IQueryResult;
-import org.eclipse.equinox.p2.query.QueryUtil;
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 
 /**
  * This class queries a p2 Repository for the available installable units
  */
 @SuppressWarnings("all")
 public class QueryManager {
-  public ArrayList<Unit> getUnits(final EObject model) {
-    try {
-      final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
-      final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
-      Object _service = bundleContext.getService(providerRef);
-      final IProvisioningAgentProvider provider = ((IProvisioningAgentProvider) _service);
-      final IProvisioningAgent provisioningAgent = provider.createAgent(null);
-      Object _service_1 = provisioningAgent.getService(
-        IMetadataRepositoryManager.SERVICE_NAME);
-      final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
-      final Unit unit = ((Unit) model);
-      EObject _eContainer = unit.eContainer();
-      final RepositoryLocation location = ((RepositoryLocation) _eContainer);
-      EObject _eContainer_1 = location.eContainer();
-      final TargetModel target = ((TargetModel) _eContainer_1);
-      String _urlAsString = GeneratorHelper.getUrlAsString(location.getUrl(), target);
-      final URI uri = new URI(_urlAsString);
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
-      IQuery<IInstallableUnit> _createIUGroupQuery = QueryUtil.createIUGroupQuery();
-      NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-      final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
-      bundleContext.ungetService(providerRef);
-      ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
-      for (final IInstallableUnit result : results) {
-        {
-          Unit unitFromResult = TargetmodelFactory.eINSTANCE.createUnit();
-          unitFromResult.setSource(result.getId());
-          unitFromResult.setVers(result.getVersion().toString());
-          resultsAsUnits.add(unitFromResult);
-        }
-      }
-      return resultsAsUnits;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public ArrayList<Unit> getUnits(final /* EObject */Object model) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nIProvisioningAgentProvider cannot be resolved to a type."
+      + "\nIMetadataRepositoryManager cannot be resolved to a type."
+      + "\nThe method or field bundle is undefined for the type Activator"
+      + "\nThe method or field IProvisioningAgentProvider is undefined"
+      + "\nThe method or field IMetadataRepositoryManager is undefined"
+      + "\nThe method or field eContainer is undefined for the type Unit"
+      + "\nThe method or field eContainer is undefined for the type RepositoryLocation"
+      + "\nNullProgressMonitor cannot be resolved."
+      + "\nThe method or field QueryUtil is undefined"
+      + "\nNullProgressMonitor cannot be resolved."
+      + "\nbundleContext cannot be resolved"
+      + "\ngetServiceReference cannot be resolved"
+      + "\nSERVICE_NAME cannot be resolved"
+      + "\ngetService cannot be resolved"
+      + "\ncreateAgent cannot be resolved"
+      + "\ngetService cannot be resolved"
+      + "\nSERVICE_NAME cannot be resolved"
+      + "\nloadRepository cannot be resolved"
+      + "\nquery cannot be resolved"
+      + "\ncreateIUGroupQuery cannot be resolved"
+      + "\nungetService cannot be resolved"
+      + "\nid cannot be resolved"
+      + "\nversion cannot be resolved"
+      + "\ntoString cannot be resolved");
   }
 }
