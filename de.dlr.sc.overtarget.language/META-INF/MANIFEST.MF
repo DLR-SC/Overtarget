@@ -5,7 +5,7 @@ Bundle-Vendor: DLR (German Aerospace Center)
 Bundle-Version: 1.1.0.qualifier
 Bundle-SymbolicName: de.dlr.sc.overtarget.language;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.18.0",
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common,
  org.eclipse.emf.ecore,
