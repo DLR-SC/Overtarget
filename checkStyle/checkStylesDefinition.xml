@@ -24,9 +24,6 @@
     <module name="IllegalImport"/>
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
-    <module name="LineLength">
-      <property name="max" value="300"/>
-    </module>
     <module name="MethodLength"/>
     <module name="EmptyForIteratorPad"/>
     <module name="MethodParamPad"/>
