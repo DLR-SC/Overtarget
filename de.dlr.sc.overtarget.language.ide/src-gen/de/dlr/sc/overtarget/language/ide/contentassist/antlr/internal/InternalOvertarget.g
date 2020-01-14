@@ -496,25 +496,25 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleOperatningSys
-entryRuleOperatningSys
+// Entry rule entryRuleOperatingSys
+entryRuleOperatingSys
 :
-{ before(grammarAccess.getOperatningSysRule()); }
-	 ruleOperatningSys
-{ after(grammarAccess.getOperatningSysRule()); } 
+{ before(grammarAccess.getOperatingSysRule()); }
+	 ruleOperatingSys
+{ after(grammarAccess.getOperatingSysRule()); } 
 	 EOF 
 ;
 
-// Rule OperatningSys
-ruleOperatningSys 
+// Rule OperatingSys
+ruleOperatingSys 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getAlternatives()); }
-		(rule__OperatningSys__Alternatives)
-		{ after(grammarAccess.getOperatningSysAccess().getAlternatives()); }
+		{ before(grammarAccess.getOperatingSysAccess().getAlternatives()); }
+		(rule__OperatingSys__Alternatives)
+		{ after(grammarAccess.getOperatingSysAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -921,51 +921,51 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__OperatningSys__Alternatives
+rule__OperatingSys__Alternatives
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getAixKeyword_0()); }
+		{ before(grammarAccess.getOperatingSysAccess().getAixKeyword_0()); }
 		'aix'
-		{ after(grammarAccess.getOperatningSysAccess().getAixKeyword_0()); }
+		{ after(grammarAccess.getOperatingSysAccess().getAixKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getHpuxKeyword_1()); }
+		{ before(grammarAccess.getOperatingSysAccess().getHpuxKeyword_1()); }
 		'hpux'
-		{ after(grammarAccess.getOperatningSysAccess().getHpuxKeyword_1()); }
+		{ after(grammarAccess.getOperatingSysAccess().getHpuxKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getLinuxKeyword_2()); }
+		{ before(grammarAccess.getOperatingSysAccess().getLinuxKeyword_2()); }
 		'linux'
-		{ after(grammarAccess.getOperatningSysAccess().getLinuxKeyword_2()); }
+		{ after(grammarAccess.getOperatingSysAccess().getLinuxKeyword_2()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getMacosxKeyword_3()); }
+		{ before(grammarAccess.getOperatingSysAccess().getMacosxKeyword_3()); }
 		'macosx'
-		{ after(grammarAccess.getOperatningSysAccess().getMacosxKeyword_3()); }
+		{ after(grammarAccess.getOperatingSysAccess().getMacosxKeyword_3()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getQnxKeyword_4()); }
+		{ before(grammarAccess.getOperatingSysAccess().getQnxKeyword_4()); }
 		'qnx'
-		{ after(grammarAccess.getOperatningSysAccess().getQnxKeyword_4()); }
+		{ after(grammarAccess.getOperatingSysAccess().getQnxKeyword_4()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getSolarisKeyword_5()); }
+		{ before(grammarAccess.getOperatingSysAccess().getSolarisKeyword_5()); }
 		'solaris'
-		{ after(grammarAccess.getOperatningSysAccess().getSolarisKeyword_5()); }
+		{ after(grammarAccess.getOperatingSysAccess().getSolarisKeyword_5()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getWin32Keyword_6()); }
+		{ before(grammarAccess.getOperatingSysAccess().getWin32Keyword_6()); }
 		'win32'
-		{ after(grammarAccess.getOperatningSysAccess().getWin32Keyword_6()); }
+		{ after(grammarAccess.getOperatingSysAccess().getWin32Keyword_6()); }
 	)
 ;
 finally {
@@ -3738,9 +3738,9 @@ rule__TargetModel__OsAssignment_5_1
 	}
 :
 	(
-		{ before(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0()); }
-		ruleOperatningSys
-		{ after(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0()); }
+		{ before(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0()); }
+		ruleOperatingSys
+		{ after(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0()); }
 	)
 ;
 finally {

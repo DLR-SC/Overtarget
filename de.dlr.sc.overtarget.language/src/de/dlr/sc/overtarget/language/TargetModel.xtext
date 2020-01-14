@@ -28,7 +28,7 @@ TargetLibrary:
 BaseModel:
 	'Target' name= ID '{'
 		 ('Import' importedModels+=[TargetFile])*
-        'OperatingSystem' os=OperatningSys
+        'OperatingSystem' os=OperatingSys
         'WorkingSystem'  ws=WorkingSys
         'Architecture' arch=Architecture
         'Locale' loc=Locale
@@ -43,10 +43,10 @@ TargetModel:
 	'Target' name= ID ('extends' super=[TargetModel])? '{'
       
        ('Import' importedModels+=[TargetFile])*
-       ('OperatingSystem' os=OperatningSys )?
-       ('WorkingSystem'  ws=WorkingSys )?
-       ('Architecture' arch=Architecture )?
-       ('Locale' loc=Locale )?
+       ('OperatingSystem' os=OperatingSys)?
+       ('WorkingSystem'  ws=WorkingSys)?
+       ('Architecture' arch=Architecture)?
+       ('Locale' loc=Locale)?
        ('TargetJRE' targetJre=jre)?
        (variables += VariableDefinition)*
        (excludedLocations += ExcludeLocation)*
@@ -114,7 +114,7 @@ qualifier:
 	(INT|ID)+('-'(INT|ID))?
 ;
 
-OperatningSys:
+OperatingSys:
 	'aix' |'hpux' |'linux'| 'macosx'| 'qnx' | 'solaris'| 'win32'
 ;
 
