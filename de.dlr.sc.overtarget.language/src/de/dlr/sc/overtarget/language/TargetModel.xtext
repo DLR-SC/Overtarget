@@ -9,49 +9,46 @@
  *******************************************************************************/
 grammar de.dlr.sc.overtarget.language.Overtarget with
                                       org.eclipse.xtext.common.Terminals
- 
+
 generate targetmodel "de.dlr.sc.overtarget.language"
 
 TargetFile:
 	TargetModel | TargetLibrary
 ;
-  
-
 
 TargetLibrary:
-	'TargetLibrary'  name= ID '{'
-		 (variables += VariableDefinition)*
-	     (repositoryLocations+=RepositoryLocation)* 
-    '}'	
-; 
+	'TargetLibrary' name= ID '{'
+		(variables += VariableDefinition)*
+		(repositoryLocations+=RepositoryLocation)* 
+	'}'	
+;
 
 BaseModel:
 	'Target' name= ID '{'
-		 ('Import' importedModels+=[TargetFile])*
-        'OperatingSystem' os=OperatingSys
-        'WorkingSystem'  ws=WorkingSys
-        'Architecture' arch=Architecture
-        'Locale' loc=Locale
-        ('TargetJRE' targetJre=jre)?
-         (variables += VariableDefinition)*
-         (excludedLocations += ExcludeLocation)*
-         (repositoryLocations+=RepositoryLocation)* 
-    '}'	
+		('Import' importedModels+=[TargetFile])*
+		'OperatingSystem' os=OperatingSys
+		'WindowingSystem' ws=WindowingSys
+		'Architecture' arch=Architecture
+		'Locale' loc=Locale
+		('TargetJRE' targetJre=jre)?
+		(variables += VariableDefinition)*
+		(excludedLocations += ExcludeLocation)*
+		(repositoryLocations+=RepositoryLocation)*
+	'}'	
 ;
 
 TargetModel:
 	'Target' name= ID ('extends' super=[TargetModel])? '{'
-      
-       ('Import' importedModels+=[TargetFile])*
-       ('OperatingSystem' os=OperatingSys)?
-       ('WorkingSystem'  ws=WorkingSys)?
-       ('Architecture' arch=Architecture)?
-       ('Locale' loc=Locale)?
-       ('TargetJRE' targetJre=jre)?
-       (variables += VariableDefinition)*
-       (excludedLocations += ExcludeLocation)*
-       (repositoryLocations+=RepositoryLocation)* 
-    '}'	
+		('Import' importedModels+=[TargetFile])*
+		('OperatingSystem' os=OperatingSys)?
+		('WindowingSystem' ws=WindowingSys)?
+		('Architecture' arch=Architecture)?
+		('Locale' loc=Locale)?
+		('TargetJRE' targetJre=jre)?
+		(variables += VariableDefinition)*
+		(excludedLocations += ExcludeLocation)*
+		(repositoryLocations+=RepositoryLocation)*
+	'}'	
 ;
 
 Version hidden():
@@ -63,13 +60,13 @@ SimpleVersion:
 ;
 
 Unit:
-	'Unit' source=Source 'version' vers= (Version | 'newest') ';' 	
+	'Unit' source=Source 'version' vers= (Version | 'newest') 
 ;
 
-Source hidden(): 
+Source hidden():
 	ValidID((dot(ValidID))|((hypen)ValidID))*':'?
 ;
- 
+
 UrlExpression:
 	UrlElement ({UrlExpression.left=current} '+' right=UrlElement)*
 ;
@@ -92,22 +89,22 @@ RepositoryLocation:
 	'}'
 ;
 
-ExcludeLocation: 	{ExcludeLocation}  
-	 'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName]  '{'
+ExcludeLocation: {ExcludeLocation}
+	'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{'
 			((units+=Unit)*	|'all;')
 	'}'
 ;
 
 VariableDefinition:
-	 AlreadyDeclaredVariable | NewVariableDefinition
+	AlreadyDeclaredVariable | NewVariableDefinition
 ;
 
 AlreadyDeclaredVariable:
-	'Override' ref=[NewVariableDefinition|QualifiedName] '=' value=STRING 
+	'Override' ref=[NewVariableDefinition|QualifiedName] '=' value=STRING
 ;
 
 NewVariableDefinition:
-	'Variable' name=ID '=' value=STRING 
+	'Variable' name=ID '=' value=STRING
 ;
 
 qualifier:
@@ -118,7 +115,7 @@ OperatingSys:
 	'aix' |'hpux' |'linux'| 'macosx'| 'qnx' | 'solaris'| 'win32'
 ;
 
-WorkingSys: 
+WindowingSys: 
 	'carbon' | 'cocoa' | 'gtk'| 'motif'| 'photon' | 'wpf'| 'win32'
 ;
 
@@ -157,6 +154,7 @@ ValidID:
 KEYWORD:
 	'Unit' | 'Target'
 ;
+
 QualifiedName:
 	ID ('.' ID)*
 ;
