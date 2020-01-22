@@ -1448,20 +1448,20 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rulequalifier"
 
 
-    // $ANTLR start "entryRuleOperatningSys"
-    // InternalOvertarget.g:500:1: entryRuleOperatningSys : ruleOperatningSys EOF ;
-    public final void entryRuleOperatningSys() throws RecognitionException {
+    // $ANTLR start "entryRuleOperatingSys"
+    // InternalOvertarget.g:500:1: entryRuleOperatingSys : ruleOperatingSys EOF ;
+    public final void entryRuleOperatingSys() throws RecognitionException {
         try {
-            // InternalOvertarget.g:501:1: ( ruleOperatningSys EOF )
-            // InternalOvertarget.g:502:1: ruleOperatningSys EOF
+            // InternalOvertarget.g:501:1: ( ruleOperatingSys EOF )
+            // InternalOvertarget.g:502:1: ruleOperatingSys EOF
             {
-             before(grammarAccess.getOperatningSysRule()); 
+             before(grammarAccess.getOperatingSysRule()); 
             pushFollow(FOLLOW_1);
-            ruleOperatningSys();
+            ruleOperatingSys();
 
             state._fsp--;
 
-             after(grammarAccess.getOperatningSysRule()); 
+             after(grammarAccess.getOperatingSysRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -1475,35 +1475,35 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "entryRuleOperatningSys"
+    // $ANTLR end "entryRuleOperatingSys"
 
 
-    // $ANTLR start "ruleOperatningSys"
-    // InternalOvertarget.g:509:1: ruleOperatningSys : ( ( rule__OperatningSys__Alternatives ) ) ;
-    public final void ruleOperatningSys() throws RecognitionException {
+    // $ANTLR start "ruleOperatingSys"
+    // InternalOvertarget.g:509:1: ruleOperatingSys : ( ( rule__OperatingSys__Alternatives ) ) ;
+    public final void ruleOperatingSys() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:513:2: ( ( ( rule__OperatningSys__Alternatives ) ) )
-            // InternalOvertarget.g:514:2: ( ( rule__OperatningSys__Alternatives ) )
+            // InternalOvertarget.g:513:2: ( ( ( rule__OperatingSys__Alternatives ) ) )
+            // InternalOvertarget.g:514:2: ( ( rule__OperatingSys__Alternatives ) )
             {
-            // InternalOvertarget.g:514:2: ( ( rule__OperatningSys__Alternatives ) )
-            // InternalOvertarget.g:515:3: ( rule__OperatningSys__Alternatives )
+            // InternalOvertarget.g:514:2: ( ( rule__OperatingSys__Alternatives ) )
+            // InternalOvertarget.g:515:3: ( rule__OperatingSys__Alternatives )
             {
-             before(grammarAccess.getOperatningSysAccess().getAlternatives()); 
-            // InternalOvertarget.g:516:3: ( rule__OperatningSys__Alternatives )
-            // InternalOvertarget.g:516:4: rule__OperatningSys__Alternatives
+             before(grammarAccess.getOperatingSysAccess().getAlternatives()); 
+            // InternalOvertarget.g:516:3: ( rule__OperatingSys__Alternatives )
+            // InternalOvertarget.g:516:4: rule__OperatingSys__Alternatives
             {
             pushFollow(FOLLOW_2);
-            rule__OperatningSys__Alternatives();
+            rule__OperatingSys__Alternatives();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getOperatningSysAccess().getAlternatives()); 
+             after(grammarAccess.getOperatingSysAccess().getAlternatives()); 
 
             }
 
@@ -1522,7 +1522,7 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "ruleOperatningSys"
+    // $ANTLR end "ruleOperatingSys"
 
 
     // $ANTLR start "entryRuleWorkingSys"
@@ -2875,9 +2875,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__Qualifier__Alternatives_1_1"
 
 
-    // $ANTLR start "rule__OperatningSys__Alternatives"
-    // InternalOvertarget.g:924:1: rule__OperatningSys__Alternatives : ( ( 'aix' ) | ( 'hpux' ) | ( 'linux' ) | ( 'macosx' ) | ( 'qnx' ) | ( 'solaris' ) | ( 'win32' ) );
-    public final void rule__OperatningSys__Alternatives() throws RecognitionException {
+    // $ANTLR start "rule__OperatingSys__Alternatives"
+    // InternalOvertarget.g:924:1: rule__OperatingSys__Alternatives : ( ( 'aix' ) | ( 'hpux' ) | ( 'linux' ) | ( 'macosx' ) | ( 'qnx' ) | ( 'solaris' ) | ( 'win32' ) );
+    public final void rule__OperatingSys__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -2934,9 +2934,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:929:2: ( 'aix' )
                     // InternalOvertarget.g:930:3: 'aix'
                     {
-                     before(grammarAccess.getOperatningSysAccess().getAixKeyword_0()); 
+                     before(grammarAccess.getOperatingSysAccess().getAixKeyword_0()); 
                     match(input,15,FOLLOW_2); 
-                     after(grammarAccess.getOperatningSysAccess().getAixKeyword_0()); 
+                     after(grammarAccess.getOperatingSysAccess().getAixKeyword_0()); 
 
                     }
 
@@ -2949,9 +2949,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:935:2: ( 'hpux' )
                     // InternalOvertarget.g:936:3: 'hpux'
                     {
-                     before(grammarAccess.getOperatningSysAccess().getHpuxKeyword_1()); 
+                     before(grammarAccess.getOperatingSysAccess().getHpuxKeyword_1()); 
                     match(input,16,FOLLOW_2); 
-                     after(grammarAccess.getOperatningSysAccess().getHpuxKeyword_1()); 
+                     after(grammarAccess.getOperatingSysAccess().getHpuxKeyword_1()); 
 
                     }
 
@@ -2964,9 +2964,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:941:2: ( 'linux' )
                     // InternalOvertarget.g:942:3: 'linux'
                     {
-                     before(grammarAccess.getOperatningSysAccess().getLinuxKeyword_2()); 
+                     before(grammarAccess.getOperatingSysAccess().getLinuxKeyword_2()); 
                     match(input,17,FOLLOW_2); 
-                     after(grammarAccess.getOperatningSysAccess().getLinuxKeyword_2()); 
+                     after(grammarAccess.getOperatingSysAccess().getLinuxKeyword_2()); 
 
                     }
 
@@ -2979,9 +2979,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:947:2: ( 'macosx' )
                     // InternalOvertarget.g:948:3: 'macosx'
                     {
-                     before(grammarAccess.getOperatningSysAccess().getMacosxKeyword_3()); 
+                     before(grammarAccess.getOperatingSysAccess().getMacosxKeyword_3()); 
                     match(input,18,FOLLOW_2); 
-                     after(grammarAccess.getOperatningSysAccess().getMacosxKeyword_3()); 
+                     after(grammarAccess.getOperatingSysAccess().getMacosxKeyword_3()); 
 
                     }
 
@@ -2994,9 +2994,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:953:2: ( 'qnx' )
                     // InternalOvertarget.g:954:3: 'qnx'
                     {
-                     before(grammarAccess.getOperatningSysAccess().getQnxKeyword_4()); 
+                     before(grammarAccess.getOperatingSysAccess().getQnxKeyword_4()); 
                     match(input,19,FOLLOW_2); 
-                     after(grammarAccess.getOperatningSysAccess().getQnxKeyword_4()); 
+                     after(grammarAccess.getOperatingSysAccess().getQnxKeyword_4()); 
 
                     }
 
@@ -3009,9 +3009,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:959:2: ( 'solaris' )
                     // InternalOvertarget.g:960:3: 'solaris'
                     {
-                     before(grammarAccess.getOperatningSysAccess().getSolarisKeyword_5()); 
+                     before(grammarAccess.getOperatingSysAccess().getSolarisKeyword_5()); 
                     match(input,20,FOLLOW_2); 
-                     after(grammarAccess.getOperatningSysAccess().getSolarisKeyword_5()); 
+                     after(grammarAccess.getOperatingSysAccess().getSolarisKeyword_5()); 
 
                     }
 
@@ -3024,9 +3024,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:965:2: ( 'win32' )
                     // InternalOvertarget.g:966:3: 'win32'
                     {
-                     before(grammarAccess.getOperatningSysAccess().getWin32Keyword_6()); 
+                     before(grammarAccess.getOperatingSysAccess().getWin32Keyword_6()); 
                     match(input,21,FOLLOW_2); 
-                     after(grammarAccess.getOperatningSysAccess().getWin32Keyword_6()); 
+                     after(grammarAccess.getOperatingSysAccess().getWin32Keyword_6()); 
 
                     }
 
@@ -3047,7 +3047,7 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__OperatningSys__Alternatives"
+    // $ANTLR end "rule__OperatingSys__Alternatives"
 
 
     // $ANTLR start "rule__WorkingSys__Alternatives"
@@ -11441,25 +11441,25 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__TargetModel__OsAssignment_5_1"
-    // InternalOvertarget.g:3735:1: rule__TargetModel__OsAssignment_5_1 : ( ruleOperatningSys ) ;
+    // InternalOvertarget.g:3735:1: rule__TargetModel__OsAssignment_5_1 : ( ruleOperatingSys ) ;
     public final void rule__TargetModel__OsAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:3739:1: ( ( ruleOperatningSys ) )
-            // InternalOvertarget.g:3740:2: ( ruleOperatningSys )
+            // InternalOvertarget.g:3739:1: ( ( ruleOperatingSys ) )
+            // InternalOvertarget.g:3740:2: ( ruleOperatingSys )
             {
-            // InternalOvertarget.g:3740:2: ( ruleOperatningSys )
-            // InternalOvertarget.g:3741:3: ruleOperatningSys
+            // InternalOvertarget.g:3740:2: ( ruleOperatingSys )
+            // InternalOvertarget.g:3741:3: ruleOperatingSys
             {
-             before(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0()); 
+             before(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0()); 
             pushFollow(FOLLOW_2);
-            ruleOperatningSys();
+            ruleOperatingSys();
 
             state._fsp--;
 
-             after(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0()); 
+             after(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0()); 
 
             }
 
