@@ -31,7 +31,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOvertargetParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'newest'", "'all;'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'", "'Unit'", "'Target'", "'TargetLibrary'", "'{'", "'}'", "'extends'", "'Import'", "'OperatingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'version'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'Override'", "'='", "'Variable'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'newest'", "'all;'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'", "'Unit'", "'Target'", "'TargetLibrary'", "'{'", "'}'", "'extends'", "'Import'", "'OperatingSystem'", "'WindowingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'version'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'Override'", "'='", "'Variable'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -1525,20 +1525,20 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
     // $ANTLR end "ruleOperatingSys"
 
 
-    // $ANTLR start "entryRuleWorkingSys"
-    // InternalOvertarget.g:525:1: entryRuleWorkingSys : ruleWorkingSys EOF ;
-    public final void entryRuleWorkingSys() throws RecognitionException {
+    // $ANTLR start "entryRuleWindowingSys"
+    // InternalOvertarget.g:525:1: entryRuleWindowingSys : ruleWindowingSys EOF ;
+    public final void entryRuleWindowingSys() throws RecognitionException {
         try {
-            // InternalOvertarget.g:526:1: ( ruleWorkingSys EOF )
-            // InternalOvertarget.g:527:1: ruleWorkingSys EOF
+            // InternalOvertarget.g:526:1: ( ruleWindowingSys EOF )
+            // InternalOvertarget.g:527:1: ruleWindowingSys EOF
             {
-             before(grammarAccess.getWorkingSysRule()); 
+             before(grammarAccess.getWindowingSysRule()); 
             pushFollow(FOLLOW_1);
-            ruleWorkingSys();
+            ruleWindowingSys();
 
             state._fsp--;
 
-             after(grammarAccess.getWorkingSysRule()); 
+             after(grammarAccess.getWindowingSysRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -1552,35 +1552,35 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "entryRuleWorkingSys"
+    // $ANTLR end "entryRuleWindowingSys"
 
 
-    // $ANTLR start "ruleWorkingSys"
-    // InternalOvertarget.g:534:1: ruleWorkingSys : ( ( rule__WorkingSys__Alternatives ) ) ;
-    public final void ruleWorkingSys() throws RecognitionException {
+    // $ANTLR start "ruleWindowingSys"
+    // InternalOvertarget.g:534:1: ruleWindowingSys : ( ( rule__WindowingSys__Alternatives ) ) ;
+    public final void ruleWindowingSys() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:538:2: ( ( ( rule__WorkingSys__Alternatives ) ) )
-            // InternalOvertarget.g:539:2: ( ( rule__WorkingSys__Alternatives ) )
+            // InternalOvertarget.g:538:2: ( ( ( rule__WindowingSys__Alternatives ) ) )
+            // InternalOvertarget.g:539:2: ( ( rule__WindowingSys__Alternatives ) )
             {
-            // InternalOvertarget.g:539:2: ( ( rule__WorkingSys__Alternatives ) )
-            // InternalOvertarget.g:540:3: ( rule__WorkingSys__Alternatives )
+            // InternalOvertarget.g:539:2: ( ( rule__WindowingSys__Alternatives ) )
+            // InternalOvertarget.g:540:3: ( rule__WindowingSys__Alternatives )
             {
-             before(grammarAccess.getWorkingSysAccess().getAlternatives()); 
-            // InternalOvertarget.g:541:3: ( rule__WorkingSys__Alternatives )
-            // InternalOvertarget.g:541:4: rule__WorkingSys__Alternatives
+             before(grammarAccess.getWindowingSysAccess().getAlternatives()); 
+            // InternalOvertarget.g:541:3: ( rule__WindowingSys__Alternatives )
+            // InternalOvertarget.g:541:4: rule__WindowingSys__Alternatives
             {
             pushFollow(FOLLOW_2);
-            rule__WorkingSys__Alternatives();
+            rule__WindowingSys__Alternatives();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getWorkingSysAccess().getAlternatives()); 
+             after(grammarAccess.getWindowingSysAccess().getAlternatives()); 
 
             }
 
@@ -1599,7 +1599,7 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "ruleWorkingSys"
+    // $ANTLR end "ruleWindowingSys"
 
 
     // $ANTLR start "entryRuleArchitecture"
@@ -3050,9 +3050,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__OperatingSys__Alternatives"
 
 
-    // $ANTLR start "rule__WorkingSys__Alternatives"
-    // InternalOvertarget.g:975:1: rule__WorkingSys__Alternatives : ( ( 'carbon' ) | ( 'cocoa' ) | ( 'gtk' ) | ( 'motif' ) | ( 'photon' ) | ( 'wpf' ) | ( 'win32' ) );
-    public final void rule__WorkingSys__Alternatives() throws RecognitionException {
+    // $ANTLR start "rule__WindowingSys__Alternatives"
+    // InternalOvertarget.g:975:1: rule__WindowingSys__Alternatives : ( ( 'carbon' ) | ( 'cocoa' ) | ( 'gtk' ) | ( 'motif' ) | ( 'photon' ) | ( 'wpf' ) | ( 'win32' ) );
+    public final void rule__WindowingSys__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3109,9 +3109,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:980:2: ( 'carbon' )
                     // InternalOvertarget.g:981:3: 'carbon'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getCarbonKeyword_0()); 
+                     before(grammarAccess.getWindowingSysAccess().getCarbonKeyword_0()); 
                     match(input,22,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getCarbonKeyword_0()); 
+                     after(grammarAccess.getWindowingSysAccess().getCarbonKeyword_0()); 
 
                     }
 
@@ -3124,9 +3124,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:986:2: ( 'cocoa' )
                     // InternalOvertarget.g:987:3: 'cocoa'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getCocoaKeyword_1()); 
+                     before(grammarAccess.getWindowingSysAccess().getCocoaKeyword_1()); 
                     match(input,23,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getCocoaKeyword_1()); 
+                     after(grammarAccess.getWindowingSysAccess().getCocoaKeyword_1()); 
 
                     }
 
@@ -3139,9 +3139,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:992:2: ( 'gtk' )
                     // InternalOvertarget.g:993:3: 'gtk'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); 
+                     before(grammarAccess.getWindowingSysAccess().getGtkKeyword_2()); 
                     match(input,24,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); 
+                     after(grammarAccess.getWindowingSysAccess().getGtkKeyword_2()); 
 
                     }
 
@@ -3154,9 +3154,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:998:2: ( 'motif' )
                     // InternalOvertarget.g:999:3: 'motif'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getMotifKeyword_3()); 
+                     before(grammarAccess.getWindowingSysAccess().getMotifKeyword_3()); 
                     match(input,25,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getMotifKeyword_3()); 
+                     after(grammarAccess.getWindowingSysAccess().getMotifKeyword_3()); 
 
                     }
 
@@ -3169,9 +3169,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:1004:2: ( 'photon' )
                     // InternalOvertarget.g:1005:3: 'photon'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getPhotonKeyword_4()); 
+                     before(grammarAccess.getWindowingSysAccess().getPhotonKeyword_4()); 
                     match(input,26,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getPhotonKeyword_4()); 
+                     after(grammarAccess.getWindowingSysAccess().getPhotonKeyword_4()); 
 
                     }
 
@@ -3184,9 +3184,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:1010:2: ( 'wpf' )
                     // InternalOvertarget.g:1011:3: 'wpf'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getWpfKeyword_5()); 
+                     before(grammarAccess.getWindowingSysAccess().getWpfKeyword_5()); 
                     match(input,27,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getWpfKeyword_5()); 
+                     after(grammarAccess.getWindowingSysAccess().getWpfKeyword_5()); 
 
                     }
 
@@ -3199,9 +3199,9 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     // InternalOvertarget.g:1016:2: ( 'win32' )
                     // InternalOvertarget.g:1017:3: 'win32'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getWin32Keyword_6()); 
+                     before(grammarAccess.getWindowingSysAccess().getWin32Keyword_6()); 
                     match(input,21,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getWin32Keyword_6()); 
+                     after(grammarAccess.getWindowingSysAccess().getWin32Keyword_6()); 
 
                     }
 
@@ -3222,7 +3222,7 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__WorkingSys__Alternatives"
+    // $ANTLR end "rule__WindowingSys__Alternatives"
 
 
     // $ANTLR start "rule__Architecture__Alternatives"
@@ -5953,21 +5953,21 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__TargetModel__Group_6__0__Impl"
-    // InternalOvertarget.g:1860:1: rule__TargetModel__Group_6__0__Impl : ( 'WorkingSystem' ) ;
+    // InternalOvertarget.g:1860:1: rule__TargetModel__Group_6__0__Impl : ( 'WindowingSystem' ) ;
     public final void rule__TargetModel__Group_6__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:1864:1: ( ( 'WorkingSystem' ) )
-            // InternalOvertarget.g:1865:1: ( 'WorkingSystem' )
+            // InternalOvertarget.g:1864:1: ( ( 'WindowingSystem' ) )
+            // InternalOvertarget.g:1865:1: ( 'WindowingSystem' )
             {
-            // InternalOvertarget.g:1865:1: ( 'WorkingSystem' )
-            // InternalOvertarget.g:1866:2: 'WorkingSystem'
+            // InternalOvertarget.g:1865:1: ( 'WindowingSystem' )
+            // InternalOvertarget.g:1866:2: 'WindowingSystem'
             {
-             before(grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0()); 
+             before(grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0()); 
             match(input,43,FOLLOW_2); 
-             after(grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0()); 
+             after(grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0()); 
 
             }
 
@@ -11482,25 +11482,25 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__TargetModel__WsAssignment_6_1"
-    // InternalOvertarget.g:3750:1: rule__TargetModel__WsAssignment_6_1 : ( ruleWorkingSys ) ;
+    // InternalOvertarget.g:3750:1: rule__TargetModel__WsAssignment_6_1 : ( ruleWindowingSys ) ;
     public final void rule__TargetModel__WsAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:3754:1: ( ( ruleWorkingSys ) )
-            // InternalOvertarget.g:3755:2: ( ruleWorkingSys )
+            // InternalOvertarget.g:3754:1: ( ( ruleWindowingSys ) )
+            // InternalOvertarget.g:3755:2: ( ruleWindowingSys )
             {
-            // InternalOvertarget.g:3755:2: ( ruleWorkingSys )
-            // InternalOvertarget.g:3756:3: ruleWorkingSys
+            // InternalOvertarget.g:3755:2: ( ruleWindowingSys )
+            // InternalOvertarget.g:3756:3: ruleWindowingSys
             {
-             before(grammarAccess.getTargetModelAccess().getWsWorkingSysParserRuleCall_6_1_0()); 
+             before(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_1_0()); 
             pushFollow(FOLLOW_2);
-            ruleWorkingSys();
+            ruleWindowingSys();
 
             state._fsp--;
 
-             after(grammarAccess.getTargetModelAccess().getWsWorkingSysParserRuleCall_6_1_0()); 
+             after(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_1_0()); 
 
             }
 

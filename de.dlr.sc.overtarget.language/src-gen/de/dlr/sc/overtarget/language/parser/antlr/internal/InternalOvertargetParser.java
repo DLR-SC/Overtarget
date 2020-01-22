@@ -30,7 +30,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOvertargetParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'TargetLibrary'", "'{'", "'}'", "'Target'", "'extends'", "'Import'", "'OperatingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'.'", "'Unit'", "'version'", "'newest'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'all;'", "'Override'", "'='", "'Variable'", "'-'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'TargetLibrary'", "'{'", "'}'", "'Target'", "'extends'", "'Import'", "'OperatingSystem'", "'WindowingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'.'", "'Unit'", "'version'", "'newest'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'all;'", "'Override'", "'='", "'Variable'", "'-'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -509,7 +509,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTargetModel"
-    // InternalOvertarget.g:200:1: ruleTargetModel returns [EObject current=null] : (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WorkingSystem' ( (lv_ws_10_0= ruleWorkingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' ) ;
+    // InternalOvertarget.g:200:1: ruleTargetModel returns [EObject current=null] : (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WindowingSystem' ( (lv_ws_10_0= ruleWindowingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' ) ;
     public final EObject ruleTargetModel() throws RecognitionException {
         EObject current = null;
 
@@ -547,11 +547,11 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalOvertarget.g:206:2: ( (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WorkingSystem' ( (lv_ws_10_0= ruleWorkingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' ) )
-            // InternalOvertarget.g:207:2: (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WorkingSystem' ( (lv_ws_10_0= ruleWorkingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' )
+            // InternalOvertarget.g:206:2: ( (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WindowingSystem' ( (lv_ws_10_0= ruleWindowingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' ) )
+            // InternalOvertarget.g:207:2: (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WindowingSystem' ( (lv_ws_10_0= ruleWindowingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' )
             {
-            // InternalOvertarget.g:207:2: (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WorkingSystem' ( (lv_ws_10_0= ruleWorkingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' )
-            // InternalOvertarget.g:208:3: otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WorkingSystem' ( (lv_ws_10_0= ruleWorkingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}'
+            // InternalOvertarget.g:207:2: (otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WindowingSystem' ( (lv_ws_10_0= ruleWindowingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}' )
+            // InternalOvertarget.g:208:3: otherlv_0= 'Target' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' (otherlv_5= 'Import' ( (otherlv_6= RULE_ID ) ) )* (otherlv_7= 'OperatingSystem' ( (lv_os_8_0= ruleOperatingSys ) ) )? (otherlv_9= 'WindowingSystem' ( (lv_ws_10_0= ruleWindowingSys ) ) )? (otherlv_11= 'Architecture' ( (lv_arch_12_0= ruleArchitecture ) ) )? (otherlv_13= 'Locale' ( (lv_loc_14_0= ruleLocale ) ) )? (otherlv_15= 'TargetJRE' ( (lv_targetJre_16_0= rulejre ) ) )? ( (lv_variables_17_0= ruleVariableDefinition ) )* ( (lv_excludedLocations_18_0= ruleExcludeLocation ) )* ( (lv_repositoryLocations_19_0= ruleRepositoryLocation ) )* otherlv_20= '}'
             {
             otherlv_0=(Token)match(input,14,FOLLOW_3); 
 
@@ -730,7 +730,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalOvertarget.g:297:3: (otherlv_9= 'WorkingSystem' ( (lv_ws_10_0= ruleWorkingSys ) ) )?
+            // InternalOvertarget.g:297:3: (otherlv_9= 'WindowingSystem' ( (lv_ws_10_0= ruleWindowingSys ) ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -739,23 +739,23 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalOvertarget.g:298:4: otherlv_9= 'WorkingSystem' ( (lv_ws_10_0= ruleWorkingSys ) )
+                    // InternalOvertarget.g:298:4: otherlv_9= 'WindowingSystem' ( (lv_ws_10_0= ruleWindowingSys ) )
                     {
                     otherlv_9=(Token)match(input,18,FOLLOW_11); 
 
-                    				newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0());
+                    				newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0());
                     			
-                    // InternalOvertarget.g:302:4: ( (lv_ws_10_0= ruleWorkingSys ) )
-                    // InternalOvertarget.g:303:5: (lv_ws_10_0= ruleWorkingSys )
+                    // InternalOvertarget.g:302:4: ( (lv_ws_10_0= ruleWindowingSys ) )
+                    // InternalOvertarget.g:303:5: (lv_ws_10_0= ruleWindowingSys )
                     {
-                    // InternalOvertarget.g:303:5: (lv_ws_10_0= ruleWorkingSys )
-                    // InternalOvertarget.g:304:6: lv_ws_10_0= ruleWorkingSys
+                    // InternalOvertarget.g:303:5: (lv_ws_10_0= ruleWindowingSys )
+                    // InternalOvertarget.g:304:6: lv_ws_10_0= ruleWindowingSys
                     {
 
-                    						newCompositeNode(grammarAccess.getTargetModelAccess().getWsWorkingSysParserRuleCall_6_1_0());
+                    						newCompositeNode(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_1_0());
                     					
                     pushFollow(FOLLOW_12);
-                    lv_ws_10_0=ruleWorkingSys();
+                    lv_ws_10_0=ruleWindowingSys();
 
                     state._fsp--;
 
@@ -767,7 +767,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     							current,
                     							"ws",
                     							lv_ws_10_0,
-                    							"de.dlr.sc.overtarget.language.Overtarget.WorkingSys");
+                    							"de.dlr.sc.overtarget.language.Overtarget.WindowingSys");
                     						afterParserOrEnumRuleCall();
                     					
 
@@ -3517,25 +3517,25 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleOperatingSys"
 
 
-    // $ANTLR start "entryRuleWorkingSys"
-    // InternalOvertarget.g:1366:1: entryRuleWorkingSys returns [String current=null] : iv_ruleWorkingSys= ruleWorkingSys EOF ;
-    public final String entryRuleWorkingSys() throws RecognitionException {
+    // $ANTLR start "entryRuleWindowingSys"
+    // InternalOvertarget.g:1366:1: entryRuleWindowingSys returns [String current=null] : iv_ruleWindowingSys= ruleWindowingSys EOF ;
+    public final String entryRuleWindowingSys() throws RecognitionException {
         String current = null;
 
-        AntlrDatatypeRuleToken iv_ruleWorkingSys = null;
+        AntlrDatatypeRuleToken iv_ruleWindowingSys = null;
 
 
         try {
-            // InternalOvertarget.g:1366:50: (iv_ruleWorkingSys= ruleWorkingSys EOF )
-            // InternalOvertarget.g:1367:2: iv_ruleWorkingSys= ruleWorkingSys EOF
+            // InternalOvertarget.g:1366:50: (iv_ruleWindowingSys= ruleWindowingSys EOF )
+            // InternalOvertarget.g:1367:2: iv_ruleWindowingSys= ruleWindowingSys EOF
             {
-             newCompositeNode(grammarAccess.getWorkingSysRule()); 
+             newCompositeNode(grammarAccess.getWindowingSysRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleWorkingSys=ruleWorkingSys();
+            iv_ruleWindowingSys=ruleWindowingSys();
 
             state._fsp--;
 
-             current =iv_ruleWorkingSys.getText(); 
+             current =iv_ruleWindowingSys.getText(); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -3550,12 +3550,12 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleWorkingSys"
+    // $ANTLR end "entryRuleWindowingSys"
 
 
-    // $ANTLR start "ruleWorkingSys"
-    // InternalOvertarget.g:1373:1: ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'carbon' | kw= 'cocoa' | kw= 'gtk' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' ) ;
-    public final AntlrDatatypeRuleToken ruleWorkingSys() throws RecognitionException {
+    // $ANTLR start "ruleWindowingSys"
+    // InternalOvertarget.g:1373:1: ruleWindowingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'carbon' | kw= 'cocoa' | kw= 'gtk' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' ) ;
+    public final AntlrDatatypeRuleToken ruleWindowingSys() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
@@ -3619,7 +3619,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     kw=(Token)match(input,44,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCarbonKeyword_0());
+                    			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getCarbonKeyword_0());
                     		
 
                     }
@@ -3630,7 +3630,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     kw=(Token)match(input,45,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCocoaKeyword_1());
+                    			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getCocoaKeyword_1());
                     		
 
                     }
@@ -3641,7 +3641,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     kw=(Token)match(input,46,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtkKeyword_2());
+                    			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getGtkKeyword_2());
                     		
 
                     }
@@ -3652,7 +3652,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     kw=(Token)match(input,47,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getMotifKeyword_3());
+                    			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getMotifKeyword_3());
                     		
 
                     }
@@ -3663,7 +3663,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     kw=(Token)match(input,48,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getPhotonKeyword_4());
+                    			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getPhotonKeyword_4());
                     		
 
                     }
@@ -3674,7 +3674,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     kw=(Token)match(input,49,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWpfKeyword_5());
+                    			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getWpfKeyword_5());
                     		
 
                     }
@@ -3685,7 +3685,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     kw=(Token)match(input,43,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWin32Keyword_6());
+                    			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getWin32Keyword_6());
                     		
 
                     }
@@ -3709,7 +3709,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleWorkingSys"
+    // $ANTLR end "ruleWindowingSys"
 
 
     // $ANTLR start "entryRuleArchitecture"

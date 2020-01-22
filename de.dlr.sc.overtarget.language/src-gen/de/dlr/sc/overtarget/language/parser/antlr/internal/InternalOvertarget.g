@@ -295,16 +295,16 @@ ruleTargetModel returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_9='WorkingSystem'
+			otherlv_9='WindowingSystem'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0());
+				newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getTargetModelAccess().getWsWorkingSysParserRuleCall_6_1_0());
+						newCompositeNode(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_1_0());
 					}
-					lv_ws_10_0=ruleWorkingSys
+					lv_ws_10_0=ruleWindowingSys
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -313,7 +313,7 @@ ruleTargetModel returns [EObject current=null]
 							$current,
 							"ws",
 							lv_ws_10_0,
-							"de.dlr.sc.overtarget.language.Overtarget.WorkingSys");
+							"de.dlr.sc.overtarget.language.Overtarget.WindowingSys");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -1362,15 +1362,15 @@ ruleOperatingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 	)
 ;
 
-// Entry rule entryRuleWorkingSys
-entryRuleWorkingSys returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getWorkingSysRule()); }
-	iv_ruleWorkingSys=ruleWorkingSys
-	{ $current=$iv_ruleWorkingSys.current.getText(); }
+// Entry rule entryRuleWindowingSys
+entryRuleWindowingSys returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getWindowingSysRule()); }
+	iv_ruleWindowingSys=ruleWindowingSys
+	{ $current=$iv_ruleWindowingSys.current.getText(); }
 	EOF;
 
-// Rule WorkingSys
-ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+// Rule WindowingSys
+ruleWindowingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
 }
@@ -1381,43 +1381,43 @@ ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 		kw='carbon'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCarbonKeyword_0());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getCarbonKeyword_0());
 		}
 		    |
 		kw='cocoa'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCocoaKeyword_1());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getCocoaKeyword_1());
 		}
 		    |
 		kw='gtk'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtkKeyword_2());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getGtkKeyword_2());
 		}
 		    |
 		kw='motif'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getMotifKeyword_3());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getMotifKeyword_3());
 		}
 		    |
 		kw='photon'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getPhotonKeyword_4());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getPhotonKeyword_4());
 		}
 		    |
 		kw='wpf'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWpfKeyword_5());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getWpfKeyword_5());
 		}
 		    |
 		kw='win32'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWin32Keyword_6());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getWin32Keyword_6());
 		}
 	)
 ;

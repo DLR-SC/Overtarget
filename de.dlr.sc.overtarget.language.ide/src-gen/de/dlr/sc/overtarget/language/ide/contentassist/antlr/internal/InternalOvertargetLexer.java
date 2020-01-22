@@ -753,10 +753,10 @@ public class InternalOvertargetLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOvertarget.g:43:7: ( 'WorkingSystem' )
-            // InternalOvertarget.g:43:9: 'WorkingSystem'
+            // InternalOvertarget.g:43:7: ( 'WindowingSystem' )
+            // InternalOvertarget.g:43:9: 'WindowingSystem'
             {
-            match("WorkingSystem"); 
+            match("WindowingSystem"); 
 
 
             }

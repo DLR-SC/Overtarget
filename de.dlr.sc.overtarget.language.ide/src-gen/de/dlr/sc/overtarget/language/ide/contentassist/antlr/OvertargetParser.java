@@ -46,7 +46,7 @@ public class OvertargetParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQualifierAccess().getAlternatives_0(), "rule__Qualifier__Alternatives_0");
 					put(grammarAccess.getQualifierAccess().getAlternatives_1_1(), "rule__Qualifier__Alternatives_1_1");
 					put(grammarAccess.getOperatingSysAccess().getAlternatives(), "rule__OperatingSys__Alternatives");
-					put(grammarAccess.getWorkingSysAccess().getAlternatives(), "rule__WorkingSys__Alternatives");
+					put(grammarAccess.getWindowingSysAccess().getAlternatives(), "rule__WindowingSys__Alternatives");
 					put(grammarAccess.getArchitectureAccess().getAlternatives(), "rule__Architecture__Alternatives");
 					put(grammarAccess.getJreAccess().getAlternatives(), "rule__Jre__Alternatives");
 					put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");

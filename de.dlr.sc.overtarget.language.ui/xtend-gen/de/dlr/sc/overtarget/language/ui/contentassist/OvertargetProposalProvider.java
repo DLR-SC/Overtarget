@@ -55,12 +55,12 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   }
   
   @Override
-  public void complete_WorkingSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void complete_WindowingSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final Consumer<String> _function = (String it) -> {
       acceptor.accept(this.createCompletionProposal(it, context));
     };
     ((List<String>)Conversions.doWrapArray(Platform.knownWSValues())).forEach(_function);
-    super.complete_WorkingSys(model, ruleCall, context, acceptor);
+    super.complete_WindowingSys(model, ruleCall, context, acceptor);
   }
   
   @Override
