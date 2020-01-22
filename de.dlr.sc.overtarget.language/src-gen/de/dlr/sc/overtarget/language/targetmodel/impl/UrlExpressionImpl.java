@@ -86,6 +86,7 @@ public class UrlExpressionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UrlExpression getLeft()
   {
     return left;
@@ -113,6 +114,7 @@ public class UrlExpressionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(UrlExpression newLeft)
   {
     if (newLeft != left)
@@ -134,6 +136,7 @@ public class UrlExpressionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UrlElement getRight()
   {
     return right;
@@ -161,6 +164,7 @@ public class UrlExpressionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(UrlElement newRight)
   {
     if (newRight != right)

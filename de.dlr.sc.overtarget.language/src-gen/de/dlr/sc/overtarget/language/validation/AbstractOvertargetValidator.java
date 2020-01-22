@@ -22,5 +22,4 @@ public abstract class AbstractOvertargetValidator extends AbstractDeclarativeVal
 		result.add(de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage.eINSTANCE);
 		return result;
 	}
-	
 }

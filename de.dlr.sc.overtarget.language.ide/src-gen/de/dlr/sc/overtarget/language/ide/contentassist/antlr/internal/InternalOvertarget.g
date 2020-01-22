@@ -2472,7 +2472,6 @@ rule__Unit__Group__3
 	}
 :
 	rule__Unit__Group__3__Impl
-	rule__Unit__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2487,32 +2486,6 @@ rule__Unit__Group__3__Impl
 	{ before(grammarAccess.getUnitAccess().getVersAssignment_3()); }
 	(rule__Unit__VersAssignment_3)
 	{ after(grammarAccess.getUnitAccess().getVersAssignment_3()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Unit__Group__4
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__Unit__Group__4__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Unit__Group__4__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getUnitAccess().getSemicolonKeyword_4()); }
-	';'
-	{ after(grammarAccess.getUnitAccess().getSemicolonKeyword_4()); }
 )
 ;
 finally {
