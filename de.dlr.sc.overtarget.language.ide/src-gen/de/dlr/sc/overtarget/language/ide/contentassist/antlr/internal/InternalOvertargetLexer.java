@@ -356,10 +356,10 @@ public class InternalOvertargetLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOvertarget.g:24:7: ( 'gta' )
-            // InternalOvertarget.g:24:9: 'gta'
+            // InternalOvertarget.g:24:7: ( 'gtk' )
+            // InternalOvertarget.g:24:9: 'gtk'
             {
-            match("gta"); 
+            match("gtk"); 
 
 
             }

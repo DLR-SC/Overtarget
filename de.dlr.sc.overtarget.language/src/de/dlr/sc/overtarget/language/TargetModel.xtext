@@ -119,7 +119,7 @@ OperatningSys:
 ;
 
 WorkingSys: 
-	'carbon' | 'cocoa' | 'gta'| 'motif'| 'photon' | 'wpf'| 'win32'
+	'carbon' | 'cocoa' | 'gtk'| 'motif'| 'photon' | 'wpf'| 'win32'
 ;
 
 Architecture:
