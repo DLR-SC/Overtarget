@@ -31,7 +31,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOvertargetParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'newest'", "'all;'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gta'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'", "'Unit'", "'Target'", "'TargetLibrary'", "'{'", "'}'", "'extends'", "'Import'", "'OperatingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'version'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'Override'", "'='", "'Variable'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'newest'", "'all;'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'", "'Unit'", "'Target'", "'TargetLibrary'", "'{'", "'}'", "'extends'", "'Import'", "'OperatingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'version'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'Override'", "'='", "'Variable'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -3051,13 +3051,13 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__WorkingSys__Alternatives"
-    // InternalOvertarget.g:975:1: rule__WorkingSys__Alternatives : ( ( 'carbon' ) | ( 'cocoa' ) | ( 'gta' ) | ( 'motif' ) | ( 'photon' ) | ( 'wpf' ) | ( 'win32' ) );
+    // InternalOvertarget.g:975:1: rule__WorkingSys__Alternatives : ( ( 'carbon' ) | ( 'cocoa' ) | ( 'gtk' ) | ( 'motif' ) | ( 'photon' ) | ( 'wpf' ) | ( 'win32' ) );
     public final void rule__WorkingSys__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:979:1: ( ( 'carbon' ) | ( 'cocoa' ) | ( 'gta' ) | ( 'motif' ) | ( 'photon' ) | ( 'wpf' ) | ( 'win32' ) )
+            // InternalOvertarget.g:979:1: ( ( 'carbon' ) | ( 'cocoa' ) | ( 'gtk' ) | ( 'motif' ) | ( 'photon' ) | ( 'wpf' ) | ( 'win32' ) )
             int alt12=7;
             switch ( input.LA(1) ) {
             case 22:
@@ -3134,14 +3134,14 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
                     }
                     break;
                 case 3 :
-                    // InternalOvertarget.g:992:2: ( 'gta' )
+                    // InternalOvertarget.g:992:2: ( 'gtk' )
                     {
-                    // InternalOvertarget.g:992:2: ( 'gta' )
-                    // InternalOvertarget.g:993:3: 'gta'
+                    // InternalOvertarget.g:992:2: ( 'gtk' )
+                    // InternalOvertarget.g:993:3: 'gtk'
                     {
-                     before(grammarAccess.getWorkingSysAccess().getGtaKeyword_2()); 
+                     before(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); 
                     match(input,24,FOLLOW_2); 
-                     after(grammarAccess.getWorkingSysAccess().getGtaKeyword_2()); 
+                     after(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); 
 
                     }
 

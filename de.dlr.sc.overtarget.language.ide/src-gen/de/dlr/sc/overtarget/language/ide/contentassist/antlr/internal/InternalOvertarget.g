@@ -990,9 +990,9 @@ rule__WorkingSys__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getGtaKeyword_2()); }
-		'gta'
-		{ after(grammarAccess.getWorkingSysAccess().getGtaKeyword_2()); }
+		{ before(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); }
+		'gtk'
+		{ after(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); }
 	)
 	|
 	(
