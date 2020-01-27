@@ -54,7 +54,7 @@ class OvertargetParsingTest {
 			Unit org.antlr.runtime version 4.3.0.v201502022030;
 		}  
 		RepositoryLocation A url "http://download.eclipse.org/technology/swtbot/releases/2.5.0"{  
-			Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837 ;
+			Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837;
 			Unit org.eclipse.swtbot.eclipse.test.junit.feature.group version 2.5.0.201609021837;
 			Unit org.eclipse.swtbot.feature.group version newest;
 		}  

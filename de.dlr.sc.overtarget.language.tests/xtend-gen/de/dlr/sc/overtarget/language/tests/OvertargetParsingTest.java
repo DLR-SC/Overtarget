@@ -93,7 +93,7 @@ public class OvertargetParsingTest {
       _builder.append("RepositoryLocation A url \"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"{  ");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837 ;");
+      _builder.append("Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837;");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("Unit org.eclipse.swtbot.eclipse.test.junit.feature.group version 2.5.0.201609021837;");

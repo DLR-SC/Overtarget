@@ -501,12 +501,13 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cVersAlternatives_3_0 = (Alternatives)cVersAssignment_3.eContents().get(0);
 		private final RuleCall cVersVersionParserRuleCall_3_0_0 = (RuleCall)cVersAlternatives_3_0.eContents().get(0);
 		private final Keyword cVersNewestKeyword_3_0_1 = (Keyword)cVersAlternatives_3_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Unit:
-		//	'Unit' source=Source 'version' vers=(Version | 'newest');
+		//	'Unit' source=Source 'version' vers=(Version | 'newest') ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Unit' source=Source 'version' vers=(Version | 'newest')
+		//'Unit' source=Source 'version' vers=(Version | 'newest') ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'Unit'
@@ -532,6 +533,9 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'newest'
 		public Keyword getVersNewestKeyword_3_0_1() { return cVersNewestKeyword_3_0_1; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 	public class SourceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.Source");
@@ -1339,7 +1343,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Unit:
-	//	'Unit' source=Source 'version' vers=(Version | 'newest');
+	//	'Unit' source=Source 'version' vers=(Version | 'newest') ';';
 	public UnitElements getUnitAccess() {
 		return pUnit;
 	}

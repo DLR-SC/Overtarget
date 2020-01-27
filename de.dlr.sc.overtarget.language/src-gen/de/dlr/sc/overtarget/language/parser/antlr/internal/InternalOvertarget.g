@@ -649,6 +649,10 @@ ruleUnit returns [EObject current=null]
 				)
 			)
 		)
+		otherlv_4=';'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getUnitAccess().getSemicolonKeyword_4());
+		}
 	)
 ;
 

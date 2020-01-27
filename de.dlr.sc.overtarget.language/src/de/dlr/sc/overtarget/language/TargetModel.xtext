@@ -60,7 +60,7 @@ SimpleVersion:
 ;
 
 Unit:
-	'Unit' source=Source 'version' vers= (Version | 'newest') 
+	'Unit' source=Source 'version' vers= (Version | 'newest') ';'
 ;
 
 Source hidden():
