@@ -1390,10 +1390,10 @@ ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCocoaKeyword_1());
 		}
 		    |
-		kw='gta'
+		kw='gtk'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtaKeyword_2());
+			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtkKeyword_2());
 		}
 		    |
 		kw='motif'
