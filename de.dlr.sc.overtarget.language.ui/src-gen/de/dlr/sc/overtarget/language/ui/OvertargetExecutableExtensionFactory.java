@@ -11,6 +11,7 @@ package de.dlr.sc.overtarget.language.ui;
 
 import com.google.inject.Injector;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
 
@@ -22,12 +23,13 @@ public class OvertargetExecutableExtensionFactory extends AbstractGuiceAwareExec
 
 	@Override
 	protected Bundle getBundle() {
-		return LanguageActivator.getInstance().getBundle();
+		return Platform.getBundle(LanguageActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return LanguageActivator.getInstance().getInjector(LanguageActivator.DE_DLR_SC_OVERTARGET_LANGUAGE_OVERTARGET);
+		LanguageActivator activator = LanguageActivator.getInstance();
+		return activator != null ? activator.getInjector(LanguageActivator.DE_DLR_SC_OVERTARGET_LANGUAGE_OVERTARGET) : null;
 	}
-	
+
 }

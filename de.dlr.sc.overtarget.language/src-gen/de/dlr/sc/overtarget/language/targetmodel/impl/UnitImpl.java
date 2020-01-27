@@ -103,6 +103,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSource()
   {
     return source;
@@ -113,6 +114,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSource(String newSource)
   {
     String oldSource = source;
@@ -126,6 +128,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVers()
   {
     return vers;
@@ -136,6 +139,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVers(String newVers)
   {
     String oldVers = vers;
@@ -230,7 +234,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (source: ");
     result.append(source);
     result.append(", vers: ");

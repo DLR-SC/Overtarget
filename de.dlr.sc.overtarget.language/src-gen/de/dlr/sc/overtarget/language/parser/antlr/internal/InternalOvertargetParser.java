@@ -3331,7 +3331,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalOvertarget.g:1306:53: (iv_ruleOperatingSys= ruleOperatingSys EOF )
+            // InternalOvertarget.g:1306:52: (iv_ruleOperatingSys= ruleOperatingSys EOF )
             // InternalOvertarget.g:1307:2: iv_ruleOperatingSys= ruleOperatingSys EOF
             {
              newCompositeNode(grammarAccess.getOperatingSysRule()); 

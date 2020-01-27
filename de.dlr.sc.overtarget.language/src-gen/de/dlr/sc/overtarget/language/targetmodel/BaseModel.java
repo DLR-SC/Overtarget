@@ -45,10 +45,6 @@ public interface BaseModel extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -72,10 +68,6 @@ public interface BaseModel extends EObject
    * Returns the value of the '<em><b>Imported Models</b></em>' reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.TargetFile}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imported Models</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Imported Models</em>' reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getBaseModel_ImportedModels()
@@ -87,10 +79,6 @@ public interface BaseModel extends EObject
   /**
    * Returns the value of the '<em><b>Os</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Os</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Os</em>' attribute.
    * @see #setOs(String)
@@ -113,10 +101,6 @@ public interface BaseModel extends EObject
   /**
    * Returns the value of the '<em><b>Ws</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ws</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ws</em>' attribute.
    * @see #setWs(String)
@@ -139,10 +123,6 @@ public interface BaseModel extends EObject
   /**
    * Returns the value of the '<em><b>Arch</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Arch</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Arch</em>' attribute.
    * @see #setArch(String)
@@ -165,10 +145,6 @@ public interface BaseModel extends EObject
   /**
    * Returns the value of the '<em><b>Loc</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Loc</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Loc</em>' attribute.
    * @see #setLoc(String)
@@ -191,10 +167,6 @@ public interface BaseModel extends EObject
   /**
    * Returns the value of the '<em><b>Target Jre</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Target Jre</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Target Jre</em>' attribute.
    * @see #setTargetJre(String)
@@ -218,10 +190,6 @@ public interface BaseModel extends EObject
    * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.VariableDefinition}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Variables</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getBaseModel_Variables()
@@ -234,10 +202,6 @@ public interface BaseModel extends EObject
    * Returns the value of the '<em><b>Excluded Locations</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.ExcludeLocation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Excluded Locations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Excluded Locations</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getBaseModel_ExcludedLocations()
@@ -250,10 +214,6 @@ public interface BaseModel extends EObject
    * Returns the value of the '<em><b>Repository Locations</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Repository Locations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Repository Locations</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getBaseModel_RepositoryLocations()

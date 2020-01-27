@@ -37,10 +37,6 @@ public interface ExcludeLocation extends EObject
   /**
    * Returns the value of the '<em><b>Repository Location</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Repository Location</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Repository Location</em>' reference.
    * @see #setRepositoryLocation(RepositoryLocation)
@@ -64,10 +60,6 @@ public interface ExcludeLocation extends EObject
    * Returns the value of the '<em><b>Units</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.Unit}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Units</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Units</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getExcludeLocation_Units()

@@ -73,6 +73,7 @@ public class AlreadyDeclaredVariableImpl extends VariableDefinitionImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NewVariableDefinition getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -103,6 +104,7 @@ public class AlreadyDeclaredVariableImpl extends VariableDefinitionImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(NewVariableDefinition newRef)
   {
     NewVariableDefinition oldRef = ref;
