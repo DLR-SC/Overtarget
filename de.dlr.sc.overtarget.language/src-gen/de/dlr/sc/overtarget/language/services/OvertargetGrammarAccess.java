@@ -975,17 +975,17 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cCarbonKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cCocoaKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cGtaKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cGtkKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cMotifKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cPhotonKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cWpfKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cWin32Keyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		
 		//WorkingSys:
-		//	'carbon' | 'cocoa' | 'gta' | 'motif' | 'photon' | 'wpf' | 'win32';
+		//	'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'carbon' | 'cocoa' | 'gta' | 'motif' | 'photon' | 'wpf' | 'win32'
+		//'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'carbon'
@@ -994,8 +994,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'cocoa'
 		public Keyword getCocoaKeyword_1() { return cCocoaKeyword_1; }
 		
-		//'gta'
-		public Keyword getGtaKeyword_2() { return cGtaKeyword_2; }
+		//'gtk'
+		public Keyword getGtkKeyword_2() { return cGtkKeyword_2; }
 		
 		//'motif'
 		public Keyword getMotifKeyword_3() { return cMotifKeyword_3; }
@@ -1504,7 +1504,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//WorkingSys:
-	//	'carbon' | 'cocoa' | 'gta' | 'motif' | 'photon' | 'wpf' | 'win32';
+	//	'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32';
 	public WorkingSysElements getWorkingSysAccess() {
 		return pWorkingSys;
 	}
