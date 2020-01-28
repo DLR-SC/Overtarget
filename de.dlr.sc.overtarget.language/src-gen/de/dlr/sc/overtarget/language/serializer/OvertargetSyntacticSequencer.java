@@ -29,14 +29,14 @@ public class OvertargetSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected OvertargetGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1;
 	protected AbstractElementAlias match_ExcludeLocation_AllKeyword_4_1_q;
-	protected AbstractElementAlias match_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1;
+	protected AbstractElementAlias match_TargetModel_WindowingSystemKeyword_6_0_0_or_WorkingSystemKeyword_6_0_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (OvertargetGrammarAccess) access;
 		match_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getBaseModelAccess().getWindowingSystemKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getBaseModelAccess().getWorkingSystemKeyword_6_1()));
 		match_ExcludeLocation_AllKeyword_4_1_q = new TokenAlias(false, true, grammarAccess.getExcludeLocationAccess().getAllKeyword_4_1());
-		match_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_1()));
+		match_TargetModel_WindowingSystemKeyword_6_0_0_or_WorkingSystemKeyword_6_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0()), new TokenAlias(false, false, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1()));
 	}
 	
 	@Override
@@ -55,8 +55,8 @@ public class OvertargetSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ExcludeLocation_AllKeyword_4_1_q.equals(syntax))
 				emit_ExcludeLocation_AllKeyword_4_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1.equals(syntax))
-				emit_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TargetModel_WindowingSystemKeyword_6_0_0_or_WorkingSystemKeyword_6_0_1.equals(syntax))
+				emit_TargetModel_WindowingSystemKeyword_6_0_0_or_WorkingSystemKeyword_6_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -93,7 +93,7 @@ public class OvertargetSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     os=OperatingSys (ambiguity) ws=WindowingSys
 	 *     super=[TargetModel|ID] '{' (ambiguity) ws=WindowingSys
 	 */
-	protected void emit_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_TargetModel_WindowingSystemKeyword_6_0_0_or_WorkingSystemKeyword_6_0_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

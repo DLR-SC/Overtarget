@@ -201,7 +201,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         super=[TargetModel|ID]? 
 	 *         importedModels+=[TargetFile|ID]* 
 	 *         os=OperatingSys? 
-	 *         ws=WindowingSys 
+	 *         ws=WindowingSys? 
 	 *         arch=Architecture? 
 	 *         loc=Locale? 
 	 *         targetJre=jre? 

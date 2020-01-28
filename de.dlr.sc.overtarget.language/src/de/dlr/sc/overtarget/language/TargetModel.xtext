@@ -41,7 +41,7 @@ TargetModel:
 	'Target' name= ID ('extends' super=[TargetModel])? '{'
 		('Import' importedModels+=[TargetFile])*
 		('OperatingSystem' os=OperatingSys)?
-		('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
+		(('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)?
 		('Architecture' arch=Architecture)?
 		('Locale' loc=Locale)?
 		('TargetJRE' targetJre=jre)?
