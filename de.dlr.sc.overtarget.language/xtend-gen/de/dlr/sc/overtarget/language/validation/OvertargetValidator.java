@@ -10,7 +10,8 @@
 package de.dlr.sc.overtarget.language.validation;
 
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
-import de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
+import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.validation.AbstractOvertargetValidator;
 import de.dlr.sc.overtarget.language.validation.ValidatorHelper;
 import org.eclipse.xtext.validation.Check;
@@ -34,10 +35,10 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
   }
   
   @Check
-  public void checkIfWorkingSysUsed(final TargetModelImpl target) {
-    String workingSys = target.getWks();
+  public void checkIfWorkingSysUsed(final TargetModel target) {
+    String workingSys = target.getWs();
     if ((workingSys != null)) {
-      this.warning("Please use WindowingSys instead of WorkingSys!", target, target.eContainingFeature());
+      this.warning("Please use WindowingSys instead of WorkingSys!", target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws());
     }
   }
 }

@@ -9,10 +9,11 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.validation
 
-
-import org.eclipse.xtext.validation.Check
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-import de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel
+import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
+import org.eclipse.xtext.validation.Check
+
 /**
  * This class contains custom validation rules. 
  * 
@@ -29,10 +30,10 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 	}
 	
 	@Check
-	def checkIfWorkingSysUsed(TargetModelImpl target) {
-		var workingSys = target.getWks();
+	def checkIfWorkingSysUsed(TargetModel target) {
+		var workingSys = target.getWs();
 		if (workingSys !== null) {
-			warning('Please use WindowingSys instead of WorkingSys!', target, target.eContainingFeature)
+			warning('Please use WindowingSys instead of WorkingSys!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws)
 		}
 	}
 }
