@@ -12,7 +12,7 @@ package de.dlr.sc.overtarget.language.validation
 
 import org.eclipse.xtext.validation.Check
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-
+import de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl
 /**
  * This class contains custom validation rules. 
  * 
@@ -24,7 +24,15 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 		var helper = new ValidatorHelper();
 		val fileName = helper.getFileName(target);
 		if (!fileName.equals(target.name)) {
-			warning('File name and model name are not the same!!!', target, target.eContainingFeature)
+			warning('File name and model name are not the same!', target, target.eContainingFeature)
+		}
+	}
+	
+	@Check
+	def checkIfWorkingSysUsed(TargetModelImpl target) {
+		var workingSys = target.getWks();
+		if (workingSys !== null) {
+			warning('Please use WindowingSys instead of WorkingSys!', target, target.eContainingFeature)
 		}
 	}
 }
