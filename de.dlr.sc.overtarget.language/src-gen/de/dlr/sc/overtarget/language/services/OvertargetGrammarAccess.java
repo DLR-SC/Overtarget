@@ -98,170 +98,154 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class BaseModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.BaseModel");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Keyword cTargetKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
-		private final Group cGroup_0_3 = (Group)cGroup_0.eContents().get(3);
-		private final Keyword cImportKeyword_0_3_0 = (Keyword)cGroup_0_3.eContents().get(0);
-		private final Assignment cImportedModelsAssignment_0_3_1 = (Assignment)cGroup_0_3.eContents().get(1);
-		private final CrossReference cImportedModelsTargetFileCrossReference_0_3_1_0 = (CrossReference)cImportedModelsAssignment_0_3_1.eContents().get(0);
-		private final RuleCall cImportedModelsTargetFileIDTerminalRuleCall_0_3_1_0_1 = (RuleCall)cImportedModelsTargetFileCrossReference_0_3_1_0.eContents().get(1);
-		private final Keyword cOperatingSystemKeyword_0_4 = (Keyword)cGroup_0.eContents().get(4);
-		private final Assignment cOsAssignment_0_5 = (Assignment)cGroup_0.eContents().get(5);
-		private final RuleCall cOsOperatingSysParserRuleCall_0_5_0 = (RuleCall)cOsAssignment_0_5.eContents().get(0);
-		private final Keyword cWindowingSystemKeyword_0_6 = (Keyword)cGroup_0.eContents().get(6);
-		private final Assignment cWsAssignment_0_7 = (Assignment)cGroup_0.eContents().get(7);
-		private final RuleCall cWsWindowingSysParserRuleCall_0_7_0 = (RuleCall)cWsAssignment_0_7.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Keyword cWorkingSystemKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cWksAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cWksWorkingSysParserRuleCall_1_1_0 = (RuleCall)cWksAssignment_1_1.eContents().get(0);
-		private final Keyword cArchitectureKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
-		private final Assignment cArchAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
-		private final RuleCall cArchArchitectureParserRuleCall_1_3_0 = (RuleCall)cArchAssignment_1_3.eContents().get(0);
-		private final Keyword cLocaleKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
-		private final Assignment cLocAssignment_1_5 = (Assignment)cGroup_1.eContents().get(5);
-		private final RuleCall cLocLocaleParserRuleCall_1_5_0 = (RuleCall)cLocAssignment_1_5.eContents().get(0);
-		private final Group cGroup_1_6 = (Group)cGroup_1.eContents().get(6);
-		private final Keyword cTargetJREKeyword_1_6_0 = (Keyword)cGroup_1_6.eContents().get(0);
-		private final Assignment cTargetJreAssignment_1_6_1 = (Assignment)cGroup_1_6.eContents().get(1);
-		private final RuleCall cTargetJreJreParserRuleCall_1_6_1_0 = (RuleCall)cTargetJreAssignment_1_6_1.eContents().get(0);
-		private final Assignment cVariablesAssignment_1_7 = (Assignment)cGroup_1.eContents().get(7);
-		private final RuleCall cVariablesVariableDefinitionParserRuleCall_1_7_0 = (RuleCall)cVariablesAssignment_1_7.eContents().get(0);
-		private final Assignment cExcludedLocationsAssignment_1_8 = (Assignment)cGroup_1.eContents().get(8);
-		private final RuleCall cExcludedLocationsExcludeLocationParserRuleCall_1_8_0 = (RuleCall)cExcludedLocationsAssignment_1_8.eContents().get(0);
-		private final Assignment cRepositoryLocationsAssignment_1_9 = (Assignment)cGroup_1.eContents().get(9);
-		private final RuleCall cRepositoryLocationsRepositoryLocationParserRuleCall_1_9_0 = (RuleCall)cRepositoryLocationsAssignment_1_9.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_1_10 = (Keyword)cGroup_1.eContents().get(10);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTargetKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cImportKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cImportedModelsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cImportedModelsTargetFileCrossReference_3_1_0 = (CrossReference)cImportedModelsAssignment_3_1.eContents().get(0);
+		private final RuleCall cImportedModelsTargetFileIDTerminalRuleCall_3_1_0_1 = (RuleCall)cImportedModelsTargetFileCrossReference_3_1_0.eContents().get(1);
+		private final Keyword cOperatingSystemKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cOsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cOsOperatingSysParserRuleCall_5_0 = (RuleCall)cOsAssignment_5.eContents().get(0);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Keyword cWindowingSystemKeyword_6_0 = (Keyword)cAlternatives_6.eContents().get(0);
+		private final Keyword cWorkingSystemKeyword_6_1 = (Keyword)cAlternatives_6.eContents().get(1);
+		private final Assignment cWsAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cWsWindowingSysParserRuleCall_7_0 = (RuleCall)cWsAssignment_7.eContents().get(0);
+		private final Keyword cArchitectureKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cArchAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cArchArchitectureParserRuleCall_9_0 = (RuleCall)cArchAssignment_9.eContents().get(0);
+		private final Keyword cLocaleKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Assignment cLocAssignment_11 = (Assignment)cGroup.eContents().get(11);
+		private final RuleCall cLocLocaleParserRuleCall_11_0 = (RuleCall)cLocAssignment_11.eContents().get(0);
+		private final Group cGroup_12 = (Group)cGroup.eContents().get(12);
+		private final Keyword cTargetJREKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
+		private final Assignment cTargetJreAssignment_12_1 = (Assignment)cGroup_12.eContents().get(1);
+		private final RuleCall cTargetJreJreParserRuleCall_12_1_0 = (RuleCall)cTargetJreAssignment_12_1.eContents().get(0);
+		private final Assignment cVariablesAssignment_13 = (Assignment)cGroup.eContents().get(13);
+		private final RuleCall cVariablesVariableDefinitionParserRuleCall_13_0 = (RuleCall)cVariablesAssignment_13.eContents().get(0);
+		private final Assignment cExcludedLocationsAssignment_14 = (Assignment)cGroup.eContents().get(14);
+		private final RuleCall cExcludedLocationsExcludeLocationParserRuleCall_14_0 = (RuleCall)cExcludedLocationsAssignment_14.eContents().get(0);
+		private final Assignment cRepositoryLocationsAssignment_15 = (Assignment)cGroup.eContents().get(15);
+		private final RuleCall cRepositoryLocationsRepositoryLocationParserRuleCall_15_0 = (RuleCall)cRepositoryLocationsAssignment_15.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_16 = (Keyword)cGroup.eContents().get(16);
 		
 		//BaseModel:
-		//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys 'WindowingSystem'
-		//	ws=WindowingSys | 'WorkingSystem' wks=WorkingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE'
-		//	targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
-		//	repositoryLocations+=RepositoryLocation* '}';
+		//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
+		//	'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+		//	variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys 'WindowingSystem'
-		//ws=WindowingSys | 'WorkingSystem' wks=WorkingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE'
-		//targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
-		//repositoryLocations+=RepositoryLocation* '}'
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys 'WindowingSystem'
-		//ws=WindowingSys
-		public Group getGroup_0() { return cGroup_0; }
+		//'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
+		//'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+		//variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}'
+		public Group getGroup() { return cGroup; }
 		
 		//'Target'
-		public Keyword getTargetKeyword_0_0() { return cTargetKeyword_0_0; }
+		public Keyword getTargetKeyword_0() { return cTargetKeyword_0; }
 		
 		//name=ID
-		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_0_2() { return cLeftCurlyBracketKeyword_0_2; }
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
 		//('Import' importedModels+=[TargetFile])*
-		public Group getGroup_0_3() { return cGroup_0_3; }
+		public Group getGroup_3() { return cGroup_3; }
 		
 		//'Import'
-		public Keyword getImportKeyword_0_3_0() { return cImportKeyword_0_3_0; }
+		public Keyword getImportKeyword_3_0() { return cImportKeyword_3_0; }
 		
 		//importedModels+=[TargetFile]
-		public Assignment getImportedModelsAssignment_0_3_1() { return cImportedModelsAssignment_0_3_1; }
+		public Assignment getImportedModelsAssignment_3_1() { return cImportedModelsAssignment_3_1; }
 		
 		//[TargetFile]
-		public CrossReference getImportedModelsTargetFileCrossReference_0_3_1_0() { return cImportedModelsTargetFileCrossReference_0_3_1_0; }
+		public CrossReference getImportedModelsTargetFileCrossReference_3_1_0() { return cImportedModelsTargetFileCrossReference_3_1_0; }
 		
 		//ID
-		public RuleCall getImportedModelsTargetFileIDTerminalRuleCall_0_3_1_0_1() { return cImportedModelsTargetFileIDTerminalRuleCall_0_3_1_0_1; }
+		public RuleCall getImportedModelsTargetFileIDTerminalRuleCall_3_1_0_1() { return cImportedModelsTargetFileIDTerminalRuleCall_3_1_0_1; }
 		
 		//'OperatingSystem'
-		public Keyword getOperatingSystemKeyword_0_4() { return cOperatingSystemKeyword_0_4; }
+		public Keyword getOperatingSystemKeyword_4() { return cOperatingSystemKeyword_4; }
 		
 		//os=OperatingSys
-		public Assignment getOsAssignment_0_5() { return cOsAssignment_0_5; }
+		public Assignment getOsAssignment_5() { return cOsAssignment_5; }
 		
 		//OperatingSys
-		public RuleCall getOsOperatingSysParserRuleCall_0_5_0() { return cOsOperatingSysParserRuleCall_0_5_0; }
+		public RuleCall getOsOperatingSysParserRuleCall_5_0() { return cOsOperatingSysParserRuleCall_5_0; }
+		
+		//'WindowingSystem' | 'WorkingSystem'
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 		
 		//'WindowingSystem'
-		public Keyword getWindowingSystemKeyword_0_6() { return cWindowingSystemKeyword_0_6; }
-		
-		//ws=WindowingSys
-		public Assignment getWsAssignment_0_7() { return cWsAssignment_0_7; }
-		
-		//WindowingSys
-		public RuleCall getWsWindowingSysParserRuleCall_0_7_0() { return cWsWindowingSysParserRuleCall_0_7_0; }
-		
-		//'WorkingSystem' wks=WorkingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
-		//variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}'
-		public Group getGroup_1() { return cGroup_1; }
+		public Keyword getWindowingSystemKeyword_6_0() { return cWindowingSystemKeyword_6_0; }
 		
 		//'WorkingSystem'
-		public Keyword getWorkingSystemKeyword_1_0() { return cWorkingSystemKeyword_1_0; }
+		public Keyword getWorkingSystemKeyword_6_1() { return cWorkingSystemKeyword_6_1; }
 		
-		//wks=WorkingSys
-		public Assignment getWksAssignment_1_1() { return cWksAssignment_1_1; }
+		//ws=WindowingSys
+		public Assignment getWsAssignment_7() { return cWsAssignment_7; }
 		
-		//WorkingSys
-		public RuleCall getWksWorkingSysParserRuleCall_1_1_0() { return cWksWorkingSysParserRuleCall_1_1_0; }
+		//WindowingSys
+		public RuleCall getWsWindowingSysParserRuleCall_7_0() { return cWsWindowingSysParserRuleCall_7_0; }
 		
 		//'Architecture'
-		public Keyword getArchitectureKeyword_1_2() { return cArchitectureKeyword_1_2; }
+		public Keyword getArchitectureKeyword_8() { return cArchitectureKeyword_8; }
 		
 		//arch=Architecture
-		public Assignment getArchAssignment_1_3() { return cArchAssignment_1_3; }
+		public Assignment getArchAssignment_9() { return cArchAssignment_9; }
 		
 		//Architecture
-		public RuleCall getArchArchitectureParserRuleCall_1_3_0() { return cArchArchitectureParserRuleCall_1_3_0; }
+		public RuleCall getArchArchitectureParserRuleCall_9_0() { return cArchArchitectureParserRuleCall_9_0; }
 		
 		//'Locale'
-		public Keyword getLocaleKeyword_1_4() { return cLocaleKeyword_1_4; }
+		public Keyword getLocaleKeyword_10() { return cLocaleKeyword_10; }
 		
 		//loc=Locale
-		public Assignment getLocAssignment_1_5() { return cLocAssignment_1_5; }
+		public Assignment getLocAssignment_11() { return cLocAssignment_11; }
 		
 		//Locale
-		public RuleCall getLocLocaleParserRuleCall_1_5_0() { return cLocLocaleParserRuleCall_1_5_0; }
+		public RuleCall getLocLocaleParserRuleCall_11_0() { return cLocLocaleParserRuleCall_11_0; }
 		
 		//('TargetJRE' targetJre=jre)?
-		public Group getGroup_1_6() { return cGroup_1_6; }
+		public Group getGroup_12() { return cGroup_12; }
 		
 		//'TargetJRE'
-		public Keyword getTargetJREKeyword_1_6_0() { return cTargetJREKeyword_1_6_0; }
+		public Keyword getTargetJREKeyword_12_0() { return cTargetJREKeyword_12_0; }
 		
 		//targetJre=jre
-		public Assignment getTargetJreAssignment_1_6_1() { return cTargetJreAssignment_1_6_1; }
+		public Assignment getTargetJreAssignment_12_1() { return cTargetJreAssignment_12_1; }
 		
 		//jre
-		public RuleCall getTargetJreJreParserRuleCall_1_6_1_0() { return cTargetJreJreParserRuleCall_1_6_1_0; }
+		public RuleCall getTargetJreJreParserRuleCall_12_1_0() { return cTargetJreJreParserRuleCall_12_1_0; }
 		
 		//variables+=VariableDefinition*
-		public Assignment getVariablesAssignment_1_7() { return cVariablesAssignment_1_7; }
+		public Assignment getVariablesAssignment_13() { return cVariablesAssignment_13; }
 		
 		//VariableDefinition
-		public RuleCall getVariablesVariableDefinitionParserRuleCall_1_7_0() { return cVariablesVariableDefinitionParserRuleCall_1_7_0; }
+		public RuleCall getVariablesVariableDefinitionParserRuleCall_13_0() { return cVariablesVariableDefinitionParserRuleCall_13_0; }
 		
 		//excludedLocations+=ExcludeLocation*
-		public Assignment getExcludedLocationsAssignment_1_8() { return cExcludedLocationsAssignment_1_8; }
+		public Assignment getExcludedLocationsAssignment_14() { return cExcludedLocationsAssignment_14; }
 		
 		//ExcludeLocation
-		public RuleCall getExcludedLocationsExcludeLocationParserRuleCall_1_8_0() { return cExcludedLocationsExcludeLocationParserRuleCall_1_8_0; }
+		public RuleCall getExcludedLocationsExcludeLocationParserRuleCall_14_0() { return cExcludedLocationsExcludeLocationParserRuleCall_14_0; }
 		
 		//repositoryLocations+=RepositoryLocation*
-		public Assignment getRepositoryLocationsAssignment_1_9() { return cRepositoryLocationsAssignment_1_9; }
+		public Assignment getRepositoryLocationsAssignment_15() { return cRepositoryLocationsAssignment_15; }
 		
 		//RepositoryLocation
-		public RuleCall getRepositoryLocationsRepositoryLocationParserRuleCall_1_9_0() { return cRepositoryLocationsRepositoryLocationParserRuleCall_1_9_0; }
+		public RuleCall getRepositoryLocationsRepositoryLocationParserRuleCall_15_0() { return cRepositoryLocationsRepositoryLocationParserRuleCall_15_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_1_10() { return cRightCurlyBracketKeyword_1_10; }
+		public Keyword getRightCurlyBracketKeyword_16() { return cRightCurlyBracketKeyword_16; }
 	}
 	public class TargetModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.TargetModel");
@@ -285,45 +269,41 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOsAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
 		private final RuleCall cOsOperatingSysParserRuleCall_5_1_0 = (RuleCall)cOsAssignment_5_1.eContents().get(0);
 		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
-		private final Group cGroup_6_0 = (Group)cAlternatives_6.eContents().get(0);
-		private final Keyword cWindowingSystemKeyword_6_0_0 = (Keyword)cGroup_6_0.eContents().get(0);
-		private final Assignment cWsAssignment_6_0_1 = (Assignment)cGroup_6_0.eContents().get(1);
-		private final RuleCall cWsWindowingSysParserRuleCall_6_0_1_0 = (RuleCall)cWsAssignment_6_0_1.eContents().get(0);
-		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
-		private final Keyword cWorkingSystemKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
-		private final Assignment cWksAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
-		private final RuleCall cWksWorkingSysParserRuleCall_6_1_1_0 = (RuleCall)cWksAssignment_6_1_1.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cArchitectureKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cArchAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cArchArchitectureParserRuleCall_7_1_0 = (RuleCall)cArchAssignment_7_1.eContents().get(0);
+		private final Keyword cWindowingSystemKeyword_6_0 = (Keyword)cAlternatives_6.eContents().get(0);
+		private final Keyword cWorkingSystemKeyword_6_1 = (Keyword)cAlternatives_6.eContents().get(1);
+		private final Assignment cWsAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cWsWindowingSysParserRuleCall_7_0 = (RuleCall)cWsAssignment_7.eContents().get(0);
 		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cLocaleKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Assignment cLocAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
-		private final RuleCall cLocLocaleParserRuleCall_8_1_0 = (RuleCall)cLocAssignment_8_1.eContents().get(0);
+		private final Keyword cArchitectureKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Assignment cArchAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
+		private final RuleCall cArchArchitectureParserRuleCall_8_1_0 = (RuleCall)cArchAssignment_8_1.eContents().get(0);
 		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
-		private final Keyword cTargetJREKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
-		private final Assignment cTargetJreAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
-		private final RuleCall cTargetJreJreParserRuleCall_9_1_0 = (RuleCall)cTargetJreAssignment_9_1.eContents().get(0);
-		private final Assignment cVariablesAssignment_10 = (Assignment)cGroup.eContents().get(10);
-		private final RuleCall cVariablesVariableDefinitionParserRuleCall_10_0 = (RuleCall)cVariablesAssignment_10.eContents().get(0);
-		private final Assignment cExcludedLocationsAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cExcludedLocationsExcludeLocationParserRuleCall_11_0 = (RuleCall)cExcludedLocationsAssignment_11.eContents().get(0);
-		private final Assignment cRepositoryLocationsAssignment_12 = (Assignment)cGroup.eContents().get(12);
-		private final RuleCall cRepositoryLocationsRepositoryLocationParserRuleCall_12_0 = (RuleCall)cRepositoryLocationsAssignment_12.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_13 = (Keyword)cGroup.eContents().get(13);
+		private final Keyword cLocaleKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Assignment cLocAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
+		private final RuleCall cLocLocaleParserRuleCall_9_1_0 = (RuleCall)cLocAssignment_9_1.eContents().get(0);
+		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
+		private final Keyword cTargetJREKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
+		private final Assignment cTargetJreAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
+		private final RuleCall cTargetJreJreParserRuleCall_10_1_0 = (RuleCall)cTargetJreAssignment_10_1.eContents().get(0);
+		private final Assignment cVariablesAssignment_11 = (Assignment)cGroup.eContents().get(11);
+		private final RuleCall cVariablesVariableDefinitionParserRuleCall_11_0 = (RuleCall)cVariablesAssignment_11.eContents().get(0);
+		private final Assignment cExcludedLocationsAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cExcludedLocationsExcludeLocationParserRuleCall_12_0 = (RuleCall)cExcludedLocationsAssignment_12.eContents().get(0);
+		private final Assignment cRepositoryLocationsAssignment_13 = (Assignment)cGroup.eContents().get(13);
+		private final RuleCall cRepositoryLocationsRepositoryLocationParserRuleCall_13_0 = (RuleCall)cRepositoryLocationsAssignment_13.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
 		
 		//TargetModel:
 		//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
-		//	os=OperatingSys)? ('WindowingSystem' ws=WindowingSys | 'WorkingSystem' wks=WorkingSys)? ('Architecture'
-		//	arch=Architecture)? ('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition*
-		//	excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+		//	os=OperatingSys)? ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys ('Architecture' arch=Architecture)? ('Locale'
+		//	loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
+		//	repositoryLocations+=RepositoryLocation* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
-		//os=OperatingSys)? ('WindowingSystem' ws=WindowingSys | 'WorkingSystem' wks=WorkingSys)? ('Architecture'
-		//arch=Architecture)? ('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition*
-		//excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}'
+		//os=OperatingSys)? ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys ('Architecture' arch=Architecture)? ('Locale'
+		//loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
+		//repositoryLocations+=RepositoryLocation* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'Target'
@@ -380,89 +360,77 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//OperatingSys
 		public RuleCall getOsOperatingSysParserRuleCall_5_1_0() { return cOsOperatingSysParserRuleCall_5_1_0; }
 		
-		//('WindowingSystem' ws=WindowingSys | 'WorkingSystem' wks=WorkingSys)?
+		//'WindowingSystem' | 'WorkingSystem'
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 		
-		//'WindowingSystem' ws=WindowingSys
-		public Group getGroup_6_0() { return cGroup_6_0; }
-		
 		//'WindowingSystem'
-		public Keyword getWindowingSystemKeyword_6_0_0() { return cWindowingSystemKeyword_6_0_0; }
-		
-		//ws=WindowingSys
-		public Assignment getWsAssignment_6_0_1() { return cWsAssignment_6_0_1; }
-		
-		//WindowingSys
-		public RuleCall getWsWindowingSysParserRuleCall_6_0_1_0() { return cWsWindowingSysParserRuleCall_6_0_1_0; }
-		
-		//'WorkingSystem' wks=WorkingSys
-		public Group getGroup_6_1() { return cGroup_6_1; }
+		public Keyword getWindowingSystemKeyword_6_0() { return cWindowingSystemKeyword_6_0; }
 		
 		//'WorkingSystem'
-		public Keyword getWorkingSystemKeyword_6_1_0() { return cWorkingSystemKeyword_6_1_0; }
+		public Keyword getWorkingSystemKeyword_6_1() { return cWorkingSystemKeyword_6_1; }
 		
-		//wks=WorkingSys
-		public Assignment getWksAssignment_6_1_1() { return cWksAssignment_6_1_1; }
+		//ws=WindowingSys
+		public Assignment getWsAssignment_7() { return cWsAssignment_7; }
 		
-		//WorkingSys
-		public RuleCall getWksWorkingSysParserRuleCall_6_1_1_0() { return cWksWorkingSysParserRuleCall_6_1_1_0; }
+		//WindowingSys
+		public RuleCall getWsWindowingSysParserRuleCall_7_0() { return cWsWindowingSysParserRuleCall_7_0; }
 		
 		//('Architecture' arch=Architecture)?
-		public Group getGroup_7() { return cGroup_7; }
-		
-		//'Architecture'
-		public Keyword getArchitectureKeyword_7_0() { return cArchitectureKeyword_7_0; }
-		
-		//arch=Architecture
-		public Assignment getArchAssignment_7_1() { return cArchAssignment_7_1; }
-		
-		//Architecture
-		public RuleCall getArchArchitectureParserRuleCall_7_1_0() { return cArchArchitectureParserRuleCall_7_1_0; }
-		
-		//('Locale' loc=Locale)?
 		public Group getGroup_8() { return cGroup_8; }
 		
-		//'Locale'
-		public Keyword getLocaleKeyword_8_0() { return cLocaleKeyword_8_0; }
+		//'Architecture'
+		public Keyword getArchitectureKeyword_8_0() { return cArchitectureKeyword_8_0; }
 		
-		//loc=Locale
-		public Assignment getLocAssignment_8_1() { return cLocAssignment_8_1; }
+		//arch=Architecture
+		public Assignment getArchAssignment_8_1() { return cArchAssignment_8_1; }
 		
-		//Locale
-		public RuleCall getLocLocaleParserRuleCall_8_1_0() { return cLocLocaleParserRuleCall_8_1_0; }
+		//Architecture
+		public RuleCall getArchArchitectureParserRuleCall_8_1_0() { return cArchArchitectureParserRuleCall_8_1_0; }
 		
-		//('TargetJRE' targetJre=jre)?
+		//('Locale' loc=Locale)?
 		public Group getGroup_9() { return cGroup_9; }
 		
+		//'Locale'
+		public Keyword getLocaleKeyword_9_0() { return cLocaleKeyword_9_0; }
+		
+		//loc=Locale
+		public Assignment getLocAssignment_9_1() { return cLocAssignment_9_1; }
+		
+		//Locale
+		public RuleCall getLocLocaleParserRuleCall_9_1_0() { return cLocLocaleParserRuleCall_9_1_0; }
+		
+		//('TargetJRE' targetJre=jre)?
+		public Group getGroup_10() { return cGroup_10; }
+		
 		//'TargetJRE'
-		public Keyword getTargetJREKeyword_9_0() { return cTargetJREKeyword_9_0; }
+		public Keyword getTargetJREKeyword_10_0() { return cTargetJREKeyword_10_0; }
 		
 		//targetJre=jre
-		public Assignment getTargetJreAssignment_9_1() { return cTargetJreAssignment_9_1; }
+		public Assignment getTargetJreAssignment_10_1() { return cTargetJreAssignment_10_1; }
 		
 		//jre
-		public RuleCall getTargetJreJreParserRuleCall_9_1_0() { return cTargetJreJreParserRuleCall_9_1_0; }
+		public RuleCall getTargetJreJreParserRuleCall_10_1_0() { return cTargetJreJreParserRuleCall_10_1_0; }
 		
 		//variables+=VariableDefinition*
-		public Assignment getVariablesAssignment_10() { return cVariablesAssignment_10; }
+		public Assignment getVariablesAssignment_11() { return cVariablesAssignment_11; }
 		
 		//VariableDefinition
-		public RuleCall getVariablesVariableDefinitionParserRuleCall_10_0() { return cVariablesVariableDefinitionParserRuleCall_10_0; }
+		public RuleCall getVariablesVariableDefinitionParserRuleCall_11_0() { return cVariablesVariableDefinitionParserRuleCall_11_0; }
 		
 		//excludedLocations+=ExcludeLocation*
-		public Assignment getExcludedLocationsAssignment_11() { return cExcludedLocationsAssignment_11; }
+		public Assignment getExcludedLocationsAssignment_12() { return cExcludedLocationsAssignment_12; }
 		
 		//ExcludeLocation
-		public RuleCall getExcludedLocationsExcludeLocationParserRuleCall_11_0() { return cExcludedLocationsExcludeLocationParserRuleCall_11_0; }
+		public RuleCall getExcludedLocationsExcludeLocationParserRuleCall_12_0() { return cExcludedLocationsExcludeLocationParserRuleCall_12_0; }
 		
 		//repositoryLocations+=RepositoryLocation*
-		public Assignment getRepositoryLocationsAssignment_12() { return cRepositoryLocationsAssignment_12; }
+		public Assignment getRepositoryLocationsAssignment_13() { return cRepositoryLocationsAssignment_13; }
 		
 		//RepositoryLocation
-		public RuleCall getRepositoryLocationsRepositoryLocationParserRuleCall_12_0() { return cRepositoryLocationsRepositoryLocationParserRuleCall_12_0; }
+		public RuleCall getRepositoryLocationsRepositoryLocationParserRuleCall_13_0() { return cRepositoryLocationsRepositoryLocationParserRuleCall_13_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_13() { return cRightCurlyBracketKeyword_13; }
+		public Keyword getRightCurlyBracketKeyword_14() { return cRightCurlyBracketKeyword_14; }
 	}
 	public class VersionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.Version");
@@ -1038,46 +1006,6 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'win32'
 		public Keyword getWin32Keyword_6() { return cWin32Keyword_6; }
 	}
-	public class WorkingSysElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.WorkingSys");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cCarbonKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cCocoaKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cGtkKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cMotifKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cPhotonKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
-		private final Keyword cWpfKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
-		private final Keyword cWin32Keyword_6 = (Keyword)cAlternatives.eContents().get(6);
-		
-		//// WorkingSys still works but should not be used (instead use WindowingSys)
-		// WorkingSys:
-		//	'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32'
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//'carbon'
-		public Keyword getCarbonKeyword_0() { return cCarbonKeyword_0; }
-		
-		//'cocoa'
-		public Keyword getCocoaKeyword_1() { return cCocoaKeyword_1; }
-		
-		//'gtk'
-		public Keyword getGtkKeyword_2() { return cGtkKeyword_2; }
-		
-		//'motif'
-		public Keyword getMotifKeyword_3() { return cMotifKeyword_3; }
-		
-		//'photon'
-		public Keyword getPhotonKeyword_4() { return cPhotonKeyword_4; }
-		
-		//'wpf'
-		public Keyword getWpfKeyword_5() { return cWpfKeyword_5; }
-		
-		//'win32'
-		public Keyword getWin32Keyword_6() { return cWin32Keyword_6; }
-	}
 	public class ArchitectureElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.Architecture");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1282,7 +1210,6 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	private final QualifierElements pQualifier;
 	private final OperatingSysElements pOperatingSys;
 	private final WindowingSysElements pWindowingSys;
-	private final WorkingSysElements pWorkingSys;
 	private final ArchitectureElements pArchitecture;
 	private final LocaleElements pLocale;
 	private final HttpElements pHttp;
@@ -1323,7 +1250,6 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		this.pQualifier = new QualifierElements();
 		this.pOperatingSys = new OperatingSysElements();
 		this.pWindowingSys = new WindowingSysElements();
-		this.pWorkingSys = new WorkingSysElements();
 		this.pArchitecture = new ArchitectureElements();
 		this.pLocale = new LocaleElements();
 		this.pHttp = new HttpElements();
@@ -1384,10 +1310,9 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BaseModel:
-	//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys 'WindowingSystem'
-	//	ws=WindowingSys | 'WorkingSystem' wks=WorkingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE'
-	//	targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
-	//	repositoryLocations+=RepositoryLocation* '}';
+	//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
+	//	'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+	//	variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
 	public BaseModelElements getBaseModelAccess() {
 		return pBaseModel;
 	}
@@ -1398,9 +1323,9 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//TargetModel:
 	//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
-	//	os=OperatingSys)? ('WindowingSystem' ws=WindowingSys | 'WorkingSystem' wks=WorkingSys)? ('Architecture'
-	//	arch=Architecture)? ('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition*
-	//	excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+	//	os=OperatingSys)? ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys ('Architecture' arch=Architecture)? ('Locale'
+	//	loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
+	//	repositoryLocations+=RepositoryLocation* '}';
 	public TargetModelElements getTargetModelAccess() {
 		return pTargetModel;
 	}
@@ -1568,17 +1493,6 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getWindowingSysRule() {
 		return getWindowingSysAccess().getRule();
-	}
-	
-	//// WorkingSys still works but should not be used (instead use WindowingSys)
-	// WorkingSys:
-	//	'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32';
-	public WorkingSysElements getWorkingSysAccess() {
-		return pWorkingSys;
-	}
-	
-	public ParserRule getWorkingSysRule() {
-		return getWorkingSysAccess().getRule();
 	}
 	
 	//Architecture:

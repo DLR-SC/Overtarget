@@ -17,6 +17,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -26,12 +27,16 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class OvertargetSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected OvertargetGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1;
 	protected AbstractElementAlias match_ExcludeLocation_AllKeyword_4_1_q;
+	protected AbstractElementAlias match_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (OvertargetGrammarAccess) access;
+		match_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getBaseModelAccess().getWindowingSystemKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getBaseModelAccess().getWorkingSystemKeyword_6_1()));
 		match_ExcludeLocation_AllKeyword_4_1_q = new TokenAlias(false, true, grammarAccess.getExcludeLocationAccess().getAllKeyword_4_1());
+		match_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_1()));
 	}
 	
 	@Override
@@ -46,12 +51,27 @@ public class OvertargetSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_ExcludeLocation_AllKeyword_4_1_q.equals(syntax))
+			if (match_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1.equals(syntax))
+				emit_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ExcludeLocation_AllKeyword_4_1_q.equals(syntax))
 				emit_ExcludeLocation_AllKeyword_4_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1.equals(syntax))
+				emit_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     'WindowingSystem' | 'WorkingSystem'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     os=OperatingSys (ambiguity) ws=WindowingSys
+	 */
+	protected void emit_BaseModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * Ambiguous syntax:
 	 *     'all;'?
@@ -60,6 +80,20 @@ public class OvertargetSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     repositoryLocation=[RepositoryLocation|QualifiedName] '{' (ambiguity) '}' (rule end)
 	 */
 	protected void emit_ExcludeLocation_AllKeyword_4_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'WindowingSystem' | 'WorkingSystem'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     importedModels+=[TargetFile|ID] (ambiguity) ws=WindowingSys
+	 *     name=ID '{' (ambiguity) ws=WindowingSys
+	 *     os=OperatingSys (ambiguity) ws=WindowingSys
+	 *     super=[TargetModel|ID] '{' (ambiguity) ws=WindowingSys
+	 */
+	protected void emit_TargetModel_WindowingSystemKeyword_6_0_or_WorkingSystemKeyword_6_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

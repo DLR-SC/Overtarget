@@ -27,7 +27,7 @@ BaseModel:
 	'Target' name= ID '{'
 		('Import' importedModels+=[TargetFile])*
 		'OperatingSystem' os=OperatingSys
-		'WindowingSystem' ws=WindowingSys | 'WorkingSystem' wks=WorkingSys
+		('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
 		'Architecture' arch=Architecture
 		'Locale' loc=Locale
 		('TargetJRE' targetJre=jre)?
@@ -41,7 +41,7 @@ TargetModel:
 	'Target' name= ID ('extends' super=[TargetModel])? '{'
 		('Import' importedModels+=[TargetFile])*
 		('OperatingSystem' os=OperatingSys)?
-		('WindowingSystem' ws=WindowingSys | 'WorkingSystem' wks=WorkingSys)?
+		('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
 		('Architecture' arch=Architecture)?
 		('Locale' loc=Locale)?
 		('TargetJRE' targetJre=jre)?
@@ -116,11 +116,6 @@ OperatingSys:
 ;
 
 WindowingSys: 
-	'carbon' | 'cocoa' | 'gtk'| 'motif'| 'photon' | 'wpf'| 'win32'
-;
-
-// WorkingSys still works but should not be used (instead use WindowingSys)
-WorkingSys:
 	'carbon' | 'cocoa' | 'gtk'| 'motif'| 'photon' | 'wpf'| 'win32'
 ;
 

@@ -47,7 +47,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.BaseModelImpl#getImportedModels <em>Imported Models</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.BaseModelImpl#getOs <em>Os</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.BaseModelImpl#getWs <em>Ws</em>}</li>
- *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.BaseModelImpl#getWks <em>Wks</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.BaseModelImpl#getArch <em>Arch</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.BaseModelImpl#getLoc <em>Loc</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.BaseModelImpl#getTargetJre <em>Target Jre</em>}</li>
@@ -129,26 +128,6 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * @ordered
    */
   protected String ws = WS_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getWks() <em>Wks</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getWks()
-   * @generated
-   * @ordered
-   */
-  protected static final String WKS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getWks() <em>Wks</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getWks()
-   * @generated
-   * @ordered
-   */
-  protected String wks = WKS_EDEFAULT;
 
   /**
    * The default value of the '{@link #getArch() <em>Arch</em>}' attribute.
@@ -357,31 +336,6 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * @generated
    */
   @Override
-  public String getWks()
-  {
-    return wks;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setWks(String newWks)
-  {
-    String oldWks = wks;
-    wks = newWks;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TargetmodelPackage.BASE_MODEL__WKS, oldWks, wks));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public String getArch()
   {
     return arch;
@@ -534,8 +488,6 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
         return getOs();
       case TargetmodelPackage.BASE_MODEL__WS:
         return getWs();
-      case TargetmodelPackage.BASE_MODEL__WKS:
-        return getWks();
       case TargetmodelPackage.BASE_MODEL__ARCH:
         return getArch();
       case TargetmodelPackage.BASE_MODEL__LOC:
@@ -575,9 +527,6 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
         return;
       case TargetmodelPackage.BASE_MODEL__WS:
         setWs((String)newValue);
-        return;
-      case TargetmodelPackage.BASE_MODEL__WKS:
-        setWks((String)newValue);
         return;
       case TargetmodelPackage.BASE_MODEL__ARCH:
         setArch((String)newValue);
@@ -626,9 +575,6 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
       case TargetmodelPackage.BASE_MODEL__WS:
         setWs(WS_EDEFAULT);
         return;
-      case TargetmodelPackage.BASE_MODEL__WKS:
-        setWks(WKS_EDEFAULT);
-        return;
       case TargetmodelPackage.BASE_MODEL__ARCH:
         setArch(ARCH_EDEFAULT);
         return;
@@ -669,8 +615,6 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
         return OS_EDEFAULT == null ? os != null : !OS_EDEFAULT.equals(os);
       case TargetmodelPackage.BASE_MODEL__WS:
         return WS_EDEFAULT == null ? ws != null : !WS_EDEFAULT.equals(ws);
-      case TargetmodelPackage.BASE_MODEL__WKS:
-        return WKS_EDEFAULT == null ? wks != null : !WKS_EDEFAULT.equals(wks);
       case TargetmodelPackage.BASE_MODEL__ARCH:
         return ARCH_EDEFAULT == null ? arch != null : !ARCH_EDEFAULT.equals(arch);
       case TargetmodelPackage.BASE_MODEL__LOC:
@@ -704,8 +648,6 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
     result.append(os);
     result.append(", ws: ");
     result.append(ws);
-    result.append(", wks: ");
-    result.append(wks);
     result.append(", arch: ");
     result.append(arch);
     result.append(", loc: ");

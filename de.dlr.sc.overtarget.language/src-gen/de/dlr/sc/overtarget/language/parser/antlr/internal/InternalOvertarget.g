@@ -295,69 +295,46 @@ ruleTargetModel returns [EObject current=null]
 			)
 		)?
 		(
-			(
-				otherlv_9='WindowingSystem'
-				{
-					newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_0_1_0());
-						}
-						lv_ws_10_0=ruleWindowingSys
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getTargetModelRule());
-							}
-							set(
-								$current,
-								"ws",
-								lv_ws_10_0,
-								"de.dlr.sc.overtarget.language.Overtarget.WindowingSys");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)
-			    |
-			(
-				otherlv_11='WorkingSystem'
-				{
-					newLeafNode(otherlv_11, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_1_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getTargetModelAccess().getWksWorkingSysParserRuleCall_6_1_1_0());
-						}
-						lv_wks_12_0=ruleWorkingSys
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getTargetModelRule());
-							}
-							set(
-								$current,
-								"wks",
-								lv_wks_12_0,
-								"de.dlr.sc.overtarget.language.Overtarget.WorkingSys");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)
-		)?
-		(
-			otherlv_13='Architecture'
+			otherlv_9='WindowingSystem'
 			{
-				newLeafNode(otherlv_13, grammarAccess.getTargetModelAccess().getArchitectureKeyword_7_0());
+				newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0());
+			}
+			    |
+			otherlv_10='WorkingSystem'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_1());
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_7_0());
+				}
+				lv_ws_11_0=ruleWindowingSys
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTargetModelRule());
+					}
+					set(
+						$current,
+						"ws",
+						lv_ws_11_0,
+						"de.dlr.sc.overtarget.language.Overtarget.WindowingSys");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_12='Architecture'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getTargetModelAccess().getArchitectureKeyword_8_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getTargetModelAccess().getArchArchitectureParserRuleCall_7_1_0());
+						newCompositeNode(grammarAccess.getTargetModelAccess().getArchArchitectureParserRuleCall_8_1_0());
 					}
-					lv_arch_14_0=ruleArchitecture
+					lv_arch_13_0=ruleArchitecture
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -365,7 +342,7 @@ ruleTargetModel returns [EObject current=null]
 						set(
 							$current,
 							"arch",
-							lv_arch_14_0,
+							lv_arch_13_0,
 							"de.dlr.sc.overtarget.language.Overtarget.Architecture");
 						afterParserOrEnumRuleCall();
 					}
@@ -373,16 +350,16 @@ ruleTargetModel returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_15='Locale'
+			otherlv_14='Locale'
 			{
-				newLeafNode(otherlv_15, grammarAccess.getTargetModelAccess().getLocaleKeyword_8_0());
+				newLeafNode(otherlv_14, grammarAccess.getTargetModelAccess().getLocaleKeyword_9_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getTargetModelAccess().getLocLocaleParserRuleCall_8_1_0());
+						newCompositeNode(grammarAccess.getTargetModelAccess().getLocLocaleParserRuleCall_9_1_0());
 					}
-					lv_loc_16_0=ruleLocale
+					lv_loc_15_0=ruleLocale
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -390,7 +367,7 @@ ruleTargetModel returns [EObject current=null]
 						set(
 							$current,
 							"loc",
-							lv_loc_16_0,
+							lv_loc_15_0,
 							"de.dlr.sc.overtarget.language.Overtarget.Locale");
 						afterParserOrEnumRuleCall();
 					}
@@ -398,16 +375,16 @@ ruleTargetModel returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_17='TargetJRE'
+			otherlv_16='TargetJRE'
 			{
-				newLeafNode(otherlv_17, grammarAccess.getTargetModelAccess().getTargetJREKeyword_9_0());
+				newLeafNode(otherlv_16, grammarAccess.getTargetModelAccess().getTargetJREKeyword_10_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getTargetModelAccess().getTargetJreJreParserRuleCall_9_1_0());
+						newCompositeNode(grammarAccess.getTargetModelAccess().getTargetJreJreParserRuleCall_10_1_0());
 					}
-					lv_targetJre_18_0=rulejre
+					lv_targetJre_17_0=rulejre
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -415,7 +392,7 @@ ruleTargetModel returns [EObject current=null]
 						set(
 							$current,
 							"targetJre",
-							lv_targetJre_18_0,
+							lv_targetJre_17_0,
 							"de.dlr.sc.overtarget.language.Overtarget.jre");
 						afterParserOrEnumRuleCall();
 					}
@@ -425,9 +402,9 @@ ruleTargetModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTargetModelAccess().getVariablesVariableDefinitionParserRuleCall_10_0());
+					newCompositeNode(grammarAccess.getTargetModelAccess().getVariablesVariableDefinitionParserRuleCall_11_0());
 				}
-				lv_variables_19_0=ruleVariableDefinition
+				lv_variables_18_0=ruleVariableDefinition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -435,7 +412,7 @@ ruleTargetModel returns [EObject current=null]
 					add(
 						$current,
 						"variables",
-						lv_variables_19_0,
+						lv_variables_18_0,
 						"de.dlr.sc.overtarget.language.Overtarget.VariableDefinition");
 					afterParserOrEnumRuleCall();
 				}
@@ -444,9 +421,9 @@ ruleTargetModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTargetModelAccess().getExcludedLocationsExcludeLocationParserRuleCall_11_0());
+					newCompositeNode(grammarAccess.getTargetModelAccess().getExcludedLocationsExcludeLocationParserRuleCall_12_0());
 				}
-				lv_excludedLocations_20_0=ruleExcludeLocation
+				lv_excludedLocations_19_0=ruleExcludeLocation
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -454,7 +431,7 @@ ruleTargetModel returns [EObject current=null]
 					add(
 						$current,
 						"excludedLocations",
-						lv_excludedLocations_20_0,
+						lv_excludedLocations_19_0,
 						"de.dlr.sc.overtarget.language.Overtarget.ExcludeLocation");
 					afterParserOrEnumRuleCall();
 				}
@@ -463,9 +440,9 @@ ruleTargetModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTargetModelAccess().getRepositoryLocationsRepositoryLocationParserRuleCall_12_0());
+					newCompositeNode(grammarAccess.getTargetModelAccess().getRepositoryLocationsRepositoryLocationParserRuleCall_13_0());
 				}
-				lv_repositoryLocations_21_0=ruleRepositoryLocation
+				lv_repositoryLocations_20_0=ruleRepositoryLocation
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -473,15 +450,15 @@ ruleTargetModel returns [EObject current=null]
 					add(
 						$current,
 						"repositoryLocations",
-						lv_repositoryLocations_21_0,
+						lv_repositoryLocations_20_0,
 						"de.dlr.sc.overtarget.language.Overtarget.RepositoryLocation");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_22='}'
+		otherlv_21='}'
 		{
-			newLeafNode(otherlv_22, grammarAccess.getTargetModelAccess().getRightCurlyBracketKeyword_13());
+			newLeafNode(otherlv_21, grammarAccess.getTargetModelAccess().getRightCurlyBracketKeyword_14());
 		}
 	)
 ;
@@ -1446,66 +1423,6 @@ ruleWindowingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 		{
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getWin32Keyword_6());
-		}
-	)
-;
-
-// Entry rule entryRuleWorkingSys
-entryRuleWorkingSys returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getWorkingSysRule()); }
-	iv_ruleWorkingSys=ruleWorkingSys
-	{ $current=$iv_ruleWorkingSys.current.getText(); }
-	EOF;
-
-// Rule WorkingSys
-ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		kw='carbon'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCarbonKeyword_0());
-		}
-		    |
-		kw='cocoa'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCocoaKeyword_1());
-		}
-		    |
-		kw='gtk'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtkKeyword_2());
-		}
-		    |
-		kw='motif'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getMotifKeyword_3());
-		}
-		    |
-		kw='photon'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getPhotonKeyword_4());
-		}
-		    |
-		kw='wpf'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWpfKeyword_5());
-		}
-		    |
-		kw='win32'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWin32Keyword_6());
 		}
 	)
 ;

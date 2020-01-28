@@ -204,22 +204,13 @@ public interface TargetmodelPackage extends EPackage
   int BASE_MODEL__WS = 3;
 
   /**
-   * The feature id for the '<em><b>Wks</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BASE_MODEL__WKS = 4;
-
-  /**
    * The feature id for the '<em><b>Arch</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BASE_MODEL__ARCH = 5;
+  int BASE_MODEL__ARCH = 4;
 
   /**
    * The feature id for the '<em><b>Loc</b></em>' attribute.
@@ -228,7 +219,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_MODEL__LOC = 6;
+  int BASE_MODEL__LOC = 5;
 
   /**
    * The feature id for the '<em><b>Target Jre</b></em>' attribute.
@@ -237,7 +228,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_MODEL__TARGET_JRE = 7;
+  int BASE_MODEL__TARGET_JRE = 6;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -246,7 +237,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_MODEL__VARIABLES = 8;
+  int BASE_MODEL__VARIABLES = 7;
 
   /**
    * The feature id for the '<em><b>Excluded Locations</b></em>' containment reference list.
@@ -255,7 +246,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_MODEL__EXCLUDED_LOCATIONS = 9;
+  int BASE_MODEL__EXCLUDED_LOCATIONS = 8;
 
   /**
    * The feature id for the '<em><b>Repository Locations</b></em>' containment reference list.
@@ -264,7 +255,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_MODEL__REPOSITORY_LOCATIONS = 10;
+  int BASE_MODEL__REPOSITORY_LOCATIONS = 9;
 
   /**
    * The number of structural features of the '<em>Base Model</em>' class.
@@ -273,7 +264,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_MODEL_FEATURE_COUNT = 11;
+  int BASE_MODEL_FEATURE_COUNT = 10;
 
   /**
    * The meta object id for the '{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl <em>Target Model</em>}' class.
@@ -349,22 +340,13 @@ public interface TargetmodelPackage extends EPackage
   int TARGET_MODEL__WS = TARGET_FILE_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Wks</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TARGET_MODEL__WKS = TARGET_FILE_FEATURE_COUNT + 4;
-
-  /**
    * The feature id for the '<em><b>Arch</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TARGET_MODEL__ARCH = TARGET_FILE_FEATURE_COUNT + 5;
+  int TARGET_MODEL__ARCH = TARGET_FILE_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Loc</b></em>' attribute.
@@ -373,7 +355,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_MODEL__LOC = TARGET_FILE_FEATURE_COUNT + 6;
+  int TARGET_MODEL__LOC = TARGET_FILE_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Target Jre</b></em>' attribute.
@@ -382,7 +364,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_MODEL__TARGET_JRE = TARGET_FILE_FEATURE_COUNT + 7;
+  int TARGET_MODEL__TARGET_JRE = TARGET_FILE_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Excluded Locations</b></em>' containment reference list.
@@ -391,7 +373,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_MODEL__EXCLUDED_LOCATIONS = TARGET_FILE_FEATURE_COUNT + 8;
+  int TARGET_MODEL__EXCLUDED_LOCATIONS = TARGET_FILE_FEATURE_COUNT + 7;
 
   /**
    * The number of structural features of the '<em>Target Model</em>' class.
@@ -400,7 +382,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TARGET_MODEL_FEATURE_COUNT = TARGET_FILE_FEATURE_COUNT + 9;
+  int TARGET_MODEL_FEATURE_COUNT = TARGET_FILE_FEATURE_COUNT + 8;
 
   /**
    * The meta object id for the '{@link de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl <em>Unit</em>}' class.
@@ -899,17 +881,6 @@ public interface TargetmodelPackage extends EPackage
   EAttribute getBaseModel_Ws();
 
   /**
-   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getWks <em>Wks</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Wks</em>'.
-   * @see de.dlr.sc.overtarget.language.targetmodel.BaseModel#getWks()
-   * @see #getBaseModel()
-   * @generated
-   */
-  EAttribute getBaseModel_Wks();
-
-  /**
    * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getArch <em>Arch</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1028,17 +999,6 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    */
   EAttribute getTargetModel_Ws();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getWks <em>Wks</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Wks</em>'.
-   * @see de.dlr.sc.overtarget.language.targetmodel.TargetModel#getWks()
-   * @see #getTargetModel()
-   * @generated
-   */
-  EAttribute getTargetModel_Wks();
 
   /**
    * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getArch <em>Arch</em>}'.
@@ -1448,14 +1408,6 @@ public interface TargetmodelPackage extends EPackage
     EAttribute BASE_MODEL__WS = eINSTANCE.getBaseModel_Ws();
 
     /**
-     * The meta object literal for the '<em><b>Wks</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute BASE_MODEL__WKS = eINSTANCE.getBaseModel_Wks();
-
-    /**
      * The meta object literal for the '<em><b>Arch</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1544,14 +1496,6 @@ public interface TargetmodelPackage extends EPackage
      * @generated
      */
     EAttribute TARGET_MODEL__WS = eINSTANCE.getTargetModel_Ws();
-
-    /**
-     * The meta object literal for the '<em><b>Wks</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TARGET_MODEL__WKS = eINSTANCE.getTargetModel_Wks();
 
     /**
      * The meta object literal for the '<em><b>Arch</b></em>' attribute feature.

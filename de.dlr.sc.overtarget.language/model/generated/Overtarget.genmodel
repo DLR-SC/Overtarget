@@ -17,7 +17,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//BaseModel/importedModels"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/os"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/ws"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/wks"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/arch"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/loc"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//BaseModel/targetJre"/>
@@ -30,7 +29,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//TargetModel/importedModels"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/os"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/ws"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/wks"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/arch"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/loc"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//TargetModel/targetJre"/>
