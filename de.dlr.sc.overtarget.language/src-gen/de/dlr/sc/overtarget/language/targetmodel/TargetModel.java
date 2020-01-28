@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getImportedModels <em>Imported Models</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getOs <em>Os</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getWs <em>Ws</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getWks <em>Wks</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getArch <em>Arch</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getLoc <em>Loc</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getTargetJre <em>Target Jre</em>}</li>
@@ -115,6 +116,28 @@ public interface TargetModel extends TargetFile
    * @generated
    */
   void setWs(String value);
+
+  /**
+   * Returns the value of the '<em><b>Wks</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Wks</em>' attribute.
+   * @see #setWks(String)
+   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getTargetModel_Wks()
+   * @model
+   * @generated
+   */
+  String getWks();
+
+  /**
+   * Sets the value of the '{@link de.dlr.sc.overtarget.language.targetmodel.TargetModel#getWks <em>Wks</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Wks</em>' attribute.
+   * @see #getWks()
+   * @generated
+   */
+  void setWks(String value);
 
   /**
    * Returns the value of the '<em><b>Arch</b></em>' attribute.

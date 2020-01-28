@@ -44,6 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl#getImportedModels <em>Imported Models</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl#getOs <em>Os</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl#getWs <em>Ws</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl#getWks <em>Wks</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl#getArch <em>Arch</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl#getLoc <em>Loc</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl#getTargetJre <em>Target Jre</em>}</li>
@@ -113,6 +114,26 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * @ordered
    */
   protected String ws = WS_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getWks() <em>Wks</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getWks()
+   * @generated
+   * @ordered
+   */
+  protected static final String WKS_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getWks() <em>Wks</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getWks()
+   * @generated
+   * @ordered
+   */
+  protected String wks = WKS_EDEFAULT;
 
   /**
    * The default value of the '{@link #getArch() <em>Arch</em>}' attribute.
@@ -321,6 +342,31 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * @generated
    */
   @Override
+  public String getWks()
+  {
+    return wks;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setWks(String newWks)
+  {
+    String oldWks = wks;
+    wks = newWks;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetmodelPackage.TARGET_MODEL__WKS, oldWks, wks));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public String getArch()
   {
     return arch;
@@ -440,6 +486,8 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
         return getOs();
       case TargetmodelPackage.TARGET_MODEL__WS:
         return getWs();
+      case TargetmodelPackage.TARGET_MODEL__WKS:
+        return getWks();
       case TargetmodelPackage.TARGET_MODEL__ARCH:
         return getArch();
       case TargetmodelPackage.TARGET_MODEL__LOC:
@@ -475,6 +523,9 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
         return;
       case TargetmodelPackage.TARGET_MODEL__WS:
         setWs((String)newValue);
+        return;
+      case TargetmodelPackage.TARGET_MODEL__WKS:
+        setWks((String)newValue);
         return;
       case TargetmodelPackage.TARGET_MODEL__ARCH:
         setArch((String)newValue);
@@ -515,6 +566,9 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
       case TargetmodelPackage.TARGET_MODEL__WS:
         setWs(WS_EDEFAULT);
         return;
+      case TargetmodelPackage.TARGET_MODEL__WKS:
+        setWks(WKS_EDEFAULT);
+        return;
       case TargetmodelPackage.TARGET_MODEL__ARCH:
         setArch(ARCH_EDEFAULT);
         return;
@@ -549,6 +603,8 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
         return OS_EDEFAULT == null ? os != null : !OS_EDEFAULT.equals(os);
       case TargetmodelPackage.TARGET_MODEL__WS:
         return WS_EDEFAULT == null ? ws != null : !WS_EDEFAULT.equals(ws);
+      case TargetmodelPackage.TARGET_MODEL__WKS:
+        return WKS_EDEFAULT == null ? wks != null : !WKS_EDEFAULT.equals(wks);
       case TargetmodelPackage.TARGET_MODEL__ARCH:
         return ARCH_EDEFAULT == null ? arch != null : !ARCH_EDEFAULT.equals(arch);
       case TargetmodelPackage.TARGET_MODEL__LOC:
@@ -576,6 +632,8 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
     result.append(os);
     result.append(", ws: ");
     result.append(ws);
+    result.append(", wks: ");
+    result.append(wks);
     result.append(", arch: ");
     result.append(arch);
     result.append(", loc: ");

@@ -320,7 +320,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getBaseModel_Arch()
+  public EAttribute getBaseModel_Wks()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(4);
   }
@@ -331,7 +331,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getBaseModel_Loc()
+  public EAttribute getBaseModel_Arch()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(5);
   }
@@ -342,7 +342,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getBaseModel_TargetJre()
+  public EAttribute getBaseModel_Loc()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(6);
   }
@@ -353,9 +353,9 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EReference getBaseModel_Variables()
+  public EAttribute getBaseModel_TargetJre()
   {
-    return (EReference)baseModelEClass.getEStructuralFeatures().get(7);
+    return (EAttribute)baseModelEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -364,7 +364,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EReference getBaseModel_ExcludedLocations()
+  public EReference getBaseModel_Variables()
   {
     return (EReference)baseModelEClass.getEStructuralFeatures().get(8);
   }
@@ -375,9 +375,20 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EReference getBaseModel_RepositoryLocations()
+  public EReference getBaseModel_ExcludedLocations()
   {
     return (EReference)baseModelEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBaseModel_RepositoryLocations()
+  {
+    return (EReference)baseModelEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -441,7 +452,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getTargetModel_Arch()
+  public EAttribute getTargetModel_Wks()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(4);
   }
@@ -452,7 +463,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getTargetModel_Loc()
+  public EAttribute getTargetModel_Arch()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(5);
   }
@@ -463,7 +474,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getTargetModel_TargetJre()
+  public EAttribute getTargetModel_Loc()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(6);
   }
@@ -474,9 +485,20 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
+  public EAttribute getTargetModel_TargetJre()
+  {
+    return (EAttribute)targetModelEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getTargetModel_ExcludedLocations()
   {
-    return (EReference)targetModelEClass.getEStructuralFeatures().get(7);
+    return (EReference)targetModelEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -786,6 +808,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEReference(baseModelEClass, BASE_MODEL__IMPORTED_MODELS);
     createEAttribute(baseModelEClass, BASE_MODEL__OS);
     createEAttribute(baseModelEClass, BASE_MODEL__WS);
+    createEAttribute(baseModelEClass, BASE_MODEL__WKS);
     createEAttribute(baseModelEClass, BASE_MODEL__ARCH);
     createEAttribute(baseModelEClass, BASE_MODEL__LOC);
     createEAttribute(baseModelEClass, BASE_MODEL__TARGET_JRE);
@@ -798,6 +821,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEReference(targetModelEClass, TARGET_MODEL__IMPORTED_MODELS);
     createEAttribute(targetModelEClass, TARGET_MODEL__OS);
     createEAttribute(targetModelEClass, TARGET_MODEL__WS);
+    createEAttribute(targetModelEClass, TARGET_MODEL__WKS);
     createEAttribute(targetModelEClass, TARGET_MODEL__ARCH);
     createEAttribute(targetModelEClass, TARGET_MODEL__LOC);
     createEAttribute(targetModelEClass, TARGET_MODEL__TARGET_JRE);
@@ -888,6 +912,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEReference(getBaseModel_ImportedModels(), this.getTargetFile(), null, "importedModels", null, 0, -1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBaseModel_Os(), ecorePackage.getEString(), "os", null, 0, 1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBaseModel_Ws(), ecorePackage.getEString(), "ws", null, 0, 1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBaseModel_Wks(), ecorePackage.getEString(), "wks", null, 0, 1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBaseModel_Arch(), ecorePackage.getEString(), "arch", null, 0, 1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBaseModel_Loc(), ecorePackage.getEString(), "loc", null, 0, 1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBaseModel_TargetJre(), ecorePackage.getEString(), "targetJre", null, 0, 1, BaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -900,6 +925,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEReference(getTargetModel_ImportedModels(), this.getTargetFile(), null, "importedModels", null, 0, -1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetModel_Os(), ecorePackage.getEString(), "os", null, 0, 1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetModel_Ws(), ecorePackage.getEString(), "ws", null, 0, 1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTargetModel_Wks(), ecorePackage.getEString(), "wks", null, 0, 1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetModel_Arch(), ecorePackage.getEString(), "arch", null, 0, 1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetModel_Loc(), ecorePackage.getEString(), "loc", null, 0, 1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTargetModel_TargetJre(), ecorePackage.getEString(), "targetJre", null, 0, 1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

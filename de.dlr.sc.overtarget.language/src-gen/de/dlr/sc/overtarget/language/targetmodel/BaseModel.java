@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getImportedModels <em>Imported Models</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getOs <em>Os</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getWs <em>Ws</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getWks <em>Wks</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getArch <em>Arch</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getLoc <em>Loc</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getTargetJre <em>Target Jre</em>}</li>
@@ -119,6 +120,28 @@ public interface BaseModel extends EObject
    * @generated
    */
   void setWs(String value);
+
+  /**
+   * Returns the value of the '<em><b>Wks</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Wks</em>' attribute.
+   * @see #setWks(String)
+   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getBaseModel_Wks()
+   * @model
+   * @generated
+   */
+  String getWks();
+
+  /**
+   * Sets the value of the '{@link de.dlr.sc.overtarget.language.targetmodel.BaseModel#getWks <em>Wks</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Wks</em>' attribute.
+   * @see #getWks()
+   * @generated
+   */
+  void setWks(String value);
 
   /**
    * Returns the value of the '<em><b>Arch</b></em>' attribute.

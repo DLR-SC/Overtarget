@@ -114,16 +114,16 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=ID 
-	 *         importedModels+=[TargetFile|ID]* 
-	 *         os=OperatingSys 
-	 *         ws=WindowingSys 
-	 *         arch=Architecture 
-	 *         loc=Locale 
-	 *         targetJre=jre? 
-	 *         variables+=VariableDefinition* 
-	 *         excludedLocations+=ExcludeLocation* 
-	 *         repositoryLocations+=RepositoryLocation*
+	 *         (name=ID importedModels+=[TargetFile|ID]* os=OperatingSys ws=WindowingSys) | 
+	 *         (
+	 *             wks=WorkingSys 
+	 *             arch=Architecture 
+	 *             loc=Locale 
+	 *             targetJre=jre? 
+	 *             variables+=VariableDefinition* 
+	 *             excludedLocations+=ExcludeLocation* 
+	 *             repositoryLocations+=RepositoryLocation*
+	 *         )
 	 *     )
 	 */
 	protected void sequence_BaseModel(ISerializationContext context, BaseModel semanticObject) {
@@ -201,7 +201,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         super=[TargetModel|ID]? 
 	 *         importedModels+=[TargetFile|ID]* 
 	 *         os=OperatingSys? 
-	 *         ws=WindowingSys? 
+	 *         (ws=WindowingSys | wks=WorkingSys)? 
 	 *         arch=Architecture? 
 	 *         loc=Locale? 
 	 *         targetJre=jre? 
