@@ -496,50 +496,50 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleOperatningSys
-entryRuleOperatningSys
+// Entry rule entryRuleOperatingSys
+entryRuleOperatingSys
 :
-{ before(grammarAccess.getOperatningSysRule()); }
-	 ruleOperatningSys
-{ after(grammarAccess.getOperatningSysRule()); } 
+{ before(grammarAccess.getOperatingSysRule()); }
+	 ruleOperatingSys
+{ after(grammarAccess.getOperatingSysRule()); } 
 	 EOF 
 ;
 
-// Rule OperatningSys
-ruleOperatningSys 
+// Rule OperatingSys
+ruleOperatingSys 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getAlternatives()); }
-		(rule__OperatningSys__Alternatives)
-		{ after(grammarAccess.getOperatningSysAccess().getAlternatives()); }
+		{ before(grammarAccess.getOperatingSysAccess().getAlternatives()); }
+		(rule__OperatingSys__Alternatives)
+		{ after(grammarAccess.getOperatingSysAccess().getAlternatives()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleWorkingSys
-entryRuleWorkingSys
+// Entry rule entryRuleWindowingSys
+entryRuleWindowingSys
 :
-{ before(grammarAccess.getWorkingSysRule()); }
-	 ruleWorkingSys
-{ after(grammarAccess.getWorkingSysRule()); } 
+{ before(grammarAccess.getWindowingSysRule()); }
+	 ruleWindowingSys
+{ after(grammarAccess.getWindowingSysRule()); } 
 	 EOF 
 ;
 
-// Rule WorkingSys
-ruleWorkingSys 
+// Rule WindowingSys
+ruleWindowingSys 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getAlternatives()); }
-		(rule__WorkingSys__Alternatives)
-		{ after(grammarAccess.getWorkingSysAccess().getAlternatives()); }
+		{ before(grammarAccess.getWindowingSysAccess().getAlternatives()); }
+		(rule__WindowingSys__Alternatives)
+		{ after(grammarAccess.getWindowingSysAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -774,6 +774,27 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__TargetModel__Alternatives_6_0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0()); }
+		'WindowingSystem'
+		{ after(grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1()); }
+		'WorkingSystem'
+		{ after(grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__Unit__VersAlternatives_3_0
 	@init {
 		int stackSize = keepStackSize();
@@ -921,102 +942,102 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__OperatningSys__Alternatives
+rule__OperatingSys__Alternatives
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getAixKeyword_0()); }
+		{ before(grammarAccess.getOperatingSysAccess().getAixKeyword_0()); }
 		'aix'
-		{ after(grammarAccess.getOperatningSysAccess().getAixKeyword_0()); }
+		{ after(grammarAccess.getOperatingSysAccess().getAixKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getHpuxKeyword_1()); }
+		{ before(grammarAccess.getOperatingSysAccess().getHpuxKeyword_1()); }
 		'hpux'
-		{ after(grammarAccess.getOperatningSysAccess().getHpuxKeyword_1()); }
+		{ after(grammarAccess.getOperatingSysAccess().getHpuxKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getLinuxKeyword_2()); }
+		{ before(grammarAccess.getOperatingSysAccess().getLinuxKeyword_2()); }
 		'linux'
-		{ after(grammarAccess.getOperatningSysAccess().getLinuxKeyword_2()); }
+		{ after(grammarAccess.getOperatingSysAccess().getLinuxKeyword_2()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getMacosxKeyword_3()); }
+		{ before(grammarAccess.getOperatingSysAccess().getMacosxKeyword_3()); }
 		'macosx'
-		{ after(grammarAccess.getOperatningSysAccess().getMacosxKeyword_3()); }
+		{ after(grammarAccess.getOperatingSysAccess().getMacosxKeyword_3()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getQnxKeyword_4()); }
+		{ before(grammarAccess.getOperatingSysAccess().getQnxKeyword_4()); }
 		'qnx'
-		{ after(grammarAccess.getOperatningSysAccess().getQnxKeyword_4()); }
+		{ after(grammarAccess.getOperatingSysAccess().getQnxKeyword_4()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getSolarisKeyword_5()); }
+		{ before(grammarAccess.getOperatingSysAccess().getSolarisKeyword_5()); }
 		'solaris'
-		{ after(grammarAccess.getOperatningSysAccess().getSolarisKeyword_5()); }
+		{ after(grammarAccess.getOperatingSysAccess().getSolarisKeyword_5()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getOperatningSysAccess().getWin32Keyword_6()); }
+		{ before(grammarAccess.getOperatingSysAccess().getWin32Keyword_6()); }
 		'win32'
-		{ after(grammarAccess.getOperatningSysAccess().getWin32Keyword_6()); }
+		{ after(grammarAccess.getOperatingSysAccess().getWin32Keyword_6()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__WorkingSys__Alternatives
+rule__WindowingSys__Alternatives
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getCarbonKeyword_0()); }
+		{ before(grammarAccess.getWindowingSysAccess().getCarbonKeyword_0()); }
 		'carbon'
-		{ after(grammarAccess.getWorkingSysAccess().getCarbonKeyword_0()); }
+		{ after(grammarAccess.getWindowingSysAccess().getCarbonKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getCocoaKeyword_1()); }
+		{ before(grammarAccess.getWindowingSysAccess().getCocoaKeyword_1()); }
 		'cocoa'
-		{ after(grammarAccess.getWorkingSysAccess().getCocoaKeyword_1()); }
+		{ after(grammarAccess.getWindowingSysAccess().getCocoaKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); }
+		{ before(grammarAccess.getWindowingSysAccess().getGtkKeyword_2()); }
 		'gtk'
-		{ after(grammarAccess.getWorkingSysAccess().getGtkKeyword_2()); }
+		{ after(grammarAccess.getWindowingSysAccess().getGtkKeyword_2()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getMotifKeyword_3()); }
+		{ before(grammarAccess.getWindowingSysAccess().getMotifKeyword_3()); }
 		'motif'
-		{ after(grammarAccess.getWorkingSysAccess().getMotifKeyword_3()); }
+		{ after(grammarAccess.getWindowingSysAccess().getMotifKeyword_3()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getPhotonKeyword_4()); }
+		{ before(grammarAccess.getWindowingSysAccess().getPhotonKeyword_4()); }
 		'photon'
-		{ after(grammarAccess.getWorkingSysAccess().getPhotonKeyword_4()); }
+		{ after(grammarAccess.getWindowingSysAccess().getPhotonKeyword_4()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getWpfKeyword_5()); }
+		{ before(grammarAccess.getWindowingSysAccess().getWpfKeyword_5()); }
 		'wpf'
-		{ after(grammarAccess.getWorkingSysAccess().getWpfKeyword_5()); }
+		{ after(grammarAccess.getWindowingSysAccess().getWpfKeyword_5()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWorkingSysAccess().getWin32Keyword_6()); }
+		{ before(grammarAccess.getWindowingSysAccess().getWin32Keyword_6()); }
 		'win32'
-		{ after(grammarAccess.getWorkingSysAccess().getWin32Keyword_6()); }
+		{ after(grammarAccess.getWindowingSysAccess().getWin32Keyword_6()); }
 	)
 ;
 finally {
@@ -1863,9 +1884,9 @@ rule__TargetModel__Group_6__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0()); }
-	'WorkingSystem'
-	{ after(grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0()); }
+	{ before(grammarAccess.getTargetModelAccess().getAlternatives_6_0()); }
+	(rule__TargetModel__Alternatives_6_0)
+	{ after(grammarAccess.getTargetModelAccess().getAlternatives_6_0()); }
 )
 ;
 finally {
@@ -3738,9 +3759,9 @@ rule__TargetModel__OsAssignment_5_1
 	}
 :
 	(
-		{ before(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0()); }
-		ruleOperatningSys
-		{ after(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0()); }
+		{ before(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0()); }
+		ruleOperatingSys
+		{ after(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0()); }
 	)
 ;
 finally {
@@ -3753,9 +3774,9 @@ rule__TargetModel__WsAssignment_6_1
 	}
 :
 	(
-		{ before(grammarAccess.getTargetModelAccess().getWsWorkingSysParserRuleCall_6_1_0()); }
-		ruleWorkingSys
-		{ after(grammarAccess.getTargetModelAccess().getWsWorkingSysParserRuleCall_6_1_0()); }
+		{ before(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_1_0()); }
+		ruleWindowingSys
+		{ after(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_1_0()); }
 	)
 ;
 finally {

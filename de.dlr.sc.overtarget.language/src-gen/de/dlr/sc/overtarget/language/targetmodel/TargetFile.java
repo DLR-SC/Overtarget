@@ -38,10 +38,6 @@ public interface TargetFile extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -65,10 +61,6 @@ public interface TargetFile extends EObject
    * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.VariableDefinition}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Variables</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getTargetFile_Variables()
@@ -81,10 +73,6 @@ public interface TargetFile extends EObject
    * Returns the value of the '<em><b>Repository Locations</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Repository Locations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Repository Locations</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getTargetFile_RepositoryLocations()

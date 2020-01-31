@@ -10,6 +10,8 @@
 package de.dlr.sc.overtarget.language.validation;
 
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
+import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.validation.AbstractOvertargetValidator;
 import de.dlr.sc.overtarget.language.validation.ValidatorHelper;
 import org.eclipse.xtext.validation.Check;
@@ -28,7 +30,15 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     boolean _equals = fileName.equals(target.getName());
     boolean _not = (!_equals);
     if (_not) {
-      this.warning("File name and model name are not the same!!!", target, target.eContainingFeature());
+      this.warning("File name and model name are not the same!", target, target.eContainingFeature());
+    }
+  }
+  
+  @Check
+  public void checkIfWorkingSysUsed(final TargetModel target) {
+    String workingSys = target.getWs();
+    if ((workingSys != null)) {
+      this.warning("Please use WindowingSys instead of WorkingSys!", target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws());
     }
   }
 }

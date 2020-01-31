@@ -38,10 +38,6 @@ public interface RepositoryLocation extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -64,10 +60,6 @@ public interface RepositoryLocation extends EObject
   /**
    * Returns the value of the '<em><b>Url</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Url</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Url</em>' containment reference.
    * @see #setUrl(UrlExpression)
@@ -91,10 +83,6 @@ public interface RepositoryLocation extends EObject
    * Returns the value of the '<em><b>Units</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.Unit}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Units</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Units</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_Units()

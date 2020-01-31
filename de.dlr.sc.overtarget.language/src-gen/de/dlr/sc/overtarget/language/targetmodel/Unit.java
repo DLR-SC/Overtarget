@@ -35,10 +35,6 @@ public interface Unit extends EObject
   /**
    * Returns the value of the '<em><b>Source</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Source</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Source</em>' attribute.
    * @see #setSource(String)
@@ -61,10 +57,6 @@ public interface Unit extends EObject
   /**
    * Returns the value of the '<em><b>Vers</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Vers</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Vers</em>' attribute.
    * @see #setVers(String)

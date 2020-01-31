@@ -24,10 +24,10 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
  * on how to customize the content assistant.
  */
 class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
-	override complete_OperatningSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	override complete_OperatingSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		Platform.knownOSValues().forEach[acceptor.accept(createCompletionProposal(it, context))]
-		super.complete_OperatningSys(model, ruleCall, context, acceptor)
+		super.complete_OperatingSys(model, ruleCall, context, acceptor)
 	}
 
 	override complete_Architecture(EObject model, RuleCall ruleCall, ContentAssistContext context,
@@ -36,10 +36,10 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		super.complete_Architecture(model, ruleCall, context, acceptor)
 	}
 
-	override complete_WorkingSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	override complete_WindowingSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		Platform.knownWSValues().forEach[acceptor.accept(createCompletionProposal(it, context))]
-		super.complete_WorkingSys(model, ruleCall, context, acceptor)
+		super.complete_WindowingSys(model, ruleCall, context, acceptor)
 	}
 
 	override complete_Locale(EObject model, RuleCall ruleCall, ContentAssistContext context,
