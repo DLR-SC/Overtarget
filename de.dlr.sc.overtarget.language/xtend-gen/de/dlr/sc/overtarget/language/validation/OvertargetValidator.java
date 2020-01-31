@@ -14,6 +14,8 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.validation.AbstractOvertargetValidator;
 import de.dlr.sc.overtarget.language.validation.ValidatorHelper;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 
 /**
@@ -24,7 +26,7 @@ import org.eclipse.xtext.validation.Check;
 @SuppressWarnings("all")
 public class OvertargetValidator extends AbstractOvertargetValidator {
   @Check
-  public void checkFileNameAndTargetNamel(final TargetFile target) {
+  public void checkFileNameAndTargetName(final TargetFile target) {
     ValidatorHelper helper = new ValidatorHelper();
     final String fileName = helper.getFileName(target);
     boolean _equals = fileName.equals(target.getName());
@@ -36,9 +38,11 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
   
   @Check
   public void checkIfWorkingSysUsed(final TargetModel target) {
-    String workingSys = target.getWs();
-    if ((workingSys != null)) {
-      this.warning("Please use WindowingSys instead of WorkingSys!", target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws());
+    final ICompositeNode node = NodeModelUtils.getNode(target);
+    final String nodeText = node.getText().toString();
+    boolean _contains = nodeText.contains("WorkingSystem");
+    if (_contains) {
+      this.warning("Please use WindowingSys instead of WorkingSys!", TargetmodelPackage.eINSTANCE.getTargetModel_Ws());
     }
   }
 }

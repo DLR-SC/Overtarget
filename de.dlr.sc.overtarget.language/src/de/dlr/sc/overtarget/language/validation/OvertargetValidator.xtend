@@ -13,6 +13,7 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import org.eclipse.xtext.validation.Check
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 /**
  * This class contains custom validation rules. 
@@ -21,7 +22,7 @@ import org.eclipse.xtext.validation.Check
  */
 class OvertargetValidator extends AbstractOvertargetValidator {
 	@Check
-	def checkFileNameAndTargetNamel(TargetFile target) {
+	def checkFileNameAndTargetName(TargetFile target) {
 		var helper = new ValidatorHelper();
 		val fileName = helper.getFileName(target);
 		if (!fileName.equals(target.name)) {
@@ -31,9 +32,10 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 	
 	@Check
 	def checkIfWorkingSysUsed(TargetModel target) {
-		var workingSys = target.getWs();
-		if (workingSys !== null) {
-			warning('Please use WindowingSys instead of WorkingSys!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws)
+		val node = NodeModelUtils.getNode(target);
+		val nodeText = node.getText().toString();
+		if (nodeText.contains("WorkingSystem")) {
+			warning('Please use WindowingSys instead of WorkingSys!', TargetmodelPackage.eINSTANCE.targetModel_Ws)
 		}
 	}
 }
