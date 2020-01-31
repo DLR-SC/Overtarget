@@ -204,6 +204,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="tmodel"
+			id="de.dlr.sc.overtarget.language.Overtarget.contenttype"
+			name="Overtarget File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -388,12 +397,18 @@
 			class="de.dlr.sc.overtarget.language.ui.OvertargetExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="tmodel">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="de.dlr.sc.overtarget.language.Overtarget.contenttype"
+			contentViewerId="de.dlr.sc.overtarget.language.Overtarget.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="de.dlr.sc.overtarget.language.Overtarget.compare.contentMergeViewers"
 			class="de.dlr.sc.overtarget.language.ui.OvertargetExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="tmodel" label="Overtarget Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="de.dlr.sc.overtarget.language.Overtarget.contenttype"
+			contentMergeViewerId="de.dlr.sc.overtarget.language.Overtarget.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="de.dlr.sc.overtarget.language.Overtarget.editors.documentProviders"

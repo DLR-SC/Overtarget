@@ -37,12 +37,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
   @Override
-  public void complete_OperatningSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void complete_OperatingSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final Consumer<String> _function = (String it) -> {
       acceptor.accept(this.createCompletionProposal(it, context));
     };
     ((List<String>)Conversions.doWrapArray(Platform.knownOSValues())).forEach(_function);
-    super.complete_OperatningSys(model, ruleCall, context, acceptor);
+    super.complete_OperatingSys(model, ruleCall, context, acceptor);
   }
   
   @Override
@@ -55,12 +55,12 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   }
   
   @Override
-  public void complete_WorkingSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void complete_WindowingSys(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final Consumer<String> _function = (String it) -> {
       acceptor.accept(this.createCompletionProposal(it, context));
     };
     ((List<String>)Conversions.doWrapArray(Platform.knownWSValues())).forEach(_function);
-    super.complete_WorkingSys(model, ruleCall, context, acceptor);
+    super.complete_WindowingSys(model, ruleCall, context, acceptor);
   }
   
   @Override

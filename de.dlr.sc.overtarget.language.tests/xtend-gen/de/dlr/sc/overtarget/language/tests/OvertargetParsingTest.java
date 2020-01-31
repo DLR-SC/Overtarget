@@ -69,7 +69,7 @@ public class OvertargetParsingTest {
       _builder.append("OperatingSystem aix ");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("WorkingSystem carbon   ");
+      _builder.append("WindowingSystem carbon   ");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("Architecture ia64_32  ");
@@ -93,7 +93,7 @@ public class OvertargetParsingTest {
       _builder.append("RepositoryLocation A url \"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"{  ");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837 ;");
+      _builder.append("Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837;");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("Unit org.eclipse.swtbot.eclipse.test.junit.feature.group version 2.5.0.201609021837;");
@@ -179,7 +179,7 @@ public class OvertargetParsingTest {
       _builder_1.append("OperatingSystem aix  ");
       _builder_1.newLine();
       _builder_1.append("\t \t\t \t");
-      _builder_1.append("WorkingSystem carbon   ");
+      _builder_1.append("WindowingSystem carbon   ");
       _builder_1.newLine();
       _builder_1.append("\t \t\t \t");
       _builder_1.append("Architecture ia64_32  ");
@@ -233,7 +233,7 @@ public class OvertargetParsingTest {
       _builder_2.append("OperatingSystem aix  ");
       _builder_2.newLine();
       _builder_2.append("\t \t");
-      _builder_2.append("WorkingSystem carbon   ");
+      _builder_2.append("WindowingSystem carbon   ");
       _builder_2.newLine();
       _builder_2.append("\t \t");
       _builder_2.append("Architecture ia64_32  ");
@@ -311,7 +311,7 @@ public class OvertargetParsingTest {
       _builder_4.append("OperatingSystem win32 ");
       _builder_4.newLine();
       _builder_4.append("\t\t");
-      _builder_4.append("WorkingSystem win32   ");
+      _builder_4.append("WindowingSystem win32   ");
       _builder_4.newLine();
       _builder_4.append("\t\t");
       _builder_4.append("Architecture x86_64  ");
@@ -854,7 +854,7 @@ public class OvertargetParsingTest {
   
   @Test
   public void testUpdateVersions() {
-    String selectedLines = "TextSelection [offset: 123, startLine: 5, endLine: 16, length: 645, text: \t TargetJRE JavaSE-1.1   \r\n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/{  \r\n\t\t\t \t Unit org.polarion.eclipse.team.svn.connector.svnkit18.feature.group version 1.1.1;   \r\n\t\t\t }\r\n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/releases/oxygen/ {  \r\n\t\t\t\t Unit org.eclipse.emf.compare.ide.ui.feature.group version 1.1.1;\r\n\t\t\t \t Unit org.eclipse.emf.sdk.feature.group version 1.1.1;\r\n\t\t\t \t Unit org.eclipse.emf.transaction.sdk.feature.group version newest;\r\n\t\t\t \t Unit org.eclipse.equinox.executable.feature.group version newest;\r\n\t\t\t } \r\n\t\t}, document: org.eclipse.xtext.ui.editor.model.XtextDocument@1e060d4b]";
+    String selectedLines = "TextSelection [offset: 123, startLine: 5, endLine: 16, length: 645, text: \t TargetJRE JavaSE-1.1   \n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/{  \n\t\t\t \t Unit org.polarion.eclipse.team.svn.connector.svnkit18.feature.group version 1.1.1;   \n\t\t\t }\n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/releases/oxygen/ {  \n\t\t\t\t Unit org.eclipse.emf.compare.ide.ui.feature.group version 1.1.1;\n\t\t\t \t Unit org.eclipse.emf.sdk.feature.group version 1.1.1;\n\t\t\t \t Unit org.eclipse.emf.transaction.sdk.feature.group version newest;\n\t\t\t \t Unit org.eclipse.equinox.executable.feature.group version newest;\n\t\t\t } \n\t\t}, document: org.eclipse.xtext.ui.editor.model.XtextDocument@1e060d4b]";
     QueryManager mockQueryManager = new QueryManager() {
       @Override
       public ArrayList<Unit> getUnits(final EObject model) {

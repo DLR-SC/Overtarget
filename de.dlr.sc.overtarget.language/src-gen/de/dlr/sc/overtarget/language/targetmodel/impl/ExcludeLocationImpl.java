@@ -94,6 +94,7 @@ public class ExcludeLocationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RepositoryLocation getRepositoryLocation()
   {
     if (repositoryLocation != null && repositoryLocation.eIsProxy())
@@ -124,6 +125,7 @@ public class ExcludeLocationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRepositoryLocation(RepositoryLocation newRepositoryLocation)
   {
     RepositoryLocation oldRepositoryLocation = repositoryLocation;
@@ -137,6 +139,7 @@ public class ExcludeLocationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Unit> getUnits()
   {
     if (units == null)
