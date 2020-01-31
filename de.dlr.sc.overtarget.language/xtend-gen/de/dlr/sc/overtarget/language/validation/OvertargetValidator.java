@@ -9,11 +9,13 @@
  */
 package de.dlr.sc.overtarget.language.validation;
 
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.validation.AbstractOvertargetValidator;
 import de.dlr.sc.overtarget.language.validation.ValidatorHelper;
+import javax.inject.Inject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
@@ -36,13 +38,19 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     }
   }
   
+  @Inject
+  private OvertargetGrammarAccess grammerAccess;
+  
+  public static final String DEPRECATED_WS_STATEMENT = "deprecatedWS";
+  
   @Check
   public void checkIfWorkingSysUsed(final TargetModel target) {
     final ICompositeNode node = NodeModelUtils.getNode(target);
     final String nodeText = node.getText().toString();
-    boolean _contains = nodeText.contains("WorkingSystem");
+    final String deprecatedWorkingSystemKeyword = this.grammerAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1().getValue();
+    boolean _contains = nodeText.contains(deprecatedWorkingSystemKeyword);
     if (_contains) {
-      this.warning("Please use WindowingSys instead of WorkingSys!", TargetmodelPackage.eINSTANCE.getTargetModel_Ws());
+      this.warning("Please use WindowingSys instead of WorkingSys!", target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws(), OvertargetValidator.DEPRECATED_WS_STATEMENT);
     }
   }
 }

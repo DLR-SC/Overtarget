@@ -14,6 +14,8 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import javax.inject.Inject
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 
 /**
  * This class contains custom validation rules. 
@@ -30,12 +32,22 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 		}
 	}
 	
+	@Inject
+	private OvertargetGrammarAccess grammerAccess 
+	
+	public static val DEPRECATED_WS_STATEMENT = "deprecatedWS"
+	
 	@Check
 	def checkIfWorkingSysUsed(TargetModel target) {
 		val node = NodeModelUtils.getNode(target);
 		val nodeText = node.getText().toString();
-		if (nodeText.contains("WorkingSystem")) {
-			warning('Please use WindowingSys instead of WorkingSys!', TargetmodelPackage.eINSTANCE.targetModel_Ws)
+		
+		val deprecatedWorkingSystemKeyword = grammerAccess.targetModelAccess.workingSystemKeyword_6_0_1.value
+		
+		if (nodeText.contains(deprecatedWorkingSystemKeyword)) {
+			warning('Please use WindowingSys instead of WorkingSys!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws, DEPRECATED_WS_STATEMENT)
 		}
 	}
+	
+	
 }

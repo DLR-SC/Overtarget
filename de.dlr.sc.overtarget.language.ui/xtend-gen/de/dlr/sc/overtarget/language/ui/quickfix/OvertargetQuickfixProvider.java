@@ -9,7 +9,14 @@
  */
 package de.dlr.sc.overtarget.language.ui.quickfix;
 
+import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModification;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.validation.Issue;
 
 /**
  * Custom quickfixes.
@@ -18,4 +25,13 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
  */
 @SuppressWarnings("all")
 public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
+  @Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
+  public void fixDeprecatedWsStatement(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = (IModificationContext context) -> {
+      final IXtextDocument xtextDocument = context.getXtextDocument();
+      final String firstLetter = xtextDocument.get((issue.getOffset()).intValue(), 1);
+      xtextDocument.replace((issue.getOffset()).intValue(), 1, firstLetter.toUpperCase());
+    };
+    acceptor.accept(issue, "Fix Working System", "Replace with Correct Windowing System.", "upcase.png", _function);
+  }
 }
