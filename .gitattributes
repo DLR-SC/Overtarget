@@ -1,0 +1,3 @@
+# Mark all generated code, so they won't appear in diffs of PRS anymore
+**/src-gen/**/* linguist-generated=true
+**/xtend-gen/**/* linguist-generated=true
