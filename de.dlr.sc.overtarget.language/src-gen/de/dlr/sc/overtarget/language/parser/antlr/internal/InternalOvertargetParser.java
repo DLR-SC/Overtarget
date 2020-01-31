@@ -30,7 +30,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOvertargetParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'TargetLibrary'", "'{'", "'}'", "'Target'", "'extends'", "'Import'", "'OperatingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'.'", "'Unit'", "'version'", "'newest'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'all;'", "'Override'", "'='", "'Variable'", "'-'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gta'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'TargetLibrary'", "'{'", "'}'", "'Target'", "'extends'", "'Import'", "'OperatingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'.'", "'Unit'", "'version'", "'newest'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'all;'", "'Override'", "'='", "'Variable'", "'-'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -3554,7 +3554,7 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleWorkingSys"
-    // InternalOvertarget.g:1373:1: ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'carbon' | kw= 'cocoa' | kw= 'gta' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' ) ;
+    // InternalOvertarget.g:1373:1: ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'carbon' | kw= 'cocoa' | kw= 'gtk' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' ) ;
     public final AntlrDatatypeRuleToken ruleWorkingSys() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3564,10 +3564,10 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalOvertarget.g:1379:2: ( (kw= 'carbon' | kw= 'cocoa' | kw= 'gta' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' ) )
-            // InternalOvertarget.g:1380:2: (kw= 'carbon' | kw= 'cocoa' | kw= 'gta' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' )
+            // InternalOvertarget.g:1379:2: ( (kw= 'carbon' | kw= 'cocoa' | kw= 'gtk' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' ) )
+            // InternalOvertarget.g:1380:2: (kw= 'carbon' | kw= 'cocoa' | kw= 'gtk' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' )
             {
-            // InternalOvertarget.g:1380:2: (kw= 'carbon' | kw= 'cocoa' | kw= 'gta' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' )
+            // InternalOvertarget.g:1380:2: (kw= 'carbon' | kw= 'cocoa' | kw= 'gtk' | kw= 'motif' | kw= 'photon' | kw= 'wpf' | kw= 'win32' )
             int alt29=7;
             switch ( input.LA(1) ) {
             case 44:
@@ -3636,12 +3636,12 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalOvertarget.g:1393:3: kw= 'gta'
+                    // InternalOvertarget.g:1393:3: kw= 'gtk'
                     {
                     kw=(Token)match(input,46,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtaKeyword_2());
+                    			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtkKeyword_2());
                     		
 
                     }

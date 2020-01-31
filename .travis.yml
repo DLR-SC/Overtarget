@@ -176,7 +176,10 @@ jobs:
       # -------------------------------------------------------
       - mvn clean install -P integration,deployUnsecured -B -V | tee maven.log
       - echo "Check for warnings:"
-      - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log || exit 0  && exit 1;)
+      - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log \
+        | grep -v "\[WARNING\] Checksum validation failed" \
+        | grep -v "\[WARNING\] Could not validate integrity of download" \
+        || exit 0 && exit 1;))
       - echo "Check for failed test cases:"
       - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
       - ant jacocoPrepareDependencies
