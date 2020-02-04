@@ -38,6 +38,8 @@ public class OvertargetParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, OvertargetGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getTargetFileAccess().getAlternatives(), "rule__TargetFile__Alternatives");
+			builder.put(grammarAccess.getBaseModelAccess().getAlternatives_6(), "rule__BaseModel__Alternatives_6");
+			builder.put(grammarAccess.getTargetModelAccess().getAlternatives_6_0(), "rule__TargetModel__Alternatives_6_0");
 			builder.put(grammarAccess.getUnitAccess().getVersAlternatives_3_0(), "rule__Unit__VersAlternatives_3_0");
 			builder.put(grammarAccess.getSourceAccess().getAlternatives_1(), "rule__Source__Alternatives_1");
 			builder.put(grammarAccess.getUrlElementAccess().getAlternatives(), "rule__UrlElement__Alternatives");
@@ -46,7 +48,7 @@ public class OvertargetParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getQualifierAccess().getAlternatives_0(), "rule__Qualifier__Alternatives_0");
 			builder.put(grammarAccess.getQualifierAccess().getAlternatives_1_1(), "rule__Qualifier__Alternatives_1_1");
 			builder.put(grammarAccess.getOperatingSysAccess().getAlternatives(), "rule__OperatingSys__Alternatives");
-			builder.put(grammarAccess.getWorkingSysAccess().getAlternatives(), "rule__WorkingSys__Alternatives");
+			builder.put(grammarAccess.getWindowingSysAccess().getAlternatives(), "rule__WindowingSys__Alternatives");
 			builder.put(grammarAccess.getArchitectureAccess().getAlternatives(), "rule__Architecture__Alternatives");
 			builder.put(grammarAccess.getJreAccess().getAlternatives(), "rule__Jre__Alternatives");
 			builder.put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");

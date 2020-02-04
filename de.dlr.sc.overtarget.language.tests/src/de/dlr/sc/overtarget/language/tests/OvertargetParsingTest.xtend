@@ -46,7 +46,7 @@ class OvertargetParsingTest {
 	def void setUp() {
 		baseModel = parse('''       Target baseTarget   { 
 	 	OperatingSystem aix 
-		WorkingSystem carbon   
+		WindowingSystem carbon   
 		Architecture ia64_32  
 		Locale ar_AE  
 		TargetJRE JavaSE-1.1   
@@ -54,7 +54,7 @@ class OvertargetParsingTest {
 			Unit org.antlr.runtime version 4.3.0.v201502022030;
 		}  
 		RepositoryLocation A url "http://download.eclipse.org/technology/swtbot/releases/2.5.0"{  
-			Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837 ;
+			Unit org.eclipse.swtbot.eclipse.feature.group version 2.5.0.v201609021837;
 			Unit org.eclipse.swtbot.eclipse.test.junit.feature.group version 2.5.0.201609021837;
 			Unit org.eclipse.swtbot.feature.group version newest;
 		}  
@@ -85,7 +85,7 @@ class OvertargetParsingTest {
 	 
 	 oldVersionModel = parse('''		Target oldVersionTarget {
 	 	OperatingSystem aix  
-	 		 	WorkingSystem carbon   
+	 		 	WindowingSystem carbon   
 	 		 	Architecture ia64_32  
 	 		 	Locale ar_AE  
 	 		 	TargetJRE JavaSE-1.1   
@@ -106,7 +106,7 @@ class OvertargetParsingTest {
 	 
 	 importedModel = parse('''		Target toBeImported {
 	 	OperatingSystem aix  
-	 	WorkingSystem carbon   
+	 	WindowingSystem carbon   
 	 	Architecture ia64_32  
 	 	Locale ar_AE  
 	 	TargetJRE JavaSE-1.1   
@@ -133,7 +133,7 @@ extendedModel = parse('''    Target  extendedTarget  extends baseTarget {
 extendedModelWithEnvironment = parse('''    Target  extendedTargetWithEnvironment  extends baseTarget {    
 	 	Import toBeImported    
 	 	OperatingSystem win32 
-		WorkingSystem win32   
+		WindowingSystem win32   
 		Architecture x86_64  
 		Locale de_DE  
 		TargetJRE JavaSE-1.4   
