@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -9,7 +9,9 @@
  */
 package de.dlr.sc.overtarget.language.ui.quickfix;
 
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
+import javax.inject.Inject;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -25,12 +27,21 @@ import org.eclipse.xtext.validation.Issue;
  */
 @SuppressWarnings("all")
 public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
+  @Inject
+  private OvertargetGrammarAccess grammarAccess;
+  
   @Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
   public void fixDeprecatedWsStatement(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final IModification _function = (IModificationContext context) -> {
+      final String windowingSystemKeyword = this.grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0().getValue();
+      final String deprecatedWorkingSystemKeyword = this.grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1().getValue();
+      final int WHITESPACE_SEPARATOR = 1;
       final IXtextDocument xtextDocument = context.getXtextDocument();
-      final String firstLetter = xtextDocument.get((issue.getOffset()).intValue(), 1);
-      xtextDocument.replace((issue.getOffset()).intValue(), 1, firstLetter.toUpperCase());
+      Integer _offset = issue.getOffset();
+      int _minus = ((_offset).intValue() - WHITESPACE_SEPARATOR);
+      int _length = deprecatedWorkingSystemKeyword.length();
+      int _minus_1 = (_minus - _length);
+      xtextDocument.replace(_minus_1, deprecatedWorkingSystemKeyword.length(), windowingSystemKeyword);
     };
     acceptor.accept(issue, "Fix Working System", "Replace with Correct Windowing System.", "upcase.png", _function);
   }

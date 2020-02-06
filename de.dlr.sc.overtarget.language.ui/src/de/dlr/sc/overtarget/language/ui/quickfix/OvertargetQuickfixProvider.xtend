@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,8 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator
+import javax.inject.Inject
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 
 /**
  * Custom quickfixes.
@@ -22,24 +24,19 @@ import de.dlr.sc.overtarget.language.validation.OvertargetValidator
  */
 class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 
+	@Inject
+	OvertargetGrammarAccess grammarAccess 
+	
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Fix Working System', 'Replace with Correct Windowing System.', 'upcase.png') [
 			context |
-			val xtextDocument = context.xtextDocument
+			val windowingSystemKeyword = grammarAccess.targetModelAccess.windowingSystemKeyword_6_0_0.value
+			val deprecatedWorkingSystemKeyword = grammarAccess.targetModelAccess.workingSystemKeyword_6_0_1.value
+			val WHITESPACE_SEPARATOR  = 1
 			
-			val firstLetter = xtextDocument.get(issue.offset , 1)
-			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
+			val xtextDocument = context.xtextDocument
+			xtextDocument.replace(issue.offset - WHITESPACE_SEPARATOR - deprecatedWorkingSystemKeyword.length, deprecatedWorkingSystemKeyword.length, windowingSystemKeyword)
 		]
 	}
-
-//	@Fix(OvertargetValidator.INVALID_NAME)
-//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
-//			context |
-//			val xtextDocument = context.xtextDocument
-//			val firstLetter = xtextDocument.get(issue.offset, 1)
-//			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
-//		]
-//	}
 }
