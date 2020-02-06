@@ -33,7 +33,7 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 	}
 	
 	@Inject
-	private OvertargetGrammarAccess grammerAccess 
+	OvertargetGrammarAccess grammarAccess 
 	
 	public static val DEPRECATED_WS_STATEMENT = "deprecatedWS"
 	
@@ -42,12 +42,11 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 		val node = NodeModelUtils.getNode(target);
 		val nodeText = node.getText().toString();
 		
-		val deprecatedWorkingSystemKeyword = grammerAccess.targetModelAccess.workingSystemKeyword_6_0_1.value
+		val deprecatedWorkingSystemKeyword = grammarAccess.targetModelAccess.workingSystemKeyword_6_0_1.value
+		val windowingSystemKeyword = grammarAccess.targetModelAccess.windowingSystemKeyword_6_0_0.value
 		
 		if (nodeText.contains(deprecatedWorkingSystemKeyword)) {
-			warning('Please use WindowingSys instead of WorkingSys!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws, DEPRECATED_WS_STATEMENT)
+			warning('Please use ' + windowingSystemKeyword + ' instead of ' + deprecatedWorkingSystemKeyword + '!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws, DEPRECATED_WS_STATEMENT)
 		}
 	}
-	
-	
 }

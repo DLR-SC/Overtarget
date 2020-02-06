@@ -39,7 +39,7 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
   }
   
   @Inject
-  private OvertargetGrammarAccess grammerAccess;
+  private OvertargetGrammarAccess grammarAccess;
   
   public static final String DEPRECATED_WS_STATEMENT = "deprecatedWS";
   
@@ -47,10 +47,11 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
   public void checkIfWorkingSysUsed(final TargetModel target) {
     final ICompositeNode node = NodeModelUtils.getNode(target);
     final String nodeText = node.getText().toString();
-    final String deprecatedWorkingSystemKeyword = this.grammerAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1().getValue();
+    final String deprecatedWorkingSystemKeyword = this.grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1().getValue();
+    final String windowingSystemKeyword = this.grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0().getValue();
     boolean _contains = nodeText.contains(deprecatedWorkingSystemKeyword);
     if (_contains) {
-      this.warning("Please use WindowingSys instead of WorkingSys!", target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws(), OvertargetValidator.DEPRECATED_WS_STATEMENT);
+      this.warning((((("Please use " + windowingSystemKeyword) + " instead of ") + deprecatedWorkingSystemKeyword) + "!"), target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws(), OvertargetValidator.DEPRECATED_WS_STATEMENT);
     }
   }
 }
