@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -27,6 +27,8 @@ import org.eclipse.xtext.validation.Check;
  */
 @SuppressWarnings("all")
 public class OvertargetValidator extends AbstractOvertargetValidator {
+  public static final String FILE_NAME_LIKE_TARGET_NAME = "fileNameLikeTargetName";
+  
   @Check
   public void checkFileNameAndTargetName(final TargetFile target) {
     ValidatorHelper helper = new ValidatorHelper();
@@ -34,7 +36,7 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     boolean _equals = fileName.equals(target.getName());
     boolean _not = (!_equals);
     if (_not) {
-      this.warning("File name and model name are not the same!", target, target.eContainingFeature());
+      this.warning("File name and model name are not the same!", target, target.eContainingFeature(), OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME);
     }
   }
   

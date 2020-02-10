@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import de.dlr.sc.overtarget.language.validation.OvertargetValidatorTest;
 import de.dlr.sc.overtarget.language.generator.GeneratorHelperTest;
 import junit.framework.JUnit4TestAdapter;
 
@@ -20,6 +21,7 @@ import junit.framework.JUnit4TestAdapter;
 @RunWith(Suite.class)
 @SuiteClasses({ 
 	OvertargetParsingTest.class,
+	OvertargetValidatorTest.class, 
 	GeneratorHelperTest.class 
 	})
 /** * * Test Collection * */
