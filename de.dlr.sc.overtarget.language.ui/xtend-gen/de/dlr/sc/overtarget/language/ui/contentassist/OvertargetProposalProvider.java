@@ -10,6 +10,7 @@
 package de.dlr.sc.overtarget.language.ui.contentassist;
 
 import com.google.common.base.Objects;
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl;
 import de.dlr.sc.overtarget.language.ui.contentassist.AbstractOvertargetProposalProvider;
@@ -19,8 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
+import javax.inject.Inject;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -87,10 +90,14 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
     super.complete_Locale(model, ruleCall, context, acceptor);
   }
   
+  @Inject
+  private OvertargetGrammarAccess grammarAccess;
+  
   @Override
   public void completeRepositoryLocation_Units(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(this.createCompletionProposal("unit", context));
-    acceptor.accept(this.createCompletionProposal("version", context));
+    final ICompletionProposal proposal = this.createCompletionProposal("Unit", "version", 
+      this.getImage(this.grammarAccess.getUnitRule()), context);
+    acceptor.accept(proposal);
     super.completeRepositoryLocation_Units(model, assignment, context, acceptor);
   }
   
