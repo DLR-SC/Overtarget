@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -95,9 +94,8 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   
   @Override
   public void completeRepositoryLocation_Units(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final ICompletionProposal proposal = this.createCompletionProposal("Unit", "version", 
-      this.getImage(this.grammarAccess.getUnitRule()), context);
-    acceptor.accept(proposal);
+    acceptor.accept(this.createCompletionProposal("Unit", "Unit", this.getImage(this.grammarAccess.getUnitRule()), context));
+    acceptor.accept(this.createCompletionProposal("version", "version", this.getImage(this.grammarAccess.getUnitRule()), context));
     super.completeRepositoryLocation_Units(model, assignment, context, acceptor);
   }
   

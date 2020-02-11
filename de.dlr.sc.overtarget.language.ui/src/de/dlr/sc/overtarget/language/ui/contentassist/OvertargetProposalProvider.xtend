@@ -64,9 +64,8 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val ICompletionProposal proposal = createCompletionProposal("Unit", "version",
-				getImage(grammarAccess.unitRule), context);
-		acceptor.accept(proposal)
+		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
+		acceptor.accept(createCompletionProposal("version", "version", getImage(grammarAccess.unitRule), context))
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
 	}
 
