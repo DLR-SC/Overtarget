@@ -437,7 +437,8 @@
 		<menuContribution
 			locationURI="popup:#TextEditorContext?endof=group.find">
 			<command
-				commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler">
+				commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
+				icon="resources/icons/buttonVersion_23px.png">
 				<visibleWhen
 					checkEnabled="false">
 					<with
