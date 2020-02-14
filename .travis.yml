@@ -1,9 +1,9 @@
 language: java
 
-dist: trusty
+dist: xenial
 
 jdk:
-- oraclejdk8
+- openjdk8
  
 cache:
   directories:
@@ -21,6 +21,7 @@ addons:
   apt:
      packages:
      - ant
+     - expect
   
 
 install:
@@ -48,6 +49,20 @@ env:
   # API Token for access to github
   # ---------------------------------------------
   - secure: "UQEpG33ddXR01fB6h+sFXBolWaFRfr6PyemwpiHEb0X9/FVxqsXnXdIWAHHvhWnvyC0hNtAmMu+j2jWSkoaquqmRHrN78VqMoSgN+2GWAfJ06KzTLm7ueuJKn+3BzAYskfXba7VBQz0MjmCyG7II73CNqB+u4zeIzsp76By2hzXyKpV4V2s+3i2GiSg87DKZ5Lz2R0E9aGcOqvGjk9Y1zad2RAyl+Yvf9fyK3z3wLtut+VRx6mdGeoeKHbIYnDDEPFToKY0VgmPyyMpKu9QEZM+oAFzAN7AkbSFkybELOYh5sDyFmHed66W6bzu6RJ3/3k/apPwEMTh1d99U2Te77p3rd2Vfhv0emwe3r1ICcnUXmPHmvcxM51CAg1nEqVF4EOkXdWcyprxiu4fadawChx5YuGQnUsTHTSGnCoK2Qgqon4buBLpN/KqN+3oXf7wit4L/PyqDx6ncG1y97fXrfCYPKso3Ax5aAjRJKL+iGdo+UiqZpntWysO+OAyQT3vwQQI2e9POGFiZyY7Hd6LT9i58IzgzK4t2AMah2ri060Xk91jX8p/ZjhOPIwXWv1nZPuvfkh93nTNKZIIFxTjnB8dQhd/CYqONY2Pjki5tAcRYpWAkQeJbouY3XIAsoLd7bisa/aOkh0gB0AzvtG41gSxJzbRyM267Q/EhBtZ9bMs="
+
+before_script:
+  # --------------------------------------
+  # Start the ssh agent
+  # --------------------------------------
+  - eval "$(ssh-agent -s)"
+  # ----------------------------------------
+  # Decrypt the key for accessign the 
+  # deployment store and add it to ssh-agent
+  # ----------------------------------------
+  - mkdir -p -m 700 /tmp/.sourceforge_ssh
+  - openssl aes-256-cbc -K $encrypted_cb83e9dfc4f3_key -iv $encrypted_cb83e9dfc4f3_iv -in id_ed25519.enc -out /tmp/.sourceforge_ssh/id_ed25519 -d
+  - chmod 600 /tmp/.sourceforge_ssh/id_ed25519
+  - bash/ssh-add-password -k /tmp/.sourceforge_ssh/id_ed25519 -p ${ssh_password} 2>/dev/null
 
 after_success:
   # ---------------------------------------------
@@ -108,18 +123,6 @@ jobs:
       - ant jacocoReport 2>&1 | tee ant.log
       - (grep -n "Rule violated" ant.log || exit 0 && exit 1;)
       before_deploy:
-        # --------------------------------------
-        # Start the ssh agent
-        # --------------------------------------
-        - eval "$(ssh-agent -s)"
-        # ----------------------------------------
-        # Decrypt the key for accessign the 
-        # deployment store and add it to ssh-agent
-        # ----------------------------------------
-        - mkdir -p -m 700 /tmp/.sourceforge_ssh
-        - openssl aes-256-cbc -K $encrypted_cb83e9dfc4f3_key -iv $encrypted_cb83e9dfc4f3_iv -in id_ed25519.enc -in id_ed25519.enc -out /tmp/.sourceforge_ssh/id_ed25519 -d
-        - chmod 600 /tmp/.sourceforge_ssh/id_ed25519
-        - ssh-add /tmp/.sourceforge_ssh/id_ed25519
         # -----------------------------------------------------------
         # Update the development tag beforehand
         # And send it back to the origin, otherwise travis will 
@@ -186,18 +189,6 @@ jobs:
       - ant jacocoReport 2>&1 | tee ant.log
       - (grep -n "Rule violated" ant.log || exit 0 && exit 1;)
       before_deploy:
-        # --------------------------------------
-        # Start the ssh agent
-        # --------------------------------------
-        - eval "$(ssh-agent -s)"
-        # ----------------------------------------
-        # Decrypt the key for accessign the 
-        # deployment store and add it to ssh-agent
-        # ----------------------------------------
-        - mkdir -p -m 700 /tmp/.sourceforge_ssh
-        - openssl aes-256-cbc -K $encrypted_cb83e9dfc4f3_key -iv $encrypted_cb83e9dfc4f3_iv -in id_ed25519.enc -in id_ed25519.enc -out /tmp/.sourceforge_ssh/id_ed25519 -d
-        - chmod 600 /tmp/.sourceforge_ssh/id_ed25519
-        - ssh-add /tmp/.sourceforge_ssh/id_ed25519
         # -----------------------------------------------------------
         # Update the development tag beforehand
         # And send it back to the origin, otherwise travis will 
@@ -261,19 +252,6 @@ jobs:
       - ant jacocoPrepareDependencies
       - ant jacocoReport 2>&1 | tee ant.log
       - (grep -n "Rule violated" ant.log || exit 0 && exit 1;)
-      before_deploy:
-        # --------------------------------------
-        # Start the ssh agent
-        # --------------------------------------
-        - eval "$(ssh-agent -s)"
-        # ----------------------------------------
-        # Decrypt the key for accessign the 
-        # deployment store and add it to ssh-agent
-        # ----------------------------------------
-        - mkdir -p -m 700 /tmp/.sourceforge_ssh
-        - openssl aes-256-cbc -K $encrypted_cb83e9dfc4f3_key -iv $encrypted_cb83e9dfc4f3_iv -in id_ed25519.enc -in id_ed25519.enc -out /tmp/.sourceforge_ssh/id_ed25519 -d
-        - chmod 600 /tmp/.sourceforge_ssh/id_ed25519
-        - ssh-add /tmp/.sourceforge_ssh/id_ed25519
       deploy:
         # -----------------------------------------------------------
         # Now attach the release to the Release Tag.

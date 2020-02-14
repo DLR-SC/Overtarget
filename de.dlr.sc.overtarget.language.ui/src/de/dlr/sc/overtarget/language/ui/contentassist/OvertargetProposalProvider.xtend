@@ -18,6 +18,9 @@ import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import javax.inject.Inject
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
+import org.eclipse.jface.text.contentassist.ICompletionProposal
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -56,10 +59,13 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		super.complete_Locale(model, ruleCall, context, acceptor)
 	}
 
+	@Inject
+	OvertargetGrammarAccess grammarAccess;
+
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		acceptor.accept(createCompletionProposal("unit", context))
-		acceptor.accept(createCompletionProposal("version", context))
+		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
+		acceptor.accept(createCompletionProposal("version", "version", getImage(grammarAccess.unitRule), context))
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
 	}
 
