@@ -27,12 +27,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
@@ -56,28 +53,25 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
 	
-	@Inject
-	IResourceDescriptions resourceDescriptions;
-
-	@Inject
-	IResourceSetProvider resourceSetProvider;
-
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-
 		IEditorPart editor = HandlerUtil.getActiveEditor(event);
 		if (editor instanceof ITextEditor) {
-			IEditorInput input = 
-				editor == null ? null : editor.getEditorInput();
-			IFile file = input instanceof FileEditorInput 
-				? ((FileEditorInput) input).getFile()
-					: null;
+			IEditorInput input = null;
+			if (editor != null) {
+				input = editor.getEditorInput();
+			}
 			
+			IFile file = null;
+			if (input instanceof FileEditorInput) {
+				file = ((FileEditorInput) input).getFile();
+			}
+
 			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 
 			ResourceSet rs = new ResourceSetImpl();
 			Resource r = rs.getResource(uri, true);
-	
+
 			final IGeneratorContext context = new IGeneratorContext() {
 				
 				@Override
@@ -91,17 +85,13 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			
 			Set<OutputConfiguration> overtargetConfigurations = new OvertargetOutputConfigurationProvider().getOutputConfigurations();
 			fsa.getOutputConfigurations().put(OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, overtargetConfigurations.iterator().next());
-			
-			
 			fsa.setProject(file.getProject());
-			
-			
+
 			OvertargetGenerator generator = new OvertargetGenerator();
 			generator.doGenerate(r, fsa, context);
 		}
-
 		return null;
- 	}
+	}
 
 	@Override
 	public boolean isEnabled() {
