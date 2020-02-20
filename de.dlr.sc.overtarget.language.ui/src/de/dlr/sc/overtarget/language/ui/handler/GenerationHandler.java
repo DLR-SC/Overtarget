@@ -62,10 +62,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 				input = editor.getEditorInput();
 			}
 			
-			IFile file = null;
-			if (input instanceof FileEditorInput) {
-				file = ((FileEditorInput) input).getFile();
-			}
+			IFile file = ((FileEditorInput) input).getFile();
 
 			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 
