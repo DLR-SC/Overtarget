@@ -422,7 +422,7 @@
 			allPopups="false"
 			locationURI="toolbar:org.eclipse.ui.main.toolbar">
 				<toolbar
-					id="de.dlr.sc.overtarget.language.ui.handler.GenerationCommand.toolbar">
+					id="de.dlr.sc.overtarget.language.ui.handler.toolbar">
 		<command
 			commandId="de.dlr.sc.overtarget.language.ui.GenerateCommand"
 			style="push">
@@ -457,7 +457,7 @@
        point="org.eclipse.ui.commandImages">
     <image
           commandId="de.dlr.sc.overtarget.language.ui.GenerateCommand"
-          icon="resources/icons/button_regenerate.png">
+          icon="resources/icons/OvertargetKugel.png">
     </image>
  </extension>
  <extension
