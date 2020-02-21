@@ -420,9 +420,13 @@
 		point="org.eclipse.ui.menus">
 		<menuContribution
 			allPopups="false"
-			locationURI="toolbar:org.eclipse.ui.main.toolbar">
+			locationURI="toolbar:org.eclipse.ui.main.toolbar?after=org.eclipse.ui.workbench.navigate">
 				<toolbar
 					id="de.dlr.sc.overtarget.language.ui.handler.toolbar">
+					<visibleWhen
+           checkEnabled="true">
+	<reference definitionId="de.dlr.sc.Overtarget"/>
+</visibleWhen>
 		<command
 			commandId="de.dlr.sc.overtarget.language.ui.GenerateCommand"
 			style="push">
@@ -431,6 +435,9 @@
         commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
         style="push">
   </command>
+  <visibleWhen
+        checkEnabled="false">
+  </visibleWhen>
 				</toolbar>
 		</menuContribution>
   <menuContribution
@@ -482,4 +489,11 @@
           name="Update versions">
     </command>
  </extension>
+ <extension point = "org.eclipse.core.expressions.definitions">
+  <definition id="org.eclipse.ui.examples.contributions.activeEditor">
+     <with variable="activeEditorId">
+        <equals value="de.dlr.sc.Overtarget"/>
+     </with>
+  </definition>
+</extension>
 </plugin>
