@@ -472,7 +472,7 @@
 		point="org.eclipse.ui.commandImages">
 		<image
 			commandId="de.dlr.sc.overtarget.language.ui.GenerateCommand"
-			icon="resources/icons/OvertargetKugel.png">
+			icon="resources/icons/Target.png">
 		</image>
 	</extension>
 	
@@ -495,7 +495,7 @@
 		point="org.eclipse.ui.commandImages">
 		<image
 			commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
-			icon="resources/icons/Version.png">
+			icon="resources/icons/version.png">
 		</image>
 	</extension>
 </plugin>
