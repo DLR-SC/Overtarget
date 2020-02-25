@@ -424,11 +424,11 @@
 			locationURI="toolbar:org.eclipse.ui.main.toolbar?after=org.eclipse.ui.workbench.navigate">
 				<toolbar
 					id="de.dlr.sc.overtarget.language.ui.handler.toolbar">
-					<activeWhen checkEnabled="false">
+					<visibleWhen checkEnabled="false">
 					<reference
 						definitionId="de.dlr.sc.Overtarget.Editor.opened">
 					</reference>
-				</activeWhen>
+					</visibleWhen>
 		<command
 			commandId="de.dlr.sc.overtarget.language.ui.GenerateCommand"
 			style="push">
