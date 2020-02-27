@@ -24,7 +24,8 @@ Require-Bundle: de.dlr.sc.overtarget.language,
  org.eclipse.equinox.p2.metadata,
  org.eclipse.core.jobs,
  org.eclipse.equinox.registry,
- org.eclipse.e4.ui.di
+ org.eclipse.e4.ui.di,
+ org.eclipse.pde
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: de.dlr.sc.overtarget.language.ui,
  de.dlr.sc.overtarget.language.ui.contentassist,
@@ -33,6 +34,8 @@ Export-Package: de.dlr.sc.overtarget.language.ui,
  de.dlr.sc.overtarget.language.ui.labeling,
  de.dlr.sc.overtarget.language.ui.outline,
  de.dlr.sc.overtarget.language.ui.quickfix
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.eclipse.pde.core.target,
+ org.eclipse.pde.internal.core
 Bundle-Activator: de.dlr.sc.overtarget.language.ui.internal.LanguageActivator
 Automatic-Module-Name: de.dlr.sc.overtarget.language.ui
