@@ -9,6 +9,8 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.util;
 
+import javax.swing.JOptionPane;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.pde.core.target.ITargetDefinition;
@@ -39,14 +41,13 @@ public class TargetPlatformHelper {
 		ITargetDefinition target = null;
 		try {
 			target = fileHandle.getTargetDefinition();
-		} catch (CoreException e1) {
-			e1.printStackTrace();
+		} catch (CoreException e) {
+			JOptionPane.showMessageDialog(null, "Could not get target definition!", "Something went wrong", JOptionPane.ERROR_MESSAGE);
 		}
 		LoadTargetDefinitionJob.load(target);
 	}
 	
 	private static ITargetPlatformService getTargetPlatformService() {
-		@SuppressWarnings("restriction")
 		ITargetPlatformService service = PDECore.getDefault().acquireService(ITargetPlatformService.class);
 		
 		return service;
