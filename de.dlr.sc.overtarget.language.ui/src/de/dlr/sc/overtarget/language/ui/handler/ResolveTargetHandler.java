@@ -28,7 +28,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
+import de.dlr.sc.overtarget.language.ui.util.TargetPlatformHelper;
 
 public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 
