@@ -520,7 +520,7 @@
        point="org.eclipse.ui.commandImages">
     <image
           commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
-          icon="de.dlr.sc.overtarget.language.ui.image1">
+          icon="resources/icons/ResolveTarget.png">
     </image>
  </extension>
  <extension
