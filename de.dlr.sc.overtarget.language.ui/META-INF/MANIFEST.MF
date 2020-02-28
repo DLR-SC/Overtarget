@@ -24,7 +24,9 @@ Require-Bundle: de.dlr.sc.overtarget.language,
  org.eclipse.equinox.p2.metadata,
  org.eclipse.core.jobs,
  org.eclipse.equinox.registry,
- org.eclipse.e4.ui.di
+ org.eclipse.e4.ui.di,
+ org.eclipse.pde,
+ org.eclipse.pde.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: de.dlr.sc.overtarget.language.ui,
  de.dlr.sc.overtarget.language.ui.contentassist,

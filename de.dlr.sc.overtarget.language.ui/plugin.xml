@@ -449,6 +449,16 @@
 					</reference>
 				</visibleWhen>
 		</command>
+		<command
+			commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
+			style="push">
+			<visibleWhen
+				checkEnabled="false">
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</visibleWhen>
+		</command>
 			</toolbar>
 		</menuContribution>
 	</extension>
@@ -498,4 +508,26 @@
 			icon="resources/icons/version.png">
 		</image>
 	</extension>
+ <extension
+       point="org.eclipse.ui.commands">
+    <command
+          description="Command to resolve the target from  the tmodel editor"
+          id="de.dlr.sc.overtarget.language.ui.ResolveTarget"
+          name="Resolve target">
+    </command>
+ </extension>
+ <extension
+       point="org.eclipse.ui.commandImages">
+    <image
+          commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
+          icon="resources/icons/ResolveTarget.png">
+    </image>
+ </extension>
+ <extension
+       point="org.eclipse.ui.handlers">
+    <handler
+          class="de.dlr.sc.overtarget.language.ui.handler.ResolveTargetHandler"
+          commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget">
+    </handler>
+ </extension>
 </plugin>
