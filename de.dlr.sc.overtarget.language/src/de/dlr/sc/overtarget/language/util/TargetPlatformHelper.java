@@ -9,8 +9,6 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.util;
 
-import javax.swing.JOptionPane;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.pde.core.target.ITargetDefinition;
@@ -33,17 +31,16 @@ public class TargetPlatformHelper {
 	/**
 	 * @param targetFile
 	 *            the target file to be set
+	 * @throws CoreException 
 	*/
 	
-	public static void setAsTargetPlatform(IFile targetFile) {
+	public static void setAsTargetPlatform(IFile targetFile) throws CoreException {
 		ITargetPlatformService service = getTargetPlatformService();
 		org.eclipse.pde.core.target.ITargetHandle fileHandle = service.getTarget((IFile) targetFile);
 		ITargetDefinition target = null;
-		try {
-			target = fileHandle.getTargetDefinition();
-		} catch (CoreException e) {
-			JOptionPane.showMessageDialog(null, "Could not get target definition!", "Something went wrong", JOptionPane.ERROR_MESSAGE);
-		}
+		
+		target = fileHandle.getTargetDefinition();
+
 		LoadTargetDefinitionJob.load(target);
 	}
 	

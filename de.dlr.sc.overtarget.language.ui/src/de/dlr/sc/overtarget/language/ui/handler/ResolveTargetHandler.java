@@ -17,7 +17,11 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -46,7 +50,23 @@ public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 			IFile targetFile = workspace.getRoot().getFile(path);
 			
 			if (targetFile.exists()) {
-				TargetPlatformHelper.setAsTargetPlatform(targetFile);
+				try {
+					TargetPlatformHelper.setAsTargetPlatform(targetFile);
+				} catch (CoreException e) {
+					MessageBox errorMessage = new MessageBox(
+							Display.getCurrent().getActiveShell(), 
+							SWT.OK | SWT.ICON_ERROR);
+					errorMessage.setText("Error");
+					errorMessage.setMessage(file.getName() + " could not be set as active target.");
+					errorMessage.open();
+				}
+			} else {
+				MessageBox errorMessage = new MessageBox(
+						Display.getCurrent().getActiveShell(), 
+						SWT.OK | SWT.ICON_ERROR);
+				errorMessage.setText("Target file not found");
+				errorMessage.setMessage("Please check if the target file exists.");
+				errorMessage.open();
 			}
 		}
 		
