@@ -13,7 +13,9 @@ Require-Bundle: de.dlr.sc.overtarget.language,
  org.eclipse.core.runtime,
  org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: de.dlr.sc.overtarget.language.tests;x-internal=true
+Export-Package: de.dlr.sc.overtarget.language.generator,
+ de.dlr.sc.overtarget.language.tests;x-internal=true,
+ de.dlr.sc.overtarget.language.validation
 Import-Package: org.hamcrest.core,
  org.junit;version="4.5.0",
  org.junit.runners.model;version="4.5.0",

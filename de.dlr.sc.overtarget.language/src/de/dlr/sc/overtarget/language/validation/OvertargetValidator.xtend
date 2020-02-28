@@ -13,6 +13,7 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import org.eclipse.xtext.validation.Check
+import de.dlr.sc.overtarget.language.validation.ValidatorHelper
 
 /**
  * This class contains custom validation rules. 
