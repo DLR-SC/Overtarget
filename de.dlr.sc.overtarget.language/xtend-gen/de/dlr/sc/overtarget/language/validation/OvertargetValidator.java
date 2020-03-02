@@ -41,4 +41,15 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
       this.warning("Please use WindowingSys instead of WorkingSys!", target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws());
     }
   }
+  
+  @Check
+  public void checkIfTmodelExtendsOwnTmodel(final TargetModel target) {
+    String tmodelName = target.getName();
+    TargetModel extendModel = target.getSuper();
+    String extendName = extendModel.getName();
+    boolean _equals = tmodelName.equals(extendName);
+    if (_equals) {
+      this.warning("A target cannot extend its own target.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super());
+    }
+  }
 }

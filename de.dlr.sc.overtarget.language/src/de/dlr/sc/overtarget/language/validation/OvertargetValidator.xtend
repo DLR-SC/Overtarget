@@ -37,4 +37,14 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 			warning('Please use WindowingSys instead of WorkingSys!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws)
 		}
 	}
+	
+	@Check
+	def checkIfTmodelExtendsOwnTmodel(TargetModel target) {
+		var tmodelName = target.name;
+		var extendModel = target.super
+		var extendName = extendModel.name
+		if (tmodelName.equals(extendName)) {
+			warning('A target cannot extend its own target.', target, TargetmodelPackage.eINSTANCE.targetModel_Super)
+		}
+	}
 }
