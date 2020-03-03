@@ -49,7 +49,7 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     String extendName = extendModel.getName();
     boolean _equals = tmodelName.equals(extendName);
     if (_equals) {
-      this.warning("A target cannot extend its own target.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super());
+      this.error("A target cannot extend its own target.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super());
     }
   }
 }

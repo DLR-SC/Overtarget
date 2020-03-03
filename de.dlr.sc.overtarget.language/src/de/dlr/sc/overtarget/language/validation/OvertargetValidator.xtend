@@ -44,7 +44,7 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 		var extendModel = target.super
 		var extendName = extendModel.name
 		if (tmodelName.equals(extendName)) {
-			warning('A target cannot extend its own target.', target, TargetmodelPackage.eINSTANCE.targetModel_Super)
+			error('A target cannot extend its own target.', target, TargetmodelPackage.eINSTANCE.targetModel_Super)
 		}
 	}
 }
