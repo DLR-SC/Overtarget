@@ -1,4 +1,8 @@
-# Overtarget
+<p align="center"> 
+  <img src ="resources/logo/Overtarget.svg" />
+</p>
+
+
 
 Overtarget is an eclipse plug-in that helps you managing your target platform files with dependencies across project boundaries.
 
