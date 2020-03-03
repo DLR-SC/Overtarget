@@ -439,6 +439,16 @@
 				</reference>
 			</visibleWhen>
 		</command>
+  <command
+        commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
+        style="push">
+     <visibleWhen
+           checkEnabled="false">
+        <reference
+              definitionId="isActiveEditorAnInstanceOfXtextEditor">
+        </reference>
+     </visibleWhen>
+  </command>
 		<command
 			commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
 				style="push">
@@ -448,16 +458,6 @@
 						definitionId="isActiveEditorAnInstanceOfXtextEditor">
 					</reference>
 				</visibleWhen>
-		</command>
-		<command
-			commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
-			style="push">
-			<visibleWhen
-				checkEnabled="false">
-				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
-				</reference>
-			</visibleWhen>
 		</command>
 			</toolbar>
 		</menuContribution>
@@ -540,11 +540,11 @@
              style="push">
        </command>
        <command
-             commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
+             commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
              style="push">
        </command>
        <command
-             commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
+             commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
              style="push">
        </command>
     </menuContribution>
