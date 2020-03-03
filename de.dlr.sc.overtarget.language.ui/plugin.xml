@@ -475,7 +475,7 @@
 		<command
 			description="This is a command to generate a target file"
 			id="de.dlr.sc.overtarget.language.ui.GenerateCommand"
-			name="Generate Command">
+			name="Generate target">
 		</command>
 	</extension>
 	<extension
@@ -529,5 +529,24 @@
           class="de.dlr.sc.overtarget.language.ui.handler.ResolveTargetHandler"
           commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget">
     </handler>
+ </extension>
+ <extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          allPopups="true"
+          locationURI="popup:#TextEditorContext?endof=group.find">
+       <command
+             commandId="de.dlr.sc.overtarget.language.ui.GenerateCommand"
+             style="push">
+       </command>
+       <command
+             commandId="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
+             style="push">
+       </command>
+       <command
+             commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
+             style="push">
+       </command>
+    </menuContribution>
  </extension>
 </plugin>
