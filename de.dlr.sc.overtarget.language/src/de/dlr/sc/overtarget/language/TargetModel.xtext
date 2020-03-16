@@ -84,7 +84,7 @@ UrlElementVariable:
 ;
 
 RepositoryLocation:
-	'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+	(referenceTarget?='ReferenceTarget')? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
 		(units+=Unit)*	
 	'}'
 ;

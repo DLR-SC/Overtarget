@@ -617,7 +617,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getRepositoryLocation_Name()
+  public EAttribute getRepositoryLocation_ReferenceTarget()
   {
     return (EAttribute)repositoryLocationEClass.getEStructuralFeatures().get(0);
   }
@@ -628,9 +628,20 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
+  public EAttribute getRepositoryLocation_Name()
+  {
+    return (EAttribute)repositoryLocationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getRepositoryLocation_Url()
   {
-    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(1);
+    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -641,7 +652,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
   @Override
   public EReference getRepositoryLocation_Units()
   {
-    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(2);
+    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -820,6 +831,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEReference(urlElementVariableEClass, URL_ELEMENT_VARIABLE__CONTENT);
 
     repositoryLocationEClass = createEClass(REPOSITORY_LOCATION);
+    createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__REFERENCE_TARGET);
     createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__NAME);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__URL);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__UNITS);
@@ -922,6 +934,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEReference(getUrlElementVariable_Content(), this.getVariableDefinition(), null, "content", null, 0, 1, UrlElementVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(repositoryLocationEClass, RepositoryLocation.class, "RepositoryLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRepositoryLocation_ReferenceTarget(), ecorePackage.getEBoolean(), "referenceTarget", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRepositoryLocation_Name(), ecorePackage.getEString(), "name", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Url(), this.getUrlExpression(), null, "url", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Units(), this.getUnit(), null, "units", null, 0, -1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

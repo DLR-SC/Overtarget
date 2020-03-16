@@ -934,15 +934,29 @@ ruleRepositoryLocation returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='RepositoryLocation'
+		(
+			(
+				lv_referenceTarget_0_0='ReferenceTarget'
+				{
+					newLeafNode(lv_referenceTarget_0_0, grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRepositoryLocationRule());
+					}
+					setWithLastConsumed($current, "referenceTarget", true, "ReferenceTarget");
+				}
+			)
+		)?
+		otherlv_1='RepositoryLocation'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getRepositoryLocationAccess().getRepositoryLocationKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getRepositoryLocationAccess().getRepositoryLocationKeyword_1());
 		}
 		(
 			(
-				lv_name_1_0=RULE_ID
+				lv_name_2_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRepositoryLocationAccess().getNameIDTerminalRuleCall_1_0());
+					newLeafNode(lv_name_2_0, grammarAccess.getRepositoryLocationAccess().getNameIDTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -951,21 +965,21 @@ ruleRepositoryLocation returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"name",
-						lv_name_1_0,
+						lv_name_2_0,
 						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
-		otherlv_2='url'
+		otherlv_3='url'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getRepositoryLocationAccess().getUrlKeyword_2());
+			newLeafNode(otherlv_3, grammarAccess.getRepositoryLocationAccess().getUrlKeyword_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUrlUrlExpressionParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUrlUrlExpressionParserRuleCall_4_0());
 				}
-				lv_url_3_0=ruleUrlExpression
+				lv_url_4_0=ruleUrlExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
@@ -973,22 +987,22 @@ ruleRepositoryLocation returns [EObject current=null]
 					set(
 						$current,
 						"url",
-						lv_url_3_0,
+						lv_url_4_0,
 						"de.dlr.sc.overtarget.language.Overtarget.UrlExpression");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_4='{'
+		otherlv_5='{'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getRepositoryLocationAccess().getLeftCurlyBracketKeyword_4());
+			newLeafNode(otherlv_5, grammarAccess.getRepositoryLocationAccess().getLeftCurlyBracketKeyword_5());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_6_0());
 				}
-				lv_units_5_0=ruleUnit
+				lv_units_6_0=ruleUnit
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
@@ -996,15 +1010,15 @@ ruleRepositoryLocation returns [EObject current=null]
 					add(
 						$current,
 						"units",
-						lv_units_5_0,
+						lv_units_6_0,
 						"de.dlr.sc.overtarget.language.Overtarget.Unit");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_6='}'
+		otherlv_7='}'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_6());
+			newLeafNode(otherlv_7, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;

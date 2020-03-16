@@ -12,6 +12,7 @@ package de.dlr.sc.overtarget.language.generator;
 import com.google.common.collect.Iterables;
 import de.dlr.sc.overtarget.language.generator.GeneratorHelper;
 import de.dlr.sc.overtarget.language.generator.OvertargetOutputConfigurationProvider;
+import de.dlr.sc.overtarget.language.generator.util.ReferenceTargetHelper;
 import de.dlr.sc.overtarget.language.targetmodel.ExcludeLocation;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
@@ -40,9 +41,17 @@ public class OvertargetGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<TargetModel> _filter = Iterables.<TargetModel>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), TargetModel.class);
     for (final TargetModel model : _filter) {
-      String _name = model.getName();
-      String _plus = (_name + ".target");
-      fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+      if (((ReferenceTargetHelper.importedModelIsProxy(model) == true) || (ReferenceTargetHelper.parentIsProxy(model) == true))) {
+        ReferenceTargetHelper.getModelToGenerate(model);
+        String _name = model.getName();
+        String _plus = (_name + ".target");
+        fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+        ReferenceTargetHelper.getTargetFile(model);
+      } else {
+        String _name_1 = model.getName();
+        String _plus_1 = (_name_1 + ".target");
+        fsa.generateFile(_plus_1, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+      }
     }
   }
   

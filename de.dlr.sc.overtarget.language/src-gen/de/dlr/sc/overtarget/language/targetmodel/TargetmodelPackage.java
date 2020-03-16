@@ -598,13 +598,22 @@ public interface TargetmodelPackage extends EPackage
   int REPOSITORY_LOCATION = 9;
 
   /**
+   * The feature id for the '<em><b>Reference Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REPOSITORY_LOCATION__REFERENCE_TARGET = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION__NAME = 0;
+  int REPOSITORY_LOCATION__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Url</b></em>' containment reference.
@@ -613,7 +622,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION__URL = 1;
+  int REPOSITORY_LOCATION__URL = 2;
 
   /**
    * The feature id for the '<em><b>Units</b></em>' containment reference list.
@@ -622,7 +631,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION__UNITS = 2;
+  int REPOSITORY_LOCATION__UNITS = 3;
 
   /**
    * The number of structural features of the '<em>Repository Location</em>' class.
@@ -631,7 +640,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION_FEATURE_COUNT = 3;
+  int REPOSITORY_LOCATION_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link de.dlr.sc.overtarget.language.targetmodel.impl.ExcludeLocationImpl <em>Exclude Location</em>}' class.
@@ -1171,6 +1180,17 @@ public interface TargetmodelPackage extends EPackage
   EClass getRepositoryLocation();
 
   /**
+   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferenceTarget <em>Reference Target</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Reference Target</em>'.
+   * @see de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferenceTarget()
+   * @see #getRepositoryLocation()
+   * @generated
+   */
+  EAttribute getRepositoryLocation_ReferenceTarget();
+
+  /**
    * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1636,6 +1656,14 @@ public interface TargetmodelPackage extends EPackage
      * @generated
      */
     EClass REPOSITORY_LOCATION = eINSTANCE.getRepositoryLocation();
+
+    /**
+     * The meta object literal for the '<em><b>Reference Target</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REPOSITORY_LOCATION__REFERENCE_TARGET = eINSTANCE.getRepositoryLocation_ReferenceTarget();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

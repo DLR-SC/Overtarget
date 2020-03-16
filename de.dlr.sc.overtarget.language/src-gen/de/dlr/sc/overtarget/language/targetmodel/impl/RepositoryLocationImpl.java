@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isReferenceTarget <em>Reference Target</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUnits <em>Units</em>}</li>
@@ -49,6 +50,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class RepositoryLocationImpl extends MinimalEObjectImpl.Container implements RepositoryLocation
 {
+  /**
+   * The default value of the '{@link #isReferenceTarget() <em>Reference Target</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isReferenceTarget()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean REFERENCE_TARGET_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isReferenceTarget() <em>Reference Target</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isReferenceTarget()
+   * @generated
+   * @ordered
+   */
+  protected boolean referenceTarget = REFERENCE_TARGET_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -108,6 +129,31 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   protected EClass eStaticClass()
   {
     return TargetmodelPackage.Literals.REPOSITORY_LOCATION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean isReferenceTarget()
+  {
+    return referenceTarget;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setReferenceTarget(boolean newReferenceTarget)
+  {
+    boolean oldReferenceTarget = referenceTarget;
+    referenceTarget = newReferenceTarget;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetmodelPackage.REPOSITORY_LOCATION__REFERENCE_TARGET, oldReferenceTarget, referenceTarget));
   }
 
   /**
@@ -228,6 +274,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCE_TARGET:
+        return isReferenceTarget();
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         return getName();
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
@@ -249,6 +297,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCE_TARGET:
+        setReferenceTarget((Boolean)newValue);
+        return;
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         setName((String)newValue);
         return;
@@ -273,6 +324,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCE_TARGET:
+        setReferenceTarget(REFERENCE_TARGET_EDEFAULT);
+        return;
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -296,6 +350,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCE_TARGET:
+        return referenceTarget != REFERENCE_TARGET_EDEFAULT;
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
@@ -317,7 +373,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
+    result.append(" (referenceTarget: ");
+    result.append(referenceTarget);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

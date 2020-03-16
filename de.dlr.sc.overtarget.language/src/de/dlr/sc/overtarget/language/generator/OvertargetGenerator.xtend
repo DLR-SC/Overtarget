@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
+import de.dlr.sc.overtarget.language.generator.util.ReferenceTargetHelper
 
 /**
  * Generates target files from tmodel files
@@ -31,8 +32,15 @@ class OvertargetGenerator extends AbstractGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
-			fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
+			if (ReferenceTargetHelper.importedModelIsProxy(model) == true || ReferenceTargetHelper.parentIsProxy(model) == true) {
+				ReferenceTargetHelper.getModelToGenerate(model)
+				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
+				ReferenceTargetHelper.getTargetFile(model)
+			} else {
+				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
+			}
 		}
+	
 	}
 	
 	/** 
@@ -42,6 +50,7 @@ class OvertargetGenerator extends AbstractGenerator {
 		arragenceProperties(target);
 		addInheritedRepositories(target)
 		printModel(target);
+		
 	}
 
 	/**
