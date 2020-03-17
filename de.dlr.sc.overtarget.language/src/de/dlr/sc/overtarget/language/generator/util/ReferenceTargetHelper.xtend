@@ -45,7 +45,9 @@ class ReferenceTargetHelper {
 	}
 
 	def static renameTarget(TargetModel model) {
-		model.name = "referenceTarget"
+		val renamedTarget = "referenceTarget"
+		model.name = renamedTarget
+		return model.name
 		}
 
 

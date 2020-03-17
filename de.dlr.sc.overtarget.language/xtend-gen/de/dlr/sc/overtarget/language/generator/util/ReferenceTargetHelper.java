@@ -63,8 +63,10 @@ public class ReferenceTargetHelper {
     }
   }
   
-  public static void renameTarget(final TargetModel model) {
-    model.setName("referenceTarget");
+  public static String renameTarget(final TargetModel model) {
+    final String renamedTarget = "referenceTarget";
+    model.setName(renamedTarget);
+    return model.getName();
   }
   
   public static boolean importedModelIsProxy(final TargetModel model) {

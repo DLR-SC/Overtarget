@@ -40,7 +40,6 @@ class OvertargetGenerator extends AbstractGenerator {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 			}
 		}
-	
 	}
 	
 	/** 

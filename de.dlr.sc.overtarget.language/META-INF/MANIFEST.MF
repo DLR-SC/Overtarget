@@ -28,6 +28,7 @@ Require-Bundle: org.eclipse.xtext,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: de.dlr.sc.overtarget.language,
  de.dlr.sc.overtarget.language.generator,
+ de.dlr.sc.overtarget.language.generator.util,
  de.dlr.sc.overtarget.language.parser.antlr,
  de.dlr.sc.overtarget.language.parser.antlr.internal,
  de.dlr.sc.overtarget.language.scoping,
