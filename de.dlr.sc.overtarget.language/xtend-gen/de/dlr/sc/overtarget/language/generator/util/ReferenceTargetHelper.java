@@ -64,7 +64,7 @@ public class ReferenceTargetHelper {
   }
   
   public static String renameTarget(final TargetModel model) {
-    final String renamedTarget = "referenceTarget";
+    final String renamedTarget = "referencedTarget";
     model.setName(renamedTarget);
     return model.getName();
   }
@@ -95,8 +95,9 @@ public class ReferenceTargetHelper {
     boolean _eIsProxy = parentTarget.eIsProxy();
     if (_eIsProxy) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
   
   public static void getTargetFile(final TargetModel model) {

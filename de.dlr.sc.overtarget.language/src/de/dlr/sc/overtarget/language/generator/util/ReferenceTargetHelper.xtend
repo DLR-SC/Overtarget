@@ -45,11 +45,10 @@ class ReferenceTargetHelper {
 	}
 
 	def static renameTarget(TargetModel model) {
-		val renamedTarget = "referenceTarget"
+		val renamedTarget = "referencedTarget"
 		model.name = renamedTarget
 		return model.name
 		}
-
 
 	def static importedModelIsProxy(TargetModel model) {
 		val list = newArrayList
@@ -71,8 +70,11 @@ class ReferenceTargetHelper {
 		val parentTarget = model.super
 		if (parentTarget.eIsProxy) {
 			return true
+		} else {
+			return false
 		}
 	}
+
 	def static getTargetFile(TargetModel model) {
 		val targetName = model.name + ".target"
 		val workspace = ResourcesPlugin.workspace
