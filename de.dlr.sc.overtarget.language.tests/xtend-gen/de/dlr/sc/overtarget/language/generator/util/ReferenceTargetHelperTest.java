@@ -72,7 +72,9 @@ public class ReferenceTargetHelperTest {
   
   @Test
   public void testRenameTarget() {
-    final String renamedTarget = ReferenceTargetHelper.renameTarget(this.testTarget);
+    EObject _get = this.testTargetResource.getContents().get(0);
+    final TargetModel testTarget = ((TargetModel) _get);
+    final String renamedTarget = ReferenceTargetHelper.renameTarget(testTarget);
     final String expectedRenamedTarget = "referenceTarget";
     Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTarget, renamedTarget);
   }

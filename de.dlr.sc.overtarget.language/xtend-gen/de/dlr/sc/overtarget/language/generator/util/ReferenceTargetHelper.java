@@ -64,7 +64,7 @@ public class ReferenceTargetHelper {
   }
   
   public static String renameTarget(final TargetModel model) {
-    final String renamedTarget = "referencedTarget";
+    final String renamedTarget = "referenceTarget";
     model.setName(renamedTarget);
     return model.getName();
   }

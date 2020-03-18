@@ -67,6 +67,7 @@ class ReferenceTargetHelperTest {
 	
 	@Test
 	def void testRenameTarget() {
+		val testTarget = testTargetResource.contents.get(0) as TargetModel
 		val renamedTarget = ReferenceTargetHelper.renameTarget(testTarget)
 		val expectedRenamedTarget = "referenceTarget"
 		
