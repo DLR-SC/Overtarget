@@ -9,7 +9,16 @@
  */
 package de.dlr.sc.overtarget.language.ui.quickfix;
 
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
+import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
+import javax.inject.Inject;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModification;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.validation.Issue;
 
 /**
  * Custom quickfixes.
@@ -18,4 +27,22 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
  */
 @SuppressWarnings("all")
 public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
+  @Inject
+  private OvertargetGrammarAccess grammarAccess;
+  
+  @Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
+  public void fixDeprecatedWsStatement(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = (IModificationContext context) -> {
+      final String windowingSystemKeyword = this.grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0().getValue();
+      final String deprecatedWorkingSystemKeyword = this.grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1().getValue();
+      final int WHITESPACE_SEPARATOR = 1;
+      final IXtextDocument xtextDocument = context.getXtextDocument();
+      Integer _offset = issue.getOffset();
+      int _minus = ((_offset).intValue() - WHITESPACE_SEPARATOR);
+      int _length = deprecatedWorkingSystemKeyword.length();
+      int _minus_1 = (_minus - _length);
+      xtextDocument.replace(_minus_1, deprecatedWorkingSystemKeyword.length(), windowingSystemKeyword);
+    };
+    acceptor.accept(issue, "Fix Working System", "Replace with Correct Windowing System.", "upcase.png", _function);
+  }
 }
