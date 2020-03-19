@@ -57,10 +57,14 @@ public class ReferenceTargetHelper {
     return null;
   }
   
-  public static void deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {
+  public static ArrayList<RepositoryLocation> deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {
     for (final RepositoryLocation reposLoc : list) {
-      EcoreUtil.delete(reposLoc);
+      {
+        EcoreUtil.delete(reposLoc);
+        return list;
+      }
     }
+    return null;
   }
   
   public static String renameTarget(final TargetModel model) {
@@ -100,7 +104,7 @@ public class ReferenceTargetHelper {
     }
   }
   
-  public static void getTargetFile(final TargetModel model) {
+  public static void setFileAsTargetPlatform(final TargetModel model) {
     try {
       String _name = model.getName();
       final String targetName = (_name + ".target");

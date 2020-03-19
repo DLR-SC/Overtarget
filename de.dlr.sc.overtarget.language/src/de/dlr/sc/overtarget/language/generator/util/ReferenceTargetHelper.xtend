@@ -40,8 +40,8 @@ class ReferenceTargetHelper {
 	def static deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
 		for (RepositoryLocation reposLoc : list) {
 			EcoreUtil.delete(reposLoc)
+			return list
 		}
-		
 	}
 
 	def static renameTarget(TargetModel model) {
@@ -75,7 +75,7 @@ class ReferenceTargetHelper {
 		}
 	}
 
-	def static getTargetFile(TargetModel model) {
+	def static setFileAsTargetPlatform(TargetModel model) {
 		val targetName = model.name + ".target"
 		val workspace = ResourcesPlugin.workspace
 		val projects = workspace.getRoot().projects

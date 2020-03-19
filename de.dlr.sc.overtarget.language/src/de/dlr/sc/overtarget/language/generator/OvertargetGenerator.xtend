@@ -35,7 +35,7 @@ class OvertargetGenerator extends AbstractGenerator {
 			if (ReferenceTargetHelper.importedModelIsProxy(model) == true || ReferenceTargetHelper.parentIsProxy(model) == true) {
 				ReferenceTargetHelper.getModelToGenerate(model)
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
-				ReferenceTargetHelper.getTargetFile(model)
+				ReferenceTargetHelper.setFileAsTargetPlatform(model)
 			} else {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 			}

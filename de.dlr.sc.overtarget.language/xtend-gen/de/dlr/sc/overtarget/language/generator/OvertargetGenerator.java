@@ -46,7 +46,7 @@ public class OvertargetGenerator extends AbstractGenerator {
         String _name = model.getName();
         String _plus = (_name + ".target");
         fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
-        ReferenceTargetHelper.getTargetFile(model);
+        ReferenceTargetHelper.setFileAsTargetPlatform(model);
       } else {
         String _name_1 = model.getName();
         String _plus_1 = (_name_1 + ".target");
