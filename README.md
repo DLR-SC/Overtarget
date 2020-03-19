@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img src ="resources/logo/Overtarget.svg" />
+  <img src ="resources/logo/Overtarget_Logo.png" />
 </p>
 
 
