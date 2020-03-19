@@ -17,9 +17,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +33,6 @@ import org.junit.runner.RunWith;
 @InjectWith(OvertargetInjectorProvider.class)
 @SuppressWarnings("all")
 public class ReferenceTargetHelperTest {
-  private TargetModel testTarget;
-  
   private static final String TEST_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/testTarget.tmodel";
   
   private static final String PARENT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel";
@@ -58,16 +60,57 @@ public class ReferenceTargetHelperTest {
   
   private final Resource importedModelResource = this.rs.getResource(this.uriImportedModel, true);
   
+  @Inject
+  @Extension
+  private ParseHelper<TargetModel> _parseHelper;
+  
+  private TargetModel referenceTarget;
+  
   @Before
   public void setUp() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Target referenceTarget extends proxy {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Import proxyImport");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("ReferenceTarget RepositoryLocation testTarget url \"test\\parentTarget.tmodel\" {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Unit parentTargetUnit version newest;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.referenceTarget = this._parseHelper.parse(_builder);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testGetModelToGenerate() {
-  }
-  
-  @Test
-  public void testDeleteRepositoryLocation() {
+    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
+    final Resource testTargetWithReferenceResource = this.rs.getResource(this.uriProxyTarget, true);
+    EObject _get = testTargetWithReferenceResource.getContents().get(0);
+    final TargetModel testTargetWithReference = ((TargetModel) _get);
+    ReferenceTargetHelper.getModelToGenerate(testTargetWithReference);
+    final String expectedTargetName = this.referenceTarget.getName();
+    final boolean expectedRepositoryLocation = this.referenceTarget.getRepositoryLocations().get(0).isReferenceTarget();
+    Assert.assertEquals(Boolean.valueOf(expectedRepositoryLocation), Boolean.valueOf(testTargetWithReference.getRepositoryLocations().get(0).isReferenceTarget()));
+    Assert.assertEquals(expectedTargetName, testTargetWithReference.getName());
   }
   
   @Test

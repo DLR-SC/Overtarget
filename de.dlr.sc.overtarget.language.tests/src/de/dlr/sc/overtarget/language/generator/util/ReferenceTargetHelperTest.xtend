@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.resource.IResourceFactory
+import org.eclipse.xtext.testing.util.ParseHelper
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
@@ -29,8 +30,6 @@ import org.eclipse.xtext.resource.IResourceFactory
 class ReferenceTargetHelperTest {
 	
 
-	TargetModel testTarget
-	
 	static final String TEST_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/testTarget.tmodel"
 	static final String PARENT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel"
 	static final String PROXY_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv"
@@ -51,18 +50,40 @@ class ReferenceTargetHelperTest {
 	val uriImportedModel = URI.createPlatformPluginURI(IMPORT_TARGET_PATH, true)
 	val importedModelResource = rs.getResource(uriImportedModel, true)
 	
+	@Inject extension ParseHelper<TargetModel>
+	
+	
+	TargetModel referenceTarget
+	
 	@Before
 	def void setUp() {
+		
+		referenceTarget = '''
+		Target referenceTarget extends proxy {
+			
+			Import proxyImport
+			
+			ReferenceTarget RepositoryLocation testTarget url "test\parentTarget.tmodel" {
+				Unit parentTargetUnit version newest;
+			}
+				
+			
+		}
+		'''.parse
 	}
 	
 	@Test
 	def void testGetModelToGenerate() {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
+		val testTargetWithReferenceResource = rs.getResource(uriProxyTarget,true)
+		val testTargetWithReference = testTargetWithReferenceResource.contents.get(0) as TargetModel
+		ReferenceTargetHelper.getModelToGenerate(testTargetWithReference)
 		
-	}
-	
-	@Test
-	def void testDeleteRepositoryLocation() {
-		
+		val expectedTargetName = referenceTarget.name
+		val expectedRepositoryLocation = referenceTarget.repositoryLocations.get(0).referenceTarget
+				
+		Assert.assertEquals(expectedRepositoryLocation, testTargetWithReference.repositoryLocations.get(0).isReferenceTarget)
+		Assert.assertEquals(expectedTargetName, testTargetWithReference.name)
 	}
 	
 	@Test
