@@ -9,7 +9,7 @@
 			default="true"
 			extensions="tmodel"
 			icon="resources/icons/TargetModelIcon.png" 
-			id="de.dlr.sc.Overtarget"
+			id="de.dlr.sc.overtarget.language.Overtarget"
 			name="Overtarget Editor">
 		</editor>
 	</extension>
