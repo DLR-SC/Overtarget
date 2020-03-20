@@ -13,7 +13,9 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import org.eclipse.xtext.validation.Check
-import de.dlr.sc.overtarget.language.validation.ValidatorHelper
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import javax.inject.Inject
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 
 /**
  * This class contains custom validation rules. 
@@ -21,20 +23,33 @@ import de.dlr.sc.overtarget.language.validation.ValidatorHelper
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class OvertargetValidator extends AbstractOvertargetValidator {
+	
+	public static val FILE_NAME_LIKE_TARGET_NAME = "fileNameLikeTargetName"
+	
 	@Check
-	def checkFileNameAndTargetNamel(TargetFile target) {
+	def checkFileNameAndTargetName(TargetFile target) {
 		var helper = new ValidatorHelper();
 		val fileName = helper.getFileName(target);
 		if (!fileName.equals(target.name)) {
-			warning('File name and model name are not the same!', target, target.eContainingFeature)
+			warning('File name and model name are not the same!', target, target.eContainingFeature, FILE_NAME_LIKE_TARGET_NAME)
 		}
 	}
 	
+	@Inject
+	OvertargetGrammarAccess grammarAccess 
+	
+	public static val DEPRECATED_WS_STATEMENT = "deprecatedWS"
+	
 	@Check
 	def checkIfWorkingSysUsed(TargetModel target) {
-		var workingSys = target.getWs();
-		if (workingSys !== null) {
-			warning('Please use WindowingSys instead of WorkingSys!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws)
+		val node = NodeModelUtils.getNode(target);
+		val nodeText = node.getText().toString();
+		
+		val deprecatedWorkingSystemKeyword = grammarAccess.targetModelAccess.workingSystemKeyword_6_0_1.value
+		val windowingSystemKeyword = grammarAccess.targetModelAccess.windowingSystemKeyword_6_0_0.value
+		
+		if (nodeText.contains(deprecatedWorkingSystemKeyword)) {
+			warning('Please use ' + windowingSystemKeyword + ' instead of ' + deprecatedWorkingSystemKeyword + '!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws, DEPRECATED_WS_STATEMENT)
 		}
 	}
 }
