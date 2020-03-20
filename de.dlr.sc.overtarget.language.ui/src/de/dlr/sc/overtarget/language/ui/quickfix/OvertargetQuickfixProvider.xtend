@@ -10,6 +10,12 @@
 package de.dlr.sc.overtarget.language.ui.quickfix
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
+import org.eclipse.xtext.ui.editor.quickfix.Fix
+import de.dlr.sc.overtarget.language.validation.OvertargetValidator
+import javax.inject.Inject
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 
 /**
  * Custom quickfixes.
@@ -18,13 +24,19 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
  */
 class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 
-//	@Fix(OvertargetValidator.INVALID_NAME)
-//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
-//			context |
-//			val xtextDocument = context.xtextDocument
-//			val firstLetter = xtextDocument.get(issue.offset, 1)
-//			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
-//		]
-//	}
+	@Inject
+	OvertargetGrammarAccess grammarAccess 
+	
+	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
+	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 'Fix Working System', 'Replace with Correct Windowing System.', 'upcase.png') [
+			context |
+			val windowingSystemKeyword = grammarAccess.targetModelAccess.windowingSystemKeyword_6_0_0.value
+			val deprecatedWorkingSystemKeyword = grammarAccess.targetModelAccess.workingSystemKeyword_6_0_1.value
+			val WHITESPACE_SEPARATOR  = 1
+			
+			val xtextDocument = context.xtextDocument
+			xtextDocument.replace(issue.offset - WHITESPACE_SEPARATOR - deprecatedWorkingSystemKeyword.length, deprecatedWorkingSystemKeyword.length, windowingSystemKeyword)
+		]
+	}
 }
