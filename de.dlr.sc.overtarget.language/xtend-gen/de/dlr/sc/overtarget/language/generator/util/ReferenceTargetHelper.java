@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 
 /**
  * This class processes the model data for generation
@@ -114,6 +115,9 @@ public class ReferenceTargetHelper {
         return p.getFile(targetName).exists();
       };
       final IProject project = ((List<IProject>)Conversions.doWrapArray(projects)).stream().filter(_function).findFirst().orElse(null);
+      if ((project == null)) {
+        InputOutput.<String>println((targetName + " not found in project."));
+      }
       final IFile file = project.getFile(targetName);
       TargetPlatformHelper.setAsTargetPlatform(file);
     } catch (Throwable _e) {

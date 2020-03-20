@@ -80,6 +80,9 @@ class ReferenceTargetHelper {
 		val workspace = ResourcesPlugin.workspace
 		val projects = workspace.getRoot().projects
 		val project = projects.stream.filter[p | p.getFile(targetName).exists].findFirst.orElse(null);
+		if (project === null) {
+			println(targetName + " not found in project.") 
+		}
 		val file = project.getFile(targetName)
 		TargetPlatformHelper.setAsTargetPlatform(file)
 	}

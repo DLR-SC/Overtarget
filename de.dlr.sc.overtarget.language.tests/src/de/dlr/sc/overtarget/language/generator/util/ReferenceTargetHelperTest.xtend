@@ -128,7 +128,7 @@ class ReferenceTargetHelperTest {
 	}
 	
 	@Test
-	def void testGetTargetFile() {
+	def void testSetFileAsTargetPlatform() {
 		
 	}
 }

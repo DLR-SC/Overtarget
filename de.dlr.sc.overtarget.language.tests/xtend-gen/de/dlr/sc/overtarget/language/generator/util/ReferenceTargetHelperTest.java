@@ -153,6 +153,6 @@ public class ReferenceTargetHelperTest {
   }
   
   @Test
-  public void testGetTargetFile() {
+  public void testSetFileAsTargetPlatform() {
   }
 }
