@@ -56,4 +56,17 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
       this.warning((((("Please use " + windowingSystemKeyword) + " instead of ") + deprecatedWorkingSystemKeyword) + "!"), target, TargetmodelPackage.eINSTANCE.getTargetModel_Ws(), OvertargetValidator.DEPRECATED_WS_STATEMENT);
     }
   }
+  
+  public static final String TMODEL_EXTENDS_OWN_TMODEL = "tmodelExtendsOwnTmodel";
+  
+  @Check
+  public void checkIfTmodelExtendsOwnTmodel(final TargetModel target) {
+    String tmodelName = target.getName();
+    TargetModel extendModel = target.getSuper();
+    String extendName = extendModel.getName();
+    boolean _equals = tmodelName.equals(extendName);
+    if (_equals) {
+      this.error("A target cannot extend its own target.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super(), OvertargetValidator.TMODEL_EXTENDS_OWN_TMODEL);
+    }
+  }
 }

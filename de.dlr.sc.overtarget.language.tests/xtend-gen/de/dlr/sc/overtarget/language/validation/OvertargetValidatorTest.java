@@ -67,4 +67,19 @@ public class OvertargetValidatorTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testCheckIfTmodelExtendsOwnTmodel() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Target tmodel extends tmodel {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String tmodelExtendsOwnTmodel = _builder.toString();
+      this._validationTestHelper.assertError(this._parseHelper.parse(tmodelExtendsOwnTmodel), TargetmodelPackage.Literals.TARGET_MODEL, OvertargetValidator.TMODEL_EXTENDS_OWN_TMODEL);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
