@@ -57,6 +57,8 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     }
   }
   
+  public static final String TMODEL_EXTENDS_OWN_TMODEL = "tmodelExtendsOwnTmodel";
+  
   @Check
   public void checkIfTmodelExtendsOwnTmodel(final TargetModel target) {
     String tmodelName = target.getName();
@@ -64,7 +66,7 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     String extendName = extendModel.getName();
     boolean _equals = tmodelName.equals(extendName);
     if (_equals) {
-      this.error("A target cannot extend its own target.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super());
+      this.error("A target cannot extend its own target.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super(), OvertargetValidator.TMODEL_EXTENDS_OWN_TMODEL);
     }
   }
 }
