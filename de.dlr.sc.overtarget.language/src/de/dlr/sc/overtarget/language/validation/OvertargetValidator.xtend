@@ -52,4 +52,16 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 			warning('Please use ' + windowingSystemKeyword + ' instead of ' + deprecatedWorkingSystemKeyword + '!', target, TargetmodelPackage.eINSTANCE.targetModel_Ws, DEPRECATED_WS_STATEMENT)
 		}
 	}
+	
+	public static val TMODEL_EXTENDS_OWN_TMODEL = "tmodelExtendsOwnTmodel"
+	
+	@Check
+	def checkIfTmodelExtendsOwnTmodel(TargetModel target) {
+		var tmodelName = target.name;
+		var extendModel = target.super
+		var extendName = extendModel.name
+		if (tmodelName.equals(extendName)) {
+			error('A target cannot extend its own target.', target, TargetmodelPackage.eINSTANCE.targetModel_Super, TMODEL_EXTENDS_OWN_TMODEL)
+		}
+	}
 }

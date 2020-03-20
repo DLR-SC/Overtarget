@@ -39,7 +39,6 @@ class OvertargetValidatorTest {
 
 	@Test
 	def void testCheckIfWorkingSysUsed() {
-
 		val workingSystemUsed = '''
 			Target __synthetic0 {
 				WorkingSystem cocoa
@@ -49,5 +48,15 @@ class OvertargetValidatorTest {
 		workingSystemUsed.parse.assertWarning(
 		TargetmodelPackage.Literals.TARGET_MODEL, OvertargetValidator.DEPRECATED_WS_STATEMENT, 'Please use WindowingSystem instead of WorkingSystem!'
 		)
+	}
+	
+	@Test
+	def void testCheckIfTmodelExtendsOwnTmodel() {
+		val tmodelExtendsOwnTmodel = '''
+			Target tmodel extends tmodel {
+			}
+		'''
+		
+		tmodelExtendsOwnTmodel.parse.assertError(TargetmodelPackage.Literals.TARGET_MODEL, OvertargetValidator.TMODEL_EXTENDS_OWN_TMODEL)
 	}
 }
