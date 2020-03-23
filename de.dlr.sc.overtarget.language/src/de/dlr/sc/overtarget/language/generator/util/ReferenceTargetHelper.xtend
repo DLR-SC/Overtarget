@@ -16,6 +16,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import java.util.ArrayList
 import org.eclipse.core.resources.ResourcesPlugin
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
+import org.eclipse.core.resources.IFile
+import org.eclipse.core.internal.resources.File
+import org.eclipse.core.runtime.IPath
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.core.resources.IResource
+import org.eclipse.core.runtime.Path
+import org.eclipse.emf.ecore.InternalEObject
 
 /**
  * This class processes the model data for generation
@@ -75,15 +83,16 @@ class ReferenceTargetHelper {
 		}
 	}
 
-	def static setFileAsTargetPlatform(TargetModel model) {
+	def static findTargetfileOfTmodel(TargetModel model) {
 		val targetName = model.name + ".target"
-		val workspace = ResourcesPlugin.workspace
-		val projects = workspace.getRoot().projects
-		val project = projects.stream.filter[p | p.getFile(targetName).exists].findFirst.orElse(null);
-		if (project === null) {
-			println(targetName + " not found in project.") 
-		}
-		val file = project.getFile(targetName)
-		TargetPlatformHelper.setAsTargetPlatform(file)
+		val uri = EcoreUtil.getURI(model)
+		val workspace = ResourcesPlugin.workspace.root
+		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
+		val targetFile = tmodelFile.project.getFile(targetName)
+		setFileAsTargetPlatform(targetFile)
+	}
+
+	def static setFileAsTargetPlatform(IFile targetFile) {
+		TargetPlatformHelper.setAsTargetPlatform(targetFile)
 	}
 }

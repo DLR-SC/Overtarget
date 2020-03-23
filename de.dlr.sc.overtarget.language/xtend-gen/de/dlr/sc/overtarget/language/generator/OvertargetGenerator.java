@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -41,16 +42,19 @@ public class OvertargetGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<TargetModel> _filter = Iterables.<TargetModel>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), TargetModel.class);
     for (final TargetModel model : _filter) {
-      if (((ReferenceTargetHelper.importedModelIsProxy(model) == true) || (ReferenceTargetHelper.parentIsProxy(model) == true))) {
-        ReferenceTargetHelper.getModelToGenerate(model);
-        String _name = model.getName();
-        String _plus = (_name + ".target");
-        fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
-        ReferenceTargetHelper.setFileAsTargetPlatform(model);
-      } else {
-        String _name_1 = model.getName();
-        String _plus_1 = (_name_1 + ".target");
-        fsa.generateFile(_plus_1, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+      {
+        EcoreUtil.resolveAll(resource);
+        if (((ReferenceTargetHelper.importedModelIsProxy(model) == true) || (ReferenceTargetHelper.parentIsProxy(model) == true))) {
+          ReferenceTargetHelper.getModelToGenerate(model);
+          String _name = model.getName();
+          String _plus = (_name + ".target");
+          fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+          ReferenceTargetHelper.findTargetfileOfTmodel(model);
+        } else {
+          String _name_1 = model.getName();
+          String _plus_1 = (_name_1 + ".target");
+          fsa.generateFile(_plus_1, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+        }
       }
     }
   }

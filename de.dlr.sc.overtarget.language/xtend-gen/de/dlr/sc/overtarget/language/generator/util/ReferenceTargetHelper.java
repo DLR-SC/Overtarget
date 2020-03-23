@@ -14,19 +14,16 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 
 /**
  * This class processes the model data for generation
@@ -105,21 +102,21 @@ public class ReferenceTargetHelper {
     }
   }
   
-  public static void setFileAsTargetPlatform(final TargetModel model) {
+  public static void findTargetfileOfTmodel(final TargetModel model) {
+    String _name = model.getName();
+    final String targetName = (_name + ".target");
+    final URI uri = EcoreUtil.getURI(model);
+    final IWorkspaceRoot workspace = ResourcesPlugin.getWorkspace().getRoot();
+    String _platformString = uri.toPlatformString(true);
+    Path _path = new Path(_platformString);
+    final IFile tmodelFile = workspace.getFile(_path);
+    final IFile targetFile = tmodelFile.getProject().getFile(targetName);
+    ReferenceTargetHelper.setFileAsTargetPlatform(targetFile);
+  }
+  
+  public static void setFileAsTargetPlatform(final IFile targetFile) {
     try {
-      String _name = model.getName();
-      final String targetName = (_name + ".target");
-      final IWorkspace workspace = ResourcesPlugin.getWorkspace();
-      final IProject[] projects = workspace.getRoot().getProjects();
-      final Predicate<IProject> _function = (IProject p) -> {
-        return p.getFile(targetName).exists();
-      };
-      final IProject project = ((List<IProject>)Conversions.doWrapArray(projects)).stream().filter(_function).findFirst().orElse(null);
-      if ((project == null)) {
-        InputOutput.<String>println((targetName + " not found in project."));
-      }
-      final IFile file = project.getFile(targetName);
-      TargetPlatformHelper.setAsTargetPlatform(file);
+      TargetPlatformHelper.setAsTargetPlatform(targetFile);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
