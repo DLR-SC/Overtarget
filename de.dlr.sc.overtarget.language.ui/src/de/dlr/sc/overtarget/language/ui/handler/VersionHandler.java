@@ -19,7 +19,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -52,12 +54,25 @@ public class VersionHandler extends AbstractHandler implements IHandler {
 				xTextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource state) throws Exception {
-						TargetFile targetFile = (TargetFile) state.getContents().get(0);
-						QueryManager queryManager = new QueryManager();
-						units.addAll(VersionHandlerHelper.getNewestUnits(targetFile, selectedLines, queryManager, monitor));
+						try {
+							TargetFile targetFile = (TargetFile) state.getContents().get(0);
+							QueryManager queryManager = new QueryManager();
+							units.addAll(VersionHandlerHelper.getNewestUnits(targetFile, selectedLines, queryManager, monitor));
+						} catch (StringIndexOutOfBoundsException e) {
+							Display.getDefault().asyncExec(new Runnable() {
+								@Override
+								public void run() {
+									MessageBox errorMessage = new MessageBox(Display.getDefault().getActiveShell(),
+											SWT.OK | SWT.ICON_INFORMATION);
+									errorMessage.setText("Warning");
+									errorMessage.setMessage("Please select the entire line of the version to be updated.");
+									errorMessage.open();
+								}
+							});
+						}
 					}
-				});	
-				
+				});
+
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
@@ -65,9 +80,9 @@ public class VersionHandler extends AbstractHandler implements IHandler {
 							@Override
 							public void process(XtextResource state) throws Exception {
 								TargetFile targetFile = (TargetFile) state.getContents().get(0);
-								VersionHandlerHelper.updateVersions(targetFile, units);						
+								VersionHandlerHelper.updateVersions(targetFile, units);
 							}
-						});	
+						});
 					}
 				});
 				return Status.OK_STATUS;
