@@ -34,6 +34,9 @@ class ReferenceTargetHelperTest {
 	static final String PARENT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel"
 	static final String PROXY_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv"
 	static final String IMPORT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel"
+	static final String TEST_TMODEL_WITH_TARGET_PATH ="/de.dlr.sc.overtarget.language.tests/resources/testProject1/tmodel-src/testTarget.tmodel"
+	static final String TEST_TMODEL_WITHOUT_TARGET_PATH ="/de.dlr.sc.overtarget.language.tests/resources/testProject2/tmodel-src/testTarget2.tmodel_inv"
+	
 	
 	@Inject
 	IResourceFactory resourceFactory
@@ -128,7 +131,24 @@ class ReferenceTargetHelperTest {
 	}
 	
 	@Test
-	def void testSetFileAsTargetPlatform() {
+	def void testTargetfileOfTmodel() {
+		val uriTestTmodelWithTarget = URI.createPlatformPluginURI(TEST_TMODEL_WITH_TARGET_PATH, true)
+		val testTmodelWithTargetResource = rs.getResource(uriTestTmodelWithTarget, true)
+		val testTmodelWithTarget = testTmodelWithTargetResource.contents.get(0) as TargetModel
+//		ReferenceTargetHelper.findTargetfileOfTmodel(testTmodelWithTarget)
 		
+		Assert.assertTrue("TargetFile exists and was set as a target", true)
+		
+		val uriTestTmodelWithoutTarget = URI.createPlatformPluginURI(TEST_TMODEL_WITHOUT_TARGET_PATH, true)
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
+		val testTmodelWithoutTargetResource = rs.getResource(uriTestTmodelWithoutTarget, true)
+		val testTmodelWithoutTarget = testTmodelWithoutTargetResource.contents.get(0) as TargetModel
+//		ReferenceTargetHelper.findTargetfileOfTmodel(testTmodelWithoutTarget)
+		
+		Assert.assertFalse("TargetFile exists and was set as a target", true)
+
+//		Assert.assertNotNull()
+//		Assert.assertNull()
+//		Assert.assertEquals(Pfade von targetFile vergelichen)
 	}
 }

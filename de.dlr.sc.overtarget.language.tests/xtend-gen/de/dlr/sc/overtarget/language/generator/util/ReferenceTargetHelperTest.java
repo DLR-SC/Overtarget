@@ -41,6 +41,10 @@ public class ReferenceTargetHelperTest {
   
   private static final String IMPORT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel";
   
+  private static final String TEST_TMODEL_WITH_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/testProject1/tmodel-src/testTarget.tmodel";
+  
+  private static final String TEST_TMODEL_WITHOUT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/testProject2/tmodel-src/testTarget2.tmodel_inv";
+  
   @Inject
   private IResourceFactory resourceFactory;
   
@@ -153,6 +157,17 @@ public class ReferenceTargetHelperTest {
   }
   
   @Test
-  public void testSetFileAsTargetPlatform() {
+  public void testTargetfileOfTmodel() {
+    final URI uriTestTmodelWithTarget = URI.createPlatformPluginURI(ReferenceTargetHelperTest.TEST_TMODEL_WITH_TARGET_PATH, true);
+    final Resource testTmodelWithTargetResource = this.rs.getResource(uriTestTmodelWithTarget, true);
+    EObject _get = testTmodelWithTargetResource.getContents().get(0);
+    final TargetModel testTmodelWithTarget = ((TargetModel) _get);
+    Assert.assertTrue("TargetFile exists and was set as a target", true);
+    final URI uriTestTmodelWithoutTarget = URI.createPlatformPluginURI(ReferenceTargetHelperTest.TEST_TMODEL_WITHOUT_TARGET_PATH, true);
+    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
+    final Resource testTmodelWithoutTargetResource = this.rs.getResource(uriTestTmodelWithoutTarget, true);
+    EObject _get_1 = testTmodelWithoutTargetResource.getContents().get(0);
+    final TargetModel testTmodelWithoutTarget = ((TargetModel) _get_1);
+    Assert.assertFalse("TargetFile exists and was set as a target", true);
   }
 }
