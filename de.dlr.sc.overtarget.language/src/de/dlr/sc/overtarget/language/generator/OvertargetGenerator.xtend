@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import de.dlr.sc.overtarget.language.generator.util.ReferenceTargetHelper
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.generator.AbstractFileSystemAccess
 
 /**
  * Generates target files from tmodel files
@@ -30,14 +31,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil
  */
 class OvertargetGenerator extends AbstractGenerator {
 	static val DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
-	
+
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
 			EcoreUtil.resolveAll(resource)
 			if (ReferenceTargetHelper.importedModelIsProxy(model) == true || ReferenceTargetHelper.parentIsProxy(model) == true) {
 				ReferenceTargetHelper.getModelToGenerate(model)
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
-				ReferenceTargetHelper.findTargetfileOfTmodel(model)
+				if (fsa instanceof AbstractFileSystemAccess) {
+					val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
+					ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath)
+				}
+				
 			} else {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 			}

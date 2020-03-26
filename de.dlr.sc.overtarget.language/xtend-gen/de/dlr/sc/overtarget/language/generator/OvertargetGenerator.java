@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
@@ -49,7 +50,10 @@ public class OvertargetGenerator extends AbstractGenerator {
           String _name = model.getName();
           String _plus = (_name + ".target");
           fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
-          ReferenceTargetHelper.findTargetfileOfTmodel(model);
+          if ((fsa instanceof AbstractFileSystemAccess)) {
+            final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
+            ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath);
+          }
         } else {
           String _name_1 = model.getName();
           String _plus_1 = (_name_1 + ".target");

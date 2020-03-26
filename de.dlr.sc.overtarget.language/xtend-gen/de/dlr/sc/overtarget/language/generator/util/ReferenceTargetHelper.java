@@ -15,6 +15,7 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -57,12 +58,9 @@ public class ReferenceTargetHelper {
   
   public static ArrayList<RepositoryLocation> deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {
     for (final RepositoryLocation reposLoc : list) {
-      {
-        EcoreUtil.delete(reposLoc);
-        return list;
-      }
+      EcoreUtil.delete(reposLoc);
     }
-    return null;
+    return list;
   }
   
   public static String renameTarget(final TargetModel model) {
@@ -102,7 +100,7 @@ public class ReferenceTargetHelper {
     }
   }
   
-  public static void findTargetfileOfTmodel(final TargetModel model) {
+  public static void findTargetfileOfTmodel(final TargetModel model, final String outputDirectory) {
     String _name = model.getName();
     final String targetName = (_name + ".target");
     final URI uri = EcoreUtil.getURI(model);
@@ -110,8 +108,13 @@ public class ReferenceTargetHelper {
     String _platformString = uri.toPlatformString(true);
     Path _path = new Path(_platformString);
     final IFile tmodelFile = workspace.getFile(_path);
-    final IFile targetFile = tmodelFile.getProject().getFile(targetName);
-    ReferenceTargetHelper.setFileAsTargetPlatform(targetFile);
+    final IProject project = tmodelFile.getProject();
+    final String outputPath = outputDirectory.toString().replaceFirst(".", "");
+    final IFile targetFile = project.getFolder(outputPath).getFile(targetName);
+    boolean _exists = targetFile.exists();
+    if (_exists) {
+      ReferenceTargetHelper.setFileAsTargetPlatform(targetFile);
+    }
   }
   
   public static void setFileAsTargetPlatform(final IFile targetFile) {

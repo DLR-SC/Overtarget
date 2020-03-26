@@ -40,5 +40,6 @@ Export-Package: de.dlr.sc.overtarget.language,
  de.dlr.sc.overtarget.language.util,
  de.dlr.sc.overtarget.language.validation
 Bundle-Activator: de.dlr.sc.overtarget.language.Activator
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.eclipse.ui.plugin
 Automatic-Module-Name: de.dlr.sc.overtarget.language

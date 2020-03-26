@@ -17,18 +17,13 @@ import java.util.ArrayList
 import org.eclipse.core.resources.ResourcesPlugin
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import org.eclipse.core.resources.IFile
-import org.eclipse.core.internal.resources.File
-import org.eclipse.core.runtime.IPath
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.Path
-import org.eclipse.emf.ecore.InternalEObject
 
 /**
  * This class processes the model data for generation
  */
 class ReferenceTargetHelper {
+
 	def static getModelToGenerate(TargetModel model) {
 		for (RepositoryLocation repos : model.repositoryLocations) {
 			if (repos.referenceTarget == true) {
@@ -48,8 +43,8 @@ class ReferenceTargetHelper {
 	def static deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
 		for (RepositoryLocation reposLoc : list) {
 			EcoreUtil.delete(reposLoc)
-			return list
 		}
+		return list
 	}
 
 	def static renameTarget(TargetModel model) {
@@ -83,13 +78,18 @@ class ReferenceTargetHelper {
 		}
 	}
 
-	def static findTargetfileOfTmodel(TargetModel model) {
+	def static findTargetfileOfTmodel(TargetModel model, String outputDirectory) {
 		val targetName = model.name + ".target"
 		val uri = EcoreUtil.getURI(model)
 		val workspace = ResourcesPlugin.workspace.root
 		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
-		val targetFile = tmodelFile.project.getFile(targetName)
-		setFileAsTargetPlatform(targetFile)
+		val project = tmodelFile.project
+		val outputPath = outputDirectory.toString.replaceFirst(".","")
+		val targetFile = project.getFolder(outputPath).getFile(targetName)
+				
+		if (targetFile.exists) {
+			setFileAsTargetPlatform(targetFile)
+		}
 	}
 
 	def static setFileAsTargetPlatform(IFile targetFile) {
