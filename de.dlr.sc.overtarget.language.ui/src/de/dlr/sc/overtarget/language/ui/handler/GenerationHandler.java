@@ -15,6 +15,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -63,7 +64,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			
 			IFile file = ((FileEditorInput) input).getFile();
 			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-
+			IProject project = file.getProject();
 			ResourceSet rs = new ResourceSetImpl();
 			Resource r = rs.getResource(uri, true);
 
@@ -79,7 +80,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			fsa.setMonitor(new NullProgressMonitor());
 			
 			final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
-			String configValue = configProvider.getPreferenceStoreAccess().getPreferenceStore().getString("outlet.de.dlr.sc.overtarget.output.directory");
+			String configValue = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
 			configProvider.getOutputConfigurations().iterator().next().setOutputDirectory(configValue);
 			fsa.setOutputPath(configValue);
 			fsa.setOutputPath("de.dlr.sc.overtarget.output", configValue);
