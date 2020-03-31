@@ -1,8 +1,0 @@
-Target testTarget2 extends parentTarget {
-	
-	Import importedModel
-	
-	RepositoryLocation parentTarget url "test/parentTarget.tmodel" {
-		Unit parentTargetUnit version newest;
-	} 
-}

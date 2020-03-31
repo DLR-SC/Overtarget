@@ -100,7 +100,7 @@ public class ReferenceTargetHelper {
     }
   }
   
-  public static void findTargetfileOfTmodel(final TargetModel model, final String outputDirectory) {
+  public static IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory) {
     String _name = model.getName();
     final String targetName = (_name + ".target");
     final URI uri = EcoreUtil.getURI(model);
@@ -113,8 +113,9 @@ public class ReferenceTargetHelper {
     final IFile targetFile = project.getFolder(outputPath).getFile(targetName);
     boolean _exists = targetFile.exists();
     if (_exists) {
-      ReferenceTargetHelper.setFileAsTargetPlatform(targetFile);
+      return targetFile;
     }
+    return null;
   }
   
   public static void setFileAsTargetPlatform(final IFile targetFile) {

@@ -23,6 +23,9 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.resources.IResource
+import java.io.ByteArrayInputStream
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
@@ -34,9 +37,6 @@ class ReferenceTargetHelperTest {
 	static final String PARENT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel"
 	static final String PROXY_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv"
 	static final String IMPORT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel"
-	static final String TEST_TMODEL_WITH_TARGET_PATH ="/de.dlr.sc.overtarget.language.tests/resources/testProject1/tmodel-src/testTarget.tmodel"
-	static final String TEST_TMODEL_WITHOUT_TARGET_PATH ="/de.dlr.sc.overtarget.language.tests/resources/testProject2/tmodel-src/testTarget2.tmodel_inv"
-	
 	
 	@Inject
 	IResourceFactory resourceFactory
@@ -131,24 +131,69 @@ class ReferenceTargetHelperTest {
 	}
 	
 	@Test
-	def void testTargetfileOfTmodel() {
-		val uriTestTmodelWithTarget = URI.createPlatformPluginURI(TEST_TMODEL_WITH_TARGET_PATH, true)
-		val testTmodelWithTargetResource = rs.getResource(uriTestTmodelWithTarget, true)
-		val testTmodelWithTarget = testTmodelWithTargetResource.contents.get(0) as TargetModel
-//		ReferenceTargetHelper.findTargetfileOfTmodel(testTmodelWithTarget)
+	def void testFindTargetfileOfTmodel() {
 		
-		Assert.assertTrue("TargetFile exists and was set as a target", true)
-		
-		val uriTestTmodelWithoutTarget = URI.createPlatformPluginURI(TEST_TMODEL_WITHOUT_TARGET_PATH, true)
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
-		val testTmodelWithoutTargetResource = rs.getResource(uriTestTmodelWithoutTarget, true)
-		val testTmodelWithoutTarget = testTmodelWithoutTargetResource.contents.get(0) as TargetModel
-//		ReferenceTargetHelper.findTargetfileOfTmodel(testTmodelWithoutTarget)
-		
-		Assert.assertFalse("TargetFile exists and was set as a target", true)
+		val outputDirectory = "./target"
 
-//		Assert.assertNotNull()
-//		Assert.assertNull()
-//		Assert.assertEquals(Pfade von targetFile vergelichen)
-	}
+		val workspace = ResourcesPlugin.getWorkspace();
+		val root = workspace.getRoot();
+		val project  = root.getProject("testProject");
+		val folder = project.getFolder("target");
+		val tmodelFile = folder.getFile("target.tmodel");
+		project.create(null);
+		if (!project.isOpen()) { 
+			project.open(null)
+		}
+		folder.create(IResource.NONE, true, null);
+		val bytes = "
+			Target target {
+				
+			}".getBytes();
+		val source = new ByteArrayInputStream(bytes);
+		tmodelFile.create(source, IResource.NONE, null);
+		
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel", resourceFactory);
+		val testTargetResource = rs.getResource(URI.createPlatformResourceURI("/testProject/target/target.tmodel", true), true)
+		val target = testTargetResource.contents.get(0) as TargetModel
+		
+		val targetFile = folder.getFile("target.target");
+		val bytesTarget = 
+			'''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+			<?pde version="3.8"?><target name="target" sequenceNumber="1">
+			<locations>
+			</locations>
+			<environment>
+			<os></os>
+			<ws>gtk</ws>
+			<arch></arch>
+			<nl></nl> 
+			</environment>
+			<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/"/>
+			</target>'''.toString.getBytes();
+		val sourceTarget = new ByteArrayInputStream(bytesTarget);
+		targetFile.create(sourceTarget, false, null);
+		
+		Assert.assertNotNull(ReferenceTargetHelper.findTargetfileOfTmodel(target, outputDirectory))
+		
+		val project2  = root.getProject("testProject2");
+		val folder2 = project2.getFolder("target");
+		val tmodelFile2 = folder2.getFile("target.tmodel");
+		project2.create(null);
+		if (!project2.isOpen()) { 
+			project2.open(null)
+		}
+		folder2.create(IResource.NONE, true, null);
+		val bytes2 = "
+			Target target {
+				
+			}".getBytes();
+		val sourceTarget2 = new ByteArrayInputStream(bytes2);
+		tmodelFile2.create(sourceTarget2, IResource.NONE, null);
+		
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel", resourceFactory);
+		val testTargetResource2 = rs.getResource(URI.createPlatformResourceURI("/testProject2/target/target.tmodel", true), true)
+		val target2 = testTargetResource2.contents.get(0) as TargetModel
+		
+		Assert.assertNull(ReferenceTargetHelper.findTargetfileOfTmodel(target2, outputDirectory))
+		}
 }

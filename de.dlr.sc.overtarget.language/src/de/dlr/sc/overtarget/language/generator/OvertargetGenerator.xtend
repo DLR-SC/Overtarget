@@ -40,7 +40,8 @@ class OvertargetGenerator extends AbstractGenerator {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 				if (fsa instanceof AbstractFileSystemAccess) {
 					val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
-					ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath)
+					val targetFile = ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath)
+					ReferenceTargetHelper.setFileAsTargetPlatform(targetFile)
 				}
 			} else {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)

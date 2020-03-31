@@ -20,6 +20,7 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import java.util.ArrayList;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -52,7 +53,8 @@ public class OvertargetGenerator extends AbstractGenerator {
           fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
           if ((fsa instanceof AbstractFileSystemAccess)) {
             final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
-            ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath);
+            final IFile targetFile = ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath);
+            ReferenceTargetHelper.setFileAsTargetPlatform(targetFile);
           }
         } else {
           String _name_1 = model.getName();
