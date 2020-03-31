@@ -80,13 +80,13 @@ class ReferenceTargetHelperTest {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val testTargetWithReferenceResource = rs.getResource(uriProxyTarget,true)
 		val testTargetWithReference = testTargetWithReferenceResource.contents.get(0) as TargetModel
-		ReferenceTargetHelper.getModelToGenerate(testTargetWithReference)
+		val target = ReferenceTargetHelper.getModelToGenerate(testTargetWithReference)
 		
 		val expectedTargetName = referenceTarget.name
 		val expectedRepositoryLocation = referenceTarget.repositoryLocations.get(0).referenceTarget
 				
-		Assert.assertEquals(expectedRepositoryLocation, testTargetWithReference.repositoryLocations.get(0).isReferenceTarget)
-		Assert.assertEquals(expectedTargetName, testTargetWithReference.name)
+		Assert.assertEquals(expectedRepositoryLocation, target.repositoryLocations.get(0).isReferenceTarget)
+		Assert.assertEquals(expectedTargetName, target.name)
 	}
 	
 	@Test
@@ -109,9 +109,9 @@ class ReferenceTargetHelperTest {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val proxyTargetResource = rs.getResource(uriProxyTarget,true)
 		val proxyTarget = proxyTargetResource.contents.get(0) as TargetModel
-		ReferenceTargetHelper.importedModelIsProxy(proxyTarget)
+		val modelIsProxy = ReferenceTargetHelper.importedModelIsProxy(proxyTarget)
 		
-		Assert.assertTrue("Imported models are proxy.", true)
+		Assert.assertTrue("Imported models are proxy.", modelIsProxy)
 	}
 	
 	@Test
@@ -125,9 +125,9 @@ class ReferenceTargetHelperTest {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val proxyTargetResource = rs.getResource(uriProxyTarget,true)
 		val proxyTarget = proxyTargetResource.contents.get(0) as TargetModel
-		ReferenceTargetHelper.parentIsProxy(proxyTarget)
+		val parentIsProxy = ReferenceTargetHelper.parentIsProxy(proxyTarget)
 
-		Assert.assertTrue("ParentTarget is proxy", true)
+		Assert.assertTrue("ParentTarget is proxy", parentIsProxy)
 	}
 	
 	@Test

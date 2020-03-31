@@ -114,11 +114,11 @@ public class ReferenceTargetHelperTest {
     final Resource testTargetWithReferenceResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get = testTargetWithReferenceResource.getContents().get(0);
     final TargetModel testTargetWithReference = ((TargetModel) _get);
-    ReferenceTargetHelper.getModelToGenerate(testTargetWithReference);
+    final TargetModel target = ReferenceTargetHelper.getModelToGenerate(testTargetWithReference);
     final String expectedTargetName = this.referenceTarget.getName();
     final boolean expectedRepositoryLocation = this.referenceTarget.getRepositoryLocations().get(0).isReferenceTarget();
-    Assert.assertEquals(Boolean.valueOf(expectedRepositoryLocation), Boolean.valueOf(testTargetWithReference.getRepositoryLocations().get(0).isReferenceTarget()));
-    Assert.assertEquals(expectedTargetName, testTargetWithReference.getName());
+    Assert.assertEquals(Boolean.valueOf(expectedRepositoryLocation), Boolean.valueOf(target.getRepositoryLocations().get(0).isReferenceTarget()));
+    Assert.assertEquals(expectedTargetName, target.getName());
   }
   
   @Test
@@ -141,8 +141,8 @@ public class ReferenceTargetHelperTest {
     final Resource proxyTargetResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get_1 = proxyTargetResource.getContents().get(0);
     final TargetModel proxyTarget = ((TargetModel) _get_1);
-    ReferenceTargetHelper.importedModelIsProxy(proxyTarget);
-    Assert.assertTrue("Imported models are proxy.", true);
+    final boolean modelIsProxy = ReferenceTargetHelper.importedModelIsProxy(proxyTarget);
+    Assert.assertTrue("Imported models are proxy.", modelIsProxy);
   }
   
   @Test
@@ -156,8 +156,8 @@ public class ReferenceTargetHelperTest {
     final Resource proxyTargetResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get_1 = proxyTargetResource.getContents().get(0);
     final TargetModel proxyTarget = ((TargetModel) _get_1);
-    ReferenceTargetHelper.parentIsProxy(proxyTarget);
-    Assert.assertTrue("ParentTarget is proxy", true);
+    final boolean parentIsProxy = ReferenceTargetHelper.parentIsProxy(proxyTarget);
+    Assert.assertTrue("ParentTarget is proxy", parentIsProxy);
   }
   
   @Test
