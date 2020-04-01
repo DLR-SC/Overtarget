@@ -15,6 +15,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.SWT;
@@ -25,12 +26,29 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 
 public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 
 	static String targetFileExtension = "target";
 	
+	public ResolveTargetHandler() {
+		setupInjector();
+	}
+
+	protected void setupInjector() {
+		LanguageActivator.getInstance().getInjector(LanguageActivator.DE_DLR_SC_OVERTARGET_LANGUAGE_OVERTARGET).injectMembers(this);
+	}
+
+	@Inject
+	private Provider<EclipseOutputConfigurationProvider> eclipseOutputConfigProvider;
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
@@ -39,11 +57,13 @@ public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 			if (editorPart != null) {
 				input = editorPart.getEditorInput();
 			}
-			
+
 			IFile file = ((FileEditorInput) input).getFile();
 			String targetName = file.getName().replace("tmodel", targetFileExtension);
 			IProject project = file.getProject();
-			IFile targetFile = project.getFile(targetName);
+			String outputConfig = getOutputConfigurations(project);
+			IFolder outputFolder = project.getFolder(outputConfig);
+			IFile targetFile = outputFolder.getFile(targetName);
 			if (targetFile.exists()) {
 				try {
 					TargetPlatformHelper.setAsTargetPlatform(targetFile);
@@ -64,8 +84,14 @@ public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 				errorMessage.open();
 			}
 		}
-		
+
 		return null;
+	}
+
+	public String getOutputConfigurations(IProject project) {
+		final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
+		String configValue = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
+		return configValue;
 	}
 
 	@Override
