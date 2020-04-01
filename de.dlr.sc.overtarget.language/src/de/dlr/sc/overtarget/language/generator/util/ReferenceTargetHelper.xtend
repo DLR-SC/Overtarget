@@ -18,9 +18,6 @@ import org.eclipse.core.resources.ResourcesPlugin
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.runtime.Path
-import org.apache.log4j.lf5.util.ResourceUtils
-import org.eclipse.core.internal.resources.File
-import org.eclipse.core.runtime.IPath
 
 /**
  * This class processes the model data for generation
