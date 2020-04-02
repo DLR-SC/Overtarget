@@ -79,16 +79,23 @@ class ReferenceTargetHelper {
 	}
 
 	def static findTargetfileOfTmodel(TargetModel model, String outputDirectory) {
-		val targetName = model.name + ".target"
+		val targetName = "/" + model.name + ".target"
 		val uri = EcoreUtil.getURI(model)
 		val workspace = ResourcesPlugin.workspace.root
 		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
 		val project = tmodelFile.project
 		val outputPath = outputDirectory.toString.replaceFirst(".","")
-		val targetFile = project.getFolder(outputPath).getFile(targetName)
-		
-		if (targetFile.exists) {
-			return targetFile
+		if (outputPath.equals("/")) {
+			val targetFile = project.getFile(targetName)
+			if (targetFile.exists){
+				return targetFile
+			}
+		} else {
+			val targetPath = outputPath + targetName
+			val targetFile = project.getFile(targetPath)
+			if (targetFile.exists){
+				return targetFile
+			}
 		}
 	}
 
