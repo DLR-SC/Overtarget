@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -29,6 +28,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
@@ -53,6 +53,9 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 	@Inject
 	private Provider<EclipseOutputConfigurationProvider> eclipseOutputConfigProvider;
 	
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editor = HandlerUtil.getActiveEditor(event);
@@ -65,7 +68,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			IFile file = ((FileEditorInput) input).getFile();
 			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 			IProject project = file.getProject();
-			ResourceSet rs = new ResourceSetImpl();
+			ResourceSet rs = resourceSetProvider.get(project);
 			Resource r = rs.getResource(uri, true);
 
 			final IGeneratorContext context = new IGeneratorContext() {
