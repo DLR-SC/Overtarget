@@ -10,8 +10,14 @@
 package de.dlr.sc.overtarget.language.ui.quickfix;
 
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
+import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import javax.inject.Inject;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -44,5 +50,21 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
       xtextDocument.replace(_minus_1, deprecatedWorkingSystemKeyword.length(), windowingSystemKeyword);
     };
     acceptor.accept(issue, "Fix Working System", "Replace with Correct Windowing System.", "upcase.png", _function);
+  }
+  
+  @Fix(Diagnostic.LINKING_DIAGNOSTIC)
+  public void fixCannotResolveReference(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = (IModificationContext it) -> {
+      boolean _contains = issue.getMessage().contains("Couldn\'t resolve reference to");
+      if (_contains) {
+        final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+        if ((editor instanceof ITextEditor)) {
+          final ITextEditor ite = ((ITextEditor) editor);
+          final IEditorInput input = ite.getEditorInput();
+          new GenerationHandler().runGeneration(input);
+        }
+      }
+    };
+    acceptor.accept(issue, "Generate Reference Target", "Generate a reference target to resolve the target.", "upcase.png", _function);
   }
 }
