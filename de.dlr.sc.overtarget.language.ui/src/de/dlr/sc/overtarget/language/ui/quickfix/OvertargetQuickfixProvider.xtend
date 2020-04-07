@@ -33,7 +33,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Fix Working System', 'Replace with Correct Windowing System.', 'upcase.png') [
+		acceptor.accept(issue, 'Fix Working System', 'Replace with correct Windowing System.', 'upcase.png') [
 			context |
 			val windowingSystemKeyword = grammarAccess.targetModelAccess.windowingSystemKeyword_6_0_0.value
 			val deprecatedWorkingSystemKeyword = grammarAccess.targetModelAccess.workingSystemKeyword_6_0_1.value
@@ -47,7 +47,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Generate Reference Target', 'Generate a reference target to resolve the target.', 'upcase.png') [
+		acceptor.accept(issue, 'Generate Reference Target', 'Generate a reference target to resolve the target.', '') [
 			if (issue.message.contains("Couldn't resolve reference to")) {
 				val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
 				if (editor instanceof ITextEditor) {

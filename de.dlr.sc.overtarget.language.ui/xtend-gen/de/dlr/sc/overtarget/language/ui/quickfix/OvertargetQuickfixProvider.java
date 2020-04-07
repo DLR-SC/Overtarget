@@ -49,7 +49,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
       int _minus_1 = (_minus - _length);
       xtextDocument.replace(_minus_1, deprecatedWorkingSystemKeyword.length(), windowingSystemKeyword);
     };
-    acceptor.accept(issue, "Fix Working System", "Replace with Correct Windowing System.", "upcase.png", _function);
+    acceptor.accept(issue, "Fix Working System", "Replace with correct Windowing System.", "upcase.png", _function);
   }
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
@@ -65,6 +65,6 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
         }
       }
     };
-    acceptor.accept(issue, "Generate Reference Target", "Generate a reference target to resolve the target.", "upcase.png", _function);
+    acceptor.accept(issue, "Generate Reference Target", "Generate a reference target to resolve the target.", "", _function);
   }
 }
