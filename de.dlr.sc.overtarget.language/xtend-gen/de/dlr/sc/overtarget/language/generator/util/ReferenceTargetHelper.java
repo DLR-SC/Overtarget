@@ -102,7 +102,8 @@ public class ReferenceTargetHelper {
   
   public static IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory) {
     String _name = model.getName();
-    final String targetName = (_name + ".target");
+    String _plus = ("/" + _name);
+    final String targetName = (_plus + ".target");
     final URI uri = EcoreUtil.getURI(model);
     final IWorkspaceRoot workspace = ResourcesPlugin.getWorkspace().getRoot();
     String _platformString = uri.toPlatformString(true);
@@ -110,10 +111,20 @@ public class ReferenceTargetHelper {
     final IFile tmodelFile = workspace.getFile(_path);
     final IProject project = tmodelFile.getProject();
     final String outputPath = outputDirectory.toString().replaceFirst(".", "");
-    final IFile targetFile = project.getFolder(outputPath).getFile(targetName);
-    boolean _exists = targetFile.exists();
-    if (_exists) {
-      return targetFile;
+    boolean _equals = outputPath.equals("/");
+    if (_equals) {
+      final IFile targetFile = project.getFile(targetName);
+      boolean _exists = targetFile.exists();
+      if (_exists) {
+        return targetFile;
+      }
+    } else {
+      final String targetPath = (outputPath + targetName);
+      final IFile targetFile_1 = project.getFile(targetPath);
+      boolean _exists_1 = targetFile_1.exists();
+      if (_exists_1) {
+        return targetFile_1;
+      }
     }
     return null;
   }
