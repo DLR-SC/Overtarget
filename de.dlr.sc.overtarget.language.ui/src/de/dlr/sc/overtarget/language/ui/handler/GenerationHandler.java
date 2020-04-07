@@ -65,36 +65,45 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 				input = editor.getEditorInput();
 			}
 			
-			IFile file = ((FileEditorInput) input).getFile();
-			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			IProject project = file.getProject();
-			ResourceSet rs = resourceSetProvider.get(project);
-			Resource r = rs.getResource(uri, true);
-
-			final IGeneratorContext context = new IGeneratorContext() {
-				
-				@Override
-				public CancelIndicator getCancelIndicator() {
-					return null;
-				}
-			};
-			
-			final EclipseResourceFileSystemAccess2 fsa = fileSystemAccessProvider.get();
-			fsa.setMonitor(new NullProgressMonitor());
-			
-			final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
-			String configValue = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
-			configProvider.getOutputConfigurations().iterator().next().setOutputDirectory(configValue);
-			fsa.setOutputPath(configValue);
-			fsa.setOutputPath("de.dlr.sc.overtarget.output", configValue);
-			fsa.setProject(file.getProject());
-			
-			OvertargetGenerator generator = new OvertargetGenerator();
-			generator.doGenerate(r, fsa, context);
+			runGeneration(input);
 		}
 		return null;
 	}
 
+	/**
+	 * method to generate a new target
+	 * 
+	 * @param input  IEditorInput from the tmodel file
+	 */
+	public void runGeneration(IEditorInput input) {
+		IFile file = ((FileEditorInput) input).getFile();
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		IProject project = file.getProject();
+		ResourceSet rs = resourceSetProvider.get(project);
+		Resource r = rs.getResource(uri, true);
+
+		final IGeneratorContext context = new IGeneratorContext() {
+			
+			@Override
+			public CancelIndicator getCancelIndicator() {
+				return null;
+			}
+		};
+		
+		final EclipseResourceFileSystemAccess2 fsa = fileSystemAccessProvider.get();
+		fsa.setMonitor(new NullProgressMonitor());
+		
+		final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
+		String configValue = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
+		configProvider.getOutputConfigurations().iterator().next().setOutputDirectory(configValue);
+		fsa.setOutputPath(configValue);
+		fsa.setOutputPath("de.dlr.sc.overtarget.output", configValue);
+		fsa.setProject(file.getProject());
+		
+		OvertargetGenerator generator = new OvertargetGenerator();
+		generator.doGenerate(r, fsa, context);
+	}
+	
 	@Override
 	public boolean isEnabled() {
 		return true;
