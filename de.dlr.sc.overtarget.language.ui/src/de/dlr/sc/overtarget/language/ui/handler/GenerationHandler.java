@@ -84,8 +84,6 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			
 			final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
 			String outputPath = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
-			configProvider.getOutputConfigurations().iterator().next().setOutputDirectory(outputPath);
-			fsa.setOutputPath(outputPath);
 			fsa.setOutputPath("de.dlr.sc.overtarget.output", outputPath);
 			fsa.setProject(file.getProject());
 			
