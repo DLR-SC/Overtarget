@@ -936,15 +936,15 @@ ruleRepositoryLocation returns [EObject current=null]
 	(
 		(
 			(
-				lv_referenceTarget_0_0='ReferenceTarget'
+				lv_referencedTarget_0_0='ReferencedTarget'
 				{
-					newLeafNode(lv_referenceTarget_0_0, grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0());
+					newLeafNode(lv_referencedTarget_0_0, grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0());
 				}
 				{
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getRepositoryLocationRule());
 					}
-					setWithLastConsumed($current, "referenceTarget", true, "ReferenceTarget");
+					setWithLastConsumed($current, "referencedTarget", true, "ReferencedTarget");
 				}
 			)
 		)?

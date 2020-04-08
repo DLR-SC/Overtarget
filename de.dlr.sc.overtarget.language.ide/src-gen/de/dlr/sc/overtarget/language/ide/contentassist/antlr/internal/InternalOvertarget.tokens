@@ -11,7 +11,7 @@
 'OperatingSystem'=44
 'Override'=55
 'PA_RISC'=30
-'ReferenceTarget'=58
+'ReferencedTarget'=58
 'RepositoryLocation'=52
 'Target'=38
 'TargetJRE'=47

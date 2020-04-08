@@ -50,7 +50,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//UrlElementVariable/content"/>
     </genClasses>
     <genClasses ecoreClass="Overtarget.ecore#//RepositoryLocation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//RepositoryLocation/referenceTarget"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//RepositoryLocation/referencedTarget"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//RepositoryLocation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//RepositoryLocation/url"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//RepositoryLocation/units"/>

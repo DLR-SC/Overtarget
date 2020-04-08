@@ -110,15 +110,9 @@ public class ReferenceTargetHelperTest {
   
   @Test
   public void testGetModelToGenerate() {
-    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
-    final Resource testTargetWithReferenceResource = this.rs.getResource(this.uriProxyTarget, true);
-    EObject _get = testTargetWithReferenceResource.getContents().get(0);
-    final TargetModel testTargetWithReference = ((TargetModel) _get);
-    final TargetModel target = ReferenceTargetHelper.getModelToGenerate(testTargetWithReference);
-    final String expectedTargetName = this.referenceTarget.getName();
-    final boolean expectedRepositoryLocation = this.referenceTarget.getRepositoryLocations().get(0).isReferenceTarget();
-    Assert.assertEquals(Boolean.valueOf(expectedRepositoryLocation), Boolean.valueOf(target.getRepositoryLocations().get(0).isReferenceTarget()));
-    Assert.assertEquals(expectedTargetName, target.getName());
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field referenceTarget is undefined for the type RepositoryLocation"
+      + "\nThe method or field isReferenceTarget is undefined for the type RepositoryLocation");
   }
   
   @Test

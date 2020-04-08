@@ -2883,9 +2883,9 @@ rule__RepositoryLocation__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getRepositoryLocationAccess().getReferenceTargetAssignment_0()); }
-	(rule__RepositoryLocation__ReferenceTargetAssignment_0)?
-	{ after(grammarAccess.getRepositoryLocationAccess().getReferenceTargetAssignment_0()); }
+	{ before(grammarAccess.getRepositoryLocationAccess().getReferencedTargetAssignment_0()); }
+	(rule__RepositoryLocation__ReferencedTargetAssignment_0)?
+	{ after(grammarAccess.getRepositoryLocationAccess().getReferencedTargetAssignment_0()); }
 )
 ;
 finally {
@@ -3979,19 +3979,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RepositoryLocation__ReferenceTargetAssignment_0
+rule__RepositoryLocation__ReferencedTargetAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); }
+		{ before(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); }
 		(
-			{ before(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); }
-			'ReferenceTarget'
-			{ after(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); }
+			{ before(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); }
+			'ReferencedTarget'
+			{ after(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); }
 		)
-		{ after(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); }
+		{ after(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); }
 	)
 ;
 finally {

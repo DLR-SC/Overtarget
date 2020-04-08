@@ -32,28 +32,11 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @SuppressWarnings("all")
 public class ReferenceTargetHelper {
   public static TargetModel getModelToGenerate(final TargetModel model) {
-    EList<RepositoryLocation> _repositoryLocations = model.getRepositoryLocations();
-    for (final RepositoryLocation repos : _repositoryLocations) {
-      {
-        boolean _isReferenceTarget = repos.isReferenceTarget();
-        boolean _equals = (_isReferenceTarget == true);
-        if (_equals) {
-          final ArrayList<RepositoryLocation> list = CollectionLiterals.<RepositoryLocation>newArrayList();
-          EList<RepositoryLocation> _repositoryLocations_1 = model.getRepositoryLocations();
-          for (final RepositoryLocation repos2 : _repositoryLocations_1) {
-            boolean _isReferenceTarget_1 = repos2.isReferenceTarget();
-            boolean _equals_1 = (_isReferenceTarget_1 == false);
-            if (_equals_1) {
-              CollectionExtensions.<RepositoryLocation>addAll(list, repos2);
-            }
-          }
-          ReferenceTargetHelper.deleteRepositoryLocation(list);
-        }
-        ReferenceTargetHelper.renameTarget(model);
-        return model;
-      }
-    }
-    return null;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field referenceTarget is undefined for the type RepositoryLocation"
+      + "\nThe method or field referenceTarget is undefined for the type RepositoryLocation"
+      + "\n== cannot be resolved"
+      + "\n== cannot be resolved");
   }
   
   public static ArrayList<RepositoryLocation> deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {

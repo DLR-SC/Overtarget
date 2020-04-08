@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferenceTarget <em>Reference Target</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferencedTarget <em>Referenced Target</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUrl <em>Url</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUnits <em>Units</em>}</li>
@@ -37,26 +37,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface RepositoryLocation extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Reference Target</b></em>' attribute.
+   * Returns the value of the '<em><b>Referenced Target</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Reference Target</em>' attribute.
-   * @see #setReferenceTarget(boolean)
-   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_ReferenceTarget()
+   * @return the value of the '<em>Referenced Target</em>' attribute.
+   * @see #setReferencedTarget(boolean)
+   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_ReferencedTarget()
    * @model
    * @generated
    */
-  boolean isReferenceTarget();
+  boolean isReferencedTarget();
 
   /**
-   * Sets the value of the '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferenceTarget <em>Reference Target</em>}' attribute.
+   * Sets the value of the '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferencedTarget <em>Referenced Target</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Reference Target</em>' attribute.
-   * @see #isReferenceTarget()
+   * @param value the new value of the '<em>Referenced Target</em>' attribute.
+   * @see #isReferencedTarget()
    * @generated
    */
-  void setReferenceTarget(boolean value);
+  void setReferencedTarget(boolean value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
