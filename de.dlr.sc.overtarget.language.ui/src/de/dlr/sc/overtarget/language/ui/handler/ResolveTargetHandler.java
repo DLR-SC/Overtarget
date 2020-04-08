@@ -15,7 +15,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.SWT;
@@ -62,8 +61,14 @@ public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 			String targetName = file.getName().replace("tmodel", targetFileExtension);
 			IProject project = file.getProject();
 			String outputConfig = getOutputConfigurations(project);
-			IFolder outputFolder = project.getFolder(outputConfig);
-			IFile targetFile = outputFolder.getFile(targetName);
+			IFile targetFile;
+			String outputPath = outputConfig.replace(".", "");
+			if (outputPath.equals("/")) {
+				targetFile = project.getFile("/" + targetName);
+			} else {
+				String targetPath = outputPath + "/" + targetName;
+				targetFile = project.getFile(targetPath);
+			}
 			if (targetFile.exists()) {
 				try {
 					TargetPlatformHelper.setAsTargetPlatform(targetFile);

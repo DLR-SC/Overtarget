@@ -63,7 +63,10 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TargetLibrary:
-		//	'TargetLibrary' name=ID '{' variables+=VariableDefinition* repositoryLocations+=RepositoryLocation* '}';
+		//	'TargetLibrary' name=ID '{'
+		//	variables+=VariableDefinition*
+		//	repositoryLocations+=RepositoryLocation*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'TargetLibrary' name=ID '{' variables+=VariableDefinition* repositoryLocations+=RepositoryLocation* '}'
@@ -135,9 +138,14 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_16 = (Keyword)cGroup.eContents().get(16);
 		
 		//BaseModel:
-		//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
-		//	'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
-		//	variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+		//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])*
+		//	'OperatingSystem' os=OperatingSys ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
+		//	'Architecture' arch=Architecture
+		//	'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+		//	variables+=VariableDefinition*
+		//	excludedLocations+=ExcludeLocation*
+		//	repositoryLocations+=RepositoryLocation*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
@@ -297,8 +305,11 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//TargetModel:
 		//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
 		//	os=OperatingSys)? (('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)? ('Architecture' arch=Architecture)?
-		//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition*
-		//	excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+		//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)?
+		//	variables+=VariableDefinition*
+		//	excludedLocations+=ExcludeLocation*
+		//	repositoryLocations+=RepositoryLocation*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
@@ -705,7 +716,9 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//RepositoryLocation:
-		//	referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}';
+		//	referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+		//	units+=Unit*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
@@ -763,7 +776,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ExcludeLocation:
-		//	{ExcludeLocation} 'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
+		//	{ExcludeLocation}
+		//	'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1312,7 +1326,10 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TargetLibrary:
-	//	'TargetLibrary' name=ID '{' variables+=VariableDefinition* repositoryLocations+=RepositoryLocation* '}';
+	//	'TargetLibrary' name=ID '{'
+	//	variables+=VariableDefinition*
+	//	repositoryLocations+=RepositoryLocation*
+	//	'}';
 	public TargetLibraryElements getTargetLibraryAccess() {
 		return pTargetLibrary;
 	}
@@ -1322,9 +1339,14 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BaseModel:
-	//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
-	//	'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
-	//	variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+	//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])*
+	//	'OperatingSystem' os=OperatingSys ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
+	//	'Architecture' arch=Architecture
+	//	'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+	//	variables+=VariableDefinition*
+	//	excludedLocations+=ExcludeLocation*
+	//	repositoryLocations+=RepositoryLocation*
+	//	'}';
 	public BaseModelElements getBaseModelAccess() {
 		return pBaseModel;
 	}
@@ -1336,8 +1358,11 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	//TargetModel:
 	//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
 	//	os=OperatingSys)? (('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)? ('Architecture' arch=Architecture)?
-	//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition*
-	//	excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+	//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)?
+	//	variables+=VariableDefinition*
+	//	excludedLocations+=ExcludeLocation*
+	//	repositoryLocations+=RepositoryLocation*
+	//	'}';
 	public TargetModelElements getTargetModelAccess() {
 		return pTargetModel;
 	}
@@ -1427,7 +1452,9 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RepositoryLocation:
-	//	referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}';
+	//	referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+	//	units+=Unit*
+	//	'}';
 	public RepositoryLocationElements getRepositoryLocationAccess() {
 		return pRepositoryLocation;
 	}
@@ -1437,7 +1464,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ExcludeLocation:
-	//	{ExcludeLocation} 'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
+	//	{ExcludeLocation}
+	//	'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
 	//	'}';
 	public ExcludeLocationElements getExcludeLocationAccess() {
 		return pExcludeLocation;
