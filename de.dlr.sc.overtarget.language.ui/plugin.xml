@@ -526,7 +526,7 @@
  <extension
        point="org.eclipse.ui.handlers">
     <handler
-          class="de.dlr.sc.overtarget.language.ui.handler.ResolveTargetHandler"
+          class="de.dlr.sc.overtarget.language.ui.handler.TargetActivationHandler"
           commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget">
     </handler>
  </extension>
