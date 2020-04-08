@@ -27,6 +27,7 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
 import java.io.ByteArrayInputStream
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.linking.impl.ImportedNamesAdapter.WrappingScope
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
@@ -36,7 +37,9 @@ class ReferencedTargetHelperTest {
 
 	static final String TEST_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/testTarget.tmodel"
 	static final String PARENT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel"
+	static final String IMPORTED_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel"
 	static final String PROXY_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv"
+	
 	
 	@Inject
 	IResourceFactory resourceFactory
@@ -47,6 +50,9 @@ class ReferencedTargetHelperTest {
 	
 	val uriParentTarget = URI.createPlatformPluginURI(PARENT_TARGET_PATH, true)
 	val parentTargetResource = rs.getResource(uriParentTarget, true)
+	
+	val uriImportedModelTarget = URI.createPlatformPluginURI(IMPORTED_TARGET_PATH, true)
+	val importedModelResource = rs.getResource(uriImportedModelTarget, true)
 	
 	val uriProxyTarget = URI.createPlatformPluginURI(PROXY_TARGET_PATH, true)
 
@@ -99,9 +105,10 @@ class ReferencedTargetHelperTest {
 	@Test
 	def void testImportedModelIsProxy() {
 		val testImportTarget = testTargetResource.contents.get(0) as TargetModel
-		val modelIsaNotProxy = refTargetHelper.importedModelIsProxy(testImportTarget)
+		importedModelResource.contents.get(0) as TargetModel
+		val modelIsNotProxy = refTargetHelper.importedModelIsProxy(testImportTarget)
 
-		Assert.assertFalse("Imported models can be resolved.", modelIsaNotProxy)
+		Assert.assertFalse("Imported models can be resolved.", modelIsNotProxy)
 
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val proxyTargetResource = rs.getResource(uriProxyTarget,true)
@@ -161,7 +168,7 @@ class ReferencedTargetHelperTest {
 
 		Assert.assertEquals(targetFile, refTargetHelper.findTargetfileOfTmodel(target, outputDirectory, uri))
 
-		val project2  = root.getProject("testProject2");
+		val project2 = root.getProject("testProject2");
 		val folder2 = project2.getFolder("target");
 		val tmodelFile2 = folder2.getFile("target2.tmodel");
 		project2.create(null);

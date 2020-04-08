@@ -46,6 +46,8 @@ public class ReferencedTargetHelperTest {
   
   private static final String PARENT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel";
   
+  private static final String IMPORTED_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel";
+  
   private static final String PROXY_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv";
   
   @Inject
@@ -60,6 +62,10 @@ public class ReferencedTargetHelperTest {
   private final URI uriParentTarget = URI.createPlatformPluginURI(ReferencedTargetHelperTest.PARENT_TARGET_PATH, true);
   
   private final Resource parentTargetResource = this.rs.getResource(this.uriParentTarget, true);
+  
+  private final URI uriImportedModelTarget = URI.createPlatformPluginURI(ReferencedTargetHelperTest.IMPORTED_TARGET_PATH, true);
+  
+  private final Resource importedModelResource = this.rs.getResource(this.uriImportedModelTarget, true);
   
   private final URI uriProxyTarget = URI.createPlatformPluginURI(ReferencedTargetHelperTest.PROXY_TARGET_PATH, true);
   
@@ -131,8 +137,9 @@ public class ReferencedTargetHelperTest {
   public void testImportedModelIsProxy() {
     EObject _get = this.testTargetResource.getContents().get(0);
     final TargetModel testImportTarget = ((TargetModel) _get);
-    final boolean modelIsaNotProxy = this.refTargetHelper.importedModelIsProxy(testImportTarget);
-    Assert.assertFalse("Imported models can be resolved.", modelIsaNotProxy);
+    this.importedModelResource.getContents().get(0);
+    final boolean modelIsNotProxy = this.refTargetHelper.importedModelIsProxy(testImportTarget);
+    Assert.assertFalse("Imported models can be resolved.", modelIsNotProxy);
     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
     final Resource proxyTargetResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get_1 = proxyTargetResource.getContents().get(0);
