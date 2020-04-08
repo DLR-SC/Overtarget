@@ -47,21 +47,28 @@ public class OvertargetGenerator extends AbstractGenerator {
       {
         EcoreUtil.resolveAll(resource);
         if (((ReferencedTargetHelper.importedModelIsProxy(model) == true) || (ReferencedTargetHelper.parentIsProxy(model) == true))) {
-          ReferencedTargetHelper.getModelToGenerate(model);
+          this.generateReferencedTarget(model, fsa);
+        } else {
           String _name = model.getName();
           String _plus = (_name + ".target");
           fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
-          if ((fsa instanceof AbstractFileSystemAccess)) {
-            final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
-            final IFile targetFile = ReferencedTargetHelper.findTargetfileOfTmodel(model, outputPath);
-            ReferencedTargetHelper.setFileAsTargetPlatform(targetFile);
-          }
-        } else {
-          String _name_1 = model.getName();
-          String _plus_1 = (_name_1 + ".target");
-          fsa.generateFile(_plus_1, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
         }
       }
+    }
+  }
+  
+  /**
+   * Generates a referencedTarget
+   */
+  public void generateReferencedTarget(final TargetModel model, final IFileSystemAccess2 fsa) {
+    ReferencedTargetHelper.getModelToGenerate(model);
+    String _name = model.getName();
+    String _plus = (_name + ".target");
+    fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+    if ((fsa instanceof AbstractFileSystemAccess)) {
+      final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
+      final IFile targetFile = ReferencedTargetHelper.findTargetfileOfTmodel(model, outputPath);
+      ReferencedTargetHelper.setFileAsTargetPlatform(targetFile);
     }
   }
   

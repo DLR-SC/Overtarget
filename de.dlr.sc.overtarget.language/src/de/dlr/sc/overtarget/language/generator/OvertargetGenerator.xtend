@@ -9,7 +9,6 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.generator
 
-
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
@@ -34,20 +33,29 @@ class OvertargetGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
-			EcoreUtil.resolveAll(resource)
+			EcoreUtil.resolveAll(resource) // resolve proxies in resource before checking if there are any unresolved references left
 			if (ReferencedTargetHelper.importedModelIsProxy(model) == true || ReferencedTargetHelper.parentIsProxy(model) == true) {
-				ReferencedTargetHelper.getModelToGenerate(model)
-				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
-				if (fsa instanceof AbstractFileSystemAccess) {
-					val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
-					val targetFile = ReferencedTargetHelper.findTargetfileOfTmodel(model, outputPath)
-					ReferencedTargetHelper.setFileAsTargetPlatform(targetFile)
-				}
+				generateReferencedTarget(model, fsa)
 			} else {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 			}
 		}
 	}
+	
+	/**
+	 * Generates a referencedTarget
+	 */
+	
+	def generateReferencedTarget(TargetModel model, IFileSystemAccess2 fsa) {
+		ReferencedTargetHelper.getModelToGenerate(model)
+		fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
+		if (fsa instanceof AbstractFileSystemAccess) {
+			val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
+			val targetFile = ReferencedTargetHelper.findTargetfileOfTmodel(model, outputPath)
+			ReferencedTargetHelper.setFileAsTargetPlatform(targetFile)
+		}
+	}
+	
 	
 	/** 
 	 * Compiles the target model into a file
@@ -56,7 +64,6 @@ class OvertargetGenerator extends AbstractGenerator {
 		arragenceProperties(target);
 		addInheritedRepositories(target)
 		printModel(target);
-		
 	}
 
 	/**
