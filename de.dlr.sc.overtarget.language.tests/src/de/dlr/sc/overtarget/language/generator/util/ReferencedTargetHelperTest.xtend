@@ -80,7 +80,7 @@ class ReferencedTargetHelperTest {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val testTargetWithReferenceResource = rs.getResource(uriProxyTarget,true)
 		val testTargetWithReference = testTargetWithReferenceResource.contents.get(0) as TargetModel
-		val target = ReferencedTargetHelper.getModelToGenerate(testTargetWithReference)
+		val target = ReferencedTargetHelper.getReferencedModelToGenerate(testTargetWithReference)
 		
 		val expectedTargetName = referencedTarget.name
 		val expectedRepositoryLocation = referencedTarget.repositoryLocations.get(0).referencedTarget

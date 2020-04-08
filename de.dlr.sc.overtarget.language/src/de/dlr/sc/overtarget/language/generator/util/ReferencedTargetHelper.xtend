@@ -24,21 +24,19 @@ import org.eclipse.core.runtime.Path
  */
 class ReferencedTargetHelper {
 
-	def static getModelToGenerate(TargetModel model) {
-		for (RepositoryLocation repos : model.repositoryLocations) {
-			if (repos.referencedTarget == true) {
-				val list = newArrayList
-				for (RepositoryLocation repos2 : model.repositoryLocations) {
-					if (repos2.referencedTarget == false) {
-						list.addAll(repos2)
-					}
-				}
-				deleteRepositoryLocation(list)
+	def static getReferencedModelToGenerate(TargetModel model) {
+		val referencedModel = EcoreUtil.copy(model)
+		val list = newArrayList
+		for (RepositoryLocation repos : referencedModel.repositoryLocations) {
+			if (repos.referencedTarget == false) {
+				list.addAll(repos)
 			}
-			renameTarget(model)
-			return model
 		}
-	}
+		deleteRepositoryLocation(list)
+		renameTarget(referencedModel)
+		return referencedModel
+		}
+	
 
 	def static deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
 		for (RepositoryLocation reposLoc : list) {
@@ -55,27 +53,17 @@ class ReferencedTargetHelper {
 
 	def static importedModelIsProxy(TargetModel model) {
 		val list = newArrayList
-		for (TargetFile files : model.importedModels) {
-			for (TargetFile file : model.importedModels) {
+		for (TargetFile file : model.importedModels) {
 				if (file.eIsProxy == true) {
-					list.addAll(file)
-				}
-			}
+					return file.eIsProxy
+				} 
 		}
-		if (list.empty) {
-			return false
-		} else {
-			return true
-		}
+		return false
 	}
 	
 	def static parentIsProxy(TargetModel model) {
 		val parentTarget = model.super
-		if (parentTarget.eIsProxy) {
-			return true
-		} else {
-			return false
-		}
+		return parentTarget.eIsProxy
 	}
 
 	def static findTargetfileOfTmodel(TargetModel model, String outputDirectory) {

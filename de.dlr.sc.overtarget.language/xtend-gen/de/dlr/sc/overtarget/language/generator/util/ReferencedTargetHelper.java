@@ -31,29 +31,20 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class ReferencedTargetHelper {
-  public static TargetModel getModelToGenerate(final TargetModel model) {
-    EList<RepositoryLocation> _repositoryLocations = model.getRepositoryLocations();
+  public static TargetModel getReferencedModelToGenerate(final TargetModel model) {
+    final TargetModel referencedModel = EcoreUtil.<TargetModel>copy(model);
+    final ArrayList<RepositoryLocation> list = CollectionLiterals.<RepositoryLocation>newArrayList();
+    EList<RepositoryLocation> _repositoryLocations = referencedModel.getRepositoryLocations();
     for (final RepositoryLocation repos : _repositoryLocations) {
-      {
-        boolean _isReferencedTarget = repos.isReferencedTarget();
-        boolean _equals = (_isReferencedTarget == true);
-        if (_equals) {
-          final ArrayList<RepositoryLocation> list = CollectionLiterals.<RepositoryLocation>newArrayList();
-          EList<RepositoryLocation> _repositoryLocations_1 = model.getRepositoryLocations();
-          for (final RepositoryLocation repos2 : _repositoryLocations_1) {
-            boolean _isReferencedTarget_1 = repos2.isReferencedTarget();
-            boolean _equals_1 = (_isReferencedTarget_1 == false);
-            if (_equals_1) {
-              CollectionExtensions.<RepositoryLocation>addAll(list, repos2);
-            }
-          }
-          ReferencedTargetHelper.deleteRepositoryLocation(list);
-        }
-        ReferencedTargetHelper.renameTarget(model);
-        return model;
+      boolean _isReferencedTarget = repos.isReferencedTarget();
+      boolean _equals = (_isReferencedTarget == false);
+      if (_equals) {
+        CollectionExtensions.<RepositoryLocation>addAll(list, repos);
       }
     }
-    return null;
+    ReferencedTargetHelper.deleteRepositoryLocation(list);
+    ReferencedTargetHelper.renameTarget(referencedModel);
+    return referencedModel;
   }
   
   public static ArrayList<RepositoryLocation> deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {
@@ -70,34 +61,21 @@ public class ReferencedTargetHelper {
   }
   
   public static boolean importedModelIsProxy(final TargetModel model) {
-    final ArrayList<TargetFile> list = CollectionLiterals.<TargetFile>newArrayList();
+    final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
     EList<TargetFile> _importedModels = model.getImportedModels();
-    for (final TargetFile files : _importedModels) {
-      EList<TargetFile> _importedModels_1 = model.getImportedModels();
-      for (final TargetFile file : _importedModels_1) {
-        boolean _eIsProxy = file.eIsProxy();
-        boolean _equals = (_eIsProxy == true);
-        if (_equals) {
-          CollectionExtensions.<TargetFile>addAll(list, file);
-        }
+    for (final TargetFile file : _importedModels) {
+      boolean _eIsProxy = file.eIsProxy();
+      boolean _equals = (_eIsProxy == true);
+      if (_equals) {
+        return file.eIsProxy();
       }
     }
-    boolean _isEmpty = list.isEmpty();
-    if (_isEmpty) {
-      return false;
-    } else {
-      return true;
-    }
+    return false;
   }
   
   public static boolean parentIsProxy(final TargetModel model) {
     final TargetModel parentTarget = model.getSuper();
-    boolean _eIsProxy = parentTarget.eIsProxy();
-    if (_eIsProxy) {
-      return true;
-    } else {
-      return false;
-    }
+    return parentTarget.eIsProxy();
   }
   
   public static IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory) {

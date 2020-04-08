@@ -114,7 +114,7 @@ public class ReferencedTargetHelperTest {
     final Resource testTargetWithReferenceResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get = testTargetWithReferenceResource.getContents().get(0);
     final TargetModel testTargetWithReference = ((TargetModel) _get);
-    final TargetModel target = ReferencedTargetHelper.getModelToGenerate(testTargetWithReference);
+    final TargetModel target = ReferencedTargetHelper.getReferencedModelToGenerate(testTargetWithReference);
     final String expectedTargetName = this.referencedTarget.getName();
     final boolean expectedRepositoryLocation = this.referencedTarget.getRepositoryLocations().get(0).isReferencedTarget();
     Assert.assertEquals(Boolean.valueOf(expectedRepositoryLocation), Boolean.valueOf(target.getRepositoryLocations().get(0).isReferencedTarget()));

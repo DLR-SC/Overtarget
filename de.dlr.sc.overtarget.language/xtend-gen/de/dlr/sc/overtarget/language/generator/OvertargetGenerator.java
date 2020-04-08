@@ -61,13 +61,13 @@ public class OvertargetGenerator extends AbstractGenerator {
    * Generates a referencedTarget
    */
   public void generateReferencedTarget(final TargetModel model, final IFileSystemAccess2 fsa) {
-    ReferencedTargetHelper.getModelToGenerate(model);
-    String _name = model.getName();
+    final TargetModel updatedModel = ReferencedTargetHelper.getReferencedModelToGenerate(model);
+    String _name = updatedModel.getName();
     String _plus = (_name + ".target");
-    fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+    fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(updatedModel));
     if ((fsa instanceof AbstractFileSystemAccess)) {
       final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
-      final IFile targetFile = ReferencedTargetHelper.findTargetfileOfTmodel(model, outputPath);
+      final IFile targetFile = ReferencedTargetHelper.findTargetfileOfTmodel(updatedModel, outputPath);
       ReferencedTargetHelper.setFileAsTargetPlatform(targetFile);
     }
   }
