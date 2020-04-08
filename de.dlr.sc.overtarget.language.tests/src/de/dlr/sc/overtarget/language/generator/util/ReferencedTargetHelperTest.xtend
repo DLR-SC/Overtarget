@@ -26,6 +26,7 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
 import java.io.ByteArrayInputStream
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
@@ -36,7 +37,6 @@ class ReferencedTargetHelperTest {
 	static final String TEST_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/testTarget.tmodel"
 	static final String PARENT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel"
 	static final String PROXY_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv"
-	static final String IMPORT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel"
 	
 	@Inject
 	IResourceFactory resourceFactory
@@ -49,10 +49,7 @@ class ReferencedTargetHelperTest {
 	val parentTargetResource = rs.getResource(uriParentTarget, true)
 	
 	val uriProxyTarget = URI.createPlatformPluginURI(PROXY_TARGET_PATH, true)
-	
-	val uriImportedModel = URI.createPlatformPluginURI(IMPORT_TARGET_PATH, true)
-	val importedModelResource = rs.getResource(uriImportedModel, true)
-	
+
 	@Inject extension ParseHelper<TargetModel>
 	
 	val refTargetHelper = new ReferencedTargetHelper()
@@ -75,7 +72,7 @@ class ReferencedTargetHelperTest {
 		}
 		'''.parse
 	}
-	
+
 	@Test
 	def void testGetModelToGenerate() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
@@ -89,40 +86,39 @@ class ReferencedTargetHelperTest {
 		Assert.assertEquals(expectedRepositoryLocation, target.repositoryLocations.get(0).isReferencedTarget)
 		Assert.assertEquals(expectedTargetName, target.name)
 	}
-	
+
 	@Test
 	def void testRenameTarget() {
 		val testTarget = testTargetResource.contents.get(0) as TargetModel
 		val renamedTarget = refTargetHelper.renameTarget(testTarget)
 		val expectedRenamedTarget = "referencedTarget"
-		
+
 		Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTarget, renamedTarget)
 	}
-	
+
 	@Test
 	def void testImportedModelIsProxy() {
 		val testImportTarget = testTargetResource.contents.get(0) as TargetModel
-		importedModelResource.contents.get(0) as TargetModel
-		refTargetHelper.importedModelIsProxy(testImportTarget)
-		
-		Assert.assertFalse("Imported models can be resolved.", false)
-		
+		val modelIsaNotProxy = refTargetHelper.importedModelIsProxy(testImportTarget)
+
+		Assert.assertFalse("Imported models can be resolved.", modelIsaNotProxy)
+
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val proxyTargetResource = rs.getResource(uriProxyTarget,true)
 		val proxyTarget = proxyTargetResource.contents.get(0) as TargetModel
 		val modelIsProxy = refTargetHelper.importedModelIsProxy(proxyTarget)
-		
+
 		Assert.assertTrue("Imported models are proxy.", modelIsProxy)
 	}
-	
+
 	@Test
 	def void testParentIsProxy() {
 		val testTarget = testTargetResource.contents.get(0) as TargetModel
 		parentTargetResource.contents.get(0) as TargetModel
-		refTargetHelper.parentIsProxy(testTarget)
+		val parentIsNotProxy = refTargetHelper.parentIsProxy(testTarget)
 
-		Assert.assertFalse("ParentTarget can be resolved", false)
-		
+		Assert.assertFalse("ParentTarget can be resolved", parentIsNotProxy)
+
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val proxyTargetResource = rs.getResource(uriProxyTarget,true)
 		val proxyTarget = proxyTargetResource.contents.get(0) as TargetModel
@@ -130,12 +126,10 @@ class ReferencedTargetHelperTest {
 
 		Assert.assertTrue("ParentTarget is proxy", parentIsProxy)
 	}
-	
+
 	@Test
 	def void testFindTargetfileOfTmodel() {
-		
 		val outputDirectory = "./target"
-
 		val workspace = ResourcesPlugin.getWorkspace();
 		val root = workspace.getRoot();
 		val project  = root.getProject("testProject");
@@ -146,6 +140,7 @@ class ReferencedTargetHelperTest {
 			project.open(null)
 		}
 		folder.create(IResource.NONE, true, null);
+
 		val bytes = "
 			Target target {
 				
@@ -156,45 +151,35 @@ class ReferencedTargetHelperTest {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel", resourceFactory);
 		val testTargetResource = rs.getResource(URI.createPlatformResourceURI("/testProject/target/target.tmodel", true), true)
 		val target = testTargetResource.contents.get(0) as TargetModel
-		
+		val uri = EcoreUtil.getURI(target)
 		val targetFile = folder.getFile("target.target");
+
 		val bytesTarget = 
-			'''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-			<?pde version="3.8"?><target name="target" sequenceNumber="1">
-			<locations>
-			</locations>
-			<environment>
-			<os></os>
-			<ws>gtk</ws>
-			<arch></arch>
-			<nl></nl> 
-			</environment>
-			<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/"/>
-			</target>'''.toString.getBytes();
-		val sourceTarget = new ByteArrayInputStream(bytesTarget);
-		targetFile.create(sourceTarget, false, null);
-		
-//		Assert.assertNotNull(refTargetHelper.findTargetfileOfTmodel(target, outputDirectory, uri))
-		
+			''''''.toString.getBytes();
+		val sourceTarget = new ByteArrayInputStream(bytesTarget)
+		targetFile.create(sourceTarget, false, null)
+
+		Assert.assertEquals(targetFile, refTargetHelper.findTargetfileOfTmodel(target, outputDirectory, uri))
+
 		val project2  = root.getProject("testProject2");
 		val folder2 = project2.getFolder("target");
-		val tmodelFile2 = folder2.getFile("target.tmodel");
+		val tmodelFile2 = folder2.getFile("target2.tmodel");
 		project2.create(null);
 		if (!project2.isOpen()) { 
 			project2.open(null)
 		}
 		folder2.create(IResource.NONE, true, null);
 		val bytes2 = "
-			Target target {
+			Target target2 {
 				
 			}".getBytes();
 		val sourceTarget2 = new ByteArrayInputStream(bytes2);
 		tmodelFile2.create(sourceTarget2, IResource.NONE, null);
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel", resourceFactory);
-		val testTargetResource2 = rs.getResource(URI.createPlatformResourceURI("/testProject2/target/target.tmodel", true), true)
+		val testTargetResource2 = rs.getResource(URI.createPlatformResourceURI("/testProject2/target/target2.tmodel", true), true)
 		val target2 = testTargetResource2.contents.get(0) as TargetModel
 		
-//		Assert.assertNull(refTargetHelper.findTargetfileOfTmodel(target2, outputDirectory))
+		Assert.assertNull(refTargetHelper.findTargetfileOfTmodel(target2, outputDirectory, uri))
 		}
 }

@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.testing.InjectWith;
@@ -47,8 +48,6 @@ public class ReferencedTargetHelperTest {
   
   private static final String PROXY_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv";
   
-  private static final String IMPORT_TARGET_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel";
-  
   @Inject
   private IResourceFactory resourceFactory;
   
@@ -63,10 +62,6 @@ public class ReferencedTargetHelperTest {
   private final Resource parentTargetResource = this.rs.getResource(this.uriParentTarget, true);
   
   private final URI uriProxyTarget = URI.createPlatformPluginURI(ReferencedTargetHelperTest.PROXY_TARGET_PATH, true);
-  
-  private final URI uriImportedModel = URI.createPlatformPluginURI(ReferencedTargetHelperTest.IMPORT_TARGET_PATH, true);
-  
-  private final Resource importedModelResource = this.rs.getResource(this.uriImportedModel, true);
   
   @Inject
   @Extension
@@ -136,9 +131,8 @@ public class ReferencedTargetHelperTest {
   public void testImportedModelIsProxy() {
     EObject _get = this.testTargetResource.getContents().get(0);
     final TargetModel testImportTarget = ((TargetModel) _get);
-    this.importedModelResource.getContents().get(0);
-    this.refTargetHelper.importedModelIsProxy(testImportTarget);
-    Assert.assertFalse("Imported models can be resolved.", false);
+    final boolean modelIsaNotProxy = this.refTargetHelper.importedModelIsProxy(testImportTarget);
+    Assert.assertFalse("Imported models can be resolved.", modelIsaNotProxy);
     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
     final Resource proxyTargetResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get_1 = proxyTargetResource.getContents().get(0);
@@ -152,8 +146,8 @@ public class ReferencedTargetHelperTest {
     EObject _get = this.testTargetResource.getContents().get(0);
     final TargetModel testTarget = ((TargetModel) _get);
     this.parentTargetResource.getContents().get(0);
-    this.refTargetHelper.parentIsProxy(testTarget);
-    Assert.assertFalse("ParentTarget can be resolved", false);
+    final boolean parentIsNotProxy = this.refTargetHelper.parentIsProxy(testTarget);
+    Assert.assertFalse("ParentTarget can be resolved", parentIsNotProxy);
     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
     final Resource proxyTargetResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get_1 = proxyTargetResource.getContents().get(0);
@@ -185,48 +179,16 @@ public class ReferencedTargetHelperTest {
       final Resource testTargetResource = this.rs.getResource(URI.createPlatformResourceURI("/testProject/target/target.tmodel", true), true);
       EObject _get = testTargetResource.getContents().get(0);
       final TargetModel target = ((TargetModel) _get);
+      final URI uri = EcoreUtil.getURI(target);
       final IFile targetFile = folder.getFile("target.target");
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<?pde version=\"3.8\"?><target name=\"target\" sequenceNumber=\"1\">");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<locations>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("</locations>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<environment>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<os></os>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<ws>gtk</ws>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<arch></arch>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<nl></nl> ");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("</environment>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("<targetJRE path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/\"/>");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("</target>");
       final byte[] bytesTarget = _builder.toString().getBytes();
       final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytesTarget);
       targetFile.create(sourceTarget, false, null);
+      Assert.assertEquals(targetFile, this.refTargetHelper.findTargetfileOfTmodel(target, outputDirectory, uri));
       final IProject project2 = root.getProject("testProject2");
       final IFolder folder2 = project2.getFolder("target");
-      final IFile tmodelFile2 = folder2.getFile("target.tmodel");
+      final IFile tmodelFile2 = folder2.getFile("target2.tmodel");
       project2.create(null);
       boolean _isOpen_1 = project2.isOpen();
       boolean _not_1 = (!_isOpen_1);
@@ -234,13 +196,14 @@ public class ReferencedTargetHelperTest {
         project2.open(null);
       }
       folder2.create(IResource.NONE, true, null);
-      final byte[] bytes2 = "\r\n\t\t\tTarget target {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final byte[] bytes2 = "\r\n\t\t\tTarget target2 {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
       final ByteArrayInputStream sourceTarget2 = new ByteArrayInputStream(bytes2);
       tmodelFile2.create(sourceTarget2, IResource.NONE, null);
       Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel", this.resourceFactory);
-      final Resource testTargetResource2 = this.rs.getResource(URI.createPlatformResourceURI("/testProject2/target/target.tmodel", true), true);
+      final Resource testTargetResource2 = this.rs.getResource(URI.createPlatformResourceURI("/testProject2/target/target2.tmodel", true), true);
       EObject _get_1 = testTargetResource2.getContents().get(0);
       final TargetModel target2 = ((TargetModel) _get_1);
+      Assert.assertNull(this.refTargetHelper.findTargetfileOfTmodel(target2, outputDirectory, uri));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
