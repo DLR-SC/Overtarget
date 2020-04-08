@@ -27,7 +27,6 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
 import java.io.ByteArrayInputStream
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.linking.impl.ImportedNamesAdapter.WrappingScope
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
