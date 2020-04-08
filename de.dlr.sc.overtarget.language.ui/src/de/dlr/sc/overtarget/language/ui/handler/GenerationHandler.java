@@ -83,10 +83,10 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			fsa.setMonitor(new NullProgressMonitor());
 			
 			final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
-			String configValue = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
-			configProvider.getOutputConfigurations().iterator().next().setOutputDirectory(configValue);
-			fsa.setOutputPath(configValue);
-			fsa.setOutputPath("de.dlr.sc.overtarget.output", configValue);
+			String outputPath = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
+			configProvider.getOutputConfigurations().iterator().next().setOutputDirectory(outputPath);
+			fsa.setOutputPath(outputPath);
+			fsa.setOutputPath("de.dlr.sc.overtarget.output", outputPath);
 			fsa.setProject(file.getProject());
 			
 			OvertargetGenerator generator = new OvertargetGenerator();
