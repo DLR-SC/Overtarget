@@ -25,8 +25,6 @@ import org.eclipse.emf.common.util.URI
  */
 class ReferencedTargetHelper {
 	
-	
-
 	/**
 	 * This method looks for all repositoryLocations without a referenced target
 	 */
