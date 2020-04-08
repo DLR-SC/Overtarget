@@ -18,13 +18,19 @@ import org.eclipse.core.resources.ResourcesPlugin
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.runtime.Path
+import org.eclipse.emf.common.util.URI
 
 /**
  * This class processes the model data for generation
  */
 class ReferencedTargetHelper {
+	
+	
 
-	def static getReferencedModelToGenerate(TargetModel model) {
+	/**
+	 * This method looks for all repositoryLocations without a referenced target
+	 */
+	def getReferencedModelToGenerate(TargetModel model) {
 		val referencedModel = EcoreUtil.copy(model)
 		val list = newArrayList
 		for (RepositoryLocation repos : referencedModel.repositoryLocations) {
@@ -38,37 +44,39 @@ class ReferencedTargetHelper {
 		}
 	
 
-	def static deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
+	def deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
 		for (RepositoryLocation reposLoc : list) {
 			EcoreUtil.delete(reposLoc)
 		}
 		return list
 	}
 
-	def static renameTarget(TargetModel model) {
+	def renameTarget(TargetModel model) {
 		val renamedTarget = "referencedTarget"
 		model.name = renamedTarget
 		return model.name
 		}
 
-	def static importedModelIsProxy(TargetModel model) {
-		val list = newArrayList
+	def hasUnresolvedReferences(TargetModel model) {
+		importedModelIsProxy(model) == true || parentIsProxy(model) == true
+	}
+
+	def importedModelIsProxy(TargetModel model) {
 		for (TargetFile file : model.importedModels) {
-				if (file.eIsProxy == true) {
-					return file.eIsProxy
-				} 
+			if (file.eIsProxy == true) {
+				return file.eIsProxy
+			}
 		}
 		return false
 	}
 	
-	def static parentIsProxy(TargetModel model) {
+	def parentIsProxy(TargetModel model) {
 		val parentTarget = model.super
 		return parentTarget.eIsProxy
 	}
 
-	def static findTargetfileOfTmodel(TargetModel model, String outputDirectory) {
+	def findTargetfileOfTmodel(TargetModel model, String outputDirectory,URI uri) {
 		val targetName = "/" + model.name + ".target"
-		val uri = EcoreUtil.getURI(model)
 		val workspace = ResourcesPlugin.workspace.root
 		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
 		val project = tmodelFile.project
@@ -87,7 +95,7 @@ class ReferencedTargetHelper {
 		}
 	}
 
-	def static setFileAsTargetPlatform(IFile targetFile) {
+	def setFileAsTargetPlatform(IFile targetFile) {
 		TargetPlatformHelper.setAsTargetPlatform(targetFile)
 	}
 }

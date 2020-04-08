@@ -55,6 +55,7 @@ class ReferencedTargetHelperTest {
 	
 	@Inject extension ParseHelper<TargetModel>
 	
+	val refTargetHelper = new ReferencedTargetHelper()
 	
 	TargetModel referencedTarget
 	
@@ -80,7 +81,7 @@ class ReferencedTargetHelperTest {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val testTargetWithReferenceResource = rs.getResource(uriProxyTarget,true)
 		val testTargetWithReference = testTargetWithReferenceResource.contents.get(0) as TargetModel
-		val target = ReferencedTargetHelper.getReferencedModelToGenerate(testTargetWithReference)
+		val target = refTargetHelper.getReferencedModelToGenerate(testTargetWithReference)
 		
 		val expectedTargetName = referencedTarget.name
 		val expectedRepositoryLocation = referencedTarget.repositoryLocations.get(0).referencedTarget
@@ -92,7 +93,7 @@ class ReferencedTargetHelperTest {
 	@Test
 	def void testRenameTarget() {
 		val testTarget = testTargetResource.contents.get(0) as TargetModel
-		val renamedTarget = ReferencedTargetHelper.renameTarget(testTarget)
+		val renamedTarget = refTargetHelper.renameTarget(testTarget)
 		val expectedRenamedTarget = "referencedTarget"
 		
 		Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTarget, renamedTarget)
@@ -102,14 +103,14 @@ class ReferencedTargetHelperTest {
 	def void testImportedModelIsProxy() {
 		val testImportTarget = testTargetResource.contents.get(0) as TargetModel
 		importedModelResource.contents.get(0) as TargetModel
-		ReferencedTargetHelper.importedModelIsProxy(testImportTarget)
+		refTargetHelper.importedModelIsProxy(testImportTarget)
 		
 		Assert.assertFalse("Imported models can be resolved.", false)
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val proxyTargetResource = rs.getResource(uriProxyTarget,true)
 		val proxyTarget = proxyTargetResource.contents.get(0) as TargetModel
-		val modelIsProxy = ReferencedTargetHelper.importedModelIsProxy(proxyTarget)
+		val modelIsProxy = refTargetHelper.importedModelIsProxy(proxyTarget)
 		
 		Assert.assertTrue("Imported models are proxy.", modelIsProxy)
 	}
@@ -118,14 +119,14 @@ class ReferencedTargetHelperTest {
 	def void testParentIsProxy() {
 		val testTarget = testTargetResource.contents.get(0) as TargetModel
 		parentTargetResource.contents.get(0) as TargetModel
-		ReferencedTargetHelper.parentIsProxy(testTarget)
+		refTargetHelper.parentIsProxy(testTarget)
 
 		Assert.assertFalse("ParentTarget can be resolved", false)
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val proxyTargetResource = rs.getResource(uriProxyTarget,true)
 		val proxyTarget = proxyTargetResource.contents.get(0) as TargetModel
-		val parentIsProxy = ReferencedTargetHelper.parentIsProxy(proxyTarget)
+		val parentIsProxy = refTargetHelper.parentIsProxy(proxyTarget)
 
 		Assert.assertTrue("ParentTarget is proxy", parentIsProxy)
 	}
@@ -173,7 +174,7 @@ class ReferencedTargetHelperTest {
 		val sourceTarget = new ByteArrayInputStream(bytesTarget);
 		targetFile.create(sourceTarget, false, null);
 		
-		Assert.assertNotNull(ReferencedTargetHelper.findTargetfileOfTmodel(target, outputDirectory))
+//		Assert.assertNotNull(refTargetHelper.findTargetfileOfTmodel(target, outputDirectory, uri))
 		
 		val project2  = root.getProject("testProject2");
 		val folder2 = project2.getFolder("target");
@@ -194,6 +195,6 @@ class ReferencedTargetHelperTest {
 		val testTargetResource2 = rs.getResource(URI.createPlatformResourceURI("/testProject2/target/target.tmodel", true), true)
 		val target2 = testTargetResource2.contents.get(0) as TargetModel
 		
-		Assert.assertNull(ReferencedTargetHelper.findTargetfileOfTmodel(target2, outputDirectory))
+//		Assert.assertNull(refTargetHelper.findTargetfileOfTmodel(target2, outputDirectory))
 		}
 }

@@ -31,7 +31,10 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class ReferencedTargetHelper {
-  public static TargetModel getReferencedModelToGenerate(final TargetModel model) {
+  /**
+   * This method looks for all repositoryLocations without a referenced target
+   */
+  public TargetModel getReferencedModelToGenerate(final TargetModel model) {
     final TargetModel referencedModel = EcoreUtil.<TargetModel>copy(model);
     final ArrayList<RepositoryLocation> list = CollectionLiterals.<RepositoryLocation>newArrayList();
     EList<RepositoryLocation> _repositoryLocations = referencedModel.getRepositoryLocations();
@@ -42,26 +45,29 @@ public class ReferencedTargetHelper {
         CollectionExtensions.<RepositoryLocation>addAll(list, repos);
       }
     }
-    ReferencedTargetHelper.deleteRepositoryLocation(list);
-    ReferencedTargetHelper.renameTarget(referencedModel);
+    this.deleteRepositoryLocation(list);
+    this.renameTarget(referencedModel);
     return referencedModel;
   }
   
-  public static ArrayList<RepositoryLocation> deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {
+  public ArrayList<RepositoryLocation> deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {
     for (final RepositoryLocation reposLoc : list) {
       EcoreUtil.delete(reposLoc);
     }
     return list;
   }
   
-  public static String renameTarget(final TargetModel model) {
+  public String renameTarget(final TargetModel model) {
     final String renamedTarget = "referencedTarget";
     model.setName(renamedTarget);
     return model.getName();
   }
   
-  public static boolean importedModelIsProxy(final TargetModel model) {
-    final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
+  public boolean hasUnresolvedReferences(final TargetModel model) {
+    return ((this.importedModelIsProxy(model) == true) || (this.parentIsProxy(model) == true));
+  }
+  
+  public boolean importedModelIsProxy(final TargetModel model) {
     EList<TargetFile> _importedModels = model.getImportedModels();
     for (final TargetFile file : _importedModels) {
       boolean _eIsProxy = file.eIsProxy();
@@ -73,16 +79,15 @@ public class ReferencedTargetHelper {
     return false;
   }
   
-  public static boolean parentIsProxy(final TargetModel model) {
+  public boolean parentIsProxy(final TargetModel model) {
     final TargetModel parentTarget = model.getSuper();
     return parentTarget.eIsProxy();
   }
   
-  public static IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory) {
+  public IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory, final URI uri) {
     String _name = model.getName();
     String _plus = ("/" + _name);
     final String targetName = (_plus + ".target");
-    final URI uri = EcoreUtil.getURI(model);
     final IWorkspaceRoot workspace = ResourcesPlugin.getWorkspace().getRoot();
     String _platformString = uri.toPlatformString(true);
     Path _path = new Path(_platformString);
@@ -107,7 +112,7 @@ public class ReferencedTargetHelper {
     return null;
   }
   
-  public static void setFileAsTargetPlatform(final IFile targetFile) {
+  public void setFileAsTargetPlatform(final IFile targetFile) {
     try {
       TargetPlatformHelper.setAsTargetPlatform(targetFile);
     } catch (Throwable _e) {

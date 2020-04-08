@@ -72,6 +72,8 @@ public class ReferencedTargetHelperTest {
   @Extension
   private ParseHelper<TargetModel> _parseHelper;
   
+  private final ReferencedTargetHelper refTargetHelper = new ReferencedTargetHelper();
+  
   private TargetModel referencedTarget;
   
   @Before
@@ -114,7 +116,7 @@ public class ReferencedTargetHelperTest {
     final Resource testTargetWithReferenceResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get = testTargetWithReferenceResource.getContents().get(0);
     final TargetModel testTargetWithReference = ((TargetModel) _get);
-    final TargetModel target = ReferencedTargetHelper.getReferencedModelToGenerate(testTargetWithReference);
+    final TargetModel target = this.refTargetHelper.getReferencedModelToGenerate(testTargetWithReference);
     final String expectedTargetName = this.referencedTarget.getName();
     final boolean expectedRepositoryLocation = this.referencedTarget.getRepositoryLocations().get(0).isReferencedTarget();
     Assert.assertEquals(Boolean.valueOf(expectedRepositoryLocation), Boolean.valueOf(target.getRepositoryLocations().get(0).isReferencedTarget()));
@@ -125,7 +127,7 @@ public class ReferencedTargetHelperTest {
   public void testRenameTarget() {
     EObject _get = this.testTargetResource.getContents().get(0);
     final TargetModel testTarget = ((TargetModel) _get);
-    final String renamedTarget = ReferencedTargetHelper.renameTarget(testTarget);
+    final String renamedTarget = this.refTargetHelper.renameTarget(testTarget);
     final String expectedRenamedTarget = "referencedTarget";
     Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTarget, renamedTarget);
   }
@@ -135,13 +137,13 @@ public class ReferencedTargetHelperTest {
     EObject _get = this.testTargetResource.getContents().get(0);
     final TargetModel testImportTarget = ((TargetModel) _get);
     this.importedModelResource.getContents().get(0);
-    ReferencedTargetHelper.importedModelIsProxy(testImportTarget);
+    this.refTargetHelper.importedModelIsProxy(testImportTarget);
     Assert.assertFalse("Imported models can be resolved.", false);
     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
     final Resource proxyTargetResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get_1 = proxyTargetResource.getContents().get(0);
     final TargetModel proxyTarget = ((TargetModel) _get_1);
-    final boolean modelIsProxy = ReferencedTargetHelper.importedModelIsProxy(proxyTarget);
+    final boolean modelIsProxy = this.refTargetHelper.importedModelIsProxy(proxyTarget);
     Assert.assertTrue("Imported models are proxy.", modelIsProxy);
   }
   
@@ -150,13 +152,13 @@ public class ReferencedTargetHelperTest {
     EObject _get = this.testTargetResource.getContents().get(0);
     final TargetModel testTarget = ((TargetModel) _get);
     this.parentTargetResource.getContents().get(0);
-    ReferencedTargetHelper.parentIsProxy(testTarget);
+    this.refTargetHelper.parentIsProxy(testTarget);
     Assert.assertFalse("ParentTarget can be resolved", false);
     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
     final Resource proxyTargetResource = this.rs.getResource(this.uriProxyTarget, true);
     EObject _get_1 = proxyTargetResource.getContents().get(0);
     final TargetModel proxyTarget = ((TargetModel) _get_1);
-    final boolean parentIsProxy = ReferencedTargetHelper.parentIsProxy(proxyTarget);
+    final boolean parentIsProxy = this.refTargetHelper.parentIsProxy(proxyTarget);
     Assert.assertTrue("ParentTarget is proxy", parentIsProxy);
   }
   
@@ -222,7 +224,6 @@ public class ReferencedTargetHelperTest {
       final byte[] bytesTarget = _builder.toString().getBytes();
       final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytesTarget);
       targetFile.create(sourceTarget, false, null);
-      Assert.assertNotNull(ReferencedTargetHelper.findTargetfileOfTmodel(target, outputDirectory));
       final IProject project2 = root.getProject("testProject2");
       final IFolder folder2 = project2.getFolder("target");
       final IFile tmodelFile2 = folder2.getFile("target.tmodel");
@@ -240,7 +241,6 @@ public class ReferencedTargetHelperTest {
       final Resource testTargetResource2 = this.rs.getResource(URI.createPlatformResourceURI("/testProject2/target/target.tmodel", true), true);
       EObject _get_1 = testTargetResource2.getContents().get(0);
       final TargetModel target2 = ((TargetModel) _get_1);
-      Assert.assertNull(ReferencedTargetHelper.findTargetfileOfTmodel(target2, outputDirectory));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
