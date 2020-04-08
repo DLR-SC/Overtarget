@@ -540,7 +540,7 @@
              style="push">
        </command>
        <command
-             commandId="de.dlr.sc.overtarget.language.ui.ResolveTarget"
+             commandId="de.dlr.sc.overtarget.language.ui.SetAsActiveTarget"
              style="push">
        </command>
        <command
