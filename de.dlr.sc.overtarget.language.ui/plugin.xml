@@ -475,7 +475,7 @@
 		<command
 			description="This is a command to generate a target file"
 			id="de.dlr.sc.overtarget.language.ui.GenerateCommand"
-			name="Generate target">
+			name="Generate Target">
 		</command>
 	</extension>
 	<extension
@@ -498,7 +498,7 @@
 		<command
 			description="This is a command to update versions"
 			id="de.dlr.sc.overtarget.language.ui.handler.VersionHandler"
-			name="Update versions">
+			name="Update Versions">
 		</command>
 	</extension>
 	<extension
