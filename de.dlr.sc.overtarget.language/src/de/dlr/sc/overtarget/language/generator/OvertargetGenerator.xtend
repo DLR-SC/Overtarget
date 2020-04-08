@@ -20,9 +20,9 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
-import de.dlr.sc.overtarget.language.generator.util.ReferenceTargetHelper
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.generator.AbstractFileSystemAccess
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 
 /**
  * Generates target files from tmodel files
@@ -35,13 +35,13 @@ class OvertargetGenerator extends AbstractGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
 			EcoreUtil.resolveAll(resource)
-			if (ReferenceTargetHelper.importedModelIsProxy(model) == true || ReferenceTargetHelper.parentIsProxy(model) == true) {
-				ReferenceTargetHelper.getModelToGenerate(model)
+			if (ReferencedTargetHelper.importedModelIsProxy(model) == true || ReferencedTargetHelper.parentIsProxy(model) == true) {
+				ReferencedTargetHelper.getModelToGenerate(model)
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 				if (fsa instanceof AbstractFileSystemAccess) {
 					val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
-					val targetFile = ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath)
-					ReferenceTargetHelper.setFileAsTargetPlatform(targetFile)
+					val targetFile = ReferencedTargetHelper.findTargetfileOfTmodel(model, outputPath)
+					ReferencedTargetHelper.setFileAsTargetPlatform(targetFile)
 				}
 			} else {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)

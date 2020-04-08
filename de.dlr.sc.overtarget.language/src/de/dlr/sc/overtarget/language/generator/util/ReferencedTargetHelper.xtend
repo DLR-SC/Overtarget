@@ -22,14 +22,14 @@ import org.eclipse.core.runtime.Path
 /**
  * This class processes the model data for generation
  */
-class ReferenceTargetHelper {
+class ReferencedTargetHelper {
 
 	def static getModelToGenerate(TargetModel model) {
 		for (RepositoryLocation repos : model.repositoryLocations) {
-			if (repos.referenceTarget == true) {
+			if (repos.referencedTarget == true) {
 				val list = newArrayList
 				for (RepositoryLocation repos2 : model.repositoryLocations) {
-					if (repos2.referenceTarget == false) {
+					if (repos2.referencedTarget == false) {
 						list.addAll(repos2)
 					}
 				}
@@ -48,7 +48,7 @@ class ReferenceTargetHelper {
 	}
 
 	def static renameTarget(TargetModel model) {
-		val renamedTarget = "referenceTarget"
+		val renamedTarget = "referencedTarget"
 		model.name = renamedTarget
 		return model.name
 		}
