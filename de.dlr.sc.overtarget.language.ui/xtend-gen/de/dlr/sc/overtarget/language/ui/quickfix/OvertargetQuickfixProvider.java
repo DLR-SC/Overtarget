@@ -54,17 +54,20 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
   public void fixCannotResolveReference(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    final IModification _function = (IModificationContext it) -> {
-      boolean _contains = issue.getMessage().contains("Couldn\'t resolve reference to");
-      if (_contains) {
-        final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-        if ((editor instanceof ITextEditor)) {
-          final ITextEditor ite = ((ITextEditor) editor);
-          final IEditorInput input = ite.getEditorInput();
-          new GenerationHandler().runGeneration(input);
+    acceptor.accept(issue, "Generate Reference Target", "Generate a reference target to resolve the target.", "", 
+      new IModification() {
+        @Override
+        public void apply(final IModificationContext context) throws Exception {
+          boolean _contains = issue.getMessage().contains("Couldn\'t resolve reference to");
+          if (_contains) {
+            final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+            if ((editor instanceof ITextEditor)) {
+              final ITextEditor ite = ((ITextEditor) editor);
+              final IEditorInput input = ite.getEditorInput();
+              new GenerationHandler().runGeneration(input);
+            }
+          }
         }
-      }
-    };
-    acceptor.accept(issue, "Generate Reference Target", "Generate a reference target to resolve the target.", "", _function);
+      }, 1);
   }
 }

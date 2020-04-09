@@ -20,6 +20,8 @@ import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler
 import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.texteditor.ITextEditor
+import org.eclipse.xtext.ui.editor.model.edit.IModification
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext
 
 /**
  * Custom quickfixes.
@@ -44,18 +46,21 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 		]
 	}
 	
-	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Generate Reference Target', 'Generate a reference target to resolve the target.', '') [
-			if (issue.message.contains("Couldn't resolve reference to")) {
-				val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
-				if (editor instanceof ITextEditor) {
-					val ite = editor as ITextEditor
-					val input = ite.editorInput
-					new GenerationHandler().runGeneration(input);
+		acceptor.accept(issue, 'Generate Reference Target', 'Generate a reference target to resolve the target.', '', 
+			new IModification() {
+			
+			override apply(IModificationContext context) throws Exception {
+				if (issue.message.contains("Couldn't resolve reference to")) {
+					val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+					if (editor instanceof ITextEditor) {
+						val ite = editor as ITextEditor
+						val input = ite.editorInput
+						new GenerationHandler().runGeneration(input);
+					}
 				}
 			}
-		]
+		}, 1)
 	}
 }
