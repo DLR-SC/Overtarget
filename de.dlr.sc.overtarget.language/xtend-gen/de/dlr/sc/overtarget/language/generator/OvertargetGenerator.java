@@ -12,7 +12,7 @@ package de.dlr.sc.overtarget.language.generator;
 import com.google.common.collect.Iterables;
 import de.dlr.sc.overtarget.language.generator.GeneratorHelper;
 import de.dlr.sc.overtarget.language.generator.OvertargetOutputConfigurationProvider;
-import de.dlr.sc.overtarget.language.generator.util.ReferenceTargetHelper;
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.targetmodel.ExcludeLocation;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
@@ -22,6 +22,7 @@ import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -40,28 +41,39 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 public class OvertargetGenerator extends AbstractGenerator {
   private static final String DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
   
+  private final ReferencedTargetHelper RefTargetHelper = new ReferencedTargetHelper();
+  
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<TargetModel> _filter = Iterables.<TargetModel>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), TargetModel.class);
     for (final TargetModel model : _filter) {
       {
         EcoreUtil.resolveAll(resource);
-        if (((ReferenceTargetHelper.importedModelIsProxy(model) == true) || (ReferenceTargetHelper.parentIsProxy(model) == true))) {
-          ReferenceTargetHelper.getModelToGenerate(model);
+        boolean _hasUnresolvedReferences = this.RefTargetHelper.hasUnresolvedReferences(model);
+        if (_hasUnresolvedReferences) {
+          this.generateReferencedTarget(model, fsa);
+        } else {
           String _name = model.getName();
           String _plus = (_name + ".target");
           fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
-          if ((fsa instanceof AbstractFileSystemAccess)) {
-            final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
-            final IFile targetFile = ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath);
-            ReferenceTargetHelper.setFileAsTargetPlatform(targetFile);
-          }
-        } else {
-          String _name_1 = model.getName();
-          String _plus_1 = (_name_1 + ".target");
-          fsa.generateFile(_plus_1, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
         }
       }
+    }
+  }
+  
+  /**
+   * Generates a referencedTarget
+   */
+  public void generateReferencedTarget(final TargetModel model, final IFileSystemAccess2 fsa) {
+    final TargetModel referencedModel = this.RefTargetHelper.getReferencedModelToGenerate(model);
+    String _name = referencedModel.getName();
+    String _plus = (_name + ".target");
+    fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(referencedModel));
+    if ((fsa instanceof AbstractFileSystemAccess)) {
+      final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
+      final URI originalUri = EcoreUtil.getURI(model);
+      final IFile targetFile = this.RefTargetHelper.findTargetfileOfTmodel(referencedModel, outputPath, originalUri);
+      this.RefTargetHelper.setFileAsTargetPlatform(targetFile);
     }
   }
   

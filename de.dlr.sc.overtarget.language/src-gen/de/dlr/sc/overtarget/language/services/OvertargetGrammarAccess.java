@@ -702,8 +702,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	public class RepositoryLocationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.RepositoryLocation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cReferenceTargetAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cReferenceTargetReferenceTargetKeyword_0_0 = (Keyword)cReferenceTargetAssignment_0.eContents().get(0);
+		private final Assignment cReferencedTargetAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cReferencedTargetReferencedTargetKeyword_0_0 = (Keyword)cReferencedTargetAssignment_0.eContents().get(0);
 		private final Keyword cRepositoryLocationKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
@@ -715,20 +715,22 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cUnitsUnitParserRuleCall_6_0 = (RuleCall)cUnitsAssignment_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//RepositoryLocation:
-		//	referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+		///* referencedTarget is used when the target has unresolved references. 
+		//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
+		//*/ RepositoryLocation:
+		//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
 		//	units+=Unit*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
+		//referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
 		public Group getGroup() { return cGroup; }
 		
-		//referenceTarget?='ReferenceTarget'?
-		public Assignment getReferenceTargetAssignment_0() { return cReferenceTargetAssignment_0; }
+		//referencedTarget?='ReferencedTarget'?
+		public Assignment getReferencedTargetAssignment_0() { return cReferencedTargetAssignment_0; }
 		
-		//'ReferenceTarget'
-		public Keyword getReferenceTargetReferenceTargetKeyword_0_0() { return cReferenceTargetReferenceTargetKeyword_0_0; }
+		//'ReferencedTarget'
+		public Keyword getReferencedTargetReferencedTargetKeyword_0_0() { return cReferencedTargetReferencedTargetKeyword_0_0; }
 		
 		//'RepositoryLocation'
 		public Keyword getRepositoryLocationKeyword_1() { return cRepositoryLocationKeyword_1; }
@@ -1451,8 +1453,10 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		return getUrlElementVariableAccess().getRule();
 	}
 	
-	//RepositoryLocation:
-	//	referenceTarget?='ReferenceTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+	///* referencedTarget is used when the target has unresolved references. 
+	//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
+	//*/ RepositoryLocation:
+	//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
 	//	units+=Unit*
 	//	'}';
 	public RepositoryLocationElements getRepositoryLocationAccess() {

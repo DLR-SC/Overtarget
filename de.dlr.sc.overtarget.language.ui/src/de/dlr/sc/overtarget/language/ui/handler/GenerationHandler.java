@@ -64,7 +64,6 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			if (editor != null) {
 				input = editor.getEditorInput();
 			}
-			
 			runGeneration(input);
 		}
 		return null;

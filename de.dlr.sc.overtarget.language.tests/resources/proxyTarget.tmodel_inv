@@ -2,7 +2,7 @@ Target proxyTarget extends proxy {
 	
 	Import proxyImport
 	
-	ReferenceTarget RepositoryLocation testTarget url "test\testTarget.tmodel" {
+	ReferencedTarget RepositoryLocation testTarget url "test\testTarget.tmodel" {
 		Unit testTargetUnit version newest;
 	}
 		

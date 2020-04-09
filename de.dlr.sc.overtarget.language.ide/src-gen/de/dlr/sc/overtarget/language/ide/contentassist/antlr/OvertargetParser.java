@@ -112,7 +112,7 @@ public class OvertargetParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getUrlExpressionAccess().getRightAssignment_1_2(), "rule__UrlExpression__RightAssignment_1_2");
 			builder.put(grammarAccess.getUrlElementStringAccess().getContentAssignment(), "rule__UrlElementString__ContentAssignment");
 			builder.put(grammarAccess.getUrlElementVariableAccess().getContentAssignment(), "rule__UrlElementVariable__ContentAssignment");
-			builder.put(grammarAccess.getRepositoryLocationAccess().getReferenceTargetAssignment_0(), "rule__RepositoryLocation__ReferenceTargetAssignment_0");
+			builder.put(grammarAccess.getRepositoryLocationAccess().getReferencedTargetAssignment_0(), "rule__RepositoryLocation__ReferencedTargetAssignment_0");
 			builder.put(grammarAccess.getRepositoryLocationAccess().getNameAssignment_2(), "rule__RepositoryLocation__NameAssignment_2");
 			builder.put(grammarAccess.getRepositoryLocationAccess().getUrlAssignment_4(), "rule__RepositoryLocation__UrlAssignment_4");
 			builder.put(grammarAccess.getRepositoryLocationAccess().getUnitsAssignment_6(), "rule__RepositoryLocation__UnitsAssignment_6");

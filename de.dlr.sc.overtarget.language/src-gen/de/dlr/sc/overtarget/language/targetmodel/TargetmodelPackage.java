@@ -598,13 +598,13 @@ public interface TargetmodelPackage extends EPackage
   int REPOSITORY_LOCATION = 9;
 
   /**
-   * The feature id for the '<em><b>Reference Target</b></em>' attribute.
+   * The feature id for the '<em><b>Referenced Target</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION__REFERENCE_TARGET = 0;
+  int REPOSITORY_LOCATION__REFERENCED_TARGET = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1180,15 +1180,15 @@ public interface TargetmodelPackage extends EPackage
   EClass getRepositoryLocation();
 
   /**
-   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferenceTarget <em>Reference Target</em>}'.
+   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferencedTarget <em>Referenced Target</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Reference Target</em>'.
-   * @see de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferenceTarget()
+   * @return the meta object for the attribute '<em>Referenced Target</em>'.
+   * @see de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferencedTarget()
    * @see #getRepositoryLocation()
    * @generated
    */
-  EAttribute getRepositoryLocation_ReferenceTarget();
+  EAttribute getRepositoryLocation_ReferencedTarget();
 
   /**
    * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getName <em>Name</em>}'.
@@ -1658,12 +1658,12 @@ public interface TargetmodelPackage extends EPackage
     EClass REPOSITORY_LOCATION = eINSTANCE.getRepositoryLocation();
 
     /**
-     * The meta object literal for the '<em><b>Reference Target</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Referenced Target</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute REPOSITORY_LOCATION__REFERENCE_TARGET = eINSTANCE.getRepositoryLocation_ReferenceTarget();
+    EAttribute REPOSITORY_LOCATION__REFERENCED_TARGET = eINSTANCE.getRepositoryLocation_ReferencedTarget();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

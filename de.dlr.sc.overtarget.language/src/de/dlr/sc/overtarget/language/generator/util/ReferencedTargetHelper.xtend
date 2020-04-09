@@ -18,69 +18,63 @@ import org.eclipse.core.resources.ResourcesPlugin
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.runtime.Path
+import org.eclipse.emf.common.util.URI
 
 /**
  * This class processes the model data for generation
  */
-class ReferenceTargetHelper {
-
-	def static getModelToGenerate(TargetModel model) {
-		for (RepositoryLocation repos : model.repositoryLocations) {
-			if (repos.referenceTarget == true) {
-				val list = newArrayList
-				for (RepositoryLocation repos2 : model.repositoryLocations) {
-					if (repos2.referenceTarget == false) {
-						list.addAll(repos2)
-					}
-				}
-				deleteRepositoryLocation(list)
+class ReferencedTargetHelper {
+	
+	/**
+	 * This method looks for all repositoryLocations without a referenced target
+	 */
+	def getReferencedModelToGenerate(TargetModel model) {
+		val referencedModel = EcoreUtil.copy(model)
+		val list = newArrayList
+		for (RepositoryLocation repos : referencedModel.repositoryLocations) {
+			if (repos.referencedTarget == false) {
+				list.addAll(repos)
 			}
-			renameTarget(model)
-			return model
 		}
-	}
+		deleteRepositoryLocation(list)
+		renameTarget(referencedModel)
+		return referencedModel
+		}
+	
 
-	def static deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
+	def deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
 		for (RepositoryLocation reposLoc : list) {
 			EcoreUtil.delete(reposLoc)
 		}
 		return list
 	}
 
-	def static renameTarget(TargetModel model) {
-		val renamedTarget = "referenceTarget"
+	def renameTarget(TargetModel model) {
+		val renamedTarget = "referencedTarget"
 		model.name = renamedTarget
 		return model.name
 		}
 
-	def static importedModelIsProxy(TargetModel model) {
-		val list = newArrayList
-		for (TargetFile files : model.importedModels) {
-			for (TargetFile file : model.importedModels) {
-				if (file.eIsProxy == true) {
-					list.addAll(file)
-				}
-			}
-		}
-		if (list.empty) {
-			return false
-		} else {
-			return true
-		}
-	}
-	
-	def static parentIsProxy(TargetModel model) {
-		val parentTarget = model.super
-		if (parentTarget.eIsProxy) {
-			return true
-		} else {
-			return false
-		}
+	def hasUnresolvedReferences(TargetModel model) {
+		importedModelIsProxy(model) == true || parentIsProxy(model) == true
 	}
 
-	def static findTargetfileOfTmodel(TargetModel model, String outputDirectory) {
+	def importedModelIsProxy(TargetModel model) {
+		for (TargetFile file : model.importedModels) {
+			if (file.eIsProxy == true) {
+				return file.eIsProxy
+			}
+		}
+		return false
+	}
+	
+	def parentIsProxy(TargetModel model) {
+		val parentTarget = model.super
+		return parentTarget.eIsProxy
+	}
+
+	def findTargetfileOfTmodel(TargetModel model, String outputDirectory,URI uri) {
 		val targetName = "/" + model.name + ".target"
-		val uri = EcoreUtil.getURI(model)
 		val workspace = ResourcesPlugin.workspace.root
 		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
 		val project = tmodelFile.project
@@ -99,7 +93,7 @@ class ReferenceTargetHelper {
 		}
 	}
 
-	def static setFileAsTargetPlatform(IFile targetFile) {
+	def setFileAsTargetPlatform(IFile targetFile) {
 		TargetPlatformHelper.setAsTargetPlatform(targetFile)
 	}
 }

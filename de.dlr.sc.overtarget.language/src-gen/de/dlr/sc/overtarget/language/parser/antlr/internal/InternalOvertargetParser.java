@@ -30,7 +30,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOvertargetParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'TargetLibrary'", "'{'", "'}'", "'Target'", "'extends'", "'Import'", "'OperatingSystem'", "'WindowingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'.'", "'Unit'", "'version'", "'newest'", "';'", "':'", "'+'", "'ReferenceTarget'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'all;'", "'Override'", "'='", "'Variable'", "'-'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'TargetLibrary'", "'{'", "'}'", "'Target'", "'extends'", "'Import'", "'OperatingSystem'", "'WindowingSystem'", "'WorkingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'.'", "'Unit'", "'version'", "'newest'", "';'", "':'", "'+'", "'ReferencedTarget'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'all;'", "'Override'", "'='", "'Variable'", "'-'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -2373,11 +2373,11 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRepositoryLocation"
-    // InternalOvertarget.g:929:1: ruleRepositoryLocation returns [EObject current=null] : ( ( (lv_referenceTarget_0_0= 'ReferenceTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' ) ;
+    // InternalOvertarget.g:929:1: ruleRepositoryLocation returns [EObject current=null] : ( ( (lv_referencedTarget_0_0= 'ReferencedTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' ) ;
     public final EObject ruleRepositoryLocation() throws RecognitionException {
         EObject current = null;
 
-        Token lv_referenceTarget_0_0=null;
+        Token lv_referencedTarget_0_0=null;
         Token otherlv_1=null;
         Token lv_name_2_0=null;
         Token otherlv_3=null;
@@ -2392,13 +2392,13 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalOvertarget.g:935:2: ( ( ( (lv_referenceTarget_0_0= 'ReferenceTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' ) )
-            // InternalOvertarget.g:936:2: ( ( (lv_referenceTarget_0_0= 'ReferenceTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' )
+            // InternalOvertarget.g:935:2: ( ( ( (lv_referencedTarget_0_0= 'ReferencedTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' ) )
+            // InternalOvertarget.g:936:2: ( ( (lv_referencedTarget_0_0= 'ReferencedTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' )
             {
-            // InternalOvertarget.g:936:2: ( ( (lv_referenceTarget_0_0= 'ReferenceTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' )
-            // InternalOvertarget.g:937:3: ( (lv_referenceTarget_0_0= 'ReferenceTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}'
+            // InternalOvertarget.g:936:2: ( ( (lv_referencedTarget_0_0= 'ReferencedTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}' )
+            // InternalOvertarget.g:937:3: ( (lv_referencedTarget_0_0= 'ReferencedTarget' ) )? otherlv_1= 'RepositoryLocation' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= 'url' ( (lv_url_4_0= ruleUrlExpression ) ) otherlv_5= '{' ( (lv_units_6_0= ruleUnit ) )* otherlv_7= '}'
             {
-            // InternalOvertarget.g:937:3: ( (lv_referenceTarget_0_0= 'ReferenceTarget' ) )?
+            // InternalOvertarget.g:937:3: ( (lv_referencedTarget_0_0= 'ReferencedTarget' ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -2407,20 +2407,20 @@ public class InternalOvertargetParser extends AbstractInternalAntlrParser {
             }
             switch (alt22) {
                 case 1 :
-                    // InternalOvertarget.g:938:4: (lv_referenceTarget_0_0= 'ReferenceTarget' )
+                    // InternalOvertarget.g:938:4: (lv_referencedTarget_0_0= 'ReferencedTarget' )
                     {
-                    // InternalOvertarget.g:938:4: (lv_referenceTarget_0_0= 'ReferenceTarget' )
-                    // InternalOvertarget.g:939:5: lv_referenceTarget_0_0= 'ReferenceTarget'
+                    // InternalOvertarget.g:938:4: (lv_referencedTarget_0_0= 'ReferencedTarget' )
+                    // InternalOvertarget.g:939:5: lv_referencedTarget_0_0= 'ReferencedTarget'
                     {
-                    lv_referenceTarget_0_0=(Token)match(input,30,FOLLOW_30); 
+                    lv_referencedTarget_0_0=(Token)match(input,30,FOLLOW_30); 
 
-                    					newLeafNode(lv_referenceTarget_0_0, grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0());
+                    					newLeafNode(lv_referencedTarget_0_0, grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0());
                     				
 
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getRepositoryLocationRule());
                     					}
-                    					setWithLastConsumed(current, "referenceTarget", true, "ReferenceTarget");
+                    					setWithLastConsumed(current, "referencedTarget", true, "ReferencedTarget");
                     				
 
                     }

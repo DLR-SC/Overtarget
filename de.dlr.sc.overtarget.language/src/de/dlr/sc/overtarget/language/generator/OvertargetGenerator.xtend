@@ -9,7 +9,6 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.generator
 
-
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
@@ -20,9 +19,9 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
-import de.dlr.sc.overtarget.language.generator.util.ReferenceTargetHelper
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.generator.AbstractFileSystemAccess
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 
 /**
  * Generates target files from tmodel files
@@ -32,23 +31,34 @@ import org.eclipse.xtext.generator.AbstractFileSystemAccess
 class OvertargetGenerator extends AbstractGenerator {
 	static val DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
 
+	val RefTargetHelper = new ReferencedTargetHelper
+
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
-			EcoreUtil.resolveAll(resource)
-			if (ReferenceTargetHelper.importedModelIsProxy(model) == true || ReferenceTargetHelper.parentIsProxy(model) == true) {
-				ReferenceTargetHelper.getModelToGenerate(model)
-				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
-				if (fsa instanceof AbstractFileSystemAccess) {
-					val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
-					val targetFile = ReferenceTargetHelper.findTargetfileOfTmodel(model, outputPath)
-					ReferenceTargetHelper.setFileAsTargetPlatform(targetFile)
-				}
+			EcoreUtil.resolveAll(resource) // resolve proxies in resource before checking if there are any unresolved references left
+			if (RefTargetHelper.hasUnresolvedReferences(model)) {
+				generateReferencedTarget(model, fsa)
 			} else {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 			}
 		}
 	}
+
+	/**
+	 * Generates a referencedTarget
+	 */
 	
+	def generateReferencedTarget(TargetModel model, IFileSystemAccess2 fsa) {
+		val referencedModel = RefTargetHelper.getReferencedModelToGenerate(model)
+		fsa.generateFile(referencedModel.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, referencedModel.compile)
+		if (fsa instanceof AbstractFileSystemAccess) {
+			val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
+			val originalUri = EcoreUtil.getURI(model)
+			val targetFile = RefTargetHelper.findTargetfileOfTmodel(referencedModel, outputPath, originalUri)
+			RefTargetHelper.setFileAsTargetPlatform(targetFile)
+		}
+	}
+
 	/** 
 	 * Compiles the target model into a file
 	 */
@@ -56,7 +66,6 @@ class OvertargetGenerator extends AbstractGenerator {
 		arragenceProperties(target);
 		addInheritedRepositories(target)
 		printModel(target);
-		
 	}
 
 	/**
@@ -87,7 +96,7 @@ class OvertargetGenerator extends AbstractGenerator {
 			GeneratorHelper.addLocationWithMerge(locations, location);
 		}
 	}	
-	
+
 	/**
 	 * Adds all inherited locations to the target model
 	 */
@@ -104,7 +113,7 @@ class OvertargetGenerator extends AbstractGenerator {
 			GeneratorHelper.addLocationWithMerge(target.repositoryLocations, rl);
 		}
 	}
-	
+
 	/**
 	 * replaces "newest" with "0.0.0"
 	 */
@@ -114,7 +123,7 @@ class OvertargetGenerator extends AbstractGenerator {
 		}
 		return unit.vers;
 	}
-	
+
 	/**
 	 * prints the target model
 	 */
@@ -142,7 +151,7 @@ class OvertargetGenerator extends AbstractGenerator {
 					</target>
 		'''
 	}
-	
+
 	/**
 	 * prints the targetJRE
 	 */

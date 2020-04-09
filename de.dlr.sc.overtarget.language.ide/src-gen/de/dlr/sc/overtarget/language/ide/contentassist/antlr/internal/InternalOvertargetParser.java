@@ -31,7 +31,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalOvertargetParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'WindowingSystem'", "'WorkingSystem'", "'newest'", "'all;'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'", "'Unit'", "'Target'", "'TargetLibrary'", "'{'", "'}'", "'extends'", "'Import'", "'OperatingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'version'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'Override'", "'='", "'Variable'", "'ReferenceTarget'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'WindowingSystem'", "'WorkingSystem'", "'newest'", "'all;'", "'aix'", "'hpux'", "'linux'", "'macosx'", "'qnx'", "'solaris'", "'win32'", "'carbon'", "'cocoa'", "'gtk'", "'motif'", "'photon'", "'wpf'", "'PA_RISC'", "'ia64'", "'ia64_32'", "'ppc'", "'sparc'", "'x86'", "'x86_64'", "'Unit'", "'Target'", "'TargetLibrary'", "'{'", "'}'", "'extends'", "'Import'", "'OperatingSystem'", "'Architecture'", "'Locale'", "'TargetJRE'", "'version'", "';'", "':'", "'+'", "'RepositoryLocation'", "'url'", "'ExcludeLocation'", "'Override'", "'='", "'Variable'", "'ReferencedTarget'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -8961,20 +8961,20 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__RepositoryLocation__Group__0__Impl"
-    // InternalOvertarget.g:2880:1: rule__RepositoryLocation__Group__0__Impl : ( ( rule__RepositoryLocation__ReferenceTargetAssignment_0 )? ) ;
+    // InternalOvertarget.g:2880:1: rule__RepositoryLocation__Group__0__Impl : ( ( rule__RepositoryLocation__ReferencedTargetAssignment_0 )? ) ;
     public final void rule__RepositoryLocation__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:2884:1: ( ( ( rule__RepositoryLocation__ReferenceTargetAssignment_0 )? ) )
-            // InternalOvertarget.g:2885:1: ( ( rule__RepositoryLocation__ReferenceTargetAssignment_0 )? )
+            // InternalOvertarget.g:2884:1: ( ( ( rule__RepositoryLocation__ReferencedTargetAssignment_0 )? ) )
+            // InternalOvertarget.g:2885:1: ( ( rule__RepositoryLocation__ReferencedTargetAssignment_0 )? )
             {
-            // InternalOvertarget.g:2885:1: ( ( rule__RepositoryLocation__ReferenceTargetAssignment_0 )? )
-            // InternalOvertarget.g:2886:2: ( rule__RepositoryLocation__ReferenceTargetAssignment_0 )?
+            // InternalOvertarget.g:2885:1: ( ( rule__RepositoryLocation__ReferencedTargetAssignment_0 )? )
+            // InternalOvertarget.g:2886:2: ( rule__RepositoryLocation__ReferencedTargetAssignment_0 )?
             {
-             before(grammarAccess.getRepositoryLocationAccess().getReferenceTargetAssignment_0()); 
-            // InternalOvertarget.g:2887:2: ( rule__RepositoryLocation__ReferenceTargetAssignment_0 )?
+             before(grammarAccess.getRepositoryLocationAccess().getReferencedTargetAssignment_0()); 
+            // InternalOvertarget.g:2887:2: ( rule__RepositoryLocation__ReferencedTargetAssignment_0 )?
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -8983,10 +8983,10 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
             }
             switch (alt35) {
                 case 1 :
-                    // InternalOvertarget.g:2887:3: rule__RepositoryLocation__ReferenceTargetAssignment_0
+                    // InternalOvertarget.g:2887:3: rule__RepositoryLocation__ReferencedTargetAssignment_0
                     {
                     pushFollow(FOLLOW_2);
-                    rule__RepositoryLocation__ReferenceTargetAssignment_0();
+                    rule__RepositoryLocation__ReferencedTargetAssignment_0();
 
                     state._fsp--;
 
@@ -8996,7 +8996,7 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
 
             }
 
-             after(grammarAccess.getRepositoryLocationAccess().getReferenceTargetAssignment_0()); 
+             after(grammarAccess.getRepositoryLocationAccess().getReferencedTargetAssignment_0()); 
 
             }
 
@@ -12162,30 +12162,30 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__UrlElementVariable__ContentAssignment"
 
 
-    // $ANTLR start "rule__RepositoryLocation__ReferenceTargetAssignment_0"
-    // InternalOvertarget.g:3982:1: rule__RepositoryLocation__ReferenceTargetAssignment_0 : ( ( 'ReferenceTarget' ) ) ;
-    public final void rule__RepositoryLocation__ReferenceTargetAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__RepositoryLocation__ReferencedTargetAssignment_0"
+    // InternalOvertarget.g:3982:1: rule__RepositoryLocation__ReferencedTargetAssignment_0 : ( ( 'ReferencedTarget' ) ) ;
+    public final void rule__RepositoryLocation__ReferencedTargetAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOvertarget.g:3986:1: ( ( ( 'ReferenceTarget' ) ) )
-            // InternalOvertarget.g:3987:2: ( ( 'ReferenceTarget' ) )
+            // InternalOvertarget.g:3986:1: ( ( ( 'ReferencedTarget' ) ) )
+            // InternalOvertarget.g:3987:2: ( ( 'ReferencedTarget' ) )
             {
-            // InternalOvertarget.g:3987:2: ( ( 'ReferenceTarget' ) )
-            // InternalOvertarget.g:3988:3: ( 'ReferenceTarget' )
+            // InternalOvertarget.g:3987:2: ( ( 'ReferencedTarget' ) )
+            // InternalOvertarget.g:3988:3: ( 'ReferencedTarget' )
             {
-             before(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); 
-            // InternalOvertarget.g:3989:3: ( 'ReferenceTarget' )
-            // InternalOvertarget.g:3990:4: 'ReferenceTarget'
+             before(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); 
+            // InternalOvertarget.g:3989:3: ( 'ReferencedTarget' )
+            // InternalOvertarget.g:3990:4: 'ReferencedTarget'
             {
-             before(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); 
+             before(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); 
             match(input,58,FOLLOW_2); 
-             after(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); 
+             after(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); 
 
             }
 
-             after(grammarAccess.getRepositoryLocationAccess().getReferenceTargetReferenceTargetKeyword_0_0()); 
+             after(grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0()); 
 
             }
 
@@ -12204,7 +12204,7 @@ public class InternalOvertargetParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__RepositoryLocation__ReferenceTargetAssignment_0"
+    // $ANTLR end "rule__RepositoryLocation__ReferencedTargetAssignment_0"
 
 
     // $ANTLR start "rule__RepositoryLocation__NameAssignment_2"

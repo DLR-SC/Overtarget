@@ -33,11 +33,11 @@ import com.google.inject.Provider;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 
-public class ResolveTargetHandler extends AbstractHandler implements IHandler {
+public class TargetActivationHandler extends AbstractHandler implements IHandler {
 
 	static String targetFileExtension = "target";
 	
-	public ResolveTargetHandler() {
+	public TargetActivationHandler() {
 		setupInjector();
 	}
 
