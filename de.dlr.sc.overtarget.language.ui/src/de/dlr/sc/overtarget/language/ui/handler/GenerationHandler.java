@@ -43,6 +43,10 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		setupInjector();
 	}
 	
+	/**
+	 * manual setup of injector because it is called 
+	 * in Eclipse UI and does not know the injector yet
+	 */
 	protected void setupInjector() {
 		LanguageActivator.getInstance().getInjector(LanguageActivator.DE_DLR_SC_OVERTARGET_LANGUAGE_OVERTARGET).injectMembers(this);
 	}
@@ -70,7 +74,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 	}
 
 	/**
-	 * method to generate a new target
+	 * This method generates a new target
 	 * 
 	 * @param input  IEditorInput from the tmodel file
 	 */
@@ -91,6 +95,11 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		
 		final EclipseResourceFileSystemAccess2 fsa = fileSystemAccessProvider.get();
 		fsa.setMonitor(new NullProgressMonitor());
+		
+		/**
+		 * Get project specific output configurations 
+		 * and set them in the fileSystemAccess outputPath for the generating process
+		 */
 		
 		final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
 		String configValue = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");

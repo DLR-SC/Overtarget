@@ -32,12 +32,14 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @SuppressWarnings("all")
 public class ReferencedTargetHelper {
   /**
-   * This method looks for all repositoryLocations without a referenced target
+   * This method copies the original tmodel and
+   * looks for all repositoryLocations without a referenced target
+   * returns a tmodel with repositoryLocations containing the keyword referencedTarget
    */
   public TargetModel getReferencedModelToGenerate(final TargetModel model) {
-    final TargetModel referencedModel = EcoreUtil.<TargetModel>copy(model);
+    final TargetModel tmodelWithReference = EcoreUtil.<TargetModel>copy(model);
     final ArrayList<RepositoryLocation> list = CollectionLiterals.<RepositoryLocation>newArrayList();
-    EList<RepositoryLocation> _repositoryLocations = referencedModel.getRepositoryLocations();
+    EList<RepositoryLocation> _repositoryLocations = tmodelWithReference.getRepositoryLocations();
     for (final RepositoryLocation repos : _repositoryLocations) {
       boolean _isReferencedTarget = repos.isReferencedTarget();
       boolean _equals = (_isReferencedTarget == false);
@@ -46,8 +48,8 @@ public class ReferencedTargetHelper {
       }
     }
     this.deleteRepositoryLocation(list);
-    this.renameTarget(referencedModel);
-    return referencedModel;
+    this.renameTmodel(tmodelWithReference);
+    return tmodelWithReference;
   }
   
   public ArrayList<RepositoryLocation> deleteRepositoryLocation(final ArrayList<RepositoryLocation> list) {
@@ -57,9 +59,9 @@ public class ReferencedTargetHelper {
     return list;
   }
   
-  public String renameTarget(final TargetModel model) {
-    final String renamedTarget = "referencedTarget";
-    model.setName(renamedTarget);
+  public String renameTmodel(final TargetModel model) {
+    final String renamedTmodel = "referencedTarget";
+    model.setName(renamedTmodel);
     return model.getName();
   }
   
@@ -84,10 +86,16 @@ public class ReferencedTargetHelper {
     return parentTarget.eIsProxy();
   }
   
+  /**
+   * Locates the tmodelFile and finds the project.
+   * In the project the targetFile is searched with the outputPath.
+   * Checks if the targetFile is located directly in the project folder or in an extra folder.
+   * Returns the targetFile.
+   */
   public IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory, final URI uri) {
     String _name = model.getName();
     String _plus = ("/" + _name);
-    final String targetName = (_plus + ".target");
+    final String tmodelName = (_plus + ".target");
     final IWorkspaceRoot workspace = ResourcesPlugin.getWorkspace().getRoot();
     String _platformString = uri.toPlatformString(true);
     Path _path = new Path(_platformString);
@@ -96,25 +104,26 @@ public class ReferencedTargetHelper {
     final String outputPath = outputDirectory.toString().replaceFirst(".", "");
     boolean _equals = outputPath.equals("/");
     if (_equals) {
-      final IFile targetFile = project.getFile(targetName);
+      final IFile targetFile = project.getFile(tmodelName);
       boolean _exists = targetFile.exists();
       if (_exists) {
         return targetFile;
       }
     } else {
-      final String targetPath = (outputPath + targetName);
-      final IFile targetFile_1 = project.getFile(targetPath);
-      boolean _exists_1 = targetFile_1.exists();
+      final String targetPath = (outputPath + tmodelName);
+      final IFile targetFileWithFolder = project.getFile(targetPath);
+      boolean _exists_1 = targetFileWithFolder.exists();
       if (_exists_1) {
-        return targetFile_1;
+        return targetFileWithFolder;
       }
     }
     return null;
   }
   
-  public void setFileAsTargetPlatform(final IFile targetFile) {
+  public void setFileAsActiveTarget(final IFile targetFile) {
     try {
-      TargetPlatformHelper.setAsTargetPlatform(targetFile);
+      final TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
+      targetPlatHelper.setAsActiveTarget(targetFile);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

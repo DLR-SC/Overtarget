@@ -25,7 +25,7 @@ import org.eclipse.pde.internal.core.PDECore;
 public class TargetPlatformHelper {
 
 	
-	private TargetPlatformHelper() {
+	public TargetPlatformHelper() {
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class TargetPlatformHelper {
 	 * @throws CoreException 
 	*/
 	
-	public static void setAsTargetPlatform(IFile targetFile) throws CoreException {
+	public void setAsActiveTarget(IFile targetFile) throws CoreException {
 		ITargetPlatformService service = getTargetPlatformService();
 		org.eclipse.pde.core.target.ITargetHandle fileHandle = service.getTarget((IFile) targetFile);
 		ITargetDefinition target = null;

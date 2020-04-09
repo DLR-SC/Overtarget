@@ -43,6 +43,11 @@ public class OvertargetGenerator extends AbstractGenerator {
   
   private final ReferencedTargetHelper RefTargetHelper = new ReferencedTargetHelper();
   
+  /**
+   * This method generates a new target from a tmodel.
+   * If the tmodel has unresolved references,
+   * it calls the method generateTargetToResolveReferences().
+   */
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<TargetModel> _filter = Iterables.<TargetModel>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), TargetModel.class);
@@ -51,7 +56,7 @@ public class OvertargetGenerator extends AbstractGenerator {
         EcoreUtil.resolveAll(resource);
         boolean _hasUnresolvedReferences = this.RefTargetHelper.hasUnresolvedReferences(model);
         if (_hasUnresolvedReferences) {
-          this.generateReferencedTarget(model, fsa);
+          this.generateTargetToResolveReferences(model, fsa);
         } else {
           String _name = model.getName();
           String _plus = (_name + ".target");
@@ -62,18 +67,20 @@ public class OvertargetGenerator extends AbstractGenerator {
   }
   
   /**
-   * Generates a referencedTarget
+   * This method generates a target with references to unresolved targets
+   * and sets the target as active target in eclipse
+   *  -> unresolved references are resolved
    */
-  public void generateReferencedTarget(final TargetModel model, final IFileSystemAccess2 fsa) {
-    final TargetModel referencedModel = this.RefTargetHelper.getReferencedModelToGenerate(model);
-    String _name = referencedModel.getName();
+  public void generateTargetToResolveReferences(final TargetModel model, final IFileSystemAccess2 fsa) {
+    final TargetModel tmodelWithReference = this.RefTargetHelper.getReferencedModelToGenerate(model);
+    String _name = tmodelWithReference.getName();
     String _plus = (_name + ".target");
-    fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(referencedModel));
+    fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(tmodelWithReference));
     if ((fsa instanceof AbstractFileSystemAccess)) {
       final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
       final URI originalUri = EcoreUtil.getURI(model);
-      final IFile targetFile = this.RefTargetHelper.findTargetfileOfTmodel(referencedModel, outputPath, originalUri);
-      this.RefTargetHelper.setFileAsTargetPlatform(targetFile);
+      final IFile targetFile = this.RefTargetHelper.findTargetfileOfTmodel(tmodelWithReference, outputPath, originalUri);
+      this.RefTargetHelper.setFileAsActiveTarget(targetFile);
     }
   }
   

@@ -33,11 +33,16 @@ class OvertargetGenerator extends AbstractGenerator {
 
 	val RefTargetHelper = new ReferencedTargetHelper
 
+	/**
+	 * This method generates a new target from a tmodel.
+	 * If the tmodel has unresolved references, 
+	 * it calls the method generateTargetToResolveReferences().
+	 */
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
 			EcoreUtil.resolveAll(resource) // resolve proxies in resource before checking if there are any unresolved references left
 			if (RefTargetHelper.hasUnresolvedReferences(model)) {
-				generateReferencedTarget(model, fsa)
+				generateTargetToResolveReferences(model, fsa)
 			} else {
 				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 			}
@@ -45,17 +50,19 @@ class OvertargetGenerator extends AbstractGenerator {
 	}
 
 	/**
-	 * Generates a referencedTarget
+	 * This method generates a target with references to unresolved targets 
+	 * and sets the target as active target in eclipse
+	 *  -> unresolved references are resolved
 	 */
 	
-	def generateReferencedTarget(TargetModel model, IFileSystemAccess2 fsa) {
-		val referencedModel = RefTargetHelper.getReferencedModelToGenerate(model)
-		fsa.generateFile(referencedModel.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, referencedModel.compile)
-		if (fsa instanceof AbstractFileSystemAccess) {
+	def generateTargetToResolveReferences(TargetModel model, IFileSystemAccess2 fsa) {
+		val tmodelWithReference = RefTargetHelper.getReferencedModelToGenerate(model)
+		fsa.generateFile(tmodelWithReference.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, tmodelWithReference.compile)
+		if (fsa instanceof AbstractFileSystemAccess) { //Check this to have access to outputConfigurations
 			val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
 			val originalUri = EcoreUtil.getURI(model)
-			val targetFile = RefTargetHelper.findTargetfileOfTmodel(referencedModel, outputPath, originalUri)
-			RefTargetHelper.setFileAsTargetPlatform(targetFile)
+			val targetFile = RefTargetHelper.findTargetfileOfTmodel(tmodelWithReference, outputPath, originalUri)
+			RefTargetHelper.setFileAsActiveTarget(targetFile)
 		}
 	}
 

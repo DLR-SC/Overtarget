@@ -26,19 +26,21 @@ import org.eclipse.emf.common.util.URI
 class ReferencedTargetHelper {
 	
 	/**
-	 * This method looks for all repositoryLocations without a referenced target
+	 * This method copies the original tmodel and
+	 * looks for all repositoryLocations without a referenced target
+	 * returns a tmodel with repositoryLocations containing the keyword referencedTarget
 	 */
 	def getReferencedModelToGenerate(TargetModel model) {
-		val referencedModel = EcoreUtil.copy(model)
+		val tmodelWithReference = EcoreUtil.copy(model)
 		val list = newArrayList
-		for (RepositoryLocation repos : referencedModel.repositoryLocations) {
+		for (RepositoryLocation repos : tmodelWithReference.repositoryLocations) {
 			if (repos.referencedTarget == false) {
 				list.addAll(repos)
 			}
 		}
 		deleteRepositoryLocation(list)
-		renameTarget(referencedModel)
-		return referencedModel
+		renameTmodel(tmodelWithReference)
+		return tmodelWithReference
 		}
 	
 
@@ -49,9 +51,9 @@ class ReferencedTargetHelper {
 		return list
 	}
 
-	def renameTarget(TargetModel model) {
-		val renamedTarget = "referencedTarget"
-		model.name = renamedTarget
+	def renameTmodel(TargetModel model) {
+		val renamedTmodel = "referencedTarget"
+		model.name = renamedTmodel
 		return model.name
 		}
 
@@ -73,27 +75,34 @@ class ReferencedTargetHelper {
 		return parentTarget.eIsProxy
 	}
 
+	/**
+	 * Locates the tmodelFile and finds the project. 
+	 * In the project the targetFile is searched with the outputPath.
+	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
+	 * Returns the targetFile.
+	 */
 	def findTargetfileOfTmodel(TargetModel model, String outputDirectory,URI uri) {
-		val targetName = "/" + model.name + ".target"
+		val tmodelName = "/" + model.name + ".target"
 		val workspace = ResourcesPlugin.workspace.root
 		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
 		val project = tmodelFile.project
 		val outputPath = outputDirectory.toString.replaceFirst(".","")
 		if (outputPath.equals("/")) {
-			val targetFile = project.getFile(targetName)
+			val targetFile = project.getFile(tmodelName)
 			if (targetFile.exists){
 				return targetFile
 			}
 		} else {
-			val targetPath = outputPath + targetName
-			val targetFile = project.getFile(targetPath)
-			if (targetFile.exists){
-				return targetFile
+			val targetPath = outputPath + tmodelName
+			val targetFileWithFolder = project.getFile(targetPath)
+			if (targetFileWithFolder.exists){
+				return targetFileWithFolder
 			}
 		}
 	}
 
-	def setFileAsTargetPlatform(IFile targetFile) {
-		TargetPlatformHelper.setAsTargetPlatform(targetFile)
+	def setFileAsActiveTarget(IFile targetFile) {
+		val targetPlatHelper = new TargetPlatformHelper()
+		targetPlatHelper.setAsActiveTarget(targetFile)
 	}
 }

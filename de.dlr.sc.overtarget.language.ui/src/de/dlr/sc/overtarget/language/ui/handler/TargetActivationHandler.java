@@ -71,7 +71,8 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 			}
 			if (targetFile.exists()) {
 				try {
-					TargetPlatformHelper.setAsTargetPlatform(targetFile);
+					TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
+					targetPlatHelper.setAsActiveTarget(targetFile);
 				} catch (CoreException e) {
 					MessageBox errorMessage = new MessageBox(
 							Display.getCurrent().getActiveShell(), 
