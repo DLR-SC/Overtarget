@@ -7,7 +7,29 @@
 
 :sectnums:
 == Creating a tmodel file
+In an existing project create a new file and add the file extension "tmodel".
+
+=== Writing a tmodel file
+A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
+Within the curly brackets you can define your tmodel the way you like. 
+A target file is automatically generated when saving the tmodel file.
+
+An example tmodel is presented below.
+
+image:virsatTmodel.PNG 
+
+Using content assist (ctrl + spacebar) will suggest the next possible keywords/steps.
+
 === Extending/Importing a tmodel file
+It is possible to extend a tmodelby using the keyword "extends". That is especially useful for downstream projects which 
+use the same infrastructure like the main projects in a tmodel. When a main project makes changes in a the tmodel,
+the tmodel of the downstream project which extends the main tmodel obtains these changes automatically.
+
+The same principle is applicable when importing a tmodel, using the keyword "Import".
+
+
+
+
 == Generating a target file
 === Generating a referencedTarget
 == Setting a target file as active target
