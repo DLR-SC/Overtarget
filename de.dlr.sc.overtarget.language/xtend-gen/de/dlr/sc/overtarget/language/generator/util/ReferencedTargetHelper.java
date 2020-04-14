@@ -34,7 +34,9 @@ public class ReferencedTargetHelper {
   /**
    * This method copies the original tmodel and
    * looks for all repositoryLocations without a referenced target
-   * returns a tmodel with repositoryLocations containing the keyword referencedTarget
+   * 
+   * @param   TargetModel original tmodel with unresolved references
+   * @returns TargetModel tmodel with repositoryLocations containing the keyword referencedTarget
    */
   public TargetModel getReferencedModelToGenerate(final TargetModel model) {
     final TargetModel tmodelWithReference = EcoreUtil.<TargetModel>copy(model);
@@ -90,7 +92,11 @@ public class ReferencedTargetHelper {
    * Locates the tmodelFile and finds the project.
    * In the project the targetFile is searched with the outputPath.
    * Checks if the targetFile is located directly in the project folder or in an extra folder.
-   * Returns the targetFile.
+   * 
+   * @Param   TargetModel tmodel with references
+   * @Param   String  outputDirectory of generated targetFile
+   * @Param   URI uri of original tmodel
+   * @returns IFile targetFile.
    */
   public IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory, final URI uri) {
     String _name = model.getName();

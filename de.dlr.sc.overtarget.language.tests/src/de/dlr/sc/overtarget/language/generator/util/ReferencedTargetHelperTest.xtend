@@ -26,7 +26,6 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
 import java.io.ByteArrayInputStream
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
@@ -37,7 +36,6 @@ class ReferencedTargetHelperTest {
 	static final String PARENT_TMODEl_PATH = "/de.dlr.sc.overtarget.language.tests/resources/parentTarget.tmodel"
 	static final String IMPORTED_TMODEL_PATH = "/de.dlr.sc.overtarget.language.tests/resources/importedModel.tmodel"
 	static final String PROXY_TMODEL_PATH = "/de.dlr.sc.overtarget.language.tests/resources/proxyTarget.tmodel_inv"
-	
 	
 	@Inject
 	IResourceFactory resourceFactory
@@ -151,10 +149,9 @@ class ReferencedTargetHelperTest {
 		val source = new ByteArrayInputStream(bytes);
 		tmodelFile.create(source, IResource.NONE, null);
 		
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel", resourceFactory);
-		val testTmodelResource = rs.getResource(URI.createPlatformResourceURI("/testProject/target/target.tmodel", true), true)
+		val uri = URI.createPlatformResourceURI("/testProject/target/target.tmodel", true)
+		val testTmodelResource = rs.getResource(uri, true)
 		val tmodel = testTmodelResource.contents.get(0) as TargetModel
-		val uri = EcoreUtil.getURI(tmodel)
 		val targetFile = folder.getFile("target.target");
 
 		val bytesTarget = 

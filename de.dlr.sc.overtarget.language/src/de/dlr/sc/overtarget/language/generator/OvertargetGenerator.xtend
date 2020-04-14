@@ -53,6 +53,9 @@ class OvertargetGenerator extends AbstractGenerator {
 	 * This method generates a target with references to unresolved targets 
 	 * and sets the target as active target in eclipse
 	 *  -> unresolved references are resolved
+	 * 
+	 * @Param TargetModel original tmodel with unresolved references
+	 * @Param IFileSystemAccess2 fsa
 	 */
 	
 	def generateTargetToResolveReferences(TargetModel model, IFileSystemAccess2 fsa) {

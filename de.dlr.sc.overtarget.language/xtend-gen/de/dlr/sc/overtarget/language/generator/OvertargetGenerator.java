@@ -70,6 +70,9 @@ public class OvertargetGenerator extends AbstractGenerator {
    * This method generates a target with references to unresolved targets
    * and sets the target as active target in eclipse
    *  -> unresolved references are resolved
+   * 
+   * @Param TargetModel original tmodel with unresolved references
+   * @Param IFileSystemAccess2 fsa
    */
   public void generateTargetToResolveReferences(final TargetModel model, final IFileSystemAccess2 fsa) {
     final TargetModel tmodelWithReference = this.RefTargetHelper.getReferencedModelToGenerate(model);
