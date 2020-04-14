@@ -29,8 +29,8 @@ class ReferencedTargetHelper {
 	 * This method copies the original tmodel and
 	 * looks for all repositoryLocations without a referenced target
 	 * 
-	 * @param   TargetModel original tmodel with unresolved references
-	 * @returns TargetModel tmodel with repositoryLocations containing the keyword referencedTarget
+	 * @param model original tmodel with unresolved references
+	 * @return tmodelWithReference tmodel with repositoryLocations containing the keyword referencedTarget
 	 */
 	def getReferencedModelToGenerate(TargetModel model) {
 		val tmodelWithReference = EcoreUtil.copy(model)
@@ -82,10 +82,10 @@ class ReferencedTargetHelper {
 	 * In the project the targetFile is searched with the outputPath.
 	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
 	 * 
-	 * @Param   TargetModel tmodel with references
-	 * @Param   String  outputDirectory of generated targetFile
-	 * @Param   URI uri of original tmodel
-	 * @returns IFile targetFile.
+	 * @param model tmodel with references
+	 * @param outputDirectory output directory of generated targetFile
+	 * @param uri uri of original tmodel
+	 * @return targetFile
 	 */
 	def findTargetfileOfTmodel(TargetModel model, String outputDirectory, URI uri) {
 		val tmodelName = "/" + model.name + ".target"
