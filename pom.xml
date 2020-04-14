@@ -20,6 +20,7 @@
 
 	<modules>
 		<module>de.dlr.sc.overtarget.feature</module>
+		<module>de.dlr.sc.overtarget.docs.feature</module>
 		<module>de.dlr.sc.overtarget.language</module>
 		<module>de.dlr.sc.overtarget.language.ide</module>
 		<module>de.dlr.sc.overtarget.language.tests</module>
