@@ -63,7 +63,10 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TargetLibrary:
-		//	'TargetLibrary' name=ID '{' variables+=VariableDefinition* repositoryLocations+=RepositoryLocation* '}';
+		//	'TargetLibrary' name=ID '{'
+		//	variables+=VariableDefinition*
+		//	repositoryLocations+=RepositoryLocation*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'TargetLibrary' name=ID '{' variables+=VariableDefinition* repositoryLocations+=RepositoryLocation* '}'
@@ -135,9 +138,14 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_16 = (Keyword)cGroup.eContents().get(16);
 		
 		//BaseModel:
-		//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
-		//	'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
-		//	variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+		//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])*
+		//	'OperatingSystem' os=OperatingSys ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
+		//	'Architecture' arch=Architecture
+		//	'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+		//	variables+=VariableDefinition*
+		//	excludedLocations+=ExcludeLocation*
+		//	repositoryLocations+=RepositoryLocation*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
@@ -297,8 +305,11 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//TargetModel:
 		//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
 		//	os=OperatingSys)? (('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)? ('Architecture' arch=Architecture)?
-		//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition*
-		//	excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+		//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)?
+		//	variables+=VariableDefinition*
+		//	excludedLocations+=ExcludeLocation*
+		//	repositoryLocations+=RepositoryLocation*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
@@ -691,53 +702,65 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	public class RepositoryLocationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.RepositoryLocation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cRepositoryLocationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cUrlKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cUrlAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cUrlUrlExpressionParserRuleCall_3_0 = (RuleCall)cUrlAssignment_3.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cUnitsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cUnitsUnitParserRuleCall_5_0 = (RuleCall)cUnitsAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cReferencedTargetAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cReferencedTargetReferencedTargetKeyword_0_0 = (Keyword)cReferencedTargetAssignment_0.eContents().get(0);
+		private final Keyword cRepositoryLocationKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cUrlKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cUrlAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cUrlUrlExpressionParserRuleCall_4_0 = (RuleCall)cUrlAssignment_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cUnitsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cUnitsUnitParserRuleCall_6_0 = (RuleCall)cUnitsAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//RepositoryLocation:
-		//	'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}';
+		///* referencedTarget is used when the target has unresolved references. 
+		//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
+		//*/ RepositoryLocation:
+		//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+		//	units+=Unit*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
+		//referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
 		public Group getGroup() { return cGroup; }
 		
+		//referencedTarget?='ReferencedTarget'?
+		public Assignment getReferencedTargetAssignment_0() { return cReferencedTargetAssignment_0; }
+		
+		//'ReferencedTarget'
+		public Keyword getReferencedTargetReferencedTargetKeyword_0_0() { return cReferencedTargetReferencedTargetKeyword_0_0; }
+		
 		//'RepositoryLocation'
-		public Keyword getRepositoryLocationKeyword_0() { return cRepositoryLocationKeyword_0; }
+		public Keyword getRepositoryLocationKeyword_1() { return cRepositoryLocationKeyword_1; }
 		
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
 		//'url'
-		public Keyword getUrlKeyword_2() { return cUrlKeyword_2; }
+		public Keyword getUrlKeyword_3() { return cUrlKeyword_3; }
 		
 		//url=UrlExpression
-		public Assignment getUrlAssignment_3() { return cUrlAssignment_3; }
+		public Assignment getUrlAssignment_4() { return cUrlAssignment_4; }
 		
 		//UrlExpression
-		public RuleCall getUrlUrlExpressionParserRuleCall_3_0() { return cUrlUrlExpressionParserRuleCall_3_0; }
+		public RuleCall getUrlUrlExpressionParserRuleCall_4_0() { return cUrlUrlExpressionParserRuleCall_4_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 		
 		//units+=Unit*
-		public Assignment getUnitsAssignment_5() { return cUnitsAssignment_5; }
+		public Assignment getUnitsAssignment_6() { return cUnitsAssignment_6; }
 		
 		//Unit
-		public RuleCall getUnitsUnitParserRuleCall_5_0() { return cUnitsUnitParserRuleCall_5_0; }
+		public RuleCall getUnitsUnitParserRuleCall_6_0() { return cUnitsUnitParserRuleCall_6_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 	public class ExcludeLocationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.ExcludeLocation");
@@ -755,7 +778,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ExcludeLocation:
-		//	{ExcludeLocation} 'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
+		//	{ExcludeLocation}
+		//	'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1304,7 +1328,10 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TargetLibrary:
-	//	'TargetLibrary' name=ID '{' variables+=VariableDefinition* repositoryLocations+=RepositoryLocation* '}';
+	//	'TargetLibrary' name=ID '{'
+	//	variables+=VariableDefinition*
+	//	repositoryLocations+=RepositoryLocation*
+	//	'}';
 	public TargetLibraryElements getTargetLibraryAccess() {
 		return pTargetLibrary;
 	}
@@ -1314,9 +1341,14 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BaseModel:
-	//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
-	//	'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
-	//	variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+	//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])*
+	//	'OperatingSystem' os=OperatingSys ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
+	//	'Architecture' arch=Architecture
+	//	'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+	//	variables+=VariableDefinition*
+	//	excludedLocations+=ExcludeLocation*
+	//	repositoryLocations+=RepositoryLocation*
+	//	'}';
 	public BaseModelElements getBaseModelAccess() {
 		return pBaseModel;
 	}
@@ -1328,8 +1360,11 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	//TargetModel:
 	//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
 	//	os=OperatingSys)? (('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)? ('Architecture' arch=Architecture)?
-	//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition*
-	//	excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}';
+	//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)?
+	//	variables+=VariableDefinition*
+	//	excludedLocations+=ExcludeLocation*
+	//	repositoryLocations+=RepositoryLocation*
+	//	'}';
 	public TargetModelElements getTargetModelAccess() {
 		return pTargetModel;
 	}
@@ -1418,8 +1453,12 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		return getUrlElementVariableAccess().getRule();
 	}
 	
-	//RepositoryLocation:
-	//	'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}';
+	///* referencedTarget is used when the target has unresolved references. 
+	//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
+	//*/ RepositoryLocation:
+	//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+	//	units+=Unit*
+	//	'}';
 	public RepositoryLocationElements getRepositoryLocationAccess() {
 		return pRepositoryLocation;
 	}
@@ -1429,7 +1468,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ExcludeLocation:
-	//	{ExcludeLocation} 'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
+	//	{ExcludeLocation}
+	//	'ExcludeLocation' repositoryLocation=[RepositoryLocation|QualifiedName] '{' (units+=Unit* | 'all;')
 	//	'}';
 	public ExcludeLocationElements getExcludeLocationAccess() {
 		return pExcludeLocation;

@@ -25,13 +25,29 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 
-import de.dlr.sc.overtarget.language.ui.util.TargetPlatformHelper;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
-public class ResolveTargetHandler extends AbstractHandler implements IHandler {
+import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
+import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
+
+public class TargetActivationHandler extends AbstractHandler implements IHandler {
 
 	static String targetFileExtension = "target";
 	
+	public TargetActivationHandler() {
+		setupInjector();
+	}
+
+	protected void setupInjector() {
+		LanguageActivator.getInstance().getInjector(LanguageActivator.DE_DLR_SC_OVERTARGET_LANGUAGE_OVERTARGET).injectMembers(this);
+	}
+
+	@Inject
+	private Provider<EclipseOutputConfigurationProvider> eclipseOutputConfigProvider;
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
@@ -40,14 +56,23 @@ public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 			if (editorPart != null) {
 				input = editorPart.getEditorInput();
 			}
-			
+
 			IFile file = ((FileEditorInput) input).getFile();
 			String targetName = file.getName().replace("tmodel", targetFileExtension);
 			IProject project = file.getProject();
-			IFile targetFile = project.getFile(targetName);
+			String outputConfig = getOutputConfigurations(project);
+			IFile targetFile;
+			String outputPath = outputConfig.replace(".", "");
+			if (outputPath.equals("/")) {
+				targetFile = project.getFile("/" + targetName);
+			} else {
+				String targetPath = outputPath + "/" + targetName;
+				targetFile = project.getFile(targetPath);
+			}
 			if (targetFile.exists()) {
 				try {
-					TargetPlatformHelper.setAsTargetPlatform(targetFile);
+					TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
+					targetPlatHelper.setAsActiveTarget(targetFile);
 				} catch (CoreException e) {
 					MessageBox errorMessage = new MessageBox(
 							Display.getCurrent().getActiveShell(), 
@@ -65,8 +90,14 @@ public class ResolveTargetHandler extends AbstractHandler implements IHandler {
 				errorMessage.open();
 			}
 		}
-		
+
 		return null;
+	}
+
+	public String getOutputConfigurations(IProject project) {
+		final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
+		String configValue = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
+		return configValue;
 	}
 
 	@Override
