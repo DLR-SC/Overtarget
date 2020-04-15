@@ -91,8 +91,7 @@ class ReferencedTargetHelperTest {
 	def void testRenameTmodel() {
 		val testTmodel = testTmodelResource.contents.get(0) as TargetModel
 		val renamedTmodel = refTargetHelper.renameTmodel(testTmodel)
-		val expectedRenamedTmodel = "referencedTarget"
-
+		val expectedRenamedTmodel = ReferencedTargetHelper.TARGET_NAME
 		Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTmodel, renamedTmodel)
 	}
 

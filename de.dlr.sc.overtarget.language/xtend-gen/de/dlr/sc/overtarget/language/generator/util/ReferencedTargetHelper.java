@@ -32,6 +32,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class ReferencedTargetHelper {
+  public static final String TARGET_NAME = "targetForReferences";
+  
   /**
    * This method copies the original tmodel and
    * looks for all repositoryLocations without a referenced target
@@ -63,7 +65,7 @@ public class ReferencedTargetHelper {
   }
   
   public String renameTmodel(final TargetModel model) {
-    final String renamedTmodel = "referencedTarget";
+    final String renamedTmodel = ReferencedTargetHelper.TARGET_NAME;
     model.setName(renamedTmodel);
     return model.getName();
   }

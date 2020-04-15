@@ -25,6 +25,8 @@ import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
  * This class processes the model data for generation
  */
 class ReferencedTargetHelper {
+	public static val TARGET_NAME = "targetForReferences"
+	
 	
 	/**
 	 * This method copies the original tmodel and
@@ -55,7 +57,7 @@ class ReferencedTargetHelper {
 	}
 
 	def renameTmodel(TargetModel model) {
-		val renamedTmodel = "referencedTarget"
+		val renamedTmodel = TARGET_NAME
 		model.name = renamedTmodel
 		return model.name
 		}

@@ -124,7 +124,7 @@ public class ReferencedTargetHelperTest {
     EObject _get = this.testTmodelResource.getContents().get(0);
     final TargetModel testTmodel = ((TargetModel) _get);
     final String renamedTmodel = this.refTargetHelper.renameTmodel(testTmodel);
-    final String expectedRenamedTmodel = "referencedTarget";
+    final String expectedRenamedTmodel = ReferencedTargetHelper.TARGET_NAME;
     Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTmodel, renamedTmodel);
   }
   
