@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package de.dlr.sc.overtarget.language.ui.util;
+package de.dlr.sc.overtarget.language.util;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -25,7 +25,7 @@ import org.eclipse.pde.internal.core.PDECore;
 public class TargetPlatformHelper {
 
 	
-	private TargetPlatformHelper() {
+	public TargetPlatformHelper() {
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class TargetPlatformHelper {
 	 * @throws CoreException 
 	*/
 	
-	public static void setAsTargetPlatform(IFile targetFile) throws CoreException {
+	public void setAsActiveTarget(IFile targetFile) throws CoreException {
 		ITargetPlatformService service = getTargetPlatformService();
 		org.eclipse.pde.core.target.ITargetHandle fileHandle = service.getTarget((IFile) targetFile);
 		ITargetDefinition target = null;
@@ -44,7 +44,7 @@ public class TargetPlatformHelper {
 		LoadTargetDefinitionJob.load(target);
 	}
 	
-	private static ITargetPlatformService getTargetPlatformService() {
+	public static ITargetPlatformService getTargetPlatformService() {
 		ITargetPlatformService service = PDECore.getDefault().acquireService(ITargetPlatformService.class);
 		
 		return service;

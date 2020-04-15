@@ -83,8 +83,12 @@ UrlElementVariable:
 	content = [VariableDefinition|QualifiedName]
 ;
 
+
+/* referencedTarget is used when the target has unresolved references. 
+*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
+*/
 RepositoryLocation:
-	'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+	(referencedTarget?='ReferencedTarget')? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
 		(units+=Unit)*	
 	'}'
 ;
