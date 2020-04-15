@@ -17,8 +17,7 @@ In an existing project create a new file and add the file extension ".tmodel".
 
 === Writing a tmodel file
 
-[%autowidth]
-[cols="35,65"]
+[cols="35,~"]
 |===
 
 |A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
