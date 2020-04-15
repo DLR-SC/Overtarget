@@ -22,7 +22,7 @@ A target file is automatically generated when saving the tmodel file.
 
 An example tmodel is presented below.
 
-image:virsatTmodel.PNG 
+image:virsatTmodel.png
 
 TIP: Using content assist (ctrl + spacebar) will suggest the next possible keywords/steps.
 
@@ -49,7 +49,7 @@ NOTE: Generating a target file by saving the tmodel file only works when changes
 Another option to generate a target is using the button in the editor toolbar or in the context menu "Generate Target". 
 A target file will be generated, also when no changes have been applied to the tmodel file.
 
-image:generateTarget.PNG
+image:generateTarget.png
 
 === Generating a referencedTarget
 == Setting a target file as active target
