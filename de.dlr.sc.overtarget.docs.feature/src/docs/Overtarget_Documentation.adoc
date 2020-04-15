@@ -6,8 +6,14 @@
 :experimental:  
 
 :sectnums:
+
+Overtarget is an eclipse plug-in that helps you managing your target platform files 
+with dependencies across project boundaries.
+
+This documentation should help you getting familiar with Overtarget and its functionalities. 
+
 == Creating a tmodel file
-In an existing project create a new file and add the file extension "tmodel".
+In an existing project create a new file and add the file extension ".tmodel".
 
 === Writing a tmodel file
 A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
@@ -18,11 +24,12 @@ An example tmodel is presented below.
 
 image:virsatTmodel.PNG 
 
-Using content assist (ctrl + spacebar) will suggest the next possible keywords/steps.
+TIP: Using content assist (ctrl + spacebar) will suggest the next possible keywords/steps.
+
 
 === Extending/Importing a tmodel file
-It is possible to extend a tmodelby using the keyword "extends". That is especially useful for downstream projects which 
-use the same infrastructure like the main projects in a tmodel. When a main project makes changes in a the tmodel,
+It is possible to extend a tmodel by using the keyword "extends". That is especially useful for downstream projects which 
+use the same dependencies as their main project in a tmodel. When a main project makes changes in a the tmodel,
 the tmodel of the downstream project which extends the main tmodel obtains these changes automatically.
 
 The same principle is applicable when importing a tmodel, using the keyword "Import".
@@ -31,6 +38,19 @@ The same principle is applicable when importing a tmodel, using the keyword "Imp
 
 
 == Generating a target file
+
+=== Saving the tmodel file
+A target file can be generated in different ways. The easiest way would be by saving
+the tmodel file. The Overtarget generator then automatically generates a target file.
+
+NOTE: Generating a target file by saving the tmodel file only works when changes were made.
+
+=== Using the button/context menu "Generate Target"
+Another option to generate a target is using the button in the editor toolbar or in the context menu "Generate Target". 
+A target file will be generated, also when no changes have been applied to the tmodel file.
+
+image:generateTarget.PNG
+
 === Generating a referencedTarget
 == Setting a target file as active target
 
