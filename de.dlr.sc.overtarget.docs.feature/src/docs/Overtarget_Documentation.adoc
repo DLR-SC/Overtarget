@@ -22,7 +22,7 @@ A target file is automatically generated when saving the tmodel file.
 
 An example tmodel is presented below.
 
-image:virsatTmodel.png[Example tmodel]
+image::virsatTmodel.png[Example tmodel]
 
 TIP: Using content assist (ctrl + spacebar) will suggest the next possible keywords/steps.
 
