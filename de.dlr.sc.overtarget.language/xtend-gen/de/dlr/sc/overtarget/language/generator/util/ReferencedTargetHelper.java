@@ -9,6 +9,7 @@
  */
 package de.dlr.sc.overtarget.language.generator.util;
 
+import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
@@ -85,7 +86,11 @@ public class ReferencedTargetHelper {
   
   public boolean parentIsProxy(final TargetModel model) {
     final TargetModel parentTarget = model.getSuper();
-    return parentTarget.eIsProxy();
+    if ((parentTarget != null)) {
+      return parentTarget.eIsProxy();
+    } else {
+      return false;
+    }
   }
   
   /**
@@ -101,7 +106,7 @@ public class ReferencedTargetHelper {
   public IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory, final URI uri) {
     String _name = model.getName();
     String _plus = ("/" + _name);
-    final String tmodelName = (_plus + ".target");
+    final String tmodelName = (_plus + OvertargetGenerator.TARGET_FILE_EXTENSION);
     final IWorkspaceRoot workspace = ResourcesPlugin.getWorkspace().getRoot();
     String _platformString = uri.toPlatformString(true);
     Path _path = new Path(_platformString);

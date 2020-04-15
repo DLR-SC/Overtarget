@@ -30,7 +30,7 @@ import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
  */
 class OvertargetGenerator extends AbstractGenerator {
 	static val DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
-
+	public static val TARGET_FILE_EXTENSION = ".target"
 	val RefTargetHelper = new ReferencedTargetHelper
 
 	/**
@@ -44,7 +44,7 @@ class OvertargetGenerator extends AbstractGenerator {
 			if (RefTargetHelper.hasUnresolvedReferences(model)) {
 				generateTargetToResolveReferences(model, fsa)
 			} else {
-				fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
+				fsa.generateFile(model.name + TARGET_FILE_EXTENSION, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
 			}
 		}
 	}
@@ -60,7 +60,7 @@ class OvertargetGenerator extends AbstractGenerator {
 	
 	def generateTargetToResolveReferences(TargetModel model, IFileSystemAccess2 fsa) {
 		val tmodelWithReference = RefTargetHelper.getReferencedModelToGenerate(model)
-		fsa.generateFile(tmodelWithReference.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, tmodelWithReference.compile)
+		fsa.generateFile(tmodelWithReference.name + TARGET_FILE_EXTENSION, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, tmodelWithReference.compile)
 		if (fsa instanceof AbstractFileSystemAccess) { //Check this to have access to outputConfigurations
 			val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
 			val originalUri = EcoreUtil.getURI(model)

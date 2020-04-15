@@ -19,6 +19,7 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.runtime.Path
 import org.eclipse.emf.common.util.URI
+import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
 
 /**
  * This class processes the model data for generation
@@ -74,7 +75,11 @@ class ReferencedTargetHelper {
 	
 	def parentIsProxy(TargetModel model) {
 		val parentTarget = model.super
+		if (parentTarget !== null) {
 		return parentTarget.eIsProxy
+		} else {
+			return false
+		}
 	}
 
 	/**
@@ -88,7 +93,7 @@ class ReferencedTargetHelper {
 	 * @return targetFile
 	 */
 	def findTargetfileOfTmodel(TargetModel model, String outputDirectory, URI uri) {
-		val tmodelName = "/" + model.name + ".target"
+		val tmodelName = "/" + model.name + OvertargetGenerator.TARGET_FILE_EXTENSION
 		val workspace = ResourcesPlugin.workspace.root
 		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
 		val project = tmodelFile.project

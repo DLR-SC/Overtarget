@@ -30,13 +30,13 @@ import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 
 public class TargetActivationHandler extends AbstractHandler implements IHandler {
 
 	public static final String OUTPUT_DIRECTORY_PREFERENCE_KEY = "outlet.de.dlr.sc.overtarget.output.directory";
-	public static final String TARGET_FILE_EXTENSION = "target";
 
 	public TargetActivationHandler() {
 		setupInjector();
@@ -59,7 +59,7 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 			}
 
 			IFile file = ((FileEditorInput) input).getFile();
-			String targetName = file.getName().replace("tmodel", TARGET_FILE_EXTENSION);
+			String targetName = file.getName().replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
 			IProject project = file.getProject();
 			String outputConfig = getOutputConfigurations(project);
 			IFile targetFile;
