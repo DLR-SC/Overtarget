@@ -16,14 +16,20 @@ This documentation should help you getting familiar with Overtarget and its func
 In an existing project create a new file and add the file extension ".tmodel".
 
 === Writing a tmodel file
-A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
+
+|===
+
+|A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
 Within the curly brackets you can define your tmodel the way you like. 
 A target file is automatically generated when saving the tmodel file.
 
-An example tmodel is presented below.
+An example tmodel is presented below. |
 
-.Example tmodel of virsat
-image::virsatTmodel.png[Example tmodel]
+image:virsatTmodel.png[Example tmodel]
+
+_Example tmodel of virsat_
+
+|===
 
 TIP: Using content assist (ctrl + spacebar) will suggest the next possible keywords/steps.
 
@@ -47,11 +53,16 @@ the tmodel file. The Overtarget generator then automatically generates a target 
 NOTE: Generating a target file by saving the tmodel file only works when changes were made.
 
 === Using the button/context menu "Generate Target"
-Another option to generate a target is using the button in the editor toolbar or in the context menu "Generate Target". 
-A target file will be generated, also when no changes have been applied to the tmodel file.
+|===
 
-.Options to generate a target (highlighted)
-image::generateTarget.png[Generate Target]
+|Another option to generate a target is using the button in the editor toolbar or in the context menu "Generate Target". 
+A target file will be generated, also when no changes have been applied to the tmodel file. |
+
+image:generateTarget.png[Generate Target]
+
+_Options to generate a target (highlighted)_
+
+|===
 
 === Generating a referencedTarget
 Sometimes when extending or importing another target, Eclipse cannot resolve the references and shows errors.
@@ -59,23 +70,37 @@ It is not possible to generate a target with unresolved references.
 Overtarget solves the problem by generating a referencedTarget. In order to generate a referencedTarget, 
 the repositoryLocation to the unresolved target has to be set with the keyword "ReferencedTarget".
 
-There is a quick fix which suggests to generate a referencedTarget. Executing that quick fix or pushing the 
+|===
+
+|There is a quick fix which suggests to generate a referencedTarget. Executing that quick fix or pushing the 
 button "Generate Target" in the toolbar, will generate a referencedTarget. The target will also be set as an
-active Target to resolve all references. 
+active Target to resolve all references. |
+
+image:generateReferencedTarget.png[Generate referencedTarget]
+
+_Generate referencedTarget_
+
+|===
 
 Now there should no longer be problems with unresolved references in the actual target. It can now be generated 
 without complications. 
 
-.Generate referencedTarget
-image::generateReferencedTarget.png[Generate referencedTarget]
+
 
 == Setting a target file as active target
+
+|===
+
 There are different ways to set a target as active target in eclipse. 
 The usual way is to open the target file which opens the eclipse target editor. Here you can click on "Set as Active Target Platform".
 If you want to set your target directly from the tmodel editor you can use the button "Set as Active Target" in the editor toolbar 
-or in the context menu. The target will be automatically loaded and set as the active target platform.
+or in the context menu. The target will be automatically loaded and set as the active target platform. |
 
-.Set as Active Target
-image::setAsActiveTarget.png[Set as Active Target]
+image:setAsActiveTarget.png[Set as Active Target]
+
+_Set as Active Target_
+
+|===
+
 == Other useful stuff
 === Updating versions
