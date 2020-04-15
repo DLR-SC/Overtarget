@@ -17,7 +17,7 @@ In an existing project create a new file and add the file extension ".tmodel".
 
 === Writing a tmodel file
 
-[cols="35,65"]
+[cols="35a,65a"]
 |===
 
 |A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
@@ -72,7 +72,7 @@ It is not possible to generate a target with unresolved references.
 Overtarget solves the problem by generating a referencedTarget. In order to generate a referencedTarget, 
 the repositoryLocation to the unresolved target has to be set with the keyword "ReferencedTarget".
 
-[cols="35,65"]
+[cols="62a,40a"]
 |===
 
 |There is a quick fix which suggests to generate a referencedTarget. Executing that quick fix or pushing the 
