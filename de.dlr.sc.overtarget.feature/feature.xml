@@ -2,7 +2,7 @@
 <feature
       id="de.dlr.sc.overtarget.feature"
       label="OverTarget Feature"
-      version="1.1.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="DLR (German Aerospace Center)"
       plugin="de.dlr.sc.overtarget.language">
 
