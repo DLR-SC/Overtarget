@@ -9,6 +9,7 @@
  */
 package de.dlr.sc.overtarget.language.generator.util;
 
+import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
@@ -31,12 +32,14 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class ReferencedTargetHelper {
+  public static final String TARGET_NAME = "targetForReferences";
+  
   /**
    * This method copies the original tmodel and
    * looks for all repositoryLocations without a referenced target
    * 
-   * @param   TargetModel original tmodel with unresolved references
-   * @returns TargetModel tmodel with repositoryLocations containing the keyword referencedTarget
+   * @param model original tmodel with unresolved references
+   * @return tmodelWithReference tmodel with repositoryLocations containing the keyword referencedTarget
    */
   public TargetModel getReferencedModelToGenerate(final TargetModel model) {
     final TargetModel tmodelWithReference = EcoreUtil.<TargetModel>copy(model);
@@ -62,7 +65,7 @@ public class ReferencedTargetHelper {
   }
   
   public String renameTmodel(final TargetModel model) {
-    final String renamedTmodel = "referencedTarget";
+    final String renamedTmodel = ReferencedTargetHelper.TARGET_NAME;
     model.setName(renamedTmodel);
     return model.getName();
   }
@@ -85,7 +88,11 @@ public class ReferencedTargetHelper {
   
   public boolean parentIsProxy(final TargetModel model) {
     final TargetModel parentTarget = model.getSuper();
-    return parentTarget.eIsProxy();
+    if ((parentTarget != null)) {
+      return parentTarget.eIsProxy();
+    } else {
+      return false;
+    }
   }
   
   /**
@@ -93,15 +100,15 @@ public class ReferencedTargetHelper {
    * In the project the targetFile is searched with the outputPath.
    * Checks if the targetFile is located directly in the project folder or in an extra folder.
    * 
-   * @Param   TargetModel tmodel with references
-   * @Param   String  outputDirectory of generated targetFile
-   * @Param   URI uri of original tmodel
-   * @returns IFile targetFile.
+   * @param model tmodel with references
+   * @param outputDirectory output directory of generated targetFile
+   * @param uri uri of original tmodel
+   * @return targetFile
    */
   public IFile findTargetfileOfTmodel(final TargetModel model, final String outputDirectory, final URI uri) {
     String _name = model.getName();
     String _plus = ("/" + _name);
-    final String tmodelName = (_plus + ".target");
+    final String tmodelName = (_plus + OvertargetGenerator.TARGET_FILE_EXTENSION);
     final IWorkspaceRoot workspace = ResourcesPlugin.getWorkspace().getRoot();
     String _platformString = uri.toPlatformString(true);
     Path _path = new Path(_platformString);

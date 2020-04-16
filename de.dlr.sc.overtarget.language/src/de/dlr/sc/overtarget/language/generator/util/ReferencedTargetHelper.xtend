@@ -19,18 +19,21 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.runtime.Path
 import org.eclipse.emf.common.util.URI
+import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
 
 /**
  * This class processes the model data for generation
  */
 class ReferencedTargetHelper {
+	public static val TARGET_NAME = "targetForReferences"
+	
 	
 	/**
 	 * This method copies the original tmodel and
 	 * looks for all repositoryLocations without a referenced target
 	 * 
-	 * @param   TargetModel original tmodel with unresolved references
-	 * @returns TargetModel tmodel with repositoryLocations containing the keyword referencedTarget
+	 * @param model original tmodel with unresolved references
+	 * @return tmodelWithReference tmodel with repositoryLocations containing the keyword referencedTarget
 	 */
 	def getReferencedModelToGenerate(TargetModel model) {
 		val tmodelWithReference = EcoreUtil.copy(model)
@@ -54,7 +57,7 @@ class ReferencedTargetHelper {
 	}
 
 	def renameTmodel(TargetModel model) {
-		val renamedTmodel = "referencedTarget"
+		val renamedTmodel = TARGET_NAME
 		model.name = renamedTmodel
 		return model.name
 		}
@@ -74,7 +77,11 @@ class ReferencedTargetHelper {
 	
 	def parentIsProxy(TargetModel model) {
 		val parentTarget = model.super
+		if (parentTarget !== null) {
 		return parentTarget.eIsProxy
+		} else {
+			return false
+		}
 	}
 
 	/**
@@ -82,13 +89,13 @@ class ReferencedTargetHelper {
 	 * In the project the targetFile is searched with the outputPath.
 	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
 	 * 
-	 * @Param   TargetModel tmodel with references
-	 * @Param   String  outputDirectory of generated targetFile
-	 * @Param   URI uri of original tmodel
-	 * @returns IFile targetFile.
+	 * @param model tmodel with references
+	 * @param outputDirectory output directory of generated targetFile
+	 * @param uri uri of original tmodel
+	 * @return targetFile
 	 */
 	def findTargetfileOfTmodel(TargetModel model, String outputDirectory, URI uri) {
-		val tmodelName = "/" + model.name + ".target"
+		val tmodelName = "/" + model.name + OvertargetGenerator.TARGET_FILE_EXTENSION
 		val workspace = ResourcesPlugin.workspace.root
 		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
 		val project = tmodelFile.project

@@ -48,7 +48,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Generate Reference Target', 'Generate a reference target to resolve the target.', '', 
+		acceptor.accept(issue, 'Generate Target for References', '', '', 
 			new IModification() {
 			
 			override apply(IModificationContext context) throws Exception {

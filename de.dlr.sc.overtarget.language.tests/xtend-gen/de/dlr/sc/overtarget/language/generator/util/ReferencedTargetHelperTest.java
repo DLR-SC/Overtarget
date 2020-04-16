@@ -74,13 +74,13 @@ public class ReferencedTargetHelperTest {
   
   private final ReferencedTargetHelper refTargetHelper = new ReferencedTargetHelper();
   
-  private TargetModel referencedTarget;
+  private TargetModel targetForReferences;
   
   @Before
   public void setUp() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Target referencedTarget extends proxy {");
+      _builder.append("Target targetForReferences extends proxy {");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -100,7 +100,7 @@ public class ReferencedTargetHelperTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this.referencedTarget = this._parseHelper.parse(_builder);
+      this.targetForReferences = this._parseHelper.parse(_builder);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -113,8 +113,8 @@ public class ReferencedTargetHelperTest {
     EObject _get = testTmodelWithReferenceResource.getContents().get(0);
     final TargetModel testTmodelWithReference = ((TargetModel) _get);
     final TargetModel tmodelWithReference = this.refTargetHelper.getReferencedModelToGenerate(testTmodelWithReference);
-    final String expectedTmodelName = this.referencedTarget.getName();
-    final boolean expectedRepositoryLocation = this.referencedTarget.getRepositoryLocations().get(0).isReferencedTarget();
+    final String expectedTmodelName = this.targetForReferences.getName();
+    final boolean expectedRepositoryLocation = this.targetForReferences.getRepositoryLocations().get(0).isReferencedTarget();
     Assert.assertEquals(Boolean.valueOf(expectedRepositoryLocation), Boolean.valueOf(tmodelWithReference.getRepositoryLocations().get(0).isReferencedTarget()));
     Assert.assertEquals(expectedTmodelName, tmodelWithReference.getName());
   }
@@ -124,7 +124,7 @@ public class ReferencedTargetHelperTest {
     EObject _get = this.testTmodelResource.getContents().get(0);
     final TargetModel testTmodel = ((TargetModel) _get);
     final String renamedTmodel = this.refTargetHelper.renameTmodel(testTmodel);
-    final String expectedRenamedTmodel = "referencedTarget";
+    final String expectedRenamedTmodel = ReferencedTargetHelper.TARGET_NAME;
     Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTmodel, renamedTmodel);
   }
   
@@ -156,6 +156,9 @@ public class ReferencedTargetHelperTest {
     final TargetModel proxyTmodel = ((TargetModel) _get_1);
     final boolean parentIsProxy = this.refTargetHelper.parentIsProxy(proxyTmodel);
     Assert.assertTrue("ParentTarget is proxy", parentIsProxy);
+    EObject _get_2 = this.parentTmodelResource.getContents().get(0);
+    final TargetModel tmodelWithoutParent = ((TargetModel) _get_2);
+    Assert.assertFalse("Tmodel has no parent tmodel.", this.refTargetHelper.parentIsProxy(tmodelWithoutParent));
   }
   
   @Test

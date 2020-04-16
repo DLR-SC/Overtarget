@@ -56,13 +56,13 @@ class ReferencedTargetHelperTest {
 	
 	val refTargetHelper = new ReferencedTargetHelper()
 	
-	TargetModel referencedTarget
+	TargetModel targetForReferences
 	
 	@Before
 	def void setUp() {
 		
-		referencedTarget = '''
-		Target referencedTarget extends proxy {
+		targetForReferences = '''
+		Target targetForReferences extends proxy {
 			
 			Import proxyImport
 			
@@ -80,8 +80,8 @@ class ReferencedTargetHelperTest {
 		val testTmodelWithReference = testTmodelWithReferenceResource.contents.get(0) as TargetModel
 		val tmodelWithReference = refTargetHelper.getReferencedModelToGenerate(testTmodelWithReference)
 		
-		val expectedTmodelName = referencedTarget.name
-		val expectedRepositoryLocation = referencedTarget.repositoryLocations.get(0).referencedTarget
+		val expectedTmodelName = targetForReferences.name
+		val expectedRepositoryLocation = targetForReferences.repositoryLocations.get(0).referencedTarget
 				
 		Assert.assertEquals(expectedRepositoryLocation, tmodelWithReference.repositoryLocations.get(0).isReferencedTarget)
 		Assert.assertEquals(expectedTmodelName, tmodelWithReference.name)
@@ -91,8 +91,7 @@ class ReferencedTargetHelperTest {
 	def void testRenameTmodel() {
 		val testTmodel = testTmodelResource.contents.get(0) as TargetModel
 		val renamedTmodel = refTargetHelper.renameTmodel(testTmodel)
-		val expectedRenamedTmodel = "referencedTarget"
-
+		val expectedRenamedTmodel = ReferencedTargetHelper.TARGET_NAME
 		Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTmodel, renamedTmodel)
 	}
 
@@ -126,6 +125,9 @@ class ReferencedTargetHelperTest {
 		val parentIsProxy = refTargetHelper.parentIsProxy(proxyTmodel)
 
 		Assert.assertTrue("ParentTarget is proxy", parentIsProxy)
+		
+		val tmodelWithoutParent = parentTmodelResource.contents.get(0) as TargetModel
+		Assert.assertFalse("Tmodel has no parent tmodel.", refTargetHelper.parentIsProxy(tmodelWithoutParent))
 	}
 
 	@Test

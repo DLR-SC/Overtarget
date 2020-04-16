@@ -41,6 +41,8 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 public class OvertargetGenerator extends AbstractGenerator {
   private static final String DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
   
+  public static final String TARGET_FILE_EXTENSION = ".target";
+  
   private final ReferencedTargetHelper RefTargetHelper = new ReferencedTargetHelper();
   
   /**
@@ -59,7 +61,7 @@ public class OvertargetGenerator extends AbstractGenerator {
           this.generateTargetToResolveReferences(model, fsa);
         } else {
           String _name = model.getName();
-          String _plus = (_name + ".target");
+          String _plus = (_name + OvertargetGenerator.TARGET_FILE_EXTENSION);
           fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
         }
       }
@@ -71,13 +73,13 @@ public class OvertargetGenerator extends AbstractGenerator {
    * and sets the target as active target in eclipse
    *  -> unresolved references are resolved
    * 
-   * @Param TargetModel original tmodel with unresolved references
-   * @Param IFileSystemAccess2 fsa
+   * @Param model original tmodel with unresolved references
+   * @Param fsa file system access
    */
   public void generateTargetToResolveReferences(final TargetModel model, final IFileSystemAccess2 fsa) {
     final TargetModel tmodelWithReference = this.RefTargetHelper.getReferencedModelToGenerate(model);
     String _name = tmodelWithReference.getName();
-    String _plus = (_name + ".target");
+    String _plus = (_name + OvertargetGenerator.TARGET_FILE_EXTENSION);
     fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(tmodelWithReference));
     if ((fsa instanceof AbstractFileSystemAccess)) {
       final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
