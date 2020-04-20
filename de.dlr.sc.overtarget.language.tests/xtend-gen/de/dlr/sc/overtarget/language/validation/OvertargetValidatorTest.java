@@ -43,7 +43,7 @@ public class OvertargetValidatorTest {
       _builder.append("Target targetName {}");
       _builder.newLine();
       final String target = _builder.toString();
-      this._validationTestHelper.assertWarning(this._parseHelper.parse(target), TargetmodelPackage.Literals.TARGET_MODEL, OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME, "File name and model name are not the same!");
+      this._validationTestHelper.assertWarning(this._parseHelper.parse(target), TargetmodelPackage.Literals.TARGET_MODEL, OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME, "File name and tmodel name are not the same!");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
