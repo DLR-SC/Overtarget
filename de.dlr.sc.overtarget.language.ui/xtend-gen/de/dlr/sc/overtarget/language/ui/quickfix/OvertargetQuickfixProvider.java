@@ -13,6 +13,7 @@ import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import javax.inject.Inject;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
@@ -62,6 +63,8 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
           if (_contains) {
             final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
             if ((editor instanceof ITextEditor)) {
+              final NullProgressMonitor progressMonitor = new NullProgressMonitor();
+              ((ITextEditor)editor).doSave(progressMonitor);
               final ITextEditor ite = ((ITextEditor) editor);
               final IEditorInput input = ite.getEditorInput();
               new GenerationHandler().runGeneration(input);
