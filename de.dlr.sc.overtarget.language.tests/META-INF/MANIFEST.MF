@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OverTarget Tests
+Bundle-Name: Overtarget Tests
 Bundle-Vendor: DLR (German Aerospace Center)
 Bundle-Version: 1.1.0.qualifier
 Bundle-SymbolicName: de.dlr.sc.overtarget.language.tests;singleton:=true

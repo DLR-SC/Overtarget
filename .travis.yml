@@ -41,7 +41,7 @@ env:
   # are used in a lot of places in this script, e.g. for
   # deployment to sourceforge etc.
   # ----------------------------------------------------------- 
-  - PROJECT_NAME=OverTarget
+  - PROJECT_NAME=Overtarget
   - PROJECT_NAME_GH=DLR-SC/Overtarget
   - PROJECT_NAME_SF=overtarget 
 

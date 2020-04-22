@@ -18,7 +18,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>de.dlr.sc.overtarget.language.tests</artifactId>
-	<name>DLR OverTarget Tests</name>
+	<name>DLR Overtarget Tests</name>
 	
 	<packaging>eclipse-test-plugin</packaging>
 

@@ -18,12 +18,12 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>de.dlr.sc.overtarget.p2updatesite</artifactId>
-	<name>DLR OverTarget P2 Update Site</name>
+	<name>DLR Overtarget P2 Update Site</name>
 
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
-		<build.folder.application>OverTarget</build.folder.application>
+		<build.folder.application>Overtarget</build.folder.application>
 		<build.folder.fullpath>${build.folder.target.p2}/${build.folder.application}/${build.folder.type}</build.folder.fullpath>
 	</properties>
 
