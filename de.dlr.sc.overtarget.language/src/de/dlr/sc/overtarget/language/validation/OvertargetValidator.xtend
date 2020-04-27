@@ -31,7 +31,7 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 		var helper = new ValidatorHelper();
 		val fileName = helper.getFileName(target);
 		if (!fileName.equals(target.name)) {
-			warning('File name and model name are not the same!', target, target.eContainingFeature, FILE_NAME_LIKE_TARGET_NAME)
+			warning('File name and tmodel name are not the same!', target, target.eContainingFeature, FILE_NAME_LIKE_TARGET_NAME)
 		}
 	}
 	
@@ -61,7 +61,7 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 		var extendModel = target.super
 		var extendName = extendModel.name
 		if (tmodelName.equals(extendName)) {
-			error('A target cannot extend its own target.', target, TargetmodelPackage.eINSTANCE.targetModel_Super, TMODEL_EXTENDS_OWN_TMODEL)
+			error('A tmodel cannot extend its own tmodel.', target, TargetmodelPackage.eINSTANCE.targetModel_Super, TMODEL_EXTENDS_OWN_TMODEL)
 		}
 	}
 }
