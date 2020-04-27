@@ -20,7 +20,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.generator.AbstractFileSystemAccess
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 
 /**
