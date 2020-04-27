@@ -153,25 +153,25 @@ target = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.antlr.runtime" version="4.3.0.v201502022030"/>
 		<repository location="http://p2-mirror.sc.dlr.de/tools/orbit/downloads/drops/R20160520211859/repository/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.swtbot.eclipse.feature.group" version="2.5.0.v201609021837"/>
 		<unit id="org.eclipse.swtbot.eclipse.test.junit.feature.group" version="2.5.0.201609021837"/>
 		<unit id="org.eclipse.swtbot.feature.group" version="0.0.0"/>
 		<repository location="http://download.eclipse.org/technology/swtbot/releases/2.5.0"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.2.0.201606020942"/>
 		<repository location="http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.nebula.widgets.gallery.feature.feature.group" version="1.0.0.201706221838"/>
 		<repository location="http://download.eclipse.org/nebula/releases/latest"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.polarion.eclipse.team.svn.connector.svnkit18.feature.group" version="6.0.4.I20161211-1700"/>
 		<repository location="http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.3.2.201709090201"/>
 		<unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170609-0928"/>
@@ -184,7 +184,7 @@ target = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<unit id="org.eclipse.platform.sdk" version="4.7.1.M20170906-1700"/>
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
 		<repository location="http://p2-mirror.sc.dlr.de/releases/oxygen/"/>
-		</location>              
+		</location>
 		</locations>
 		<environment>
 		<os>aix</os>
@@ -203,19 +203,19 @@ target = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<unit id="org.eclipse.swtbot.eclipse.test.junit.feature.group" version="2.5.0.201609021837"/>
 		<unit id="org.eclipse.swtbot.feature.group" version="0.0.0"/>
 		<repository location="http://download.eclipse.org/technology/swtbot/releases/2.5.0"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.2.0.201606020942"/>
 		<repository location="http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.nebula.widgets.gallery.feature.feature.group" version="1.0.0.201706221838"/>
 		<repository location="http://download.eclipse.org/nebula/releases/latest"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.polarion.eclipse.team.svn.connector.svnkit18.feature.group" version="6.0.4.I20161211-1700"/>
 		<repository location="http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.3.2.201709090201"/>
 		<unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170609-0928"/>
@@ -225,15 +225,15 @@ target = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<unit id="org.eclipse.platform.sdk" version="4.7.1.M20170906-1700"/>
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
 		<repository location="http://p2-mirror.sc.dlr.de/releases/oxygen/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group" version="6.0.4.I20161211-1700"/>
 		<repository location="http://p2-misdsdrror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group" version="6.0.4.I20161211-1700"/>
 		<repository location="http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/"/>
-		</location>              
+		</location>
 		</locations>
 		<environment>
 		<os>aix</os>
@@ -255,19 +255,19 @@ target = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<unit id="org.eclipse.swtbot.eclipse.test.junit.feature.group" version="2.5.0.201609021837"/>
 		<unit id="org.eclipse.swtbot.feature.group" version="0.0.0"/>
 		<repository location="http://download.eclipse.org/technology/swtbot/releases/2.5.0"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.2.0.201606020942"/>
 		<repository location="http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.nebula.widgets.gallery.feature.feature.group" version="1.0.0.201706221838"/>
 		<repository location="http://download.eclipse.org/nebula/releases/latest"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.polarion.eclipse.team.svn.connector.svnkit18.feature.group" version="6.0.4.I20161211-1700"/>
 		<repository location="http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.3.2.201709090201"/>
 		<unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170609-0928"/>
@@ -277,15 +277,15 @@ target = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<unit id="org.eclipse.platform.sdk" version="4.7.1.M20170906-1700"/>
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
 		<repository location="http://p2-mirror.sc.dlr.de/releases/oxygen/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group" version="6.0.4.I20161211-1700"/>
 		<repository location="http://p2-misdsdrror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/"/>
-		</location>              
+		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.polarion.llllllas.eclipse.team.svn.connector.svnkit18.feature.group" version="6.0.4.I20161211-1700"/>
 		<repository location="http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/"/>
-		</location>              
+		</location>
 		</locations>
 		<environment>
 		<os>win32</os>
