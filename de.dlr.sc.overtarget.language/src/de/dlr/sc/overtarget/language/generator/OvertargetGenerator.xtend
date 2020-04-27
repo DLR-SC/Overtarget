@@ -61,13 +61,15 @@ class OvertargetGenerator extends AbstractGenerator {
 	def generateTargetToResolveReferences(TargetModel model, IFileSystemAccess2 fsa) {
 		val tmodelWithReference = RefTargetHelper.getReferencedModelToGenerate(model)
 		fsa.generateFile(tmodelWithReference.name + TARGET_FILE_EXTENSION, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, tmodelWithReference.compile)
-		if (fsa instanceof AbstractFileSystemAccess) { //Check this to have access to outputConfigurations
-			val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
-			val originalUri = EcoreUtil.getURI(model)
-			val targetFile = RefTargetHelper.findTargetfileOfTmodel(tmodelWithReference, outputPath, originalUri)
-			RefTargetHelper.setFileAsActiveTarget(targetFile)
-		}
 	}
+	
+//	def prepareToSetFileAsTarget(TargetModel model, IFileSystemAccess2 fsa) {
+//		if (fsa instanceof AbstractFileSystemAccess) { //Check this to have access to outputConfigurations
+//			val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
+//			val originalUri = EcoreUtil.getURI(model)
+//			val targetFile = RefTargetHelper.findTargetfileOfTmodel(model, outputPath, originalUri)
+//		}
+//	}
 
 	/** 
 	 * Compiles the target model into a file
