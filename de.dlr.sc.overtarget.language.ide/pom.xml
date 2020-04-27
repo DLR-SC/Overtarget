@@ -18,7 +18,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>de.dlr.sc.overtarget.language.ide</artifactId>
-	<name>DLR OverTarget Language IDE</name>
+	<name>DLR Overtarget Language IDE</name>
 	
 	<packaging>eclipse-plugin</packaging>
 </project>

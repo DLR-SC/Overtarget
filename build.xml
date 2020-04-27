@@ -7,7 +7,7 @@ http://www.eclipse.org/legal/epl-2.0.
 
 SPDX-License-Identifier: EPL-2.0
 -->
-<project name="OverTarget" default="updateVersions" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="Overtarget" default="updateVersions" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
 	<description>
   	  Additional Build Preparations e.g. Updating Version Numbers
   	</description>
