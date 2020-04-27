@@ -76,6 +76,16 @@
 					</with>
 			</and>
 		</definition>
+		<definition id="de.dlr.sc.overtarget.language.Overtarget.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+					<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+							value="de.dlr.sc.overtarget.language.Overtarget" 
+							forcePluginActivation="true"/>
+					</with>
+			</and>
+		</definition>
 	</extension>
 	<extension
 		point="org.eclipse.ui.preferencePages">
@@ -435,7 +445,7 @@
 			<visibleWhen
 				checkEnabled="false">
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="de.dlr.sc.overtarget.language.Overtarget.opened">
 				</reference>
 			</visibleWhen>
 		</command>
@@ -445,7 +455,7 @@
      <visibleWhen
            checkEnabled="false">
         <reference
-              definitionId="isActiveEditorAnInstanceOfXtextEditor">
+              definitionId="de.dlr.sc.overtarget.language.Overtarget.opened">
         </reference>
      </visibleWhen>
   </command>
@@ -455,7 +465,7 @@
 				<visibleWhen
 					checkEnabled="false">
 					<reference
-						definitionId="isActiveEditorAnInstanceOfXtextEditor">
+						definitionId="de.dlr.sc.overtarget.language.Overtarget.opened">
 					</reference>
 				</visibleWhen>
 		</command>
