@@ -119,35 +119,18 @@ class ReferencedTargetHelper {
 	def findTargetFileInProject(IFile file, String outputDirectory) {
 		val project = file.getProject
 		val fileName = "/" + file.name
-		val fileExtension = file.fileExtension
-		if (fileExtension.equals("tmodel")) {
-			val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
-			val outputPath = outputDirectory.toString.replaceFirst(".","")
-			if (outputPath.equals("/")) {
-				val targetFile = project.getFile(targetFileName)
-				if (targetFile.exists){
-					return targetFile
-				}
-			} else {
-				val targetPath = outputPath + targetFileName
-				val targetFileWithFolder = project.getFile(targetPath)
-				if (targetFileWithFolder.exists){
-					return targetFileWithFolder
-				}
+		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
+		val outputPath = outputDirectory.toString.replaceFirst(".","")
+		if (outputPath.equals("/")) {
+			val targetFile = project.getFile(targetFileName)
+			if (targetFile.exists){
+				return targetFile
 			}
 		} else {
-			val outputPath = outputDirectory.toString.replaceFirst(".","")
-			if (outputPath.equals("/")) {
-				val targetFile = project.getFile(fileName)
-				if (targetFile.exists){
-					return targetFile
-				}
-			} else {
-				val targetPath = outputPath + fileName
-				val targetFileWithFolder = project.getFile(targetPath)
-				if (targetFileWithFolder.exists){
-					return targetFileWithFolder
-				}
+			val targetPath = outputPath + targetFileName
+			val targetFileWithFolder = project.getFile(targetPath)
+			if (targetFileWithFolder.exists){
+				return targetFileWithFolder
 			}
 		}
 	}

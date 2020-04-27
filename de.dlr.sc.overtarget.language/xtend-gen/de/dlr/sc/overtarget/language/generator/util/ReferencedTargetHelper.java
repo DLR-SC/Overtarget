@@ -101,42 +101,21 @@ public class ReferencedTargetHelper {
     final IProject project = file.getProject();
     String _name = file.getName();
     final String fileName = ("/" + _name);
-    final String fileExtension = file.getFileExtension();
-    boolean _equals = fileExtension.equals("tmodel");
+    final String targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
+    final String outputPath = outputDirectory.toString().replaceFirst(".", "");
+    boolean _equals = outputPath.equals("/");
     if (_equals) {
-      final String targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
-      final String outputPath = outputDirectory.toString().replaceFirst(".", "");
-      boolean _equals_1 = outputPath.equals("/");
-      if (_equals_1) {
-        final IFile targetFile = project.getFile(targetFileName);
-        boolean _exists = targetFile.exists();
-        if (_exists) {
-          return targetFile;
-        }
-      } else {
-        final String targetPath = (outputPath + targetFileName);
-        final IFile targetFileWithFolder = project.getFile(targetPath);
-        boolean _exists_1 = targetFileWithFolder.exists();
-        if (_exists_1) {
-          return targetFileWithFolder;
-        }
+      final IFile targetFile = project.getFile(targetFileName);
+      boolean _exists = targetFile.exists();
+      if (_exists) {
+        return targetFile;
       }
     } else {
-      final String outputPath_1 = outputDirectory.toString().replaceFirst(".", "");
-      boolean _equals_2 = outputPath_1.equals("/");
-      if (_equals_2) {
-        final IFile targetFile_1 = project.getFile(fileName);
-        boolean _exists_2 = targetFile_1.exists();
-        if (_exists_2) {
-          return targetFile_1;
-        }
-      } else {
-        final String targetPath_1 = (outputPath_1 + fileName);
-        final IFile targetFileWithFolder_1 = project.getFile(targetPath_1);
-        boolean _exists_3 = targetFileWithFolder_1.exists();
-        if (_exists_3) {
-          return targetFileWithFolder_1;
-        }
+      final String targetPath = (outputPath + targetFileName);
+      final IFile targetFileWithFolder = project.getFile(targetPath);
+      boolean _exists_1 = targetFileWithFolder.exists();
+      if (_exists_1) {
+        return targetFileWithFolder;
       }
     }
     return null;
