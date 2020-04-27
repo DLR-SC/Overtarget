@@ -78,36 +78,6 @@ class ReferencedTargetHelper {
 		}
 	}
 
-//	/**
-//	 * Locates the tmodelFile and finds the project. 
-//	 * In the project the targetFile is searched with the outputPath.
-//	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
-//	 * 
-//	 * @param model tmodel with references
-//	 * @param outputDirectory output directory of generated targetFile
-//	 * @param uri uri of original tmodel
-//	 * @return targetFile
-//	 */
-//	def findTargetfileOfTmodel(TargetModel model, String outputDirectory, URI uri) {
-//		val tmodelName = "/" + model.name + OvertargetGenerator.TARGET_FILE_EXTENSION
-//		val workspace = ResourcesPlugin.workspace.root
-//		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
-//		val project = tmodelFile.project
-//		val outputPath = outputDirectory.toString.replaceFirst(".","")
-//		if (outputPath.equals("/")) {
-//			val targetFile = project.getFile(tmodelName)
-//			if (targetFile.exists){
-//				return targetFile
-//			}
-//		} else {
-//			val targetPath = outputPath + tmodelName
-//			val targetFileWithFolder = project.getFile(targetPath)
-//			if (targetFileWithFolder.exists){
-//				return targetFileWithFolder
-//			}
-//		}
-//	}
-//	
 	/**
 	 * In the project the targetFile is searched with the outputPath.
 	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
