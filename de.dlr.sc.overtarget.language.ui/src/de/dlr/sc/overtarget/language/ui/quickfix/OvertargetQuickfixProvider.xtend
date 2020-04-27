@@ -22,6 +22,9 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtext.ui.editor.model.edit.IModification
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext
+import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
+import org.eclipse.ui.IFileEditorInput
 
 /**
  * Custom quickfixes.
@@ -32,7 +35,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess
-	
+
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Fix Working System', 'Replace with correct Windowing System.', 'upcase.png') [
@@ -53,11 +56,26 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 			
 			override apply(IModificationContext context) throws Exception {
 				if (issue.message.contains("Couldn't resolve reference to")) {
+					val genHandler = new GenerationHandler();
+					val refTargetHelper = new ReferencedTargetHelper()
+					val targetPlatHelper = new TargetPlatformHelper()
+				
 					val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
 					if (editor instanceof ITextEditor) {
 						val ite = editor as ITextEditor
 						val input = ite.editorInput
-						new GenerationHandler().runGeneration(input);
+						genHandler.runGeneration(input);
+						
+						//find targetForReferences.target in directory and set it as active target
+						val fileEditorInput = input as IFileEditorInput
+						val file = fileEditorInput.file
+						val outputDirectory = genHandler.getOutputConfigurations(input)
+						val targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory)
+						targetPlatHelper.asActiveTarget = targetForReferencesFile;
+						
+						//find original targetFile and set it as active target
+						val targetFile = refTargetHelper.findTargetFileInProject(file, outputDirectory)
+						targetPlatHelper.asActiveTarget = targetFile
 					}
 				}
 			}
