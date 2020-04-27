@@ -51,7 +51,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Generate Target for References', '', '', 
+		acceptor.accept(issue, 'Generate targetForReferences to resolve references', 'Generates a targetForReferences and sets it as active target. \n After that the actual target, which could not be resolved, is set as active target.', '', 
 			new IModification() {
 			
 			override apply(IModificationContext context) throws Exception {
