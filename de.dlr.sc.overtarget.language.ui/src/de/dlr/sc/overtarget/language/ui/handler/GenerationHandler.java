@@ -84,7 +84,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		IProject project = file.getProject();
 		ResourceSet rs = resourceSetProvider.get(project);
 		Resource r = rs.getResource(uri, true);
-
+		
 		final IGeneratorContext context = new IGeneratorContext() {
 			
 			@Override
@@ -108,6 +108,14 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		
 		OvertargetGenerator generator = new OvertargetGenerator();
 		generator.doGenerate(r, fsa, context);
+	}
+	
+	public String getOutputConfigurations(IEditorInput input) {
+		IFile file = ((FileEditorInput) input).getFile();
+		IProject project = file.getProject();
+		final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
+		String outputPath = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
+		return outputPath;
 	}
 	
 	@Override
