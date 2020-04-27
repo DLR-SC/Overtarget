@@ -22,6 +22,7 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtext.ui.editor.model.edit.IModification
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext
+import org.eclipse.core.runtime.NullProgressMonitor
 
 /**
  * Custom quickfixes.
@@ -55,9 +56,11 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 				if (issue.message.contains("Couldn't resolve reference to")) {
 					val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
 					if (editor instanceof ITextEditor) {
+						val progressMonitor = new NullProgressMonitor()
+						editor.doSave(progressMonitor) //saves the made changes in the file
 						val ite = editor as ITextEditor
 						val input = ite.editorInput
-						new GenerationHandler().runGeneration(input);
+						new GenerationHandler().runGeneration(input)
 					}
 				}
 			}
