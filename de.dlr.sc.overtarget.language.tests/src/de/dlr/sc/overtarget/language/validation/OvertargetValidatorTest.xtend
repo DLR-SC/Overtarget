@@ -34,7 +34,7 @@ class OvertargetValidatorTest {
 		val target = '''
 			Target targetName {}
 		'''
-		target.parse.assertWarning(TargetmodelPackage.Literals.TARGET_MODEL, OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME, 'File name and model name are not the same!')
+		target.parse.assertWarning(TargetmodelPackage.Literals.TARGET_MODEL, OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME, 'File name and tmodel name are not the same!')
 	}
 
 	@Test

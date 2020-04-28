@@ -41,7 +41,7 @@ env:
   # are used in a lot of places in this script, e.g. for
   # deployment to sourceforge etc.
   # ----------------------------------------------------------- 
-  - PROJECT_NAME=OverTarget
+  - PROJECT_NAME=Overtarget
   - PROJECT_NAME_GH=DLR-SC/Overtarget
   - PROJECT_NAME_SF=overtarget 
 
@@ -182,7 +182,7 @@ jobs:
       - (grep -n "\[\(WARN\|WARNING\|ERROR\)\]" maven.log \
         | grep -v "\[WARNING\] Checksum validation failed" \
         | grep -v "\[WARNING\] Could not validate integrity of download" \
-        || exit 0 && exit 1;))
+        || exit 0 && exit 1;)
       - echo "Check for failed test cases:"
       - (grep -n "<<< FAILURE!" maven.log || exit 0 && exit 1;)
       - ant jacocoPrepareDependencies

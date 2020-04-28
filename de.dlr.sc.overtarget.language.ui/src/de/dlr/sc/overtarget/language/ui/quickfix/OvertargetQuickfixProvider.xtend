@@ -26,6 +26,7 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 import org.eclipse.ui.IFileEditorInput
 
+
 /**
  * Custom quickfixes.
  *
@@ -62,6 +63,8 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 				
 					val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
 					if (editor instanceof ITextEditor) {
+						val progressMonitor = new NullProgressMonitor()
+						editor.doSave(progressMonitor) //saves the made changes in the file
 						val ite = editor as ITextEditor
 						val input = ite.editorInput
 						genHandler.runGeneration(input);

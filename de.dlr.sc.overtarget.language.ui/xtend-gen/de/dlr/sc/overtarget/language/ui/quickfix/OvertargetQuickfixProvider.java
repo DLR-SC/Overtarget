@@ -69,6 +69,8 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
             final TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
             final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
             if ((editor instanceof ITextEditor)) {
+              final NullProgressMonitor progressMonitor = new NullProgressMonitor();
+              ((ITextEditor)editor).doSave(progressMonitor);
               final ITextEditor ite = ((ITextEditor) editor);
               final IEditorInput input = ite.getEditorInput();
               genHandler.runGeneration(input);

@@ -16,6 +16,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,7 +25,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
@@ -66,6 +66,8 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		IEditorPart editor = HandlerUtil.getActiveEditor(event);
 		if (editor instanceof ITextEditor) {
 			IEditorInput input = null;
+			IProgressMonitor progressMonitor = new NullProgressMonitor();
+			editor.doSave(progressMonitor);
 			if (editor != null) {
 				input = editor.getEditorInput();
 			}
@@ -96,10 +98,9 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 				}
 			};
 			
-			
-			final EclipseResourceFileSystemAccess2 fsa = fileSystemAccessProvider.get();
+	    final EclipseResourceFileSystemAccess2 fsa = fileSystemAccessProvider.get();
 			fsa.setMonitor(new NullProgressMonitor());
-			
+
 			/**
 			 * Get project specific output configurations 
 			 * and set them in the fileSystemAccess outputPath for the generating process
