@@ -25,6 +25,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
@@ -100,12 +101,11 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			
 			final EclipseResourceFileSystemAccess2 fsa = fileSystemAccessProvider.get();
 			fsa.setMonitor(new NullProgressMonitor());
-		
+
 			/**
 			 * Get project specific output configurations 
 			 * and set them in the fileSystemAccess outputPath for the generating process
 			 */
-			
 			final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
 			String outputPath = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
 			fsa.setOutputPath("de.dlr.sc.overtarget.output", outputPath);
@@ -113,9 +113,15 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			
 			OvertargetGenerator generator = new OvertargetGenerator();
 			generator.doGenerate(r, fsa, context);
-			
 		}
-		
+	}
+
+	public String getOutputConfigurations(IEditorInput input) {
+		IFile file = ((FileEditorInput) input).getFile();
+		IProject project = file.getProject();
+		final EclipseOutputConfigurationProvider configProvider = eclipseOutputConfigProvider.get();
+		String outputPath = configProvider.getPreferenceStoreAccess().getContextPreferenceStore(project).getString("outlet.de.dlr.sc.overtarget.output.directory");
+		return outputPath;
 	}
 	
 	@Override

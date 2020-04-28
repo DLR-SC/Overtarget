@@ -9,13 +9,17 @@
  */
 package de.dlr.sc.overtarget.language.ui.quickfix;
 
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
+import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import javax.inject.Inject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.diagnostics.Diagnostic;
@@ -55,19 +59,29 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
   public void fixCannotResolveReference(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    acceptor.accept(issue, "Generate Target for References", "", "", 
+    acceptor.accept(issue, "Use temporary target to resolve tmodel references", "Generates a temporary target for resolving tmodel references and sets it as active target. \n After resolving the references of this target, it is set as active target again.", "", 
       new IModification() {
         @Override
         public void apply(final IModificationContext context) throws Exception {
           boolean _contains = issue.getMessage().contains("Couldn\'t resolve reference to");
           if (_contains) {
+            final GenerationHandler genHandler = new GenerationHandler();
+            final ReferencedTargetHelper refTargetHelper = new ReferencedTargetHelper();
+            final TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
             final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
             if ((editor instanceof ITextEditor)) {
               final NullProgressMonitor progressMonitor = new NullProgressMonitor();
               ((ITextEditor)editor).doSave(progressMonitor);
               final ITextEditor ite = ((ITextEditor) editor);
               final IEditorInput input = ite.getEditorInput();
-              new GenerationHandler().runGeneration(input);
+              genHandler.runGeneration(input);
+              final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
+              final IFile file = fileEditorInput.getFile();
+              final String outputDirectory = genHandler.getOutputConfigurations(input);
+              final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
+              targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
+              final IFile targetFile = refTargetHelper.findTargetFileInProject(file, outputDirectory);
+              targetPlatHelper.setAsActiveTarget(targetFile);
             }
           }
         }

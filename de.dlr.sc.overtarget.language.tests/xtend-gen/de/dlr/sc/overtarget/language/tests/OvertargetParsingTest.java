@@ -369,7 +369,7 @@ public class OvertargetParsingTest {
       _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/tools/orbit/downloads/drops/R20160520211859/repository/\"/>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
-      _builder_5.append("</location>              ");
+      _builder_5.append("</location>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
       _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -387,7 +387,7 @@ public class OvertargetParsingTest {
       _builder_5.append("<repository location=\"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"/>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
-      _builder_5.append("</location>              ");
+      _builder_5.append("</location>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
       _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -399,7 +399,7 @@ public class OvertargetParsingTest {
       _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/\"/>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
-      _builder_5.append("</location>              ");
+      _builder_5.append("</location>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
       _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -411,7 +411,7 @@ public class OvertargetParsingTest {
       _builder_5.append("<repository location=\"http://download.eclipse.org/nebula/releases/latest\"/>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
-      _builder_5.append("</location>              ");
+      _builder_5.append("</location>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
       _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -423,7 +423,7 @@ public class OvertargetParsingTest {
       _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
-      _builder_5.append("</location>              ");
+      _builder_5.append("</location>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
       _builder_5.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -462,7 +462,7 @@ public class OvertargetParsingTest {
       _builder_5.append("<repository location=\"http://p2-mirror.sc.dlr.de/releases/oxygen/\"/>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
-      _builder_5.append("</location>              ");
+      _builder_5.append("</location>");
       _builder_5.newLine();
       _builder_5.append("\t\t");
       _builder_5.append("</locations>");
@@ -517,7 +517,7 @@ public class OvertargetParsingTest {
       _builder_6.append("<repository location=\"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"/>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
-      _builder_6.append("</location>              ");
+      _builder_6.append("</location>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
       _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -529,7 +529,7 @@ public class OvertargetParsingTest {
       _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/\"/>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
-      _builder_6.append("</location>              ");
+      _builder_6.append("</location>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
       _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -541,7 +541,7 @@ public class OvertargetParsingTest {
       _builder_6.append("<repository location=\"http://download.eclipse.org/nebula/releases/latest\"/>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
-      _builder_6.append("</location>              ");
+      _builder_6.append("</location>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
       _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -553,7 +553,7 @@ public class OvertargetParsingTest {
       _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
-      _builder_6.append("</location>              ");
+      _builder_6.append("</location>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
       _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -583,7 +583,7 @@ public class OvertargetParsingTest {
       _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/releases/oxygen/\"/>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
-      _builder_6.append("</location>              ");
+      _builder_6.append("</location>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
       _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -595,7 +595,7 @@ public class OvertargetParsingTest {
       _builder_6.append("<repository location=\"http://p2-misdsdrror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
-      _builder_6.append("</location>              ");
+      _builder_6.append("</location>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
       _builder_6.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -607,7 +607,7 @@ public class OvertargetParsingTest {
       _builder_6.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
-      _builder_6.append("</location>              ");
+      _builder_6.append("</location>");
       _builder_6.newLine();
       _builder_6.append("\t\t");
       _builder_6.append("</locations>");
@@ -662,7 +662,7 @@ public class OvertargetParsingTest {
       _builder_7.append("<repository location=\"http://download.eclipse.org/technology/swtbot/releases/2.5.0\"/>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
-      _builder_7.append("</location>              ");
+      _builder_7.append("</location>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
       _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -674,7 +674,7 @@ public class OvertargetParsingTest {
       _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/edapt/releases/12x/120/\"/>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
-      _builder_7.append("</location>              ");
+      _builder_7.append("</location>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
       _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -686,7 +686,7 @@ public class OvertargetParsingTest {
       _builder_7.append("<repository location=\"http://download.eclipse.org/nebula/releases/latest\"/>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
-      _builder_7.append("</location>              ");
+      _builder_7.append("</location>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
       _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -698,7 +698,7 @@ public class OvertargetParsingTest {
       _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
-      _builder_7.append("</location>              ");
+      _builder_7.append("</location>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
       _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -728,7 +728,7 @@ public class OvertargetParsingTest {
       _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/releases/oxygen/\"/>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
-      _builder_7.append("</location>              ");
+      _builder_7.append("</location>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
       _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -740,7 +740,7 @@ public class OvertargetParsingTest {
       _builder_7.append("<repository location=\"http://p2-misdsdrror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
-      _builder_7.append("</location>              ");
+      _builder_7.append("</location>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
       _builder_7.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
@@ -752,7 +752,7 @@ public class OvertargetParsingTest {
       _builder_7.append("<repository location=\"http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/\"/>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
-      _builder_7.append("</location>              ");
+      _builder_7.append("</location>");
       _builder_7.newLine();
       _builder_7.append("\t\t");
       _builder_7.append("</locations>");
@@ -854,7 +854,7 @@ public class OvertargetParsingTest {
   
   @Test
   public void testUpdateVersions() {
-    String selectedLines = "TextSelection [offset: 123, startLine: 5, endLine: 16, length: 645, text: \t TargetJRE JavaSE-1.1   \n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/{  \n\t\t\t \t Unit org.polarion.eclipse.team.svn.connector.svnkit18.feature.group version 1.1.1;   \n\t\t\t }\n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/releases/oxygen/ {  \n\t\t\t\t Unit org.eclipse.emf.compare.ide.ui.feature.group version 1.1.1;\n\t\t\t \t Unit org.eclipse.emf.sdk.feature.group version 1.1.1;\n\t\t\t \t Unit org.eclipse.emf.transaction.sdk.feature.group version newest;\n\t\t\t \t Unit org.eclipse.equinox.executable.feature.group version newest;\n\t\t\t } \n\t\t}, document: org.eclipse.xtext.ui.editor.model.XtextDocument@1e060d4b]";
+    String selectedLines = "TextSelection [offset: 123, startLine: 5, endLine: 16, length: 645, text: \t TargetJRE JavaSE-1.1   \r\n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/projects/subversive/download/eclipse/6.0/neon-site/{  \r\n\t\t\t \t Unit org.polarion.eclipse.team.svn.connector.svnkit18.feature.group version 1.1.1;   \r\n\t\t\t }\r\n\t\t\t RepositoryLocation http://p2-mirror.sc.dlr.de/releases/oxygen/ {  \r\n\t\t\t\t Unit org.eclipse.emf.compare.ide.ui.feature.group version 1.1.1;\r\n\t\t\t \t Unit org.eclipse.emf.sdk.feature.group version 1.1.1;\r\n\t\t\t \t Unit org.eclipse.emf.transaction.sdk.feature.group version newest;\r\n\t\t\t \t Unit org.eclipse.equinox.executable.feature.group version newest;\r\n\t\t\t } \r\n\t\t}, document: org.eclipse.xtext.ui.editor.model.XtextDocument@1e060d4b]";
     QueryManager mockQueryManager = new QueryManager() {
       @Override
       public ArrayList<Unit> getUnits(final EObject model) {
