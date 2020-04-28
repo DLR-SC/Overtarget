@@ -78,17 +78,17 @@ class ReferencedTargetHelper {
 		}
 	}
 
-	/**
+/**
 	 * In the project the targetFile is searched with the outputPath.
 	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
 	 * 
 	 * @param file targetFile which is searched for
 	 * @param outputDirectory output directory of generated targetFile
+	 * @param fileName name of the tmodel/targetFile
 	 * @return targetFile
 	 */
-	def findTargetFileInProject(IFile file, String outputDirectory) {
+	def findTargetFileInProject(IFile file, String outputDirectory, String fileName) {
 		val project = file.getProject
-		val fileName = "/" + file.name
 		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
 		val outputPath = outputDirectory.toString.replaceFirst(".","")
 		if (outputPath.equals("/")) {
@@ -104,6 +104,21 @@ class ReferencedTargetHelper {
 			}
 		}
 	}
+
+
+	/**
+	 * In the project the targetFile is searched with the outputPath.
+	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
+	 * 
+	 * @param file targetFile which is searched for
+	 * @param outputDirectory output directory of generated targetFile
+	 * @return targetFile
+	 */
+	def findTargetFileInProject(IFile file, String outputDirectory) {
+		val fileName = "/" + file.name
+		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
+		return findTargetFileInProject(file, outputDirectory, targetFileName)
+	}
 	
 	/**
 	 * In the project the targetForReferences file is searched with the outputPath.
@@ -114,20 +129,7 @@ class ReferencedTargetHelper {
 	 * @return targetForReferences 
 	 */
 	def findTargetForReferencesFile(IFile file, String outputDirectory) {
-		val project = file.getProject
 		val fileName = "/" + TARGET_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
-		val outputPath = outputDirectory.toString.replaceFirst(".","")
-		if (outputPath.equals("/")) {
-			val targetForReferences = project.getFile(fileName)
-			if (targetForReferences.exists){
-				return targetForReferences
-			}
-		} else {
-			val targetPath = outputPath + fileName
-			val targetForReferencesWithFolder = project.getFile(targetPath)
-			if (targetForReferencesWithFolder.exists){
-				return targetForReferencesWithFolder
-			}
-		}
+		return findTargetFileInProject(file, outputDirectory, fileName)
 	}
 }

@@ -95,12 +95,11 @@ public class ReferencedTargetHelper {
    * 
    * @param file targetFile which is searched for
    * @param outputDirectory output directory of generated targetFile
+   * @param fileName name of the tmodel/targetFile
    * @return targetFile
    */
-  public IFile findTargetFileInProject(final IFile file, final String outputDirectory) {
+  public IFile findTargetFileInProject(final IFile file, final String outputDirectory, final String fileName) {
     final IProject project = file.getProject();
-    String _name = file.getName();
-    final String fileName = ("/" + _name);
     final String targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
     final String outputPath = outputDirectory.toString().replaceFirst(".", "");
     boolean _equals = outputPath.equals("/");
@@ -122,6 +121,21 @@ public class ReferencedTargetHelper {
   }
   
   /**
+   * In the project the targetFile is searched with the outputPath.
+   * Checks if the targetFile is located directly in the project folder or in an extra folder.
+   * 
+   * @param file targetFile which is searched for
+   * @param outputDirectory output directory of generated targetFile
+   * @return targetFile
+   */
+  public IFile findTargetFileInProject(final IFile file, final String outputDirectory) {
+    String _name = file.getName();
+    final String fileName = ("/" + _name);
+    final String targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
+    return this.findTargetFileInProject(file, outputDirectory, targetFileName);
+  }
+  
+  /**
    * In the project the targetForReferences file is searched with the outputPath.
    * Checks if the file is located directly in the project folder or in an extra folder.
    * 
@@ -130,24 +144,7 @@ public class ReferencedTargetHelper {
    * @return targetForReferences
    */
   public IFile findTargetForReferencesFile(final IFile file, final String outputDirectory) {
-    final IProject project = file.getProject();
     final String fileName = (("/" + ReferencedTargetHelper.TARGET_NAME) + OvertargetGenerator.TARGET_FILE_EXTENSION);
-    final String outputPath = outputDirectory.toString().replaceFirst(".", "");
-    boolean _equals = outputPath.equals("/");
-    if (_equals) {
-      final IFile targetForReferences = project.getFile(fileName);
-      boolean _exists = targetForReferences.exists();
-      if (_exists) {
-        return targetForReferences;
-      }
-    } else {
-      final String targetPath = (outputPath + fileName);
-      final IFile targetForReferencesWithFolder = project.getFile(targetPath);
-      boolean _exists_1 = targetForReferencesWithFolder.exists();
-      if (_exists_1) {
-        return targetForReferencesWithFolder;
-      }
-    }
-    return null;
+    return this.findTargetFileInProject(file, outputDirectory, fileName);
   }
 }
