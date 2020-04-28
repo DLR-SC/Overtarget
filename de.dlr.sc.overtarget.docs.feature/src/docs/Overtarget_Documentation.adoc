@@ -1,6 +1,6 @@
 = Overtarget Documentation
 :imagesdir: images
-:title-logo-image:
+:title-logo-image:image:Kreis_Logo.png[Overtarget_Logo]
 :toc:
 :toclevels: 3
 :experimental:  
@@ -66,10 +66,29 @@ _Options to generate a target (highlighted)_
 
 |===
 
-=== Generating a referencedTarget
+
+== Setting a target file as active target
+[cols="35,65"]
+|===
+
+|There are different ways to set a target as active target in eclipse. 
+The usual way is to open the target file which opens the eclipse target editor. Here you can click on "Set as Active Target Platform".
+However, Overtarget serves you with a much more comfortable option to set a target.
+If you want to set your target directly from the tmodel editor you can use the button "Set as Active Target" in the editor toolbar 
+or in the context menu. The target will be automatically loaded and set as the active target platform. |
+
+image:setAsActiveTarget.png[Set as Active Target]
+
+_Set as Active Target_
+
+|===
+
+== Other useful stuff
+=== Solving unresolved references in a tmodel
 Sometimes when extending or importing another target, Eclipse cannot resolve the references and shows errors.
 It is not possible to generate a target with unresolved references. 
-Overtarget solves the problem by generating a referencedTarget. In order to generate a referencedTarget, 
+Overtarget solves the problem by generating a targetForReferences. This targets includes the repository locations 
+which lead to the unresolved references. By setting this target as active target, the references are then. resolved In order to generate a referencedTarget, 
 the repositoryLocation to the unresolved target has to be set with the keyword "ReferencedTarget".
 
 [cols="62a,40a"]
@@ -88,22 +107,4 @@ _Generate referencedTarget_
 Now there should no longer be problems with unresolved references in the actual target. It can now be generated 
 without complications. 
 
-
-
-== Setting a target file as active target
-[cols="35,65"]
-|===
-
-|There are different ways to set a target as active target in eclipse. 
-The usual way is to open the target file which opens the eclipse target editor. Here you can click on "Set as Active Target Platform".
-If you want to set your target directly from the tmodel editor you can use the button "Set as Active Target" in the editor toolbar 
-or in the context menu. The target will be automatically loaded and set as the active target platform. |
-
-image:setAsActiveTarget.png[Set as Active Target]
-
-_Set as Active Target_
-
-|===
-
-== Other useful stuff
 === Updating versions
