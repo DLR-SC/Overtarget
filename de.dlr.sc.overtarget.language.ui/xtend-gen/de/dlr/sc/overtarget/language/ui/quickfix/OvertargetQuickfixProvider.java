@@ -58,7 +58,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
   public void fixCannotResolveReference(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    acceptor.accept(issue, "Generate targetForReferences to resolve references", "Generates a targetForReferences and sets it as active target. \n After that the actual target, which could not be resolved, is set as active target.", "", 
+    acceptor.accept(issue, "Resolve references", "", "", 
       new IModification() {
         @Override
         public void apply(final IModificationContext context) throws Exception {
