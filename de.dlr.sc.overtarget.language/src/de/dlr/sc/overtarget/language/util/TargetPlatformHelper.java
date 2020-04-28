@@ -11,6 +11,7 @@ package de.dlr.sc.overtarget.language.util;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.pde.core.target.ITargetDefinition;
 import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
@@ -40,6 +41,9 @@ public class TargetPlatformHelper {
 		ITargetDefinition target = null;
 		
 		target = fileHandle.getTargetDefinition();
+		
+		IProgressMonitor monitor = null;
+		target.resolve(monitor);
 
 		LoadTargetDefinitionJob.load(target);
 	}
