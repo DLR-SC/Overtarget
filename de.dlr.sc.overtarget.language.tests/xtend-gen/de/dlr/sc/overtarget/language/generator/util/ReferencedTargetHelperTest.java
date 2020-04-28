@@ -167,14 +167,15 @@ public class ReferencedTargetHelperTest {
       final String outputDirectory = "./target";
       final IWorkspace workspace = ResourcesPlugin.getWorkspace();
       final IWorkspaceRoot root = workspace.getRoot();
-      final IProject project = root.getProject("testProject");
-      final IFolder folder = project.getFolder("target");
+      final String PROJECT_NAME = "testProjectWithTarget";
+      final IProject projectWithTarget = root.getProject(PROJECT_NAME);
+      final IFolder folder = projectWithTarget.getFolder("target");
       final IFile tmodelFile = folder.getFile("target.tmodel");
-      project.create(null);
-      boolean _isOpen = project.isOpen();
+      projectWithTarget.create(null);
+      boolean _isOpen = projectWithTarget.isOpen();
       boolean _not = (!_isOpen);
       if (_not) {
-        project.open(null);
+        projectWithTarget.open(null);
       }
       folder.create(IResource.NONE, true, null);
       final byte[] bytes = "\r\n\t\t\tTarget target {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
@@ -186,20 +187,32 @@ public class ReferencedTargetHelperTest {
       final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytesTarget);
       targetFile.create(sourceTarget, false, null);
       Assert.assertEquals(targetFile, this.refTargetHelper.findTargetFileInProject(tmodelFile, outputDirectory));
-      final IProject project2 = root.getProject("testProject2");
-      final IFolder folder2 = project2.getFolder("target");
-      final IFile tmodelFile2 = folder2.getFile("target2.tmodel");
-      project2.create(null);
-      boolean _isOpen_1 = project2.isOpen();
-      boolean _not_1 = (!_isOpen_1);
-      if (_not_1) {
-        project2.open(null);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFindTargetFileNonExistendFile() {
+    try {
+      final String outputDirectory = "./target";
+      final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+      final IWorkspaceRoot root = workspace.getRoot();
+      final String PROJECT_NAME = "testProjectWithoutTarget";
+      final IProject projectWithoutTarget = root.getProject(PROJECT_NAME);
+      final IFolder folder = projectWithoutTarget.getFolder("target");
+      final IFile tmodelFile = folder.getFile("target.tmodel");
+      projectWithoutTarget.create(null);
+      boolean _isOpen = projectWithoutTarget.isOpen();
+      boolean _not = (!_isOpen);
+      if (_not) {
+        projectWithoutTarget.open(null);
       }
-      folder2.create(IResource.NONE, true, null);
-      final byte[] bytes2 = "\r\n\t\t\tTarget target2 {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
-      final ByteArrayInputStream sourceTarget2 = new ByteArrayInputStream(bytes2);
-      tmodelFile2.create(sourceTarget2, IResource.NONE, null);
-      Assert.assertNull(this.refTargetHelper.findTargetFileInProject(tmodelFile2, outputDirectory));
+      folder.create(IResource.NONE, true, null);
+      final byte[] bytes = "\r\n\t\t\tTarget target {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytes);
+      tmodelFile.create(sourceTarget, IResource.NONE, null);
+      Assert.assertNull("File does not exist, so shoud be null", this.refTargetHelper.findTargetFileInProject(tmodelFile, outputDirectory));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -211,14 +224,15 @@ public class ReferencedTargetHelperTest {
       final String outputDirectory = "./target";
       final IWorkspace workspace = ResourcesPlugin.getWorkspace();
       final IWorkspaceRoot root = workspace.getRoot();
-      final IProject project = root.getProject("testProject3");
-      final IFolder folder = project.getFolder("target");
+      final String PROJECT_NAME = "testProjectWithTargetForReferences";
+      final IProject projectWithTarget = root.getProject(PROJECT_NAME);
+      final IFolder folder = projectWithTarget.getFolder("target");
       final IFile tmodelFile = folder.getFile("targetForReferences.tmodel");
-      project.create(null);
-      boolean _isOpen = project.isOpen();
+      projectWithTarget.create(null);
+      boolean _isOpen = projectWithTarget.isOpen();
       boolean _not = (!_isOpen);
       if (_not) {
-        project.open(null);
+        projectWithTarget.open(null);
       }
       folder.create(IResource.NONE, true, null);
       final byte[] bytes = "\r\n\t\t\tTarget targetForReferences {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
@@ -230,20 +244,32 @@ public class ReferencedTargetHelperTest {
       final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytesTarget);
       targetFile.create(sourceTarget, false, null);
       Assert.assertEquals(targetFile, this.refTargetHelper.findTargetForReferencesFile(tmodelFile, outputDirectory));
-      final IProject project2 = root.getProject("testProject4");
-      final IFolder folder2 = project2.getFolder("target");
-      final IFile tmodelFile2 = folder2.getFile("targetForReferences.tmodel");
-      project2.create(null);
-      boolean _isOpen_1 = project2.isOpen();
-      boolean _not_1 = (!_isOpen_1);
-      if (_not_1) {
-        project2.open(null);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFindTargetForReferencesFileNonExistendFile() {
+    try {
+      final String outputDirectory = "./target";
+      final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+      final IWorkspaceRoot root = workspace.getRoot();
+      final String PROJECT_NAME = "testProjectWithoutTargetForReferences";
+      final IProject projectWithoutTarget = root.getProject(PROJECT_NAME);
+      final IFolder folder = projectWithoutTarget.getFolder("target");
+      final IFile tmodelFile = folder.getFile("targetForReferences.tmodel");
+      projectWithoutTarget.create(null);
+      boolean _isOpen = projectWithoutTarget.isOpen();
+      boolean _not = (!_isOpen);
+      if (_not) {
+        projectWithoutTarget.open(null);
       }
-      folder2.create(IResource.NONE, true, null);
-      final byte[] bytes2 = "\r\n\t\t\tTarget targetForReferences {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
-      final ByteArrayInputStream sourceTarget2 = new ByteArrayInputStream(bytes2);
-      tmodelFile2.create(sourceTarget2, IResource.NONE, null);
-      Assert.assertNull(this.refTargetHelper.findTargetForReferencesFile(tmodelFile2, outputDirectory));
+      folder.create(IResource.NONE, true, null);
+      final byte[] bytes = "\r\n\t\t\tTarget targetForReferences {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytes);
+      tmodelFile.create(sourceTarget, IResource.NONE, null);
+      Assert.assertNull("File does not exist, so shoud be null", this.refTargetHelper.findTargetForReferencesFile(tmodelFile, outputDirectory));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
