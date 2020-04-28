@@ -16,6 +16,7 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import javax.inject.Inject;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -58,7 +59,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
   public void fixCannotResolveReference(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    acceptor.accept(issue, "Resolve references", "", "", 
+    acceptor.accept(issue, "Resolve references and set as active target", "", "", 
       new IModification() {
         @Override
         public void apply(final IModificationContext context) throws Exception {

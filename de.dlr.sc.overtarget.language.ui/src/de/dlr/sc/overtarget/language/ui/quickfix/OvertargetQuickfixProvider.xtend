@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 import org.eclipse.ui.IFileEditorInput
-
+import org.eclipse.core.runtime.NullProgressMonitor
 
 /**
  * Custom quickfixes.
@@ -52,7 +52,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Resolve references', '', '', 
+		acceptor.accept(issue, 'Resolve references and set as active target', '', '', 
 			new IModification() {
 			
 			override apply(IModificationContext context) throws Exception {
