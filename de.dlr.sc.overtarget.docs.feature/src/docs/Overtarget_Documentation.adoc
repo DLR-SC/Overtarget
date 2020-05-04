@@ -1,6 +1,6 @@
 = Overtarget Documentation
 :imagesdir: images
-:title-logo-image:image:Kreis_Logo.png[Overtarget_Logo]
+:title-logo-image:
 :toc:
 :toclevels: 3
 :experimental:  
@@ -24,8 +24,7 @@ In an existing project create a new file and add the file extension ".tmodel".
 |A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
 Within the curly brackets you can define your tmodel the way you like. 
 A target file is automatically generated when saving the tmodel file.
-
-An example tmodel is presented below. |
+ |
 
 image:virsatTmodel.png[Example tmodel]
 
@@ -34,6 +33,7 @@ _Example tmodel of virsat_
 |===
 
 TIP: Using content assist (ctrl + spacebar) will suggest the next possible keywords/steps.
+
 
 
 === Extending/Importing a tmodel file
@@ -52,13 +52,13 @@ The same principle is applicable when importing a tmodel, using the keyword "Imp
 A target file can be generated in different ways. The easiest way would be by saving
 the tmodel file. The Overtarget generator then automatically generates a target file.
 
-NOTE: Generating a target file by saving the tmodel file only works when changes were made.
+NOTE: Generating a target file by saving the tmodel file only works when changes have been applied.
 
 === Using the button/context menu "Generate Target"
 [cols="50,50"]
 |===
 
-|Another option to generate a target is using the button in the editor toolbar or in the context menu "Generate Target". 
+|Another option to generate a target is using the button "Generate Target" in the editor toolbar or in the context menu. 
 A target file will be generated, also when no changes have been applied to the tmodel file. |
 
 image:generateTarget.png[Generate Target]
@@ -69,7 +69,8 @@ _Options to generate a target (highlighted)_
 
 
 == Setting a target file as active target
-[cols="35,65"]
+[options=unbreakable]
+[cols="35a,65a"]
 |===
 
 |There are different ways to set a target as active target in eclipse. 
@@ -108,7 +109,15 @@ without complications and then be set as the active target platform.
 NOTE: If there are still unresolved references, please check if you need to add dependencies to the manifest file.
 
 === Updating versions
-Another nice feature Overtarget provides, is updating the versions of units in a repository location automatically in the tmodel file. To do that, you have to select the entire line of a unit with its version and then either click the button "Update Versions" in the toolbar or use the context menu.
+
+[cols="50a,50a"]
+|===
+| Another nice feature Overtarget provides, is updating the versions of units in a repository location automatically in the tmodel file. To do that, you have to select the entire line of a unit with its version and then either click the button "Update Versions" in the toolbar or use the context menu.
+|
+image:update_versions.png[Update versions]
+
+|===
+
 
 == Your ideas to improve Overtarget
 
