@@ -88,24 +88,27 @@ _Set as Active Target_
 === Solving unresolved references in a tmodel
 Sometimes when extending or importing another target, Eclipse cannot resolve the references and shows errors.
 It is not possible to generate a target with unresolved references. 
-Overtarget solves the problem by generating a targetForReferences. This targets includes the repository locations 
-which lead to the unresolved references. By setting this target as active target, the references are then. resolved In order to generate a referencedTarget, 
-the repositoryLocation to the unresolved target has to be set with the keyword "ReferencedTarget".
+Overtarget solves the problem by generating a targetForReferences. This target includes the repository locations 
+which lead to the unresolved references. By setting this target as active target, the references are then resolved. In order to generate a targetForReferences, the repositoryLocation to the unresolved target has to be added with the keyword "ReferencedTarget".
 
 [cols="62a,40a"]
 |===
 
-|There is a quick fix which suggests to generate a referencedTarget. Executing that quick fix or pushing the 
-button "Generate Target" in the toolbar, will generate a referencedTarget. The target will also be set as an
-active Target to resolve all references. |
+|There is a quick fix which suggests to generate a targetForReferences. Executing that quick fix will generate a targetForReferences. The target will also be set as an active Target to resolve all references. |
 
 image:generateReferencedTarget.png[Generate referencedTarget]
 
-_Generate referencedTarget_
+_Generate targetForReferences_
 
 |===
 
 Now there should no longer be problems with unresolved references in the actual target. It can now be generated 
-without complications. 
+without complications and then be set as the active target platform. 
+
+NOTE: If there are still errors, please check if you need to add dependencies to the manifest file.
 
 === Updating versions
+
+== Some last words
+
+Overtarget is still in development. So if you have any ideas, how to improve the handling with target platforms, please let us know. The easiest way to do that, is to add an issue in github. We are happy to consider your suggestions.
