@@ -109,6 +109,6 @@ NOTE: If there are still errors, please check if you need to add dependencies to
 
 === Updating versions
 
-== Some last words
+== Your ideas to improve Overtarget
 
 Overtarget is still in development. So if you have any ideas, how to improve the handling with target platforms, please let us know. The easiest way to do that, is to add an issue in github. We are happy to consider your suggestions.
