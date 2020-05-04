@@ -105,9 +105,10 @@ _Generate targetForReferences_
 Now there should no longer be problems with unresolved references in the actual target. It can now be generated 
 without complications and then be set as the active target platform. 
 
-NOTE: If there are still errors, please check if you need to add dependencies to the manifest file.
+NOTE: If there are still unresolved references, please check if you need to add dependencies to the manifest file.
 
 === Updating versions
+Another nice feature Overtarget provides, is updating the versions of units in a repository location automatically in the tmodel file. To do that, you have to select the entire line of a unit with its version and then either click the button "Update Versions" in the toolbar or use the context menu.
 
 == Your ideas to improve Overtarget
 
