@@ -52,7 +52,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, 'Use temporary target to resolve tmodel references', 'Generates a temporary target for resolving tmodel references and sets it as active target. \n After resolving the references of this target, it is set as active target again.', '', 
+		acceptor.accept(issue, 'Use temporary target to resolve tmodel references', 'Generates a temporary target for resolving tmodel references and sets it as active target.', '', 
 			new IModification() {
 			
 			override apply(IModificationContext context) throws Exception {
@@ -76,9 +76,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 						val targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory)
 						targetPlatHelper.asActiveTarget = targetForReferencesFile;
 						
-						//find original targetFile and set it as active target
-						val targetFile = refTargetHelper.findTargetFileInProject(file, outputDirectory)
-						targetPlatHelper.asActiveTarget = targetFile
+						genHandler.runGeneration(input);
 					}
 				}
 			}

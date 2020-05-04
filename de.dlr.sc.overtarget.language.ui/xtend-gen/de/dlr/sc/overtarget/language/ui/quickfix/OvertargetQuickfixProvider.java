@@ -59,7 +59,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
   public void fixCannotResolveReference(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    acceptor.accept(issue, "Use temporary target to resolve tmodel references", "Generates a temporary target for resolving tmodel references and sets it as active target. \n After resolving the references of this target, it is set as active target again.", "", 
+    acceptor.accept(issue, "Use temporary target to resolve tmodel references", "Generates a temporary target for resolving tmodel references and sets it as active target.", "", 
       new IModification() {
         @Override
         public void apply(final IModificationContext context) throws Exception {
@@ -80,8 +80,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
               final String outputDirectory = genHandler.getOutputConfigurations(input);
               final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
               targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
-              final IFile targetFile = refTargetHelper.findTargetFileInProject(file, outputDirectory);
-              targetPlatHelper.setAsActiveTarget(targetFile);
+              genHandler.runGeneration(input);
             }
           }
         }
