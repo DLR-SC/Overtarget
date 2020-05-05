@@ -1,24 +1,46 @@
 = Overtarget Documentation
 :imagesdir: images
-:title-logo-image:
 :toc:
+:title-logo-image: image:Logo_Kreis.png[] 
 :toclevels: 3
 :experimental:  
 
 :sectnums:
 
-== Introduction
-Overtarget is an eclipse plug-in that helps you managing your target platform files 
-with dependencies across project boundaries.
+== Purpose
+If you have an eclipse project which is based on one of your other projects, 
+you most likely have similar contents in the target definition files. 
+When you are changing dependencies here, you often have to change them in both files.
+
+Overtarget lets you define your dependencies in textual .tmodel file. 
+Every change is directly compiled into a standard .target file. 
+Similar to inheritance of classes you can create another .tmodel file for some other project 
+and derive from the previous one. 
+This way you only have to specify the changes such as added, changed or removed dependencies. 
+All other dependencies are inherited and compiled into the local .target file.
 
 This documentation should help you getting familiar with Overtarget and its functionalities. 
+
+== Requirements
+Overtarget is based on Java / Eclipse and provides an installable feature with plug-ins for 
+your personal eclipse IDE. The following infrastructure is required:
+
+
+* Java Development Kit (JDK) 8
+* Eclipse Oxygen or newer
+** Including Checkstyle
+** Including Spotbugs
+** Including M2E
+* Maven 3
+* Windows 7 or Linux Computer
+
 
 == Creating a tmodel file
 In an existing project create a new file and add the file extension ".tmodel".
 
 === Writing a tmodel file
 
-[cols="35,~"]
+[cols="35a,~"]
 |===
 
 |A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
@@ -38,8 +60,8 @@ TIP: Using content assist (ctrl + spacebar) will suggest the next possible keywo
 
 === Extending/Importing a tmodel file
 It is possible to extend a tmodel by using the keyword "extends". That is especially useful for downstream projects which 
-use the same dependencies as their main project in a tmodel. When a main project makes changes in a the tmodel,
-the tmodel of the downstream project which extends the main tmodel obtains these changes automatically.
+use the same dependencies as their main project in a tmodel. When there are changes in the tmodel of the main 
+project, the tmodel of the downstream project which extends the main tmodel obtains these changes automatically.
 
 The same principle is applicable when importing a tmodel, using the keyword "Import".
 
@@ -55,7 +77,7 @@ the tmodel file. The Overtarget generator then automatically generates a target 
 NOTE: Generating a target file by saving the tmodel file only works when changes have been applied.
 
 === Using the button/context menu "Generate Target"
-[cols="50,50"]
+[cols="50a,50a"]
 |===
 
 |Another option to generate a target is using the button "Generate Target" in the editor toolbar or in the context menu. 
@@ -75,6 +97,7 @@ _Options to generate a target (highlighted)_
 
 |There are different ways to set a target as active target in eclipse. 
 The usual way is to open the target file which opens the eclipse target editor. Here you can click on "Set as Active Target Platform".
+
 However, Overtarget serves you with a much more comfortable option to set a target.
 If you want to set your target directly from the tmodel editor you can use the button "Set as Active Target" in the editor toolbar 
 or in the context menu. The target will be automatically loaded and set as the active target platform. |
@@ -87,15 +110,17 @@ _Set as Active Target_
 
 == Other useful stuff
 === Solving unresolved references in a tmodel
-Sometimes when extending or importing another target, Eclipse cannot resolve the references and shows errors.
-It is not possible to generate a target with unresolved references. 
+Sometimes when extending or importing another target, Eclipse cannot always resolve the references 
+and shows errors in the tmodel file. It is not possible to generate a target with unresolved references. 
 Overtarget solves the problem by generating a targetForReferences. This target includes the repository locations 
 which lead to the unresolved references. By setting this target as active target, the references are then resolved. In order to generate a targetForReferences, the repositoryLocation to the unresolved target has to be added with the keyword "ReferencedTarget".
 
 [cols="62a,40a"]
 |===
 
-|There is a quick fix which suggests to generate a targetForReferences. Executing that quick fix will generate a targetForReferences. The target will also be set as an active Target to resolve all references. |
+|There is a quick fix which suggests to generate a targetForReferences. 
+Executing that quick fix will generate a targetForReferences. 
+The target will also be set as an active target to resolve all references. |
 
 image:generateReferencedTarget.png[Generate referencedTarget]
 
@@ -112,7 +137,10 @@ NOTE: If there are still unresolved references, please check if you need to add 
 
 [cols="50a,50a"]
 |===
-| Another nice feature Overtarget provides, is updating the versions of units in a repository location automatically in the tmodel file. To do that, you have to select the entire line of a unit with its version and then either click the button "Update Versions" in the toolbar or use the context menu.
+| Another nice feature Overtarget provides, is updating the versions of units in a repository location 
+automatically in the tmodel file. To do that, you have to select the entire line of a unit with its 
+version and then either click the button "Update Versions" in the toolbar or use the context menu. 
+If there is a newer version available, it will be updated.
 |
 image:update_versions.png[Update versions]
 
@@ -121,4 +149,15 @@ image:update_versions.png[Update versions]
 
 == Your ideas to improve Overtarget
 
-Overtarget is still in development. So if you have any ideas, how to improve the handling with target platforms, please let us know. The easiest way to do that, is to add an issue in github. We are happy to consider your suggestions.
+Overtarget is still in development. So if you have any ideas, how to improve the handling with 
+target platforms, please let us know. 
+
+To contribute to this project follow the given steps:
+
+* Create your own fork of the project.
+* Apply your changes.
+* Create a pull-request of your change to our development branch.
+
+To increase the chance that we accept your pull-request, make sure all tests are working.
+ The best indicator is the Travis CI job.
+ Next we will review your pull-request, give comments and maybe accept it.
