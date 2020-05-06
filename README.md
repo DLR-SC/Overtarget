@@ -31,6 +31,9 @@ Overtarget is based on Java / Eclipse and provides an installable feature with p
  - Maven 3
  - Windows 7 or Linux Computer
 
+## Quickstart for users
+If you just want to use Overtarget feel free to download it from the Releases section here on GitHub. A manual is provided as [PDF](https://github.com/DLR-SC/Overtarget/releases/download/integration_snapshot/Overtarget_Documentation.pdf). 
+
 ## Quickstart
 
 1. Open your Eclipse and switch to the Git Perspective.
