@@ -8,15 +8,18 @@
 :sectnums:
 
 == Purpose
-If you have an eclipse project which is based on one of your other projects, 
-you most likely have similar contents in the target definition files. 
-When you are changing dependencies here, you often have to change them in both files.
+Overtarget is a feature that is supposed to help you with the creation and 
+handling of target platform definitions in eclipse.
 
-Overtarget lets you define your dependencies in textual .tmodel file. 
+If you have an eclipse project which is based on other projects, 
+you most likely have similar contents in the target definition files. 
+When you are changing dependencies in the base project, you often have to change them in both files.
+
+Overtarget lets you define your dependencies in a textual .tmodel file. 
 Every change is directly compiled into a standard .target file. 
 Similar to inheritance of classes you can create another .tmodel file for some other project 
 and derive from the previous one. 
-This way you only have to specify the changes such as added, changed or removed dependencies. 
+This way you only have to specify the changes, such as added, changed or removed dependencies. 
 All other dependencies are inherited and compiled into the local .target file.
 
 This documentation should help you getting familiar with Overtarget and its functionalities. 
@@ -40,10 +43,10 @@ In an existing project create a new file and add the file extension ".tmodel".
 
 === Writing a tmodel file
 
-[cols="35a,~"]
+[cols="35a,65a"]
 |===
 
-|A tmodel file always starts with the keyword "Target" followed by the name of the tmodel. 
+|A tmodel file starts with the keyword "Target" followed by the name of the tmodel. 
 Within the curly brackets you can define your tmodel the way you like. 
 A target file is automatically generated when saving the tmodel file.
  |
@@ -62,8 +65,11 @@ TIP: Using content assist (ctrl + spacebar) will suggest the next possible keywo
 It is possible to extend a tmodel by using the keyword "extends". That is especially useful for downstream projects which 
 use the same dependencies as their main project in a tmodel. When there are changes in the tmodel of the main 
 project, the tmodel of the downstream project which extends the main tmodel obtains these changes automatically.
+A parent target hands down all of its content to the inheriting target, including operating system, windowing system and so on.
 
-The same principle is applicable when importing a tmodel, using the keyword "Import".
+The same principle is applicable when importing a tmodel, using the keyword "Import". 
+Imported targets only pass repository locations on to the inheriting targets.
+
 
 
 
@@ -113,7 +119,9 @@ _Set as Active Target_
 Sometimes when extending or importing another target, Eclipse cannot always resolve the references 
 and shows errors in the tmodel file. It is not possible to generate a target with unresolved references. 
 Overtarget solves the problem by generating a targetForReferences. This target includes the repository locations 
-which lead to the unresolved references. By setting this target as active target, the references are then resolved. In order to generate a targetForReferences, the repositoryLocation to the unresolved target has to be added with the keyword "ReferencedTarget".
+which lead to the unresolved references. By setting this target as active target, the references are 
+then resolved. In order to generate a targetForReferences, the repositoryLocation to the 
+referenced target has to be added with the keyword "ReferencedTarget".
 
 [cols="62a,40a"]
 |===
