@@ -110,7 +110,7 @@ SPDX-License-Identifier: EPL-2.0
 		 Task: flushM2Repository 
 	     ===================================================== -->
 	<target name="flushM2Repository">
-		<description>Call this target to flush pending virsat dependencies in mavens m2 repository</description>
+		<description>Call this target to flush pending overtarget dependencies in mavens m2 repository</description>
 		<delete includeemptydirs="true" verbose="true" failonerror="false">
 			<fileset dir="${m2.directory}" includes="**/${group.id}*/**"/>
 		</delete>
