@@ -13,13 +13,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dlr.sc.overtarget</groupId>
 	<artifactId>de.dlr.sc.overtarget</artifactId>
-	<name>DLR OverTarget</name>
+	<name>DLR Overtarget</name>
 	
 	<packaging>pom</packaging>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.2.0-SNAPSHOT</version>
 
 	<modules>
 		<module>de.dlr.sc.overtarget.feature</module>
+		<module>de.dlr.sc.overtarget.docs.feature</module>
 		<module>de.dlr.sc.overtarget.language</module>
 		<module>de.dlr.sc.overtarget.language.ide</module>
 		<module>de.dlr.sc.overtarget.language.tests</module>

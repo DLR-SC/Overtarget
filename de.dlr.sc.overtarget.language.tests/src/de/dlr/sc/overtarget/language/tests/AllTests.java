@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import de.dlr.sc.overtarget.language.validation.OvertargetValidatorTest;
 import de.dlr.sc.overtarget.language.generator.GeneratorHelperTest;
 import junit.framework.JUnit4TestAdapter;
 
@@ -20,6 +21,7 @@ import junit.framework.JUnit4TestAdapter;
 @RunWith(Suite.class)
 @SuiteClasses({ 
 	OvertargetParsingTest.class,
+	OvertargetValidatorTest.class, 
 	GeneratorHelperTest.class 
 	})
 /** * * Test Collection * */

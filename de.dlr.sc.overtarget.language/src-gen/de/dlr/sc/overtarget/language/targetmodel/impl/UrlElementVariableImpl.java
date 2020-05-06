@@ -73,6 +73,7 @@ public class UrlElementVariableImpl extends UrlElementImpl implements UrlElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public VariableDefinition getContent()
   {
     if (content != null && content.eIsProxy())
@@ -103,6 +104,7 @@ public class UrlElementVariableImpl extends UrlElementImpl implements UrlElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setContent(VariableDefinition newContent)
   {
     VariableDefinition oldContent = content;

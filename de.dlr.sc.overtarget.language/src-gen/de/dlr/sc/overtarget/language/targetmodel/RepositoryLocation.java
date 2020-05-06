@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferencedTarget <em>Referenced Target</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUrl <em>Url</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUnits <em>Units</em>}</li>
@@ -36,12 +37,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface RepositoryLocation extends EObject
 {
   /**
+   * Returns the value of the '<em><b>Referenced Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Referenced Target</em>' attribute.
+   * @see #setReferencedTarget(boolean)
+   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_ReferencedTarget()
+   * @model
+   * @generated
+   */
+  boolean isReferencedTarget();
+
+  /**
+   * Sets the value of the '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferencedTarget <em>Referenced Target</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Referenced Target</em>' attribute.
+   * @see #isReferencedTarget()
+   * @generated
+   */
+  void setReferencedTarget(boolean value);
+
+  /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -64,10 +83,6 @@ public interface RepositoryLocation extends EObject
   /**
    * Returns the value of the '<em><b>Url</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Url</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Url</em>' containment reference.
    * @see #setUrl(UrlExpression)
@@ -91,10 +106,6 @@ public interface RepositoryLocation extends EObject
    * Returns the value of the '<em><b>Units</b></em>' containment reference list.
    * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.Unit}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Units</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Units</em>' containment reference list.
    * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_Units()

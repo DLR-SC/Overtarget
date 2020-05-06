@@ -245,6 +245,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -255,6 +256,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -268,6 +270,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TargetFile> getImportedModels()
   {
     if (importedModels == null)
@@ -282,6 +285,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOs()
   {
     return os;
@@ -292,6 +296,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOs(String newOs)
   {
     String oldOs = os;
@@ -305,6 +310,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getWs()
   {
     return ws;
@@ -315,6 +321,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setWs(String newWs)
   {
     String oldWs = ws;
@@ -328,6 +335,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getArch()
   {
     return arch;
@@ -338,6 +346,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setArch(String newArch)
   {
     String oldArch = arch;
@@ -351,6 +360,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLoc()
   {
     return loc;
@@ -361,6 +371,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLoc(String newLoc)
   {
     String oldLoc = loc;
@@ -374,6 +385,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTargetJre()
   {
     return targetJre;
@@ -384,6 +396,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTargetJre(String newTargetJre)
   {
     String oldTargetJre = targetJre;
@@ -397,6 +410,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<VariableDefinition> getVariables()
   {
     if (variables == null)
@@ -411,6 +425,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ExcludeLocation> getExcludedLocations()
   {
     if (excludedLocations == null)
@@ -425,6 +440,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<RepositoryLocation> getRepositoryLocations()
   {
     if (repositoryLocations == null)
@@ -625,7 +641,7 @@ public class BaseModelImpl extends MinimalEObjectImpl.Container implements BaseM
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", os: ");

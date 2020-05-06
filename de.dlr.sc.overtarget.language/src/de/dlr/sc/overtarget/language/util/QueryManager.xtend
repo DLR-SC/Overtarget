@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,7 +26,7 @@ import de.dlr.sc.overtarget.language.Activator
 /**
  * This class queries a p2 Repository for the available installable units
  */
-public class QueryManager {
+class QueryManager {
 	def getUnits(EObject model) {
 		val bundleContext = Activator.^default.bundle.bundleContext;
 		val providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);

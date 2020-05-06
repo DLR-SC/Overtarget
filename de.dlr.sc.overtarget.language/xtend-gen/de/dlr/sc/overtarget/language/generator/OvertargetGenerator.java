@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,6 +12,7 @@ package de.dlr.sc.overtarget.language.generator;
 import com.google.common.collect.Iterables;
 import de.dlr.sc.overtarget.language.generator.GeneratorHelper;
 import de.dlr.sc.overtarget.language.generator.OvertargetOutputConfigurationProvider;
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.targetmodel.ExcludeLocation;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -34,16 +36,48 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
  */
 @SuppressWarnings("all")
 public class OvertargetGenerator extends AbstractGenerator {
-  private final static String DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
+  private static final String DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
   
+  public static final String TARGET_FILE_EXTENSION = ".target";
+  
+  private final ReferencedTargetHelper RefTargetHelper = new ReferencedTargetHelper();
+  
+  /**
+   * This method generates a new target from a tmodel.
+   * If the tmodel has unresolved references,
+   * it calls the method generateTargetToResolveReferences().
+   */
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<TargetModel> _filter = Iterables.<TargetModel>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), TargetModel.class);
     for (final TargetModel model : _filter) {
-      String _name = model.getName();
-      String _plus = (_name + ".target");
-      fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+      {
+        EcoreUtil.resolveAll(resource);
+        boolean _hasUnresolvedReferences = this.RefTargetHelper.hasUnresolvedReferences(model);
+        if (_hasUnresolvedReferences) {
+          this.generateTargetToResolveReferences(model, fsa);
+        } else {
+          String _name = model.getName();
+          String _plus = (_name + OvertargetGenerator.TARGET_FILE_EXTENSION);
+          fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(model));
+        }
+      }
     }
+  }
+  
+  /**
+   * This method generates a target with references to unresolved targets
+   * and sets the target as active target in eclipse
+   *  -> unresolved references are resolved
+   * 
+   * @Param model original tmodel with unresolved references
+   * @Param fsa file system access
+   */
+  public void generateTargetToResolveReferences(final TargetModel model, final IFileSystemAccess2 fsa) {
+    final TargetModel tmodelWithReference = this.RefTargetHelper.getReferencedModelToGenerate(model);
+    String _name = tmodelWithReference.getName();
+    String _plus = (_name + OvertargetGenerator.TARGET_FILE_EXTENSION);
+    fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(tmodelWithReference));
   }
   
   /**
@@ -178,7 +212,7 @@ public class OvertargetGenerator extends AbstractGenerator {
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("</location>              ");
+        _builder.append("</location>");
         _builder.newLine();
       }
     }

@@ -116,8 +116,8 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (
 	 *         name=ID 
 	 *         importedModels+=[TargetFile|ID]* 
-	 *         os=OperatningSys 
-	 *         ws=WorkingSys 
+	 *         os=OperatingSys 
+	 *         ws=WindowingSys 
 	 *         arch=Architecture 
 	 *         loc=Locale 
 	 *         targetJre=jre? 
@@ -170,7 +170,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     RepositoryLocation returns RepositoryLocation
 	 *
 	 * Constraint:
-	 *     (name=ID url=UrlExpression units+=Unit*)
+	 *     (referencedTarget?='ReferencedTarget'? name=ID url=UrlExpression units+=Unit*)
 	 */
 	protected void sequence_RepositoryLocation(ISerializationContext context, RepositoryLocation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -200,8 +200,8 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         name=ID 
 	 *         super=[TargetModel|ID]? 
 	 *         importedModels+=[TargetFile|ID]* 
-	 *         os=OperatningSys? 
-	 *         ws=WorkingSys? 
+	 *         os=OperatingSys? 
+	 *         ws=WindowingSys? 
 	 *         arch=Architecture? 
 	 *         loc=Locale? 
 	 *         targetJre=jre? 

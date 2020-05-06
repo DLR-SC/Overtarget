@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isReferencedTarget <em>Referenced Target</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUnits <em>Units</em>}</li>
@@ -49,6 +50,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class RepositoryLocationImpl extends MinimalEObjectImpl.Container implements RepositoryLocation
 {
+  /**
+   * The default value of the '{@link #isReferencedTarget() <em>Referenced Target</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isReferencedTarget()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean REFERENCED_TARGET_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isReferencedTarget() <em>Referenced Target</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isReferencedTarget()
+   * @generated
+   * @ordered
+   */
+  protected boolean referencedTarget = REFERENCED_TARGET_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -115,6 +136,32 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
+  public boolean isReferencedTarget()
+  {
+    return referencedTarget;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setReferencedTarget(boolean newReferencedTarget)
+  {
+    boolean oldReferencedTarget = referencedTarget;
+    referencedTarget = newReferencedTarget;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetmodelPackage.REPOSITORY_LOCATION__REFERENCED_TARGET, oldReferencedTarget, referencedTarget));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public String getName()
   {
     return name;
@@ -125,6 +172,7 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -138,6 +186,7 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UrlExpression getUrl()
   {
     return url;
@@ -165,6 +214,7 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUrl(UrlExpression newUrl)
   {
     if (newUrl != url)
@@ -186,6 +236,7 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Unit> getUnits()
   {
     if (units == null)
@@ -223,6 +274,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCED_TARGET:
+        return isReferencedTarget();
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         return getName();
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
@@ -244,6 +297,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCED_TARGET:
+        setReferencedTarget((Boolean)newValue);
+        return;
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         setName((String)newValue);
         return;
@@ -268,6 +324,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCED_TARGET:
+        setReferencedTarget(REFERENCED_TARGET_EDEFAULT);
+        return;
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -291,6 +350,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
+      case TargetmodelPackage.REPOSITORY_LOCATION__REFERENCED_TARGET:
+        return referencedTarget != REFERENCED_TARGET_EDEFAULT;
       case TargetmodelPackage.REPOSITORY_LOCATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
@@ -311,8 +372,10 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (referencedTarget: ");
+    result.append(referencedTarget);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

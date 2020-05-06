@@ -277,9 +277,9 @@ ruleTargetModel returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getTargetModelAccess().getOsOperatningSysParserRuleCall_5_1_0());
+						newCompositeNode(grammarAccess.getTargetModelAccess().getOsOperatingSysParserRuleCall_5_1_0());
 					}
-					lv_os_8_0=ruleOperatningSys
+					lv_os_8_0=ruleOperatingSys
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -288,23 +288,30 @@ ruleTargetModel returns [EObject current=null]
 							$current,
 							"os",
 							lv_os_8_0,
-							"de.dlr.sc.overtarget.language.Overtarget.OperatningSys");
+							"de.dlr.sc.overtarget.language.Overtarget.OperatingSys");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)?
 		(
-			otherlv_9='WorkingSystem'
-			{
-				newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0());
-			}
+			(
+				otherlv_9='WindowingSystem'
+				{
+					newLeafNode(otherlv_9, grammarAccess.getTargetModelAccess().getWindowingSystemKeyword_6_0_0());
+				}
+				    |
+				otherlv_10='WorkingSystem'
+				{
+					newLeafNode(otherlv_10, grammarAccess.getTargetModelAccess().getWorkingSystemKeyword_6_0_1());
+				}
+			)
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getTargetModelAccess().getWsWorkingSysParserRuleCall_6_1_0());
+						newCompositeNode(grammarAccess.getTargetModelAccess().getWsWindowingSysParserRuleCall_6_1_0());
 					}
-					lv_ws_10_0=ruleWorkingSys
+					lv_ws_11_0=ruleWindowingSys
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -312,24 +319,24 @@ ruleTargetModel returns [EObject current=null]
 						set(
 							$current,
 							"ws",
-							lv_ws_10_0,
-							"de.dlr.sc.overtarget.language.Overtarget.WorkingSys");
+							lv_ws_11_0,
+							"de.dlr.sc.overtarget.language.Overtarget.WindowingSys");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)?
 		(
-			otherlv_11='Architecture'
+			otherlv_12='Architecture'
 			{
-				newLeafNode(otherlv_11, grammarAccess.getTargetModelAccess().getArchitectureKeyword_7_0());
+				newLeafNode(otherlv_12, grammarAccess.getTargetModelAccess().getArchitectureKeyword_7_0());
 			}
 			(
 				(
 					{
 						newCompositeNode(grammarAccess.getTargetModelAccess().getArchArchitectureParserRuleCall_7_1_0());
 					}
-					lv_arch_12_0=ruleArchitecture
+					lv_arch_13_0=ruleArchitecture
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -337,7 +344,7 @@ ruleTargetModel returns [EObject current=null]
 						set(
 							$current,
 							"arch",
-							lv_arch_12_0,
+							lv_arch_13_0,
 							"de.dlr.sc.overtarget.language.Overtarget.Architecture");
 						afterParserOrEnumRuleCall();
 					}
@@ -345,16 +352,16 @@ ruleTargetModel returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_13='Locale'
+			otherlv_14='Locale'
 			{
-				newLeafNode(otherlv_13, grammarAccess.getTargetModelAccess().getLocaleKeyword_8_0());
+				newLeafNode(otherlv_14, grammarAccess.getTargetModelAccess().getLocaleKeyword_8_0());
 			}
 			(
 				(
 					{
 						newCompositeNode(grammarAccess.getTargetModelAccess().getLocLocaleParserRuleCall_8_1_0());
 					}
-					lv_loc_14_0=ruleLocale
+					lv_loc_15_0=ruleLocale
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -362,7 +369,7 @@ ruleTargetModel returns [EObject current=null]
 						set(
 							$current,
 							"loc",
-							lv_loc_14_0,
+							lv_loc_15_0,
 							"de.dlr.sc.overtarget.language.Overtarget.Locale");
 						afterParserOrEnumRuleCall();
 					}
@@ -370,16 +377,16 @@ ruleTargetModel returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_15='TargetJRE'
+			otherlv_16='TargetJRE'
 			{
-				newLeafNode(otherlv_15, grammarAccess.getTargetModelAccess().getTargetJREKeyword_9_0());
+				newLeafNode(otherlv_16, grammarAccess.getTargetModelAccess().getTargetJREKeyword_9_0());
 			}
 			(
 				(
 					{
 						newCompositeNode(grammarAccess.getTargetModelAccess().getTargetJreJreParserRuleCall_9_1_0());
 					}
-					lv_targetJre_16_0=rulejre
+					lv_targetJre_17_0=rulejre
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -387,7 +394,7 @@ ruleTargetModel returns [EObject current=null]
 						set(
 							$current,
 							"targetJre",
-							lv_targetJre_16_0,
+							lv_targetJre_17_0,
 							"de.dlr.sc.overtarget.language.Overtarget.jre");
 						afterParserOrEnumRuleCall();
 					}
@@ -399,7 +406,7 @@ ruleTargetModel returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getTargetModelAccess().getVariablesVariableDefinitionParserRuleCall_10_0());
 				}
-				lv_variables_17_0=ruleVariableDefinition
+				lv_variables_18_0=ruleVariableDefinition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -407,7 +414,7 @@ ruleTargetModel returns [EObject current=null]
 					add(
 						$current,
 						"variables",
-						lv_variables_17_0,
+						lv_variables_18_0,
 						"de.dlr.sc.overtarget.language.Overtarget.VariableDefinition");
 					afterParserOrEnumRuleCall();
 				}
@@ -418,7 +425,7 @@ ruleTargetModel returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getTargetModelAccess().getExcludedLocationsExcludeLocationParserRuleCall_11_0());
 				}
-				lv_excludedLocations_18_0=ruleExcludeLocation
+				lv_excludedLocations_19_0=ruleExcludeLocation
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -426,7 +433,7 @@ ruleTargetModel returns [EObject current=null]
 					add(
 						$current,
 						"excludedLocations",
-						lv_excludedLocations_18_0,
+						lv_excludedLocations_19_0,
 						"de.dlr.sc.overtarget.language.Overtarget.ExcludeLocation");
 					afterParserOrEnumRuleCall();
 				}
@@ -437,7 +444,7 @@ ruleTargetModel returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getTargetModelAccess().getRepositoryLocationsRepositoryLocationParserRuleCall_12_0());
 				}
-				lv_repositoryLocations_19_0=ruleRepositoryLocation
+				lv_repositoryLocations_20_0=ruleRepositoryLocation
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTargetModelRule());
@@ -445,15 +452,15 @@ ruleTargetModel returns [EObject current=null]
 					add(
 						$current,
 						"repositoryLocations",
-						lv_repositoryLocations_19_0,
+						lv_repositoryLocations_20_0,
 						"de.dlr.sc.overtarget.language.Overtarget.RepositoryLocation");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_20='}'
+		otherlv_21='}'
 		{
-			newLeafNode(otherlv_20, grammarAccess.getTargetModelAccess().getRightCurlyBracketKeyword_13());
+			newLeafNode(otherlv_21, grammarAccess.getTargetModelAccess().getRightCurlyBracketKeyword_13());
 		}
 	)
 ;
@@ -927,15 +934,29 @@ ruleRepositoryLocation returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='RepositoryLocation'
+		(
+			(
+				lv_referencedTarget_0_0='ReferencedTarget'
+				{
+					newLeafNode(lv_referencedTarget_0_0, grammarAccess.getRepositoryLocationAccess().getReferencedTargetReferencedTargetKeyword_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRepositoryLocationRule());
+					}
+					setWithLastConsumed($current, "referencedTarget", true, "ReferencedTarget");
+				}
+			)
+		)?
+		otherlv_1='RepositoryLocation'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getRepositoryLocationAccess().getRepositoryLocationKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getRepositoryLocationAccess().getRepositoryLocationKeyword_1());
 		}
 		(
 			(
-				lv_name_1_0=RULE_ID
+				lv_name_2_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRepositoryLocationAccess().getNameIDTerminalRuleCall_1_0());
+					newLeafNode(lv_name_2_0, grammarAccess.getRepositoryLocationAccess().getNameIDTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -944,21 +965,21 @@ ruleRepositoryLocation returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"name",
-						lv_name_1_0,
+						lv_name_2_0,
 						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
-		otherlv_2='url'
+		otherlv_3='url'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getRepositoryLocationAccess().getUrlKeyword_2());
+			newLeafNode(otherlv_3, grammarAccess.getRepositoryLocationAccess().getUrlKeyword_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUrlUrlExpressionParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUrlUrlExpressionParserRuleCall_4_0());
 				}
-				lv_url_3_0=ruleUrlExpression
+				lv_url_4_0=ruleUrlExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
@@ -966,22 +987,22 @@ ruleRepositoryLocation returns [EObject current=null]
 					set(
 						$current,
 						"url",
-						lv_url_3_0,
+						lv_url_4_0,
 						"de.dlr.sc.overtarget.language.Overtarget.UrlExpression");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_4='{'
+		otherlv_5='{'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getRepositoryLocationAccess().getLeftCurlyBracketKeyword_4());
+			newLeafNode(otherlv_5, grammarAccess.getRepositoryLocationAccess().getLeftCurlyBracketKeyword_5());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_6_0());
 				}
-				lv_units_5_0=ruleUnit
+				lv_units_6_0=ruleUnit
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
@@ -989,15 +1010,15 @@ ruleRepositoryLocation returns [EObject current=null]
 					add(
 						$current,
 						"units",
-						lv_units_5_0,
+						lv_units_6_0,
 						"de.dlr.sc.overtarget.language.Overtarget.Unit");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_6='}'
+		otherlv_7='}'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_6());
+			newLeafNode(otherlv_7, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;
@@ -1302,15 +1323,15 @@ rulequalifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 	)
 ;
 
-// Entry rule entryRuleOperatningSys
-entryRuleOperatningSys returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getOperatningSysRule()); }
-	iv_ruleOperatningSys=ruleOperatningSys
-	{ $current=$iv_ruleOperatningSys.current.getText(); }
+// Entry rule entryRuleOperatingSys
+entryRuleOperatingSys returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getOperatingSysRule()); }
+	iv_ruleOperatingSys=ruleOperatingSys
+	{ $current=$iv_ruleOperatingSys.current.getText(); }
 	EOF;
 
-// Rule OperatningSys
-ruleOperatningSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+// Rule OperatingSys
+ruleOperatingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
 }
@@ -1321,56 +1342,56 @@ ruleOperatningSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 		kw='aix'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getAixKeyword_0());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getAixKeyword_0());
 		}
 		    |
 		kw='hpux'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getHpuxKeyword_1());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getHpuxKeyword_1());
 		}
 		    |
 		kw='linux'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getLinuxKeyword_2());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getLinuxKeyword_2());
 		}
 		    |
 		kw='macosx'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getMacosxKeyword_3());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getMacosxKeyword_3());
 		}
 		    |
 		kw='qnx'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getQnxKeyword_4());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getQnxKeyword_4());
 		}
 		    |
 		kw='solaris'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getSolarisKeyword_5());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getSolarisKeyword_5());
 		}
 		    |
 		kw='win32'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getOperatningSysAccess().getWin32Keyword_6());
+			newLeafNode(kw, grammarAccess.getOperatingSysAccess().getWin32Keyword_6());
 		}
 	)
 ;
 
-// Entry rule entryRuleWorkingSys
-entryRuleWorkingSys returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getWorkingSysRule()); }
-	iv_ruleWorkingSys=ruleWorkingSys
-	{ $current=$iv_ruleWorkingSys.current.getText(); }
+// Entry rule entryRuleWindowingSys
+entryRuleWindowingSys returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getWindowingSysRule()); }
+	iv_ruleWindowingSys=ruleWindowingSys
+	{ $current=$iv_ruleWindowingSys.current.getText(); }
 	EOF;
 
-// Rule WorkingSys
-ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+// Rule WindowingSys
+ruleWindowingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
 }
@@ -1381,43 +1402,43 @@ ruleWorkingSys returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 		kw='carbon'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCarbonKeyword_0());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getCarbonKeyword_0());
 		}
 		    |
 		kw='cocoa'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getCocoaKeyword_1());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getCocoaKeyword_1());
 		}
 		    |
-		kw='gta'
+		kw='gtk'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getGtaKeyword_2());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getGtkKeyword_2());
 		}
 		    |
 		kw='motif'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getMotifKeyword_3());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getMotifKeyword_3());
 		}
 		    |
 		kw='photon'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getPhotonKeyword_4());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getPhotonKeyword_4());
 		}
 		    |
 		kw='wpf'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWpfKeyword_5());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getWpfKeyword_5());
 		}
 		    |
 		kw='win32'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getWorkingSysAccess().getWin32Keyword_6());
+			newLeafNode(kw, grammarAccess.getWindowingSysAccess().getWin32Keyword_6());
 		}
 	)
 ;

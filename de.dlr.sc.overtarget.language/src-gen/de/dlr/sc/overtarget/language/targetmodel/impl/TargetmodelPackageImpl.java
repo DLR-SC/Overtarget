@@ -170,7 +170,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TargetmodelPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -185,7 +185,8 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     if (isInited) return (TargetmodelPackage)EPackage.Registry.INSTANCE.getEPackage(TargetmodelPackage.eNS_URI);
 
     // Obtain or create and register package
-    TargetmodelPackageImpl theTargetmodelPackage = (TargetmodelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TargetmodelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TargetmodelPackageImpl());
+    Object registeredTargetmodelPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TargetmodelPackageImpl theTargetmodelPackage = registeredTargetmodelPackage instanceof TargetmodelPackageImpl ? (TargetmodelPackageImpl)registeredTargetmodelPackage : new TargetmodelPackageImpl();
 
     isInited = true;
 
@@ -198,7 +199,6 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     // Mark meta-data to indicate it can't be changed
     theTargetmodelPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TargetmodelPackage.eNS_URI, theTargetmodelPackage);
     return theTargetmodelPackage;
@@ -209,6 +209,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTargetFile()
   {
     return targetFileEClass;
@@ -219,6 +220,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTargetFile_Name()
   {
     return (EAttribute)targetFileEClass.getEStructuralFeatures().get(0);
@@ -229,6 +231,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTargetFile_Variables()
   {
     return (EReference)targetFileEClass.getEStructuralFeatures().get(1);
@@ -239,6 +242,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTargetFile_RepositoryLocations()
   {
     return (EReference)targetFileEClass.getEStructuralFeatures().get(2);
@@ -249,6 +253,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTargetLibrary()
   {
     return targetLibraryEClass;
@@ -259,6 +264,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBaseModel()
   {
     return baseModelEClass;
@@ -269,6 +275,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBaseModel_Name()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(0);
@@ -279,6 +286,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBaseModel_ImportedModels()
   {
     return (EReference)baseModelEClass.getEStructuralFeatures().get(1);
@@ -289,6 +297,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBaseModel_Os()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(2);
@@ -299,6 +308,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBaseModel_Ws()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(3);
@@ -309,6 +319,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBaseModel_Arch()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(4);
@@ -319,6 +330,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBaseModel_Loc()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(5);
@@ -329,6 +341,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBaseModel_TargetJre()
   {
     return (EAttribute)baseModelEClass.getEStructuralFeatures().get(6);
@@ -339,6 +352,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBaseModel_Variables()
   {
     return (EReference)baseModelEClass.getEStructuralFeatures().get(7);
@@ -349,6 +363,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBaseModel_ExcludedLocations()
   {
     return (EReference)baseModelEClass.getEStructuralFeatures().get(8);
@@ -359,6 +374,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBaseModel_RepositoryLocations()
   {
     return (EReference)baseModelEClass.getEStructuralFeatures().get(9);
@@ -369,6 +385,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTargetModel()
   {
     return targetModelEClass;
@@ -379,6 +396,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTargetModel_Super()
   {
     return (EReference)targetModelEClass.getEStructuralFeatures().get(0);
@@ -389,6 +407,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTargetModel_ImportedModels()
   {
     return (EReference)targetModelEClass.getEStructuralFeatures().get(1);
@@ -399,6 +418,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTargetModel_Os()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(2);
@@ -409,6 +429,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTargetModel_Ws()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(3);
@@ -419,6 +440,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTargetModel_Arch()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(4);
@@ -429,6 +451,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTargetModel_Loc()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(5);
@@ -439,6 +462,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTargetModel_TargetJre()
   {
     return (EAttribute)targetModelEClass.getEStructuralFeatures().get(6);
@@ -449,6 +473,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTargetModel_ExcludedLocations()
   {
     return (EReference)targetModelEClass.getEStructuralFeatures().get(7);
@@ -459,6 +484,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnit()
   {
     return unitEClass;
@@ -469,6 +495,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnit_Source()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(0);
@@ -479,6 +506,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnit_Vers()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
@@ -489,6 +517,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUrlExpression()
   {
     return urlExpressionEClass;
@@ -499,6 +528,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getUrlExpression_Left()
   {
     return (EReference)urlExpressionEClass.getEStructuralFeatures().get(0);
@@ -509,6 +539,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getUrlExpression_Right()
   {
     return (EReference)urlExpressionEClass.getEStructuralFeatures().get(1);
@@ -519,6 +550,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUrlElement()
   {
     return urlElementEClass;
@@ -529,6 +561,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUrlElementString()
   {
     return urlElementStringEClass;
@@ -539,6 +572,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUrlElementString_Content()
   {
     return (EAttribute)urlElementStringEClass.getEStructuralFeatures().get(0);
@@ -549,6 +583,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUrlElementVariable()
   {
     return urlElementVariableEClass;
@@ -559,6 +594,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getUrlElementVariable_Content()
   {
     return (EReference)urlElementVariableEClass.getEStructuralFeatures().get(0);
@@ -569,6 +605,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRepositoryLocation()
   {
     return repositoryLocationEClass;
@@ -579,7 +616,8 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRepositoryLocation_Name()
+  @Override
+  public EAttribute getRepositoryLocation_ReferencedTarget()
   {
     return (EAttribute)repositoryLocationEClass.getEStructuralFeatures().get(0);
   }
@@ -589,9 +627,10 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRepositoryLocation_Url()
+  @Override
+  public EAttribute getRepositoryLocation_Name()
   {
-    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)repositoryLocationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -599,7 +638,8 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRepositoryLocation_Units()
+  @Override
+  public EReference getRepositoryLocation_Url()
   {
     return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(2);
   }
@@ -609,6 +649,18 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
+  public EReference getRepositoryLocation_Units()
+  {
+    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getExcludeLocation()
   {
     return excludeLocationEClass;
@@ -619,6 +671,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExcludeLocation_RepositoryLocation()
   {
     return (EReference)excludeLocationEClass.getEStructuralFeatures().get(0);
@@ -629,6 +682,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExcludeLocation_Units()
   {
     return (EReference)excludeLocationEClass.getEStructuralFeatures().get(1);
@@ -639,6 +693,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVariableDefinition()
   {
     return variableDefinitionEClass;
@@ -649,6 +704,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVariableDefinition_Value()
   {
     return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(0);
@@ -659,6 +715,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAlreadyDeclaredVariable()
   {
     return alreadyDeclaredVariableEClass;
@@ -669,6 +726,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAlreadyDeclaredVariable_Ref()
   {
     return (EReference)alreadyDeclaredVariableEClass.getEStructuralFeatures().get(0);
@@ -679,6 +737,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNewVariableDefinition()
   {
     return newVariableDefinitionEClass;
@@ -689,6 +748,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNewVariableDefinition_Name()
   {
     return (EAttribute)newVariableDefinitionEClass.getEStructuralFeatures().get(0);
@@ -699,6 +759,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TargetmodelFactory getTargetmodelFactory()
   {
     return (TargetmodelFactory)getEFactoryInstance();
@@ -770,6 +831,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEReference(urlElementVariableEClass, URL_ELEMENT_VARIABLE__CONTENT);
 
     repositoryLocationEClass = createEClass(REPOSITORY_LOCATION);
+    createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__REFERENCED_TARGET);
     createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__NAME);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__URL);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__UNITS);
@@ -872,6 +934,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEReference(getUrlElementVariable_Content(), this.getVariableDefinition(), null, "content", null, 0, 1, UrlElementVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(repositoryLocationEClass, RepositoryLocation.class, "RepositoryLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRepositoryLocation_ReferencedTarget(), ecorePackage.getEBoolean(), "referencedTarget", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRepositoryLocation_Name(), ecorePackage.getEString(), "name", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Url(), this.getUrlExpression(), null, "url", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Units(), this.getUnit(), null, "units", null, 0, -1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

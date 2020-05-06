@@ -1,4 +1,8 @@
-# Overtarget
+<p align="center"> 
+  <img src ="resources/logo/Overtarget_Logo.png" />
+</p>
+
+
 
 Overtarget is an eclipse plug-in that helps you managing your target platform files with dependencies across project boundaries.
 
@@ -26,6 +30,9 @@ Overtarget is based on Java / Eclipse and provides an installable feature with p
    - Including M2E
  - Maven 3
  - Windows 7 or Linux Computer
+
+## Quickstart for users
+If you just want to use Overtarget feel free to download it from the Releases section here on GitHub. A manual is provided as [PDF](https://github.com/DLR-SC/Overtarget/releases/download/development_snapshot/Overtarget_Documentation.pdf). 
 
 ## Quickstart
 

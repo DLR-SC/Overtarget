@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -8,7 +8,6 @@
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.generator
-
 
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
@@ -20,6 +19,8 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
+import org.eclipse.emf.ecore.util.EcoreUtil
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 
 /**
  * Generates target files from tmodel files
@@ -27,14 +28,40 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
  * 
  */
 class OvertargetGenerator extends AbstractGenerator {
-	private static val DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
-	
+	static val DEFAULT_JRE_CONTAINER = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/";
+	public static val TARGET_FILE_EXTENSION = ".target"
+	val RefTargetHelper = new ReferencedTargetHelper
+
+	/**
+	 * This method generates a new target from a tmodel.
+	 * If the tmodel has unresolved references, 
+	 * it calls the method generateTargetToResolveReferences().
+	 */
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
-			fsa.generateFile(model.name + ".target", OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
+			EcoreUtil.resolveAll(resource) // resolve proxies in resource before checking if there are any unresolved references left
+			if (RefTargetHelper.hasUnresolvedReferences(model)) {
+				generateTargetToResolveReferences(model, fsa)
+			} else {
+				fsa.generateFile(model.name + TARGET_FILE_EXTENSION, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
+			}
 		}
 	}
+
+	/**
+	 * This method generates a target with references to unresolved targets 
+	 * and sets the target as active target in eclipse
+	 *  -> unresolved references are resolved
+	 * 
+	 * @Param model original tmodel with unresolved references
+	 * @Param fsa file system access
+	 */
 	
+	def generateTargetToResolveReferences(TargetModel model, IFileSystemAccess2 fsa) {
+		val tmodelWithReference = RefTargetHelper.getReferencedModelToGenerate(model)
+		fsa.generateFile(tmodelWithReference.name + TARGET_FILE_EXTENSION, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, tmodelWithReference.compile)
+	}
+
 	/** 
 	 * Compiles the target model into a file
 	 */
@@ -72,7 +99,7 @@ class OvertargetGenerator extends AbstractGenerator {
 			GeneratorHelper.addLocationWithMerge(locations, location);
 		}
 	}	
-	
+
 	/**
 	 * Adds all inherited locations to the target model
 	 */
@@ -89,7 +116,7 @@ class OvertargetGenerator extends AbstractGenerator {
 			GeneratorHelper.addLocationWithMerge(target.repositoryLocations, rl);
 		}
 	}
-	
+
 	/**
 	 * replaces "newest" with "0.0.0"
 	 */
@@ -99,7 +126,7 @@ class OvertargetGenerator extends AbstractGenerator {
 		}
 		return unit.vers;
 	}
-	
+
 	/**
 	 * prints the target model
 	 */
@@ -114,7 +141,7 @@ class OvertargetGenerator extends AbstractGenerator {
 							<unit id="«unit.source»" version="«printVersion(unit)»"/>
 						«ENDFOR»
 						<repository location="«GeneratorHelper.getUrlAsString(repositoryLocation.url, target)»"/>
-						</location>              
+						</location>
 					«ENDFOR»
 					</locations>
 					<environment>
@@ -127,7 +154,7 @@ class OvertargetGenerator extends AbstractGenerator {
 					</target>
 		'''
 	}
-	
+
 	/**
 	 * prints the targetJRE
 	 */

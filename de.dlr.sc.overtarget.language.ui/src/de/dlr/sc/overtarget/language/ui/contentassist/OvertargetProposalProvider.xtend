@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,16 +18,18 @@ import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import javax.inject.Inject
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
-	override complete_OperatningSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	override complete_OperatingSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		Platform.knownOSValues().forEach[acceptor.accept(createCompletionProposal(it, context))]
-		super.complete_OperatningSys(model, ruleCall, context, acceptor)
+		super.complete_OperatingSys(model, ruleCall, context, acceptor)
 	}
 
 	override complete_Architecture(EObject model, RuleCall ruleCall, ContentAssistContext context,
@@ -36,10 +38,10 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		super.complete_Architecture(model, ruleCall, context, acceptor)
 	}
 
-	override complete_WorkingSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	override complete_WindowingSys(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		Platform.knownWSValues().forEach[acceptor.accept(createCompletionProposal(it, context))]
-		super.complete_WorkingSys(model, ruleCall, context, acceptor)
+		super.complete_WindowingSys(model, ruleCall, context, acceptor)
 	}
 
 	override complete_Locale(EObject model, RuleCall ruleCall, ContentAssistContext context,
@@ -56,10 +58,13 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		super.complete_Locale(model, ruleCall, context, acceptor)
 	}
 
+	@Inject
+	OvertargetGrammarAccess grammarAccess;
+
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		acceptor.accept(createCompletionProposal("unit", context))
-		acceptor.accept(createCompletionProposal("version", context))
+		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
+		acceptor.accept(createCompletionProposal("version", "version", getImage(grammarAccess.unitRule), context))
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
 	}
 

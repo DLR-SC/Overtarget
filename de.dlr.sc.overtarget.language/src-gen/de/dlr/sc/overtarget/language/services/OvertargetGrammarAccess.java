@@ -113,10 +113,12 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportedModelsTargetFileIDTerminalRuleCall_3_1_0_1 = (RuleCall)cImportedModelsTargetFileCrossReference_3_1_0.eContents().get(1);
 		private final Keyword cOperatingSystemKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cOsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cOsOperatningSysParserRuleCall_5_0 = (RuleCall)cOsAssignment_5.eContents().get(0);
-		private final Keyword cWorkingSystemKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final RuleCall cOsOperatingSysParserRuleCall_5_0 = (RuleCall)cOsAssignment_5.eContents().get(0);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Keyword cWindowingSystemKeyword_6_0 = (Keyword)cAlternatives_6.eContents().get(0);
+		private final Keyword cWorkingSystemKeyword_6_1 = (Keyword)cAlternatives_6.eContents().get(1);
 		private final Assignment cWsAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cWsWorkingSysParserRuleCall_7_0 = (RuleCall)cWsAssignment_7.eContents().get(0);
+		private final RuleCall cWsWindowingSysParserRuleCall_7_0 = (RuleCall)cWsAssignment_7.eContents().get(0);
 		private final Keyword cArchitectureKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		private final Assignment cArchAssignment_9 = (Assignment)cGroup.eContents().get(9);
 		private final RuleCall cArchArchitectureParserRuleCall_9_0 = (RuleCall)cArchAssignment_9.eContents().get(0);
@@ -137,8 +139,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//BaseModel:
 		//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])*
-		//	'OperatingSystem' os=OperatningSys
-		//	'WorkingSystem' ws=WorkingSys
+		//	'OperatingSystem' os=OperatingSys ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
 		//	'Architecture' arch=Architecture
 		//	'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
 		//	variables+=VariableDefinition*
@@ -147,8 +148,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatningSys 'WorkingSystem'
-		//ws=WorkingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
+		//'Target' name=ID '{' ('Import' importedModels+=[TargetFile])* 'OperatingSystem' os=OperatingSys ('WindowingSystem' |
+		//'WorkingSystem') ws=WindowingSys 'Architecture' arch=Architecture 'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
 		//variables+=VariableDefinition* excludedLocations+=ExcludeLocation* repositoryLocations+=RepositoryLocation* '}'
 		public Group getGroup() { return cGroup; }
 		
@@ -182,20 +183,26 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'OperatingSystem'
 		public Keyword getOperatingSystemKeyword_4() { return cOperatingSystemKeyword_4; }
 		
-		//os=OperatningSys
+		//os=OperatingSys
 		public Assignment getOsAssignment_5() { return cOsAssignment_5; }
 		
-		//OperatningSys
-		public RuleCall getOsOperatningSysParserRuleCall_5_0() { return cOsOperatningSysParserRuleCall_5_0; }
+		//OperatingSys
+		public RuleCall getOsOperatingSysParserRuleCall_5_0() { return cOsOperatingSysParserRuleCall_5_0; }
+		
+		//'WindowingSystem' | 'WorkingSystem'
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+		
+		//'WindowingSystem'
+		public Keyword getWindowingSystemKeyword_6_0() { return cWindowingSystemKeyword_6_0; }
 		
 		//'WorkingSystem'
-		public Keyword getWorkingSystemKeyword_6() { return cWorkingSystemKeyword_6; }
+		public Keyword getWorkingSystemKeyword_6_1() { return cWorkingSystemKeyword_6_1; }
 		
-		//ws=WorkingSys
+		//ws=WindowingSys
 		public Assignment getWsAssignment_7() { return cWsAssignment_7; }
 		
-		//WorkingSys
-		public RuleCall getWsWorkingSysParserRuleCall_7_0() { return cWsWorkingSysParserRuleCall_7_0; }
+		//WindowingSys
+		public RuleCall getWsWindowingSysParserRuleCall_7_0() { return cWsWindowingSysParserRuleCall_7_0; }
 		
 		//'Architecture'
 		public Keyword getArchitectureKeyword_8() { return cArchitectureKeyword_8; }
@@ -268,11 +275,13 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cOperatingSystemKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Assignment cOsAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cOsOperatningSysParserRuleCall_5_1_0 = (RuleCall)cOsAssignment_5_1.eContents().get(0);
+		private final RuleCall cOsOperatingSysParserRuleCall_5_1_0 = (RuleCall)cOsAssignment_5_1.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cWorkingSystemKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Alternatives cAlternatives_6_0 = (Alternatives)cGroup_6.eContents().get(0);
+		private final Keyword cWindowingSystemKeyword_6_0_0 = (Keyword)cAlternatives_6_0.eContents().get(0);
+		private final Keyword cWorkingSystemKeyword_6_0_1 = (Keyword)cAlternatives_6_0.eContents().get(1);
 		private final Assignment cWsAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
-		private final RuleCall cWsWorkingSysParserRuleCall_6_1_0 = (RuleCall)cWsAssignment_6_1.eContents().get(0);
+		private final RuleCall cWsWindowingSysParserRuleCall_6_1_0 = (RuleCall)cWsAssignment_6_1.eContents().get(0);
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
 		private final Keyword cArchitectureKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Assignment cArchAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
@@ -295,8 +304,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TargetModel:
 		//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
-		//	os=OperatningSys)? ('WorkingSystem' ws=WorkingSys)? ('Architecture' arch=Architecture)? ('Locale' loc=Locale)?
-		//	('TargetJRE' targetJre=jre)?
+		//	os=OperatingSys)? (('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)? ('Architecture' arch=Architecture)?
+		//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)?
 		//	variables+=VariableDefinition*
 		//	excludedLocations+=ExcludeLocation*
 		//	repositoryLocations+=RepositoryLocation*
@@ -304,8 +313,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
-		//os=OperatningSys)? ('WorkingSystem' ws=WorkingSys)? ('Architecture' arch=Architecture)? ('Locale' loc=Locale)?
-		//('TargetJRE' targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
+		//os=OperatingSys)? (('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)? ('Architecture' arch=Architecture)?
+		//('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)? variables+=VariableDefinition* excludedLocations+=ExcludeLocation*
 		//repositoryLocations+=RepositoryLocation* '}'
 		public Group getGroup() { return cGroup; }
 		
@@ -351,29 +360,35 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getImportedModelsTargetFileIDTerminalRuleCall_4_1_0_1() { return cImportedModelsTargetFileIDTerminalRuleCall_4_1_0_1; }
 		
-		//('OperatingSystem' os=OperatningSys)?
+		//('OperatingSystem' os=OperatingSys)?
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//'OperatingSystem'
 		public Keyword getOperatingSystemKeyword_5_0() { return cOperatingSystemKeyword_5_0; }
 		
-		//os=OperatningSys
+		//os=OperatingSys
 		public Assignment getOsAssignment_5_1() { return cOsAssignment_5_1; }
 		
-		//OperatningSys
-		public RuleCall getOsOperatningSysParserRuleCall_5_1_0() { return cOsOperatningSysParserRuleCall_5_1_0; }
+		//OperatingSys
+		public RuleCall getOsOperatingSysParserRuleCall_5_1_0() { return cOsOperatingSysParserRuleCall_5_1_0; }
 		
-		//('WorkingSystem' ws=WorkingSys)?
+		//(('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)?
 		public Group getGroup_6() { return cGroup_6; }
 		
-		//'WorkingSystem'
-		public Keyword getWorkingSystemKeyword_6_0() { return cWorkingSystemKeyword_6_0; }
+		//'WindowingSystem' | 'WorkingSystem'
+		public Alternatives getAlternatives_6_0() { return cAlternatives_6_0; }
 		
-		//ws=WorkingSys
+		//'WindowingSystem'
+		public Keyword getWindowingSystemKeyword_6_0_0() { return cWindowingSystemKeyword_6_0_0; }
+		
+		//'WorkingSystem'
+		public Keyword getWorkingSystemKeyword_6_0_1() { return cWorkingSystemKeyword_6_0_1; }
+		
+		//ws=WindowingSys
 		public Assignment getWsAssignment_6_1() { return cWsAssignment_6_1; }
 		
-		//WorkingSys
-		public RuleCall getWsWorkingSysParserRuleCall_6_1_0() { return cWsWorkingSysParserRuleCall_6_1_0; }
+		//WindowingSys
+		public RuleCall getWsWindowingSysParserRuleCall_6_1_0() { return cWsWindowingSysParserRuleCall_6_1_0; }
 		
 		//('Architecture' arch=Architecture)?
 		public Group getGroup_7() { return cGroup_7; }
@@ -687,55 +702,65 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	public class RepositoryLocationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.RepositoryLocation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cRepositoryLocationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cUrlKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cUrlAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cUrlUrlExpressionParserRuleCall_3_0 = (RuleCall)cUrlAssignment_3.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cUnitsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cUnitsUnitParserRuleCall_5_0 = (RuleCall)cUnitsAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cReferencedTargetAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cReferencedTargetReferencedTargetKeyword_0_0 = (Keyword)cReferencedTargetAssignment_0.eContents().get(0);
+		private final Keyword cRepositoryLocationKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cUrlKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cUrlAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cUrlUrlExpressionParserRuleCall_4_0 = (RuleCall)cUrlAssignment_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cUnitsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cUnitsUnitParserRuleCall_6_0 = (RuleCall)cUnitsAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//RepositoryLocation:
-		//	'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+		///* referencedTarget is used when the target has unresolved references. 
+		//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
+		//*/ RepositoryLocation:
+		//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
 		//	units+=Unit*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
+		//referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
 		public Group getGroup() { return cGroup; }
 		
+		//referencedTarget?='ReferencedTarget'?
+		public Assignment getReferencedTargetAssignment_0() { return cReferencedTargetAssignment_0; }
+		
+		//'ReferencedTarget'
+		public Keyword getReferencedTargetReferencedTargetKeyword_0_0() { return cReferencedTargetReferencedTargetKeyword_0_0; }
+		
 		//'RepositoryLocation'
-		public Keyword getRepositoryLocationKeyword_0() { return cRepositoryLocationKeyword_0; }
+		public Keyword getRepositoryLocationKeyword_1() { return cRepositoryLocationKeyword_1; }
 		
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
 		//'url'
-		public Keyword getUrlKeyword_2() { return cUrlKeyword_2; }
+		public Keyword getUrlKeyword_3() { return cUrlKeyword_3; }
 		
 		//url=UrlExpression
-		public Assignment getUrlAssignment_3() { return cUrlAssignment_3; }
+		public Assignment getUrlAssignment_4() { return cUrlAssignment_4; }
 		
 		//UrlExpression
-		public RuleCall getUrlUrlExpressionParserRuleCall_3_0() { return cUrlUrlExpressionParserRuleCall_3_0; }
+		public RuleCall getUrlUrlExpressionParserRuleCall_4_0() { return cUrlUrlExpressionParserRuleCall_4_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 		
 		//units+=Unit*
-		public Assignment getUnitsAssignment_5() { return cUnitsAssignment_5; }
+		public Assignment getUnitsAssignment_6() { return cUnitsAssignment_6; }
 		
 		//Unit
-		public RuleCall getUnitsUnitParserRuleCall_5_0() { return cUnitsUnitParserRuleCall_5_0; }
+		public RuleCall getUnitsUnitParserRuleCall_6_0() { return cUnitsUnitParserRuleCall_6_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 	public class ExcludeLocationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.ExcludeLocation");
@@ -931,8 +956,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1_1() { return cIDTerminalRuleCall_1_1_1; }
 	}
-	public class OperatningSysElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.OperatningSys");
+	public class OperatingSysElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.OperatingSys");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cAixKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cHpuxKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
@@ -942,7 +967,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSolarisKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cWin32Keyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		
-		//OperatningSys:
+		//OperatingSys:
 		//	'aix' | 'hpux' | 'linux' | 'macosx' | 'qnx' | 'solaris' | 'win32';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -970,22 +995,22 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'win32'
 		public Keyword getWin32Keyword_6() { return cWin32Keyword_6; }
 	}
-	public class WorkingSysElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.WorkingSys");
+	public class WindowingSysElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.WindowingSys");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cCarbonKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cCocoaKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cGtaKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cGtkKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cMotifKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cPhotonKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cWpfKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cWin32Keyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		
-		//WorkingSys:
-		//	'carbon' | 'cocoa' | 'gta' | 'motif' | 'photon' | 'wpf' | 'win32';
+		//WindowingSys:
+		//	'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'carbon' | 'cocoa' | 'gta' | 'motif' | 'photon' | 'wpf' | 'win32'
+		//'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'carbon'
@@ -994,8 +1019,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'cocoa'
 		public Keyword getCocoaKeyword_1() { return cCocoaKeyword_1; }
 		
-		//'gta'
-		public Keyword getGtaKeyword_2() { return cGtaKeyword_2; }
+		//'gtk'
+		public Keyword getGtkKeyword_2() { return cGtkKeyword_2; }
 		
 		//'motif'
 		public Keyword getMotifKeyword_3() { return cMotifKeyword_3; }
@@ -1211,8 +1236,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	private final AlreadyDeclaredVariableElements pAlreadyDeclaredVariable;
 	private final NewVariableDefinitionElements pNewVariableDefinition;
 	private final QualifierElements pQualifier;
-	private final OperatningSysElements pOperatningSys;
-	private final WorkingSysElements pWorkingSys;
+	private final OperatingSysElements pOperatingSys;
+	private final WindowingSysElements pWindowingSys;
 	private final ArchitectureElements pArchitecture;
 	private final LocaleElements pLocale;
 	private final HttpElements pHttp;
@@ -1251,8 +1276,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAlreadyDeclaredVariable = new AlreadyDeclaredVariableElements();
 		this.pNewVariableDefinition = new NewVariableDefinitionElements();
 		this.pQualifier = new QualifierElements();
-		this.pOperatningSys = new OperatningSysElements();
-		this.pWorkingSys = new WorkingSysElements();
+		this.pOperatingSys = new OperatingSysElements();
+		this.pWindowingSys = new WindowingSysElements();
 		this.pArchitecture = new ArchitectureElements();
 		this.pLocale = new LocaleElements();
 		this.pHttp = new HttpElements();
@@ -1317,8 +1342,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//BaseModel:
 	//	'Target' name=ID '{' ('Import' importedModels+=[TargetFile])*
-	//	'OperatingSystem' os=OperatningSys
-	//	'WorkingSystem' ws=WorkingSys
+	//	'OperatingSystem' os=OperatingSys ('WindowingSystem' | 'WorkingSystem') ws=WindowingSys
 	//	'Architecture' arch=Architecture
 	//	'Locale' loc=Locale ('TargetJRE' targetJre=jre)?
 	//	variables+=VariableDefinition*
@@ -1335,8 +1359,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//TargetModel:
 	//	'Target' name=ID ('extends' super=[TargetModel])? '{' ('Import' importedModels+=[TargetFile])* ('OperatingSystem'
-	//	os=OperatningSys)? ('WorkingSystem' ws=WorkingSys)? ('Architecture' arch=Architecture)? ('Locale' loc=Locale)?
-	//	('TargetJRE' targetJre=jre)?
+	//	os=OperatingSys)? (('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)? ('Architecture' arch=Architecture)?
+	//	('Locale' loc=Locale)? ('TargetJRE' targetJre=jre)?
 	//	variables+=VariableDefinition*
 	//	excludedLocations+=ExcludeLocation*
 	//	repositoryLocations+=RepositoryLocation*
@@ -1429,8 +1453,10 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		return getUrlElementVariableAccess().getRule();
 	}
 	
-	//RepositoryLocation:
-	//	'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
+	///* referencedTarget is used when the target has unresolved references. 
+	//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
+	//*/ RepositoryLocation:
+	//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
 	//	units+=Unit*
 	//	'}';
 	public RepositoryLocationElements getRepositoryLocationAccess() {
@@ -1493,24 +1519,24 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		return getQualifierAccess().getRule();
 	}
 	
-	//OperatningSys:
+	//OperatingSys:
 	//	'aix' | 'hpux' | 'linux' | 'macosx' | 'qnx' | 'solaris' | 'win32';
-	public OperatningSysElements getOperatningSysAccess() {
-		return pOperatningSys;
+	public OperatingSysElements getOperatingSysAccess() {
+		return pOperatingSys;
 	}
 	
-	public ParserRule getOperatningSysRule() {
-		return getOperatningSysAccess().getRule();
+	public ParserRule getOperatingSysRule() {
+		return getOperatingSysAccess().getRule();
 	}
 	
-	//WorkingSys:
-	//	'carbon' | 'cocoa' | 'gta' | 'motif' | 'photon' | 'wpf' | 'win32';
-	public WorkingSysElements getWorkingSysAccess() {
-		return pWorkingSys;
+	//WindowingSys:
+	//	'carbon' | 'cocoa' | 'gtk' | 'motif' | 'photon' | 'wpf' | 'win32';
+	public WindowingSysElements getWindowingSysAccess() {
+		return pWindowingSys;
 	}
 	
-	public ParserRule getWorkingSysRule() {
-		return getWorkingSysAccess().getRule();
+	public ParserRule getWindowingSysRule() {
+		return getWindowingSysAccess().getRule();
 	}
 	
 	//Architecture:

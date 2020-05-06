@@ -1,19 +1,22 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OverTarget Tests
+Bundle-Name: Overtarget Tests
 Bundle-Vendor: DLR (German Aerospace Center)
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-SymbolicName: de.dlr.sc.overtarget.language.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.dlr.sc.overtarget.language,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing,
- org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.junit,
  org.eclipse.core.runtime,
  org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: de.dlr.sc.overtarget.language.tests;x-internal=true
+Export-Package: de.dlr.sc.overtarget.language.generator,
+ de.dlr.sc.overtarget.language.generator.util,
+ de.dlr.sc.overtarget.language.tests;x-internal=true,
+ de.dlr.sc.overtarget.language.validation
 Import-Package: org.hamcrest.core,
  org.junit;version="4.5.0",
  org.junit.runners.model;version="4.5.0",

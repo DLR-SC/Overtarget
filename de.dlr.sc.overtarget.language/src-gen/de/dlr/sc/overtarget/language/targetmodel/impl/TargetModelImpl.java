@@ -210,6 +210,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TargetModel getSuper()
   {
     if (super_ != null && super_.eIsProxy())
@@ -240,6 +241,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSuper(TargetModel newSuper)
   {
     TargetModel oldSuper = super_;
@@ -253,6 +255,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TargetFile> getImportedModels()
   {
     if (importedModels == null)
@@ -267,6 +270,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOs()
   {
     return os;
@@ -277,6 +281,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOs(String newOs)
   {
     String oldOs = os;
@@ -290,6 +295,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getWs()
   {
     return ws;
@@ -300,6 +306,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setWs(String newWs)
   {
     String oldWs = ws;
@@ -313,6 +320,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getArch()
   {
     return arch;
@@ -323,6 +331,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setArch(String newArch)
   {
     String oldArch = arch;
@@ -336,6 +345,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLoc()
   {
     return loc;
@@ -346,6 +356,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLoc(String newLoc)
   {
     String oldLoc = loc;
@@ -359,6 +370,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTargetJre()
   {
     return targetJre;
@@ -369,6 +381,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTargetJre(String newTargetJre)
   {
     String oldTargetJre = targetJre;
@@ -382,6 +395,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ExcludeLocation> getExcludedLocations()
   {
     if (excludedLocations == null)
@@ -557,7 +571,7 @@ public class TargetModelImpl extends TargetFileImpl implements TargetModel
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (os: ");
     result.append(os);
     result.append(", ws: ");
