@@ -145,6 +145,8 @@ jobs:
         - deploy/unsecured/p2/**/zip/*_p2.zip
         - deploy/unsecured/bin/**/*.zip
         - deploy/unsecured/bin/**/*.tar.gz
+        - de.dlr.sc.overtarget.docs.feature/docs/*.pdf
+        
         skip_cleanup: true
         name: $PROJECT_NAME Development Build
         body: Development build on latest commit by Travis CI - $TRAVIS_BRANCH ($TRAVIS_COMMIT) - $(date +'%F %T %Z'). This release is subject to constant change.
@@ -211,6 +213,8 @@ jobs:
         - deploy/unsecured/p2/**/zip/*_p2.zip
         - deploy/unsecured/bin/**/*.zip
         - deploy/unsecured/bin/**/*.tar.gz
+        - de.dlr.sc.overtarget.docs.feature/docs/*.pdf
+        
         skip_cleanup: true
         name: $PROJECT_NAME Integration Build
         body: Integration build on latest commit by Travis CI - $TRAVIS_BRANCH ($TRAVIS_COMMIT) - $(date +'%F %T %Z'). This release is subject to constant change.
