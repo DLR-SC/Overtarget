@@ -4,12 +4,15 @@
       label="de.dlr.sc.overtarget.docs.feature"
       version="1.1.0.qualifier">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description>
+      Feature for documentation and release notes.
+German Aerospace Center (DLR e.V.)
+Simulation and Software Technology
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright>
+      Copyright 2020
+by German Aerospace Center (DLR e.V.)
    </copyright>
 
    <license url="http://www.example.com/license">
