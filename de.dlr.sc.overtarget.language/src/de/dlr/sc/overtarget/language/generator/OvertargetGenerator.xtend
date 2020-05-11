@@ -20,7 +20,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.generator.AbstractFileSystemAccess
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 
 /**
@@ -61,12 +60,6 @@ class OvertargetGenerator extends AbstractGenerator {
 	def generateTargetToResolveReferences(TargetModel model, IFileSystemAccess2 fsa) {
 		val tmodelWithReference = RefTargetHelper.getReferencedModelToGenerate(model)
 		fsa.generateFile(tmodelWithReference.name + TARGET_FILE_EXTENSION, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, tmodelWithReference.compile)
-		if (fsa instanceof AbstractFileSystemAccess) { //Check this to have access to outputConfigurations
-			val outputPath = fsa.outputConfigurations.get("de.dlr.sc.overtarget.output").outputDirectory
-			val originalUri = EcoreUtil.getURI(model)
-			val targetFile = RefTargetHelper.findTargetfileOfTmodel(tmodelWithReference, outputPath, originalUri)
-			RefTargetHelper.setFileAsActiveTarget(targetFile)
-		}
 	}
 
 	/** 
@@ -148,7 +141,7 @@ class OvertargetGenerator extends AbstractGenerator {
 							<unit id="«unit.source»" version="«printVersion(unit)»"/>
 						«ENDFOR»
 						<repository location="«GeneratorHelper.getUrlAsString(repositoryLocation.url, target)»"/>
-						</location>              
+						</location>
 					«ENDFOR»
 					</locations>
 					<environment>

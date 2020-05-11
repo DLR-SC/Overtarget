@@ -36,7 +36,7 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     boolean _equals = fileName.equals(target.getName());
     boolean _not = (!_equals);
     if (_not) {
-      this.warning("File name and model name are not the same!", target, target.eContainingFeature(), OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME);
+      this.warning("File name and tmodel name are not the same!", target, target.eContainingFeature(), OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME);
     }
   }
   
@@ -66,7 +66,7 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     String extendName = extendModel.getName();
     boolean _equals = tmodelName.equals(extendName);
     if (_equals) {
-      this.error("A target cannot extend its own target.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super(), OvertargetValidator.TMODEL_EXTENDS_OWN_TMODEL);
+      this.error("A tmodel cannot extend its own tmodel.", target, TargetmodelPackage.eINSTANCE.getTargetModel_Super(), OvertargetValidator.TMODEL_EXTENDS_OWN_TMODEL);
     }
   }
 }
