@@ -2,7 +2,7 @@
 <feature
       id="de.dlr.sc.overtarget.docs.feature"
       label="de.dlr.sc.overtarget.docs.feature"
-      version="1.1.0.qualifier">
+      version="1.2.0.qualifier">
 
    <description>
       Feature for documentation and release notes.

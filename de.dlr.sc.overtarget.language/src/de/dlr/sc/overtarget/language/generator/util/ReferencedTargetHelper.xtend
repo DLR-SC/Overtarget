@@ -14,11 +14,7 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 import org.eclipse.emf.ecore.util.EcoreUtil
 import java.util.ArrayList
-import org.eclipse.core.resources.ResourcesPlugin
-import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import org.eclipse.core.resources.IFile
-import org.eclipse.core.runtime.Path
-import org.eclipse.emf.common.util.URI
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
 
 /**
@@ -26,7 +22,6 @@ import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
  */
 class ReferencedTargetHelper {
 	public static val TARGET_NAME = "targetForReferences"
-	
 	
 	/**
 	 * This method copies the original tmodel and
@@ -47,7 +42,6 @@ class ReferencedTargetHelper {
 		renameTmodel(tmodelWithReference)
 		return tmodelWithReference
 		}
-	
 
 	def deleteRepositoryLocation(ArrayList<RepositoryLocation> list) {
 		for (RepositoryLocation reposLoc : list) {
@@ -84,29 +78,26 @@ class ReferencedTargetHelper {
 		}
 	}
 
-	/**
-	 * Locates the tmodelFile and finds the project. 
+/**
 	 * In the project the targetFile is searched with the outputPath.
 	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
 	 * 
-	 * @param model tmodel with references
+	 * @param file targetFile which is searched for
 	 * @param outputDirectory output directory of generated targetFile
-	 * @param uri uri of original tmodel
+	 * @param fileName name of the tmodel/targetFile
 	 * @return targetFile
 	 */
-	def findTargetfileOfTmodel(TargetModel model, String outputDirectory, URI uri) {
-		val tmodelName = "/" + model.name + OvertargetGenerator.TARGET_FILE_EXTENSION
-		val workspace = ResourcesPlugin.workspace.root
-		val tmodelFile = workspace.getFile(new Path(uri.toPlatformString(true)))
-		val project = tmodelFile.project
+	def findTargetFileInProject(IFile file, String outputDirectory, String fileName) {
+		val project = file.getProject
+		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
 		val outputPath = outputDirectory.toString.replaceFirst(".","")
 		if (outputPath.equals("/")) {
-			val targetFile = project.getFile(tmodelName)
+			val targetFile = project.getFile(targetFileName)
 			if (targetFile.exists){
 				return targetFile
 			}
 		} else {
-			val targetPath = outputPath + tmodelName
+			val targetPath = outputPath + targetFileName
 			val targetFileWithFolder = project.getFile(targetPath)
 			if (targetFileWithFolder.exists){
 				return targetFileWithFolder
@@ -114,8 +105,31 @@ class ReferencedTargetHelper {
 		}
 	}
 
-	def setFileAsActiveTarget(IFile targetFile) {
-		val targetPlatHelper = new TargetPlatformHelper()
-		targetPlatHelper.setAsActiveTarget(targetFile)
+
+	/**
+	 * In the project the targetFile is searched with the outputPath.
+	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
+	 * 
+	 * @param file targetFile which is searched for
+	 * @param outputDirectory output directory of generated targetFile
+	 * @return targetFile
+	 */
+	def findTargetFileInProject(IFile file, String outputDirectory) {
+		val fileName = "/" + file.name
+		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
+		return findTargetFileInProject(file, outputDirectory, targetFileName)
+	}
+	
+	/**
+	 * In the project the targetForReferences file is searched with the outputPath.
+	 * Checks if the file is located directly in the project folder or in an extra folder.
+	 * 
+	 * @param file targetFile with unresolved references
+	 * @param outputDirectory output directory of generated targetFile
+	 * @return targetForReferences 
+	 */
+	def findTargetForReferencesFile(IFile file, String outputDirectory) {
+		val fileName = "/" + TARGET_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
+		return findTargetFileInProject(file, outputDirectory, fileName)
 	}
 }

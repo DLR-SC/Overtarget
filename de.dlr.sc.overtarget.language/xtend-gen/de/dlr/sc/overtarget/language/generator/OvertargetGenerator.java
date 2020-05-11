@@ -20,14 +20,11 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import java.util.ArrayList;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
@@ -81,12 +78,6 @@ public class OvertargetGenerator extends AbstractGenerator {
     String _name = tmodelWithReference.getName();
     String _plus = (_name + OvertargetGenerator.TARGET_FILE_EXTENSION);
     fsa.generateFile(_plus, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, this.compile(tmodelWithReference));
-    if ((fsa instanceof AbstractFileSystemAccess)) {
-      final String outputPath = ((AbstractFileSystemAccess)fsa).getOutputConfigurations().get("de.dlr.sc.overtarget.output").getOutputDirectory();
-      final URI originalUri = EcoreUtil.getURI(model);
-      final IFile targetFile = this.RefTargetHelper.findTargetfileOfTmodel(tmodelWithReference, outputPath, originalUri);
-      this.RefTargetHelper.setFileAsActiveTarget(targetFile);
-    }
   }
   
   /**
@@ -221,7 +212,7 @@ public class OvertargetGenerator extends AbstractGenerator {
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("</location>              ");
+        _builder.append("</location>");
         _builder.newLine();
       }
     }

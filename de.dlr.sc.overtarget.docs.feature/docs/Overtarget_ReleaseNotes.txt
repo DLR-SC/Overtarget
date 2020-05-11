@@ -1,0 +1,12 @@
+Overtarget Release Notes
+-------------------------
+
+Release 1.2.0 (6th May 2020)
+----------------------------
+
+New Features:
+  - Added toolbar
+  - Update UI
+  - Added documentation
+  - Support for references to other tmodels
+  - Improved/specialised language
