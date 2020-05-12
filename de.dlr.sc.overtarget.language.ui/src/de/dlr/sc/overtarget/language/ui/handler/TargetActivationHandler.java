@@ -10,8 +10,6 @@
 
 package de.dlr.sc.overtarget.language.ui.handler;
 
-import java.lang.annotation.Target;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -19,9 +17,7 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.swt.SWT;
@@ -32,15 +28,10 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.w3c.dom.Node;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -48,8 +39,6 @@ import com.google.inject.Provider;
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
-import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
-import de.dlr.sc.overtarget.language.targetmodel.impl.TargetLibraryImpl;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 
