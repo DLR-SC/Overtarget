@@ -12,7 +12,7 @@ package de.dlr.sc.overtarget.language.util;
 import de.dlr.sc.overtarget.language.Activator;
 import de.dlr.sc.overtarget.language.generator.GeneratorHelper;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
-import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelFactory;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import java.net.URI;
@@ -50,7 +50,7 @@ public class QueryManager {
       EObject _eContainer = unit.eContainer();
       final RepositoryLocation location = ((RepositoryLocation) _eContainer);
       EObject _eContainer_1 = location.eContainer();
-      final TargetModel target = ((TargetModel) _eContainer_1);
+      final TargetFile target = ((TargetFile) _eContainer_1);
       String _urlAsString = GeneratorHelper.getUrlAsString(location.getUrl(), target);
       final URI uri = new URI(_urlAsString);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
