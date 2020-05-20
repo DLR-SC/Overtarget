@@ -26,19 +26,11 @@ import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 import org.eclipse.ui.IFileEditorInput
 import org.eclipse.core.runtime.NullProgressMonitor
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
-import de.dlr.sc.overtarget.language.targetmodel.impl.TargetmodelFactoryImpl
-import de.dlr.sc.overtarget.language.targetmodel.impl.TargetModelImpl
-import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.core.resources.IFile
 import org.eclipse.emf.common.util.URI
-import org.eclipse.core.resources.IProject
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.ui.IEditorInput
-import org.eclipse.core.runtime.IProgressMonitor
-import de.dlr.sc.overtarget.language.targetmodel.impl.TargetmodelPackageImpl
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import com.google.inject.Inject
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 
 /**
  * Custom quickfixes.
@@ -102,34 +94,38 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME)
 	def fixFileNameLikeTargetName(Issue issue, IssueResolutionAcceptor acceptor) {
-			acceptor.accept(issue, 'Replace with correct tmodel name', '', 'upcase.png') [
-			
-			context |
-					val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
-					if (editor instanceof ITextEditor) {
-						val progressMonitor = new NullProgressMonitor()
-						editor.doSave(progressMonitor) //saves the made changes in the file
-						val ite = editor as ITextEditor
-						val input = ite.editorInput
-						val fileEditorInput = input as IFileEditorInput
-						val file = fileEditorInput.file
-						val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-						val project = file.getProject();
-						val rs = resourceSetProvider.get(project);
-						val r = rs.getResource(uri, true);
-						
-						val model = r.contents.get(0) as TargetModel
-						val modelName = model.name
-						
-						val targetKeyword = grammarAccess.KEYWORDAccess.targetKeyword_1.value
-						val targetLibraryKeyword = grammarAccess.targetLibraryRule.name
-						val WHITESPACE_SEPARATOR = 1
-						
-						val xtextDocument = context.xtextDocument
-						val fileName = editor.title.replace(".tmodel", "")
-						xtextDocument.replace(issue.offset + WHITESPACE_SEPARATOR + targetKeyword.length, modelName.length, fileName)
-					}
-			
+		acceptor.accept(issue, 'Replace with correct tmodel name', '', 'upcase.png') [
+		
+		context |
+			val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+			if (editor instanceof ITextEditor) {
+				val progressMonitor = new NullProgressMonitor()
+				editor.doSave(progressMonitor) //saves the made changes in the file
+				val ite = editor as ITextEditor
+				val input = ite.editorInput
+				val fileEditorInput = input as IFileEditorInput
+				val file = fileEditorInput.file
+				val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+				val project = file.getProject();
+				val rs = resourceSetProvider.get(project);
+				val r = rs.getResource(uri, true);
+				
+				val model = r.contents.get(0) as TargetFile
+				val modelName = model.name
+				
+				val targetKeyword = grammarAccess.KEYWORDAccess.targetKeyword_1.value
+				val targetLibraryKeyword = grammarAccess.targetLibraryRule.name
+				val WHITESPACE_SEPARATOR = 1
+				
+				val xtextDocument = context.xtextDocument
+				val fileName = editor.title.replace(".tmodel", "")
+				
+				if (model instanceof TargetModel) {
+					xtextDocument.replace(issue.offset + WHITESPACE_SEPARATOR + targetKeyword.length, modelName.length, fileName)
+				} else if (model instanceof TargetLibrary) {
+					xtextDocument.replace(issue.offset + WHITESPACE_SEPARATOR + targetLibraryKeyword.length, modelName.length, fileName)
+				}
+			}
 		]
 	}
 }

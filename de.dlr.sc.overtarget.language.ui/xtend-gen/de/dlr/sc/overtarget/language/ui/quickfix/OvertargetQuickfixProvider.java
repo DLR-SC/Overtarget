@@ -12,6 +12,8 @@ package de.dlr.sc.overtarget.language.ui.quickfix;
 import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
@@ -113,18 +115,28 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
         final ResourceSet rs = this.resourceSetProvider.get(project);
         final Resource r = rs.getResource(uri, true);
         EObject _get = r.getContents().get(0);
-        final TargetModel model = ((TargetModel) _get);
+        final TargetFile model = ((TargetFile) _get);
         final String modelName = model.getName();
         final String targetKeyword = this.grammarAccess.getKEYWORDAccess().getTargetKeyword_1().getValue();
         final String targetLibraryKeyword = this.grammarAccess.getTargetLibraryRule().getName();
         final int WHITESPACE_SEPARATOR = 1;
         final IXtextDocument xtextDocument = context.getXtextDocument();
         final String fileName = ((ITextEditor)editor).getTitle().replace(".tmodel", "");
-        Integer _offset = issue.getOffset();
-        int _plus = ((_offset).intValue() + WHITESPACE_SEPARATOR);
-        int _length = targetKeyword.length();
-        int _plus_1 = (_plus + _length);
-        xtextDocument.replace(_plus_1, modelName.length(), fileName);
+        if ((model instanceof TargetModel)) {
+          Integer _offset = issue.getOffset();
+          int _plus = ((_offset).intValue() + WHITESPACE_SEPARATOR);
+          int _length = targetKeyword.length();
+          int _plus_1 = (_plus + _length);
+          xtextDocument.replace(_plus_1, modelName.length(), fileName);
+        } else {
+          if ((model instanceof TargetLibrary)) {
+            Integer _offset_1 = issue.getOffset();
+            int _plus_2 = ((_offset_1).intValue() + WHITESPACE_SEPARATOR);
+            int _length_1 = targetLibraryKeyword.length();
+            int _plus_3 = (_plus_2 + _length_1);
+            xtextDocument.replace(_plus_3, modelName.length(), fileName);
+          }
+        }
       }
     };
     acceptor.accept(issue, "Replace with correct tmodel name", "", "upcase.png", _function);
