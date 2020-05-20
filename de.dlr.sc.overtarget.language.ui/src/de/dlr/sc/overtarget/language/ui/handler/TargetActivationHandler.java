@@ -29,8 +29,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
@@ -39,6 +37,8 @@ import com.google.inject.Provider;
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 
@@ -83,12 +83,7 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 			ResourceSet rs = resourceSetProvider.get(project);
 			Resource r = rs.getResource(uri, true);
 			
-			//to check if the tmodel is a target library
 			TargetFile target = (TargetFile) r.getContents().get(0);
-			ICompositeNode node = NodeModelUtils.getNode(target);
-			String targetLibraryKeyword = grammarAccess.getTargetLibraryRule().getName();
-			String nodeKeyword = node.getFirstChild().getText();
-			boolean isTargetLibrary = nodeKeyword.equals(targetLibraryKeyword);
 			
 			if (outputPath.equals("/")) {
 				targetFile = project.getFile("/" + targetName);
@@ -96,14 +91,7 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 				String targetPath = outputPath + "/" + targetName;
 				targetFile = project.getFile(targetPath);
 			}
-			if (isTargetLibrary) {
-				MessageBox errorMessage = new MessageBox(
-						Display.getCurrent().getActiveShell(), 
-						SWT.OK | SWT.ICON_ERROR);
-				errorMessage.setText("Error");
-				errorMessage.setMessage("A " + targetLibraryKeyword + " cannot be set as active target.");
-				errorMessage.open();
-			} else if (targetFile.exists()) {
+			if (target instanceof TargetModel && targetFile.exists()) {
 				try {
 					TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
 					targetPlatHelper.setAsActiveTarget(targetFile);
@@ -115,6 +103,13 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 					errorMessage.setMessage(file.getName() + " could not be set as active target.");
 					errorMessage.open();
 				}
+			} else if (target instanceof TargetLibrary) {
+				MessageBox errorMessage = new MessageBox(
+						Display.getCurrent().getActiveShell(), 
+						SWT.OK | SWT.ICON_ERROR);
+				errorMessage.setText("Error");
+				errorMessage.setMessage("A TargetLibrary cannot be set as active target.");
+				errorMessage.open();
 			} else {
 				MessageBox errorMessage = new MessageBox(
 						Display.getCurrent().getActiveShell(), 
