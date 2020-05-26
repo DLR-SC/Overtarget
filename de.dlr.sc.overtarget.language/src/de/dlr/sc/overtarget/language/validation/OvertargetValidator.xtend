@@ -31,7 +31,7 @@ class OvertargetValidator extends AbstractOvertargetValidator {
 		var helper = new ValidatorHelper();
 		val fileName = helper.getFileName(target);
 		if (!fileName.equals(target.name)) {
-			warning('File name and tmodel name are not the same!', target, target.eContainingFeature, FILE_NAME_LIKE_TARGET_NAME)
+			warning('File name and tmodel name are not the same!', target, TargetmodelPackage.eINSTANCE.targetFile_Name, FILE_NAME_LIKE_TARGET_NAME)
 		}
 	}
 	
