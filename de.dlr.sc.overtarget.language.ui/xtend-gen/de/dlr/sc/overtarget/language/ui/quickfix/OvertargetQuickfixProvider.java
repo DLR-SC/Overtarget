@@ -110,31 +110,19 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
         final IEditorInput input = ite.getEditorInput();
         final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
         final IFile file = fileEditorInput.getFile();
+        final String fileName = file.getName().replace(".tmodel", "");
         final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
         final IProject project = file.getProject();
         final ResourceSet rs = this.resourceSetProvider.get(project);
         final Resource r = rs.getResource(uri, true);
         EObject _get = r.getContents().get(0);
         final TargetFile model = ((TargetFile) _get);
-        final String modelName = model.getName();
-        final String targetKeyword = this.grammarAccess.getKEYWORDAccess().getTargetKeyword_1().getValue();
-        final String targetLibraryKeyword = this.grammarAccess.getTargetLibraryRule().getName();
-        final int WHITESPACE_SEPARATOR = 1;
         final IXtextDocument xtextDocument = context.getXtextDocument();
-        final String fileName = ((ITextEditor)editor).getTitle().replace(".tmodel", "");
         if ((model instanceof TargetModel)) {
-          Integer _offset = issue.getOffset();
-          int _plus = ((_offset).intValue() + WHITESPACE_SEPARATOR);
-          int _length = targetKeyword.length();
-          int _plus_1 = (_plus + _length);
-          xtextDocument.replace(_plus_1, modelName.length(), fileName);
+          xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
         } else {
           if ((model instanceof TargetLibrary)) {
-            Integer _offset_1 = issue.getOffset();
-            int _plus_2 = ((_offset_1).intValue() + WHITESPACE_SEPARATOR);
-            int _length_1 = targetLibraryKeyword.length();
-            int _plus_3 = (_plus_2 + _length_1);
-            xtextDocument.replace(_plus_3, modelName.length(), fileName);
+            xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
           }
         }
       }

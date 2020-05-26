@@ -105,28 +105,22 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 				val input = ite.editorInput
 				val fileEditorInput = input as IFileEditorInput
 				val file = fileEditorInput.file
+				val fileName = file.name.replace(".tmodel", "")
+
 				val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 				val project = file.getProject();
 				val rs = resourceSetProvider.get(project);
 				val r = rs.getResource(uri, true);
-				
 				val model = r.contents.get(0) as TargetFile
-				val modelName = model.name
-				
-				val targetKeyword = grammarAccess.KEYWORDAccess.targetKeyword_1.value
-				val targetLibraryKeyword = grammarAccess.targetLibraryRule.name
-				val WHITESPACE_SEPARATOR = 1
 				
 				val xtextDocument = context.xtextDocument
-				val fileName = editor.title.replace(".tmodel", "")
 				
 				if (model instanceof TargetModel) {
-					xtextDocument.replace(issue.offset + WHITESPACE_SEPARATOR + targetKeyword.length, modelName.length, fileName)
+					xtextDocument.replace(issue.offset, issue.length, fileName)
 				} else if (model instanceof TargetLibrary) {
-					xtextDocument.replace(issue.offset + WHITESPACE_SEPARATOR + targetLibraryKeyword.length, modelName.length, fileName)
+					xtextDocument.replace(issue.offset, issue.length, fileName)
 				}
 			}
 		]
 	}
 }
-	
