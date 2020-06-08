@@ -11,12 +11,23 @@ package de.dlr.sc.overtarget.language.ui.quickfix;
 
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
+import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import javax.inject.Inject;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -29,7 +40,10 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * Custom quickfixes.
@@ -40,6 +54,9 @@ import org.eclipse.xtext.validation.Issue;
 public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   @Inject
   private OvertargetGrammarAccess grammarAccess;
+  
+  @Inject
+  private IResourceSetProvider resourceSetProvider;
   
   @Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
   public void fixDeprecatedWsStatement(final Issue issue, final IssueResolutionAcceptor acceptor) {
@@ -77,10 +94,32 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
               genHandler.runGeneration(input);
               final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
               final IFile file = fileEditorInput.getFile();
-              final String outputDirectory = genHandler.getOutputConfigurations(input);
-              final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
-              targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
-              genHandler.runGeneration(input);
+              final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+              final IProject project = file.getProject();
+              final ResourceSet rs = OvertargetQuickfixProvider.this.resourceSetProvider.get(project);
+              final Resource r = rs.getResource(uri, true);
+              EObject _get = r.getContents().get(0);
+              final TargetFile model = ((TargetFile) _get);
+              final Function1<RepositoryLocation, Boolean> _function = (RepositoryLocation it) -> {
+                return Boolean.valueOf(it.isReferencedTarget());
+              };
+              final RepositoryLocation referencedTarget = IterableExtensions.<RepositoryLocation>findFirst(model.getRepositoryLocations(), _function);
+              if ((referencedTarget == null)) {
+                Shell _activeShell = Display.getCurrent().getActiveShell();
+                final MessageBox errorMessage = new MessageBox(_activeShell, 
+                  SWT.OK);
+                errorMessage.setText("Could not generate a ReferencedTarget!");
+                errorMessage.setMessage("Please set a ReferencedTarget");
+                errorMessage.open();
+              } else {
+                boolean _isReferencedTarget = referencedTarget.isReferencedTarget();
+                if (_isReferencedTarget) {
+                  final String outputDirectory = genHandler.getOutputConfigurations(input);
+                  final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
+                  targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
+                  genHandler.runGeneration(input);
+                }
+              }
             }
           }
         }
