@@ -96,7 +96,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 								Display.getCurrent().getActiveShell(), 
 								SWT.OK);
 							errorMessage.setText("Could not generate a ReferencedTarget!");
-							errorMessage.setMessage("Please set a ReferencedTarget");
+							errorMessage.setMessage("Please specify one of the RepositoryLocations as ReferencedTarget container! (See Section 6.1 of the user manual for more information)");
 							errorMessage.open();
 						} else if (referencedTarget.referencedTarget) { // if referencedTarget set -> generate referencedTarget and set it
 							val outputDirectory = genHandler.getOutputConfigurations(input)
