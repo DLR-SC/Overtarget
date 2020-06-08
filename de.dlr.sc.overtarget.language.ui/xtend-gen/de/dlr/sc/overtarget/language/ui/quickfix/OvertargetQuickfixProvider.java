@@ -9,14 +9,16 @@
  */
 package de.dlr.sc.overtarget.language.ui.quickfix;
 
+import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
-import javax.inject.Inject;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -124,5 +126,36 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
           }
         }
       }, 1);
+  }
+  
+  @Fix(OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME)
+  public void fixFileNameLikeTargetName(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = (IModificationContext context) -> {
+      final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+      if ((editor instanceof ITextEditor)) {
+        final NullProgressMonitor progressMonitor = new NullProgressMonitor();
+        ((ITextEditor)editor).doSave(progressMonitor);
+        final ITextEditor ite = ((ITextEditor) editor);
+        final IEditorInput input = ite.getEditorInput();
+        final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
+        final IFile file = fileEditorInput.getFile();
+        final String fileName = file.getName().replace(".tmodel", "");
+        final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+        final IProject project = file.getProject();
+        final ResourceSet rs = this.resourceSetProvider.get(project);
+        final Resource r = rs.getResource(uri, true);
+        EObject _get = r.getContents().get(0);
+        final TargetFile model = ((TargetFile) _get);
+        final IXtextDocument xtextDocument = context.getXtextDocument();
+        if ((model instanceof TargetModel)) {
+          xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
+        } else {
+          if ((model instanceof TargetLibrary)) {
+            xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
+          }
+        }
+      }
+    };
+    acceptor.accept(issue, "Replace with correct tmodel name", "", "upcase.png", _function);
   }
 }
