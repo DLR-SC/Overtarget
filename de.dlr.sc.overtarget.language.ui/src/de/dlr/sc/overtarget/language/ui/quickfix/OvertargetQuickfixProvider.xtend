@@ -34,6 +34,7 @@ import org.eclipse.swt.SWT
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 import com.google.inject.Inject
 import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary
+import org.eclipse.jface.dialogs.MessageDialog
 
 //github.com/DLR-SC/Overtarget.git
 
@@ -99,7 +100,8 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 						if (referencedTarget === null) { // if no referencedTarget is set -> errorMessage
 							val errorMessage = new MessageBox(
 								Display.getCurrent().getActiveShell(), 
-								SWT.OK);
+								SWT::OK + SWT::ICON_INFORMATION
+								);
 							errorMessage.setText("Could not generate a ReferencedTarget!");
 							errorMessage.setMessage("Please specify one of the RepositoryLocations as ReferencedTarget container! (See Section 6.1 of the user manual for more information)");
 							errorMessage.open();

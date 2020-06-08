@@ -109,7 +109,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
               if ((referencedTarget == null)) {
                 Shell _activeShell = Display.getCurrent().getActiveShell();
                 final MessageBox errorMessage = new MessageBox(_activeShell, 
-                  SWT.OK);
+                  (SWT.OK + SWT.ICON_INFORMATION));
                 errorMessage.setText("Could not generate a ReferencedTarget!");
                 errorMessage.setMessage("Please specify one of the RepositoryLocations as ReferencedTarget container! (See Section 6.1 of the user manual for more information)");
                 errorMessage.open();
