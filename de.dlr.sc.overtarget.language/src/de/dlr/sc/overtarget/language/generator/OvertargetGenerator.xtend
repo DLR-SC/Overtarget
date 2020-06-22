@@ -39,12 +39,12 @@ class OvertargetGenerator extends AbstractGenerator {
 	 */
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (model : resource.allContents.toIterable.filter(TargetModel)) {
-			EcoreUtil.resolveAll(resource) // resolve proxies in resource before checking if there are any unresolved references left
-			if (RefTargetHelper.hasUnresolvedReferences(model)) {
-				generateTargetToResolveReferences(model, fsa)
-			} else {
+			//EcoreUtil.resolveAll(resource) // resolve proxies in resource before checking if there are any unresolved references left
+			//if (RefTargetHelper.hasUnresolvedReferences(model)) {
+				//generateTargetToResolveReferences(model, fsa)
+			//} else {
 				fsa.generateFile(model.name + TARGET_FILE_EXTENSION, OvertargetOutputConfigurationProvider.GENERATOR_OUTPUT_ID_OVERTARGET, model.compile)
-			}
+			//}
 		}
 	}
 
