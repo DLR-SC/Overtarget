@@ -203,7 +203,7 @@ public class OvertargetGenerator extends AbstractGenerator {
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("</location>              ");
+        _builder.append("</location>");
         _builder.newLine();
       }
     }
