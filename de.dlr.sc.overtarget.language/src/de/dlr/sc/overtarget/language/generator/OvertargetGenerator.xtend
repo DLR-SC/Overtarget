@@ -141,7 +141,7 @@ class OvertargetGenerator extends AbstractGenerator {
 							<unit id="«unit.source»" version="«printVersion(unit)»"/>
 						«ENDFOR»
 						<repository location="«GeneratorHelper.getUrlAsString(repositoryLocation.url, target)»"/>
-						</location>
+						</location>              
 					«ENDFOR»
 					</locations>
 					<environment>
