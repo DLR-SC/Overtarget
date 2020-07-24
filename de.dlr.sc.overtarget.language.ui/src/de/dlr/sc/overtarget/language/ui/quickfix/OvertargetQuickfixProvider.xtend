@@ -14,7 +14,6 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator
-import javax.inject.Inject
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler
 import org.eclipse.xtext.diagnostics.Diagnostic
@@ -26,6 +25,12 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 import org.eclipse.ui.IFileEditorInput
 import org.eclipse.core.runtime.NullProgressMonitor
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.ui.resource.IResourceSetProvider
+import com.google.inject.Inject
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 
 /**
  * Custom quickfixes.
@@ -36,6 +41,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess
+	
 
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
@@ -81,5 +87,40 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 				}
 			}
 		}, 1)
+	}
+	
+	@Inject
+	IResourceSetProvider resourceSetProvider
+	
+	@Fix(OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME)
+	def fixFileNameLikeTargetName(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 'Replace with correct tmodel name', '', 'upcase.png') [
+		
+		context |
+			val editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+			if (editor instanceof ITextEditor) {
+				val progressMonitor = new NullProgressMonitor()
+				editor.doSave(progressMonitor) //saves the made changes in the file
+				val ite = editor as ITextEditor
+				val input = ite.editorInput
+				val fileEditorInput = input as IFileEditorInput
+				val file = fileEditorInput.file
+				val fileName = file.name.replace(".tmodel", "")
+
+				val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+				val project = file.getProject();
+				val rs = resourceSetProvider.get(project);
+				val r = rs.getResource(uri, true);
+				val model = r.contents.get(0) as TargetFile
+				
+				val xtextDocument = context.xtextDocument
+				
+				if (model instanceof TargetModel) {
+					xtextDocument.replace(issue.offset, issue.length, fileName)
+				} else if (model instanceof TargetLibrary) {
+					xtextDocument.replace(issue.offset, issue.length, fileName)
+				}
+			}
+		]
 	}
 }
