@@ -22,7 +22,6 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EAttribute
-import de.dlr.sc.overtarget.language.util.QueryManager
 
 /**
  * This class processes the model data for generation
