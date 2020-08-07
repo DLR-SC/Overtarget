@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import javax.inject.Inject
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -61,12 +62,24 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 	@Inject
 	OvertargetGrammarAccess grammarAccess;
 
+
+	
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
 		acceptor.accept(createCompletionProposal("version", "version", getImage(grammarAccess.unitRule), context))
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
 	}
+
+	override completeUnit_AddAll(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val proposal = createCompletionProposal("addAll", "addAll", getImage(grammarAccess.unitRule), context) as ConfigurableCompletionProposal;
+  getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix())
+		if (proposal !== null) {
+			proposal.setPriority(proposal.getPriority() * 2);
+			acceptor.accept(proposal);
+		}
+	}
+	
 
 	override complete_Version(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
