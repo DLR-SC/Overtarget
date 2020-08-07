@@ -19,6 +19,7 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
+import de.dlr.sc.overtarget.language.util.QueryManager;
 import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -159,6 +160,15 @@ public class OvertargetGenerator extends AbstractGenerator {
   }
   
   /**
+   * If "addAll" is used, add all units to repository location
+   */
+  public static ArrayList<Unit> addAllUnitsToRepositoryLocation(final Unit unit) {
+    QueryManager queryManager = new QueryManager();
+    final ArrayList<Unit> allUnitsFromReposLoc = queryManager.getUnits(unit);
+    return allUnitsFromReposLoc;
+  }
+  
+  /**
    * replaces "newest" with "0.0.0"
    */
   public String printVersion(final Unit unit) {
@@ -194,15 +204,37 @@ public class OvertargetGenerator extends AbstractGenerator {
         {
           EList<Unit> _units = repositoryLocation.getUnits();
           for(final Unit unit : _units) {
-            _builder.append("\t\t");
-            _builder.append("<unit id=\"");
-            String _source = unit.getSource();
-            _builder.append(_source, "\t\t");
-            _builder.append("\" version=\"");
-            String _printVersion = this.printVersion(unit);
-            _builder.append(_printVersion, "\t\t");
-            _builder.append("\"/>");
-            _builder.newLineIfNotEmpty();
+            {
+              boolean _isAddAll = unit.isAddAll();
+              if (_isAddAll) {
+                _builder.append("\t\t");
+                final ArrayList<Unit> allUnitsFromReposLoc = OvertargetGenerator.addAllUnitsToRepositoryLocation(unit);
+                _builder.newLineIfNotEmpty();
+                {
+                  for(final Unit u : allUnitsFromReposLoc) {
+                    _builder.append("\t\t");
+                    _builder.append("<unit id=\"");
+                    String _source = u.getSource();
+                    _builder.append(_source, "\t\t");
+                    _builder.append("\" version=\"");
+                    String _printVersion = this.printVersion(u);
+                    _builder.append(_printVersion, "\t\t");
+                    _builder.append("\"/>");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              } else {
+                _builder.append("\t\t");
+                _builder.append("<unit id=\"");
+                String _source_1 = unit.getSource();
+                _builder.append(_source_1, "\t\t");
+                _builder.append("\" version=\"");
+                String _printVersion_1 = this.printVersion(unit);
+                _builder.append(_printVersion_1, "\t\t");
+                _builder.append("\"/>");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
         _builder.append("\t\t");

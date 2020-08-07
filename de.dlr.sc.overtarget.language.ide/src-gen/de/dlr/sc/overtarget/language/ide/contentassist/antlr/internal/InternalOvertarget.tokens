@@ -2,7 +2,7 @@
 '-'=12
 '.'=11
 ':'=50
-';'=49
+';'=48
 '='=56
 'Architecture'=45
 'ExcludeLocation'=54
@@ -11,7 +11,7 @@
 'OperatingSystem'=44
 'Override'=55
 'PA_RISC'=30
-'ReferencedTarget'=58
+'ReferencedTarget'=59
 'RepositoryLocation'=52
 'Target'=38
 'TargetJRE'=47
@@ -20,6 +20,7 @@
 'Variable'=57
 'WindowingSystem'=13
 'WorkingSystem'=14
+'addAll'=58
 'aix'=17
 'all;'=16
 'carbon'=24
@@ -39,7 +40,7 @@
 'solaris'=22
 'sparc'=34
 'url'=53
-'version'=48
+'version'=49
 'win32'=23
 'wpf'=29
 'x86'=35
@@ -101,3 +102,4 @@ T__55=55
 T__56=56
 T__57=57
 T__58=58
+T__59=59

@@ -1,13 +1,11 @@
 /**
- * ******************************************************************************
  * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
- *  *
+ * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- *  *
+ * 
  * SPDX-License-Identifier: EPL-2.0
- *  ******************************************************************************
  */
 package de.dlr.sc.overtarget.language.targetmodel.impl;
 
@@ -496,7 +494,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getUnit_Source()
+  public EAttribute getUnit_AddAll()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(0);
   }
@@ -507,9 +505,20 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getUnit_Vers()
+  public EAttribute getUnit_Source()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getUnit_Vers()
+  {
+    return (EAttribute)unitEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -815,6 +824,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEReference(targetModelEClass, TARGET_MODEL__EXCLUDED_LOCATIONS);
 
     unitEClass = createEClass(UNIT);
+    createEAttribute(unitEClass, UNIT__ADD_ALL);
     createEAttribute(unitEClass, UNIT__SOURCE);
     createEAttribute(unitEClass, UNIT__VERS);
 
@@ -918,6 +928,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEReference(getTargetModel_ExcludedLocations(), this.getExcludeLocation(), null, "excludedLocations", null, 0, -1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnit_AddAll(), ecorePackage.getEBoolean(), "addAll", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnit_Source(), ecorePackage.getEString(), "source", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnit_Vers(), ecorePackage.getEString(), "vers", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

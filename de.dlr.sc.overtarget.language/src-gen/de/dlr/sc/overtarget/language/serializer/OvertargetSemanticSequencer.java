@@ -220,7 +220,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     Unit returns Unit
 	 *
 	 * Constraint:
-	 *     (source=Source (vers=Version | vers='newest'))
+	 *     (addAll?='addAll'? (source=Source (vers=Version | vers='newest'))?)
 	 */
 	protected void sequence_Unit(ISerializationContext context, Unit semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

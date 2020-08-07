@@ -24,11 +24,11 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
+public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class TargetFileElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.TargetFile");
@@ -189,7 +189,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//OperatingSys
 		public RuleCall getOsOperatingSysParserRuleCall_5_0() { return cOsOperatingSysParserRuleCall_5_0; }
 		
-		//'WindowingSystem' | 'WorkingSystem'
+		//('WindowingSystem' | 'WorkingSystem')
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 		
 		//'WindowingSystem'
@@ -375,7 +375,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//(('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)?
 		public Group getGroup_6() { return cGroup_6; }
 		
-		//'WindowingSystem' | 'WorkingSystem'
+		//('WindowingSystem' | 'WorkingSystem')
 		public Alternatives getAlternatives_6_0() { return cAlternatives_6_0; }
 		
 		//'WindowingSystem'
@@ -520,46 +520,62 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	public class UnitElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.Unit");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUnitKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSourceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSourceSourceParserRuleCall_1_0 = (RuleCall)cSourceAssignment_1.eContents().get(0);
-		private final Keyword cVersionKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cVersAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final Alternatives cVersAlternatives_3_0 = (Alternatives)cVersAssignment_3.eContents().get(0);
-		private final RuleCall cVersVersionParserRuleCall_3_0_0 = (RuleCall)cVersAlternatives_3_0.eContents().get(0);
-		private final Keyword cVersNewestKeyword_3_0_1 = (Keyword)cVersAlternatives_3_0.eContents().get(1);
+		private final Action cUnitAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cUnitKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cAddAllAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cAddAllAddAllKeyword_2_0 = (Keyword)cAddAllAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cSourceAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cSourceSourceParserRuleCall_3_0_0 = (RuleCall)cSourceAssignment_3_0.eContents().get(0);
+		private final Keyword cVersionKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Assignment cVersAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final Alternatives cVersAlternatives_3_2_0 = (Alternatives)cVersAssignment_3_2.eContents().get(0);
+		private final RuleCall cVersVersionParserRuleCall_3_2_0_0 = (RuleCall)cVersAlternatives_3_2_0.eContents().get(0);
+		private final Keyword cVersNewestKeyword_3_2_0_1 = (Keyword)cVersAlternatives_3_2_0.eContents().get(1);
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Unit:
-		//	'Unit' source=Source 'version' vers=(Version | 'newest') ';';
+		//	{Unit} 'Unit' addAll?='addAll'? (source=Source 'version' vers=(Version | 'newest'))? ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Unit' source=Source 'version' vers=(Version | 'newest') ';'
+		//{Unit} 'Unit' addAll?='addAll'? (source=Source 'version' vers=(Version | 'newest'))? ';'
 		public Group getGroup() { return cGroup; }
 		
+		//{Unit}
+		public Action getUnitAction_0() { return cUnitAction_0; }
+		
 		//'Unit'
-		public Keyword getUnitKeyword_0() { return cUnitKeyword_0; }
+		public Keyword getUnitKeyword_1() { return cUnitKeyword_1; }
+		
+		//addAll?='addAll'?
+		public Assignment getAddAllAssignment_2() { return cAddAllAssignment_2; }
+		
+		//'addAll'
+		public Keyword getAddAllAddAllKeyword_2_0() { return cAddAllAddAllKeyword_2_0; }
+		
+		//(source=Source 'version' vers=(Version | 'newest'))?
+		public Group getGroup_3() { return cGroup_3; }
 		
 		//source=Source
-		public Assignment getSourceAssignment_1() { return cSourceAssignment_1; }
+		public Assignment getSourceAssignment_3_0() { return cSourceAssignment_3_0; }
 		
 		//Source
-		public RuleCall getSourceSourceParserRuleCall_1_0() { return cSourceSourceParserRuleCall_1_0; }
+		public RuleCall getSourceSourceParserRuleCall_3_0_0() { return cSourceSourceParserRuleCall_3_0_0; }
 		
 		//'version'
-		public Keyword getVersionKeyword_2() { return cVersionKeyword_2; }
+		public Keyword getVersionKeyword_3_1() { return cVersionKeyword_3_1; }
 		
 		//vers=(Version | 'newest')
-		public Assignment getVersAssignment_3() { return cVersAssignment_3; }
+		public Assignment getVersAssignment_3_2() { return cVersAssignment_3_2; }
 		
 		//(Version | 'newest')
-		public Alternatives getVersAlternatives_3_0() { return cVersAlternatives_3_0; }
+		public Alternatives getVersAlternatives_3_2_0() { return cVersAlternatives_3_2_0; }
 		
 		//Version
-		public RuleCall getVersVersionParserRuleCall_3_0_0() { return cVersVersionParserRuleCall_3_0_0; }
+		public RuleCall getVersVersionParserRuleCall_3_2_0_0() { return cVersVersionParserRuleCall_3_2_0_0; }
 		
 		//'newest'
-		public Keyword getVersNewestKeyword_3_0_1() { return cVersNewestKeyword_3_0_1; }
+		public Keyword getVersNewestKeyword_3_2_0_1() { return cVersNewestKeyword_3_2_0_1; }
 		
 		//';'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
@@ -805,7 +821,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//units+=Unit* | 'all;'
+		//(units+=Unit* | 'all;')
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//units+=Unit*
@@ -947,7 +963,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'-'
 		public Keyword getHyphenMinusKeyword_1_0() { return cHyphenMinusKeyword_1_0; }
 		
-		//INT | ID
+		//(INT | ID)
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 		
 		//INT
@@ -1394,7 +1410,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Unit:
-	//	'Unit' source=Source 'version' vers=(Version | 'newest') ';';
+	//	{Unit} 'Unit' addAll?='addAll'? (source=Source 'version' vers=(Version | 'newest'))? ';';
 	public UnitElements getUnitAccess() {
 		return pUnit;
 	}
@@ -1652,7 +1668,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}

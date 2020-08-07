@@ -1,13 +1,11 @@
 /**
- * ******************************************************************************
  * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
- *  *
+ * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- *  *
+ * 
  * SPDX-License-Identifier: EPL-2.0
- *  ******************************************************************************
  */
 package de.dlr.sc.overtarget.language.targetmodel;
 
@@ -395,13 +393,22 @@ public interface TargetmodelPackage extends EPackage
   int UNIT = 4;
 
   /**
+   * The feature id for the '<em><b>Add All</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNIT__ADD_ALL = 0;
+
+  /**
    * The feature id for the '<em><b>Source</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int UNIT__SOURCE = 0;
+  int UNIT__SOURCE = 1;
 
   /**
    * The feature id for the '<em><b>Vers</b></em>' attribute.
@@ -410,7 +417,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNIT__VERS = 1;
+  int UNIT__VERS = 2;
 
   /**
    * The number of structural features of the '<em>Unit</em>' class.
@@ -419,7 +426,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNIT_FEATURE_COUNT = 2;
+  int UNIT_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link de.dlr.sc.overtarget.language.targetmodel.impl.UrlExpressionImpl <em>Url Expression</em>}' class.
@@ -1064,6 +1071,17 @@ public interface TargetmodelPackage extends EPackage
   EClass getUnit();
 
   /**
+   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.Unit#isAddAll <em>Add All</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Add All</em>'.
+   * @see de.dlr.sc.overtarget.language.targetmodel.Unit#isAddAll()
+   * @see #getUnit()
+   * @generated
+   */
+  EAttribute getUnit_AddAll();
+
+  /**
    * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.Unit#getSource <em>Source</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1558,6 +1576,14 @@ public interface TargetmodelPackage extends EPackage
      * @generated
      */
     EClass UNIT = eINSTANCE.getUnit();
+
+    /**
+     * The meta object literal for the '<em><b>Add All</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNIT__ADD_ALL = eINSTANCE.getUnit_AddAll();
 
     /**
      * The meta object literal for the '<em><b>Source</b></em>' attribute feature.

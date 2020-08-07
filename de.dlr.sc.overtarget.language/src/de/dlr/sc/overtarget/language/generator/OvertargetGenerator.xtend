@@ -21,6 +21,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage
 import org.eclipse.emf.ecore.util.EcoreUtil
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
+import de.dlr.sc.overtarget.language.util.QueryManager
 
 /**
  * Generates target files from tmodel files
@@ -117,6 +118,15 @@ class OvertargetGenerator extends AbstractGenerator {
 		}
 	}
 
+/**
+	 * If "addAll" is used, add all units to repository location
+	 */
+	def static addAllUnitsToRepositoryLocation(Unit unit) {
+		var queryManager = new QueryManager()
+		val allUnitsFromReposLoc = queryManager.getUnits(unit)
+		return allUnitsFromReposLoc
+	}
+
 	/**
 	 * replaces "newest" with "0.0.0"
 	 */
@@ -138,7 +148,14 @@ class OvertargetGenerator extends AbstractGenerator {
 					«FOR repositoryLocation : target.repositoryLocations»
 						<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 						«FOR unit : repositoryLocation.units»
+							«IF unit.addAll»
+								«val allUnitsFromReposLoc = addAllUnitsToRepositoryLocation(unit)»
+								«FOR u : allUnitsFromReposLoc»
+									<unit id="«u.source»" version="«printVersion(u)»"/>
+								«ENDFOR»
+							«ELSE»
 							<unit id="«unit.source»" version="«printVersion(unit)»"/>
+						«ENDIF»
 						«ENDFOR»
 						<repository location="«GeneratorHelper.getUrlAsString(repositoryLocation.url, target)»"/>
 						</location>
