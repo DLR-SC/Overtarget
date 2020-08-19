@@ -82,17 +82,26 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 
 	override complete_Version(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val queryManager = new QueryManager(); 	
+		val versionProposals = new ArrayList
 		val unit = model as UnitImpl;
-		val results = queryManager.getUnits(model);
-		results.filter[source == unit.source].forEach[acceptor.accept(createCompletionProposal(vers, context))];
+		val reposLoc = unit.eContainer as RepositoryLocation
+		val reposLocName = reposLoc.name
+		val unitManager = new UnitManager()
+		val mapOfUnits = unitManager.mapOfUnits
+		if (mapOfUnits.containsKey(reposLocName)) {
+			val listOfUnits = mapOfUnits.get(reposLocName)
+			for (u : listOfUnits) {
+				versionProposals.add(u)
+				acceptor.accept(createCompletionProposal(u.vers, context))
+			}
+		}
 		acceptor.accept(createCompletionProposal("version", context))
 		super.complete_Version(model, ruleCall, context, acceptor)
 	}
 
 	override complete_Source(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val unitProposals = new ArrayList
+		val sourceProposals = new ArrayList
 		val unitManager = new UnitManager()
 		val unit = model as UnitImpl
 		val reposLoc = unit.eContainer as RepositoryLocation
@@ -101,7 +110,7 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		if (mapOfUnits.containsKey(reposLocName)) {
 			val listOfUnits = mapOfUnits.get(reposLocName)
 			for (u : listOfUnits) {
-				unitProposals.add(u)
+				sourceProposals.add(u)
 				acceptor.accept(createCompletionProposal(u.source, context));
 			}
 			super.complete_Version(model, ruleCall, context, acceptor)
