@@ -9,7 +9,6 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.contentassist
 
-import de.dlr.sc.overtarget.language.util.QueryManager
 import java.text.DateFormat
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.ecore.EObject
