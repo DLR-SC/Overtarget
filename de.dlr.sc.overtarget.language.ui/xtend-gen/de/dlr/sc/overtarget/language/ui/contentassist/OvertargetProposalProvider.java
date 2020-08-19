@@ -11,12 +11,15 @@ package de.dlr.sc.overtarget.language.ui.contentassist;
 
 import com.google.common.base.Objects;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
+import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl;
 import de.dlr.sc.overtarget.language.ui.contentassist.AbstractOvertargetProposalProvider;
+import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
 import de.dlr.sc.overtarget.language.util.QueryManager;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -134,13 +137,23 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   
   @Override
   public void complete_Source(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final QueryManager queryManager = new QueryManager();
-    acceptor.accept(this.createCompletionProposal("version", context));
-    final ArrayList<Unit> results = queryManager.getUnits(model);
-    final Consumer<Unit> _function = (Unit it) -> {
-      acceptor.accept(this.createCompletionProposal(it.getSource(), context));
-    };
-    results.forEach(_function);
-    super.complete_Source(model, ruleCall, context, acceptor);
+    final ArrayList<Unit> unitProposals = new ArrayList<Unit>();
+    final UnitManager unitManager = new UnitManager();
+    final UnitImpl unit = ((UnitImpl) model);
+    EObject _eContainer = unit.eContainer();
+    final RepositoryLocation reposLoc = ((RepositoryLocation) _eContainer);
+    final String reposLocName = reposLoc.getName();
+    final HashMap<String, ArrayList<Unit>> mapOfUnits = unitManager.getMapOfUnits();
+    boolean _containsKey = mapOfUnits.containsKey(reposLocName);
+    if (_containsKey) {
+      final ArrayList<Unit> listOfUnits = mapOfUnits.get(reposLocName);
+      for (final Unit u : listOfUnits) {
+        {
+          unitProposals.add(u);
+          acceptor.accept(this.createCompletionProposal(u.getSource(), context));
+        }
+      }
+      super.complete_Version(model, ruleCall, context, acceptor);
+    }
   }
 }
