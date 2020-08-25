@@ -22,6 +22,12 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.XtextUIMessages
+import org.eclipse.ui.texteditor.ResourceAction
+import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds
+import org.eclipse.ui.texteditor.ITextEditorActionConstants
+import org.eclipse.ui.texteditor.EditorMessages
+import org.eclipse.ui.texteditor.ContentAssistAction
+import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds
 
 class OvertargetXtextEditor extends XtextEditor {
 	
@@ -52,25 +58,30 @@ class OvertargetXtextEditor extends XtextEditor {
 		}
 	}
 	
-	override updateState(IEditorInput input) {
-		val document = document
-		var XtextResource xtextResource = document.readOnly(new IUnitOfWork<XtextResource, XtextResource>(){
-			override XtextResource exec(XtextResource state) throws Exception {
-				return state
-			}
-		})
-		val model = xtextResource.contents.get(0) as TargetFile
-		val unitManager = UnitManager.instance
-		unitManager.loadUnits(model)
- 		super.updateState(input)
-	}
+//	override updateState(IEditorInput input) {
+//		val document = document
+//		var XtextResource xtextResource = document.readOnly(new IUnitOfWork<XtextResource, XtextResource>(){
+//			override XtextResource exec(XtextResource state) throws Exception {
+//				return state
+//			}
+//		})
+//		val model = xtextResource.contents.get(0) as TargetFile
+//		val unitManager = UnitManager.instance
+//		unitManager.loadUnits(model)
+// 		super.updateState(input)
+//	}
 	
 	override createActions() {
 		super.createActions
 		val updateUnitManagerAction = new UpdateUnitManagerAction(XtextUIMessages.getResourceBundle(),
-					"Unit Manager", this)
+					"Update Unit Manager", this)
 		updateUnitManagerAction.update
+		updateUnitManagerAction.run
 		setAction("Update Unit Manager", updateUnitManagerAction)
+//		markAsStateDependentAction("Update Unit Manager", true);
+		markAsContentDependentAction("Update Unit Manager", true);
+		
+		
 	}
 //	def getChangesInModel() {
 //		val document = document

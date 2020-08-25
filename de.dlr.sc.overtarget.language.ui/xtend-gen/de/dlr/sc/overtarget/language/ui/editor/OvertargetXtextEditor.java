@@ -24,12 +24,9 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 @SuppressWarnings("all")
 public class OvertargetXtextEditor extends XtextEditor {
@@ -63,28 +60,14 @@ public class OvertargetXtextEditor extends XtextEditor {
   }
   
   @Override
-  public void updateState(final IEditorInput input) {
-    final IXtextDocument document = this.getDocument();
-    XtextResource xtextResource = document.<XtextResource>readOnly(new IUnitOfWork<XtextResource, XtextResource>() {
-      @Override
-      public XtextResource exec(final XtextResource state) throws Exception {
-        return state;
-      }
-    });
-    EObject _get = xtextResource.getContents().get(0);
-    final TargetFile model = ((TargetFile) _get);
-    final UnitManager unitManager = UnitManager.getInstance();
-    unitManager.loadUnits(model);
-    super.updateState(input);
-  }
-  
-  @Override
   public void createActions() {
     super.createActions();
     ResourceBundle _resourceBundle = XtextUIMessages.getResourceBundle();
     final UpdateUnitManagerAction updateUnitManagerAction = new UpdateUnitManagerAction(_resourceBundle, 
-      "Unit Manager", this);
+      "Update Unit Manager", this);
     updateUnitManagerAction.update();
+    updateUnitManagerAction.run();
     this.setAction("Update Unit Manager", updateUnitManagerAction);
+    this.markAsContentDependentAction("Update Unit Manager", true);
   }
 }

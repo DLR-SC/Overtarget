@@ -19,11 +19,9 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager
 import org.eclipse.jface.text.ITextOperationTarget
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 
 class UpdateUnitManagerAction extends TextEditorAction {
-	
-	/** The text operation target */
-	ITextOperationTarget fOperationTarget;
 	
 	protected new(ResourceBundle bundle, String prefix, ITextEditor editor) {
 		super(bundle, prefix, editor)
@@ -32,22 +30,20 @@ class UpdateUnitManagerAction extends TextEditorAction {
 	@Inject
 	IResourceSetProvider resourceSetProvider;
 	
-	override run() {
-		super.run()
-		if (fOperationTarget !== null) {
-			val editor= getTextEditor();
-			val input = editor.editorInput
-			if (input instanceof IFileEditorInput) {
-				val file = input.getFile();
-				val uri = URI.createPlatformResourceURI(file.fullPath.toString(), true);
-				val project = file.getProject();
-				val rs = resourceSetProvider.get(project);
-				val r = rs.getResource(uri, true);
-				val target = r.contents.get(0) as TargetFile
-				val unitManager = UnitManager.instance
-				unitManager.loadUnits(target)
-			}
+	override update() {
+		super.update()
+		val editor= getTextEditor();
+		val input = editor.editorInput
+		if (input instanceof IFileEditorInput) {
+			val file = input.getFile();
+			val uri = URI.createPlatformResourceURI(file.fullPath.toString(), true);
+			val project = file.getProject();
+			val set = new ResourceSetImpl
+//			val rs = resourceSetProvider.get(project);
+			val r = set.getResource(uri, true);
+			val target = r.contents.get(0) as TargetFile
+			val unitManager = UnitManager.instance
+			unitManager.loadUnits(target)
 		}
 	}
-	
 }
