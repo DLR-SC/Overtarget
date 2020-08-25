@@ -20,7 +20,6 @@ import javax.inject.Inject
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 import java.util.ArrayList
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
-import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 
 /**

@@ -25,10 +25,8 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -99,19 +97,6 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
     acceptor.accept(this.createCompletionProposal("Unit", "Unit", this.getImage(this.grammarAccess.getUnitRule()), context));
     acceptor.accept(this.createCompletionProposal("version", "version", this.getImage(this.grammarAccess.getUnitRule()), context));
     super.completeRepositoryLocation_Units(model, assignment, context, acceptor);
-  }
-  
-  @Override
-  public void completeUnit_AddAll(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal _createCompletionProposal = this.createCompletionProposal("addAll", "addAll", this.getImage(this.grammarAccess.getUnitRule()), context);
-    final ConfigurableCompletionProposal proposal = ((ConfigurableCompletionProposal) _createCompletionProposal);
-    this.getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix());
-    if ((proposal != null)) {
-      int _priority = proposal.getPriority();
-      int _multiply = (_priority * 2);
-      proposal.setPriority(_multiply);
-      acceptor.accept(proposal);
-    }
   }
   
   @Override
