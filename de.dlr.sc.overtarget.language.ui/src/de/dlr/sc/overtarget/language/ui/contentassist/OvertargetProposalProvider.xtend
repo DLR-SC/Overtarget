@@ -9,6 +9,7 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.contentassist
 
+import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
 import de.dlr.sc.overtarget.language.util.QueryManager
 import java.text.DateFormat
 import org.eclipse.core.runtime.Platform
@@ -19,10 +20,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import javax.inject.Inject
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
-import java.util.ArrayList
-import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
-import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -63,6 +61,8 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess;
+
+
 	
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
@@ -79,41 +79,26 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 			acceptor.accept(proposal);
 		}
 	}
+	
 
 	override complete_Version(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val versionProposals = new ArrayList
+		val queryManager = new QueryManager(); 	
 		val unit = model as UnitImpl;
-		val reposLoc = unit.eContainer as RepositoryLocation
-		val reposLocName = reposLoc.name
-		val unitManager = new UnitManager()
-		val mapOfUnits = unitManager.mapOfUnits
-		if (mapOfUnits.containsKey(reposLocName)) {
-			val listOfUnits = mapOfUnits.get(reposLocName)
-			for (u : listOfUnits) {
-				versionProposals.add(u)
-				acceptor.accept(createCompletionProposal(u.vers, context))
-			}
-		}
+		val results = queryManager.getUnits(model);
+		results.filter[source == unit.source].forEach[acceptor.accept(createCompletionProposal(vers, context))];
 		acceptor.accept(createCompletionProposal("version", context))
 		super.complete_Version(model, ruleCall, context, acceptor)
 	}
 
 	override complete_Source(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val sourceProposals = new ArrayList
-		val unitManager = new UnitManager()
-		val unit = model as UnitImpl
-		val reposLoc = unit.eContainer as RepositoryLocation
-		val reposLocName = reposLoc.name
-		val mapOfUnits = unitManager.mapOfUnits
-		if (mapOfUnits.containsKey(reposLocName)) {
-			val listOfUnits = mapOfUnits.get(reposLocName)
-			for (u : listOfUnits) {
-				sourceProposals.add(u)
-				acceptor.accept(createCompletionProposal(u.source, context));
-			}
-			super.complete_Version(model, ruleCall, context, acceptor)
-		}
+		val queryManager = new QueryManager(); 	
+		acceptor.accept(createCompletionProposal("version", context))
+		val results = queryManager.getUnits(model);
+		results.forEach[acceptor.accept(createCompletionProposal(source, context))];
+		super.complete_Source(model, ruleCall, context, acceptor)
 	}
+
+	
 }

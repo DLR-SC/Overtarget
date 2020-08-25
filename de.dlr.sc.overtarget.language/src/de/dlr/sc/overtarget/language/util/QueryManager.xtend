@@ -27,34 +27,21 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile
  * This class queries a p2 Repository for the available installable units
  */
 class QueryManager {
-	def getReposLocOfUnit(EObject model) {
-		if (model instanceof Unit) {
-			val unit = model as Unit;
-			val location = unit.eContainer as RepositoryLocation;
-			return location
-		} else if (model instanceof RepositoryLocation) {
-			val location = model
-			return location
-		}
-	}
-	
 	def getUnits(EObject model) {
-		val location = getReposLocOfUnit(model)
-		val target = location.eContainer as TargetFile
-		loadUnits(target, location)
-	}
-	
-	def loadUnits(TargetFile target, RepositoryLocation reposLoc) {
 		val bundleContext = Activator.^default.bundle.bundleContext;
 		val providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
 		val provider = bundleContext.getService(providerRef) as IProvisioningAgentProvider;
 		val provisioningAgent = provider.createAgent(null);
 		val metadataRepositoryManager = provisioningAgent.getService(
 			IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
-		val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
+		val unit = model as Unit;
+		val location = unit.eContainer as RepositoryLocation;
+		val target = location.eContainer as TargetFile;
+		val uri = new URI(GeneratorHelper.getUrlAsString(location.url, target));
 		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
 		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
 		bundleContext.ungetService(providerRef);
+		
 		var resultsAsUnits = new ArrayList<Unit>;
 		for(result:results ){
 			var unitFromResult = TargetmodelFactory.eINSTANCE.createUnit;
