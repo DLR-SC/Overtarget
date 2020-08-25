@@ -18,7 +18,6 @@ import com.google.inject.Inject
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager
-import org.eclipse.jface.text.ITextOperationTarget
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 
 class UpdateUnitManagerAction extends TextEditorAction {
@@ -41,9 +40,11 @@ class UpdateUnitManagerAction extends TextEditorAction {
 			val set = new ResourceSetImpl
 //			val rs = resourceSetProvider.get(project);
 			val r = set.getResource(uri, true);
-			val target = r.contents.get(0) as TargetFile
-			val unitManager = UnitManager.instance
-			unitManager.loadUnits(target)
+			if (!r.contents.empty) {
+				val target = r.contents.get(0) as TargetFile
+				val unitManager = UnitManager.instance
+				unitManager.loadUnits(target)
+			}
 		}
 	}
 }
