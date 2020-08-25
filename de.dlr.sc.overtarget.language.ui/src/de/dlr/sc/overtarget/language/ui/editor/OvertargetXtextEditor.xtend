@@ -19,8 +19,8 @@ import com.google.inject.Inject
 import org.eclipse.ui.IFileEditorInput
 import org.eclipse.emf.common.util.URI
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.XtextUIMessages
 
 class OvertargetXtextEditor extends XtextEditor {
