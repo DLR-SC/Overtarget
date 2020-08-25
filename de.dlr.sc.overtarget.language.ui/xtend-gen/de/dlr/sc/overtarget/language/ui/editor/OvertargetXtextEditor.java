@@ -42,14 +42,10 @@ public class OvertargetXtextEditor extends XtextEditor {
     this.prepareUnitsLoading(input);
   }
   
-  public Object prepareUnitsLoading(final IEditorInput input) {
-    Object _xblockexpression = null;
-    {
-      final TargetFile target = this.getModel(input);
-      final UnitManager unitManager = UnitManager.getInstance();
-      _xblockexpression = unitManager.loadUnits(target);
-    }
-    return _xblockexpression;
+  public void prepareUnitsLoading(final IEditorInput input) {
+    final TargetFile target = this.getModel(input);
+    final UnitManager unitManager = UnitManager.getInstance();
+    unitManager.loadUnits(target);
   }
   
   public TargetFile getModel(final IEditorInput input) {
