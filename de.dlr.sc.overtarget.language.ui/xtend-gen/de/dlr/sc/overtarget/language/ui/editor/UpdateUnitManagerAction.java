@@ -45,10 +45,14 @@ public class UpdateUnitManagerAction extends TextEditorAction {
       final IProject project = file.getProject();
       final ResourceSetImpl set = new ResourceSetImpl();
       final Resource r = set.getResource(uri, true);
-      EObject _get = r.getContents().get(0);
-      final TargetFile target = ((TargetFile) _get);
-      final UnitManager unitManager = UnitManager.getInstance();
-      unitManager.loadUnits(target);
+      boolean _isEmpty = r.getContents().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        EObject _get = r.getContents().get(0);
+        final TargetFile target = ((TargetFile) _get);
+        final UnitManager unitManager = UnitManager.getInstance();
+        unitManager.loadUnits(target);
+      }
     }
   }
 }

@@ -41,8 +41,12 @@ public class OvertargetXtextEditor extends XtextEditor {
   
   public void prepareUnitsLoading(final IEditorInput input) {
     final TargetFile target = this.getModel(input);
-    final UnitManager unitManager = UnitManager.getInstance();
-    unitManager.loadUnits(target);
+    if ((target != null)) {
+      final UnitManager unitManager = UnitManager.getInstance();
+      unitManager.loadUnits(target);
+    } else {
+      return;
+    }
   }
   
   public TargetFile getModel(final IEditorInput input) {
@@ -52,9 +56,15 @@ public class OvertargetXtextEditor extends XtextEditor {
       final IProject project = file.getProject();
       final ResourceSet rs = this.resourceSetProvider.get(project);
       final Resource r = rs.getResource(uri, true);
-      EObject _get = r.getContents().get(0);
-      final TargetFile target = ((TargetFile) _get);
-      return target;
+      boolean _isEmpty = r.getContents().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        EObject _get = r.getContents().get(0);
+        final TargetFile target = ((TargetFile) _get);
+        return target;
+      } else {
+        return null;
+      }
     }
     return null;
   }
@@ -65,8 +75,6 @@ public class OvertargetXtextEditor extends XtextEditor {
     ResourceBundle _resourceBundle = XtextUIMessages.getResourceBundle();
     final UpdateUnitManagerAction updateUnitManagerAction = new UpdateUnitManagerAction(_resourceBundle, 
       "Update Unit Manager", this);
-    updateUnitManagerAction.update();
-    updateUnitManagerAction.run();
     this.setAction("Update Unit Manager", updateUnitManagerAction);
     this.markAsContentDependentAction("Update Unit Manager", true);
   }

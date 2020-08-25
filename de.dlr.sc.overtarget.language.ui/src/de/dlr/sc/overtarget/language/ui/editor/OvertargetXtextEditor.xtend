@@ -19,15 +19,7 @@ import com.google.inject.Inject
 import org.eclipse.ui.IFileEditorInput
 import org.eclipse.emf.common.util.URI
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-import org.eclipse.xtext.util.concurrent.IUnitOfWork
-import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.XtextUIMessages
-import org.eclipse.ui.texteditor.ResourceAction
-import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds
-import org.eclipse.ui.texteditor.ITextEditorActionConstants
-import org.eclipse.ui.texteditor.EditorMessages
-import org.eclipse.ui.texteditor.ContentAssistAction
-import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds
 
 class OvertargetXtextEditor extends XtextEditor {
 	
@@ -41,8 +33,10 @@ class OvertargetXtextEditor extends XtextEditor {
 	
 	def prepareUnitsLoading(IEditorInput input) {
 		val target = getModel(input)
-		val unitManager = UnitManager.instance;
-		unitManager.loadUnits(target)
+		if (target !== null) {
+			val unitManager = UnitManager.instance;
+			unitManager.loadUnits(target)
+		} else return
 	}
 	
 	def getModel(IEditorInput input) {
@@ -52,47 +46,20 @@ class OvertargetXtextEditor extends XtextEditor {
 			val project = file.getProject();
 			val rs = resourceSetProvider.get(project);
 			val r = rs.getResource(uri, true);
-			val target = r.contents.get(0) as TargetFile
-			
-			return target
+			if (!r.contents.empty) {
+				val target = r.contents.get(0) as TargetFile
+				return target
+			} else return null
 		}
 	}
-	
-//	override updateState(IEditorInput input) {
-//		val document = document
-//		var XtextResource xtextResource = document.readOnly(new IUnitOfWork<XtextResource, XtextResource>(){
-//			override XtextResource exec(XtextResource state) throws Exception {
-//				return state
-//			}
-//		})
-//		val model = xtextResource.contents.get(0) as TargetFile
-//		val unitManager = UnitManager.instance
-//		unitManager.loadUnits(model)
-// 		super.updateState(input)
-//	}
 	
 	override createActions() {
 		super.createActions
 		val updateUnitManagerAction = new UpdateUnitManagerAction(XtextUIMessages.getResourceBundle(),
 					"Update Unit Manager", this)
-		updateUnitManagerAction.update
-		updateUnitManagerAction.run
 		setAction("Update Unit Manager", updateUnitManagerAction)
-//		markAsStateDependentAction("Update Unit Manager", true);
 		markAsContentDependentAction("Update Unit Manager", true);
 		
 		
 	}
-//	def getChangesInModel() {
-//		val document = document
-//		var XtextResource xtextResource = document.readOnly(new IUnitOfWork<XtextResource, XtextResource>(){
-//			override XtextResource exec(XtextResource state) throws Exception {
-//				return state
-//			}
-//		})
-//		val model = xtextResource.contents.get(0) as TargetFile 
-//		val reposLoc = model.repositoryLocations
-//		return reposLoc
-//	} 
-
 }
