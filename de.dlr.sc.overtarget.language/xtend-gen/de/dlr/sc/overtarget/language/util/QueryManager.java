@@ -36,7 +36,33 @@ import org.osgi.framework.ServiceReference;
  */
 @SuppressWarnings("all")
 public class QueryManager {
+  public RepositoryLocation getReposLocOfUnit(final EObject model) {
+    if ((model instanceof Unit)) {
+      final Unit unit = ((Unit) model);
+      EObject _eContainer = unit.eContainer();
+      final RepositoryLocation location = ((RepositoryLocation) _eContainer);
+      return location;
+    } else {
+      if ((model instanceof RepositoryLocation)) {
+        final RepositoryLocation location_1 = ((RepositoryLocation)model);
+        return location_1;
+      }
+    }
+    return null;
+  }
+  
   public ArrayList<Unit> getUnits(final EObject model) {
+    ArrayList<Unit> _xblockexpression = null;
+    {
+      final RepositoryLocation location = this.getReposLocOfUnit(model);
+      EObject _eContainer = location.eContainer();
+      final TargetFile target = ((TargetFile) _eContainer);
+      _xblockexpression = this.loadUnits(target, location);
+    }
+    return _xblockexpression;
+  }
+  
+  public ArrayList<Unit> loadUnits(final TargetFile target, final RepositoryLocation reposLoc) {
     try {
       final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
       final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
@@ -46,12 +72,7 @@ public class QueryManager {
       Object _service_1 = provisioningAgent.getService(
         IMetadataRepositoryManager.SERVICE_NAME);
       final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
-      final Unit unit = ((Unit) model);
-      EObject _eContainer = unit.eContainer();
-      final RepositoryLocation location = ((RepositoryLocation) _eContainer);
-      EObject _eContainer_1 = location.eContainer();
-      final TargetFile target = ((TargetFile) _eContainer_1);
-      String _urlAsString = GeneratorHelper.getUrlAsString(location.getUrl(), target);
+      String _urlAsString = GeneratorHelper.getUrlAsString(reposLoc.getUrl(), target);
       final URI uri = new URI(_urlAsString);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
