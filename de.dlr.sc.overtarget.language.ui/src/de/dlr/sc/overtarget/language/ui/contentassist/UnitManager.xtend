@@ -43,15 +43,30 @@ class UnitManager {
 		return mapOfUnits
 	}
 	
-	def unitsLoaded(String reposLoc) {
-		if (!mapOfUnits.containsKey(reposLoc)) {
+	/**
+	 * This method checks if the String reposLocName is contained in the mapOfUnits 
+	 * -> units are already loaded
+	 * 
+	 * @param reposLocName	the name of the given repository location
+	 * @return				<code>true</code> if mapOfUnits does contain the units of the given repository location <br>
+	 * 						<code>false</code> if mapOfUnits does not contain the units of the given repository location
+	 */
+	def checkIfUnitsLoaded(String reposLocName) {
+		if (!mapOfUnits.containsKey(reposLocName)) {
 			return false
 		} else return true
 	}
 
+	/**
+	 * This method starts for every repository location of a given TargetFile a job to load units in the background
+	 * 
+	 * @param target	the targetFile with repository locations which contain units that have to be loaded
+	 * @return			<code>Status.OK_STATUS</code> if the units are loaded successfully <br>
+	 * 					<code>Status.CANCEL_STATUS</code> if loading units failed
+	 */
 	def loadUnits(TargetFile target) {
 		for (reposLoc : target.repositoryLocations) {
-			if (unitsLoaded(reposLoc.name) == false){
+			if (checkIfUnitsLoaded(reposLoc.name) == false){
 				val job = new Job("Loading units") {
 					override protected IStatus run(IProgressMonitor monitor) {
 						try { 

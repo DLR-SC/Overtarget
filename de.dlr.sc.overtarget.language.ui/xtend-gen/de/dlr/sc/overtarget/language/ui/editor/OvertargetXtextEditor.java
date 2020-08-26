@@ -40,7 +40,7 @@ public class OvertargetXtextEditor extends XtextEditor {
   }
   
   public void prepareUnitsLoading(final IEditorInput input) {
-    final TargetFile target = this.getModel(input);
+    final TargetFile target = this.getTargetFile(input);
     if ((target != null)) {
       final UnitManager unitManager = UnitManager.getInstance();
       unitManager.loadUnits(target);
@@ -49,7 +49,14 @@ public class OvertargetXtextEditor extends XtextEditor {
     }
   }
   
-  public TargetFile getModel(final IEditorInput input) {
+  /**
+   * This method tries to get the targetFile of the given input
+   * 
+   * @param input	the editor input
+   * @return		<code>targetFile</code> if the input contains a targetFile <br>
+   * 				<code>null</code> if the input does not contain a targetFile
+   */
+  public TargetFile getTargetFile(final IEditorInput input) {
     if ((input instanceof IFileEditorInput)) {
       final IFile file = ((IFileEditorInput)input).getFile();
       final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
@@ -60,8 +67,8 @@ public class OvertargetXtextEditor extends XtextEditor {
       boolean _not = (!_isEmpty);
       if (_not) {
         EObject _get = r.getContents().get(0);
-        final TargetFile target = ((TargetFile) _get);
-        return target;
+        final TargetFile targetFile = ((TargetFile) _get);
+        return targetFile;
       } else {
         return null;
       }

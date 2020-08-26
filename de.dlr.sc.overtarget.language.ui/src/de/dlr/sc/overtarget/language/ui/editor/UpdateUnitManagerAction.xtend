@@ -29,6 +29,10 @@ class UpdateUnitManagerAction extends TextEditorAction {
 	@Inject
 	IResourceSetProvider resourceSetProvider;
 	
+	/**
+	 * This method calls the UnitManager to load units 
+	 * whenever there is a change in the editor
+	 */
 	override update() {
 		super.update()
 		val editor= getTextEditor();

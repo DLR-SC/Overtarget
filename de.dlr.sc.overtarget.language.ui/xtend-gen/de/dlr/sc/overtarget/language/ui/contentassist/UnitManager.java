@@ -47,8 +47,16 @@ public class UnitManager {
     return this.mapOfUnits;
   }
   
-  public boolean unitsLoaded(final String reposLoc) {
-    boolean _containsKey = this.mapOfUnits.containsKey(reposLoc);
+  /**
+   * This method checks if the String reposLocName is contained in the mapOfUnits
+   * -> units are already loaded
+   * 
+   * @param reposLocName	the name of the given repository location
+   * @return				<code>true</code> if mapOfUnits does contain the units of the given repository location <br>
+   * 						<code>false</code> if mapOfUnits does not contain the units of the given repository location
+   */
+  public boolean checkIfUnitsLoaded(final String reposLocName) {
+    boolean _containsKey = this.mapOfUnits.containsKey(reposLocName);
     boolean _not = (!_containsKey);
     if (_not) {
       return false;
@@ -57,11 +65,18 @@ public class UnitManager {
     }
   }
   
+  /**
+   * This method starts for every repository location of a given TargetFile a job to load units in the background
+   * 
+   * @param target	the targetFile with repository locations which contain units that have to be loaded
+   * @return			<code>Status.OK_STATUS</code> if the units are loaded successfully <br>
+   * 					<code>Status.CANCEL_STATUS</code> if loading units failed
+   */
   public void loadUnits(final TargetFile target) {
     EList<RepositoryLocation> _repositoryLocations = target.getRepositoryLocations();
     for (final RepositoryLocation reposLoc : _repositoryLocations) {
-      boolean _unitsLoaded = this.unitsLoaded(reposLoc.getName());
-      boolean _equals = (_unitsLoaded == false);
+      boolean _checkIfUnitsLoaded = this.checkIfUnitsLoaded(reposLoc.getName());
+      boolean _equals = (_checkIfUnitsLoaded == false);
       if (_equals) {
         final Job job = new Job("Loading units") {
           @Override
