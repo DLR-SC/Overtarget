@@ -32,14 +32,21 @@ class OvertargetXtextEditor extends XtextEditor {
 	}
 	
 	def prepareUnitsLoading(IEditorInput input) {
-		val target = getModel(input)
+		val target = getTargetFile(input)
 		if (target !== null) {
 			val unitManager = UnitManager.instance;
 			unitManager.loadUnits(target)
 		} else return
 	}
 	
-	def getModel(IEditorInput input) {
+	/**
+	 * This method tries to get the targetFile of the given input
+	 * 
+	 * @param input	the editor input
+	 * @return		<code>targetFile</code> if the input contains a targetFile <br>
+	 * 				<code>null</code> if the input does not contain a targetFile
+	 */
+	def getTargetFile(IEditorInput input) {
 		if (input instanceof IFileEditorInput) {
 			val file = input.getFile();
 			val uri = URI.createPlatformResourceURI(file.fullPath.toString(), true);
@@ -47,8 +54,8 @@ class OvertargetXtextEditor extends XtextEditor {
 			val rs = resourceSetProvider.get(project);
 			val r = rs.getResource(uri, true);
 			if (!r.contents.empty) {
-				val target = r.contents.get(0) as TargetFile
-				return target
+				val targetFile = r.contents.get(0) as TargetFile
+				return targetFile
 			} else return null
 		}
 	}
@@ -59,7 +66,5 @@ class OvertargetXtextEditor extends XtextEditor {
 					"Update Unit Manager", this)
 		setAction("Update Unit Manager", updateUnitManagerAction)
 		markAsContentDependentAction("Update Unit Manager", true);
-		
-		
 	}
 }

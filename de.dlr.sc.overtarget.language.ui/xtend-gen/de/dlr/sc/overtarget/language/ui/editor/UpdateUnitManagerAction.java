@@ -34,6 +34,10 @@ public class UpdateUnitManagerAction extends TextEditorAction {
   @Inject
   private IResourceSetProvider resourceSetProvider;
   
+  /**
+   * This method calls the UnitManager to load units
+   * whenever there is a change in the editor
+   */
   @Override
   public void update() {
     super.update();
