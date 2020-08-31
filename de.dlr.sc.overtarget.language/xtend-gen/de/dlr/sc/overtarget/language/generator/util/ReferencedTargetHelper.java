@@ -10,12 +10,12 @@
 package de.dlr.sc.overtarget.language.generator.util;
 
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
+import de.dlr.sc.overtarget.language.generator.util.TargetFileHandler;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -90,52 +90,6 @@ public class ReferencedTargetHelper {
   }
   
   /**
-   * In the project the targetFile is searched with the outputPath.
-   * Checks if the targetFile is located directly in the project folder or in an extra folder.
-   * 
-   * @param file targetFile which is searched for
-   * @param outputDirectory output directory of generated targetFile
-   * @param fileName name of the tmodel/targetFile
-   * @return targetFile
-   */
-  public IFile findTargetFileInProject(final IFile file, final String outputDirectory, final String fileName) {
-    final IProject project = file.getProject();
-    final String targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
-    final String outputPath = outputDirectory.toString().replaceFirst(".", "");
-    boolean _equals = outputPath.equals("/");
-    if (_equals) {
-      final IFile targetFile = project.getFile(targetFileName);
-      boolean _exists = targetFile.exists();
-      if (_exists) {
-        return targetFile;
-      }
-    } else {
-      final String targetPath = (outputPath + targetFileName);
-      final IFile targetFileWithFolder = project.getFile(targetPath);
-      boolean _exists_1 = targetFileWithFolder.exists();
-      if (_exists_1) {
-        return targetFileWithFolder;
-      }
-    }
-    return null;
-  }
-  
-  /**
-   * In the project the targetFile is searched with the outputPath.
-   * Checks if the targetFile is located directly in the project folder or in an extra folder.
-   * 
-   * @param file targetFile which is searched for
-   * @param outputDirectory output directory of generated targetFile
-   * @return targetFile
-   */
-  public IFile findTargetFileInProject(final IFile file, final String outputDirectory) {
-    String _name = file.getName();
-    final String fileName = ("/" + _name);
-    final String targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
-    return this.findTargetFileInProject(file, outputDirectory, targetFileName);
-  }
-  
-  /**
    * In the project the targetForReferences file is searched with the outputPath.
    * Checks if the file is located directly in the project folder or in an extra folder.
    * 
@@ -145,6 +99,7 @@ public class ReferencedTargetHelper {
    */
   public IFile findTargetForReferencesFile(final IFile file, final String outputDirectory) {
     final String fileName = (("/" + ReferencedTargetHelper.TARGET_NAME) + OvertargetGenerator.TARGET_FILE_EXTENSION);
-    return this.findTargetFileInProject(file, outputDirectory, fileName);
+    final TargetFileHandler targetFileHandler = new TargetFileHandler();
+    return targetFileHandler.findTargetFileInProject(file, outputDirectory, fileName);
   }
 }

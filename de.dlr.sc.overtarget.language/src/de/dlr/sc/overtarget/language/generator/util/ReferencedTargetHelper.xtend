@@ -77,48 +77,6 @@ class ReferencedTargetHelper {
 			return false
 		}
 	}
-
-/**
-	 * In the project the targetFile is searched with the outputPath.
-	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
-	 * 
-	 * @param file targetFile which is searched for
-	 * @param outputDirectory output directory of generated targetFile
-	 * @param fileName name of the tmodel/targetFile
-	 * @return targetFile
-	 */
-	def findTargetFileInProject(IFile file, String outputDirectory, String fileName) {
-		val project = file.getProject
-		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
-		val outputPath = outputDirectory.toString.replaceFirst(".","")
-		if (outputPath.equals("/")) {
-			val targetFile = project.getFile(targetFileName)
-			if (targetFile.exists){
-				return targetFile
-			}
-		} else {
-			val targetPath = outputPath + targetFileName
-			val targetFileWithFolder = project.getFile(targetPath)
-			if (targetFileWithFolder.exists){
-				return targetFileWithFolder
-			}
-		}
-	}
-
-
-	/**
-	 * In the project the targetFile is searched with the outputPath.
-	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
-	 * 
-	 * @param file targetFile which is searched for
-	 * @param outputDirectory output directory of generated targetFile
-	 * @return targetFile
-	 */
-	def findTargetFileInProject(IFile file, String outputDirectory) {
-		val fileName = "/" + file.name
-		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
-		return findTargetFileInProject(file, outputDirectory, targetFileName)
-	}
 	
 	/**
 	 * In the project the targetForReferences file is searched with the outputPath.
@@ -130,6 +88,7 @@ class ReferencedTargetHelper {
 	 */
 	def findTargetForReferencesFile(IFile file, String outputDirectory) {
 		val fileName = "/" + TARGET_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
-		return findTargetFileInProject(file, outputDirectory, fileName)
+		val targetFileHandler = new TargetFileHandler
+		return targetFileHandler.findTargetFileInProject(file, outputDirectory, fileName)
 	}
 }
