@@ -12,19 +12,11 @@ package de.dlr.sc.overtarget.language.ui.quickfix;
 import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
-import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
-import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -37,7 +29,6 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.validation.Issue;
 
 /**
@@ -96,9 +87,6 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
       }, 1);
   }
   
-  @Inject
-  private IResourceSetProvider resourceSetProvider;
-  
   @Fix(OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME)
   public void fixFileNameLikeTargetName(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final IModification _function = (IModificationContext context) -> {
@@ -111,20 +99,8 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
         final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
         final IFile file = fileEditorInput.getFile();
         final String fileName = file.getName().replace(".tmodel", "");
-        final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-        final IProject project = file.getProject();
-        final ResourceSet rs = this.resourceSetProvider.get(project);
-        final Resource r = rs.getResource(uri, true);
-        EObject _get = r.getContents().get(0);
-        final TargetFile model = ((TargetFile) _get);
         final IXtextDocument xtextDocument = context.getXtextDocument();
-        if ((model instanceof TargetModel)) {
-          xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
-        } else {
-          if ((model instanceof TargetLibrary)) {
-            xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
-          }
-        }
+        xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
       }
     };
     acceptor.accept(issue, "Replace with correct tmodel name", "", "upcase.png", _function);

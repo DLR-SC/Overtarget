@@ -25,12 +25,7 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 import org.eclipse.ui.IFileEditorInput
 import org.eclipse.core.runtime.NullProgressMonitor
-import de.dlr.sc.overtarget.language.targetmodel.TargetModel
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import com.google.inject.Inject
-import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 
 /**
  * Custom quickfixes.
@@ -42,7 +37,6 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	OvertargetGrammarAccess grammarAccess
 	
-
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Fix Working System', 'Replace with correct Windowing System.', 'upcase.png') [
@@ -89,9 +83,6 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 		}, 1)
 	}
 	
-	@Inject
-	IResourceSetProvider resourceSetProvider
-	
 	@Fix(OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME)
 	def fixFileNameLikeTargetName(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Replace with correct tmodel name', '', 'upcase.png') [
@@ -106,20 +97,8 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 				val fileEditorInput = input as IFileEditorInput
 				val file = fileEditorInput.file
 				val fileName = file.name.replace(".tmodel", "")
-
-				val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-				val project = file.getProject();
-				val rs = resourceSetProvider.get(project);
-				val r = rs.getResource(uri, true);
-				val model = r.contents.get(0) as TargetFile
-				
 				val xtextDocument = context.xtextDocument
-				
-				if (model instanceof TargetModel) {
-					xtextDocument.replace(issue.offset, issue.length, fileName)
-				} else if (model instanceof TargetLibrary) {
-					xtextDocument.replace(issue.offset, issue.length, fileName)
-				}
+				xtextDocument.replace(issue.offset, issue.length, fileName)
 			}
 		]
 	}
