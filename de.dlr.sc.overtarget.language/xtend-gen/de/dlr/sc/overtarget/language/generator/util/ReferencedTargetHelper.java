@@ -10,10 +10,10 @@
 package de.dlr.sc.overtarget.language.generator.util;
 
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
-import de.dlr.sc.overtarget.language.generator.util.TargetFileHandler;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
+import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
@@ -100,6 +100,6 @@ public class ReferencedTargetHelper {
   public IFile findTargetForReferencesFile(final IFile file, final String outputDirectory) {
     final String fileName = (("/" + ReferencedTargetHelper.TARGET_NAME) + OvertargetGenerator.TARGET_FILE_EXTENSION);
     final TargetFileHandler targetFileHandler = new TargetFileHandler();
-    return targetFileHandler.findTargetFileInProject(file, outputDirectory, fileName);
+    return targetFileHandler.findTargetFile(file, outputDirectory, fileName);
   }
 }

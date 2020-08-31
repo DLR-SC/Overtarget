@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import java.util.ArrayList
 import org.eclipse.core.resources.IFile
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
+import de.dlr.sc.overtarget.language.util.TargetFileHandler
 
 /**
  * This class processes the model data for generation
@@ -89,6 +90,6 @@ class ReferencedTargetHelper {
 	def findTargetForReferencesFile(IFile file, String outputDirectory) {
 		val fileName = "/" + TARGET_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
 		val targetFileHandler = new TargetFileHandler
-		return targetFileHandler.findTargetFileInProject(file, outputDirectory, fileName)
+		return targetFileHandler.findTargetFile(file, outputDirectory, fileName)
 	}
 }
