@@ -56,9 +56,6 @@ class TargetFileHandler {
 	 * @return targetFile
 	 */
 	def findTargetFile(IFile file, String outputDirectory, String fileName) {
-		if (fileName !== null) {
-			fileName.replace("", "/" + file.name)
-		}
 		val project = file.getProject
 		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
 		val outputPath = outputDirectory.toString.replaceFirst(".","")
@@ -68,7 +65,7 @@ class TargetFileHandler {
 				return targetFile
 			}
 		} else {
-			val targetPath = outputPath + targetFileName
+			val targetPath = outputPath + "/" + targetFileName
 			val targetFileWithFolder = project.getFile(targetPath)
 			if (targetFileWithFolder.exists){
 				return targetFileWithFolder
