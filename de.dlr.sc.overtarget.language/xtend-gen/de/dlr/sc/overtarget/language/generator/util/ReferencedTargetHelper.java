@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  */
 @SuppressWarnings("all")
 public class ReferencedTargetHelper {
-  public static final String TARGET_NAME = "targetForReferences";
+  public static final String TARGET_FOR_REFERENCES_NAME = "targetForReferences";
   
   /**
    * This method copies the original tmodel and
@@ -59,7 +59,7 @@ public class ReferencedTargetHelper {
   }
   
   public String renameTmodel(final TargetModel model) {
-    final String renamedTmodel = ReferencedTargetHelper.TARGET_NAME;
+    final String renamedTmodel = ReferencedTargetHelper.TARGET_FOR_REFERENCES_NAME;
     model.setName(renamedTmodel);
     return model.getName();
   }
@@ -98,7 +98,7 @@ public class ReferencedTargetHelper {
    * @return targetForReferences
    */
   public IFile findTargetForReferencesFile(final IFile file, final String outputDirectory) {
-    final String fileName = (("/" + ReferencedTargetHelper.TARGET_NAME) + OvertargetGenerator.TARGET_FILE_EXTENSION);
+    final String fileName = (ReferencedTargetHelper.TARGET_FOR_REFERENCES_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION);
     final TargetFileHandler targetFileHandler = new TargetFileHandler();
     return targetFileHandler.findTargetFile(file, outputDirectory, fileName);
   }

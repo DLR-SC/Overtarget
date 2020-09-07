@@ -22,7 +22,7 @@ import de.dlr.sc.overtarget.language.util.TargetFileHandler
  * This class processes the model data for generation
  */
 class ReferencedTargetHelper {
-	public static val TARGET_NAME = "targetForReferences"
+	public static val TARGET_FOR_REFERENCES_NAME = "targetForReferences"
 	
 	/**
 	 * This method copies the original tmodel and
@@ -52,7 +52,7 @@ class ReferencedTargetHelper {
 	}
 
 	def renameTmodel(TargetModel model) {
-		val renamedTmodel = TARGET_NAME
+		val renamedTmodel = TARGET_FOR_REFERENCES_NAME
 		model.name = renamedTmodel
 		return model.name
 		}
@@ -88,7 +88,7 @@ class ReferencedTargetHelper {
 	 * @return targetForReferences 
 	 */
 	def findTargetForReferencesFile(IFile file, String outputDirectory) {
-		val fileName = "/" + TARGET_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
+		val fileName = TARGET_FOR_REFERENCES_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
 		val targetFileHandler = new TargetFileHandler
 		return targetFileHandler.findTargetFile(file, outputDirectory, fileName)
 	}
