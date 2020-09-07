@@ -61,11 +61,6 @@ public class TargetFileHandler {
    * @return targetFile
    */
   public IFile findTargetFile(final IFile file, final String outputDirectory, final String fileName) {
-    if ((fileName != null)) {
-      String _name = file.getName();
-      String _plus = ("/" + _name);
-      fileName.replace("", _plus);
-    }
     final IProject project = file.getProject();
     final String targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
     final String outputPath = outputDirectory.toString().replaceFirst(".", "");
@@ -77,7 +72,7 @@ public class TargetFileHandler {
         return targetFile;
       }
     } else {
-      final String targetPath = (outputPath + targetFileName);
+      final String targetPath = ((outputPath + "/") + targetFileName);
       final IFile targetFileWithFolder = project.getFile(targetPath);
       boolean _exists_1 = targetFileWithFolder.exists();
       if (_exists_1) {
