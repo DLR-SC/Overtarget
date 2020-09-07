@@ -91,7 +91,7 @@ class ReferencedTargetHelperTest {
 	def void testRenameTmodel() {
 		val testTmodel = testTmodelResource.contents.get(0) as TargetModel
 		val renamedTmodel = refTargetHelper.renameTmodel(testTmodel)
-		val expectedRenamedTmodel = ReferencedTargetHelper.TARGET_NAME
+		val expectedRenamedTmodel = ReferencedTargetHelper.TARGET_FOR_REFERENCES_NAME
 		Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTmodel, renamedTmodel)
 	}
 
@@ -130,61 +130,6 @@ class ReferencedTargetHelperTest {
 		Assert.assertFalse("Tmodel has no parent tmodel.", refTargetHelper.parentIsProxy(tmodelWithoutParent))
 	}
 
-	@Test
-	def void testFindTargetFileInProject() {
-		val outputDirectory = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val PROJECT_NAME = "testProjectWithTarget"
-		val projectWithTarget = root.getProject(PROJECT_NAME);
-		val folder = projectWithTarget.getFolder("target");
-		val tmodelFile = folder.getFile("target.tmodel");
-		projectWithTarget.create(null);
-		if (!projectWithTarget.isOpen()) { 
-			projectWithTarget.open(null)
-		}
-		folder.create(IResource.NONE, true, null);
-
-		val bytes = "
-			Target target {
-				
-			}".getBytes();
-		val source = new ByteArrayInputStream(bytes);
-		tmodelFile.create(source, IResource.NONE, null);
-		val targetFile = folder.getFile("target.target");
-
-		val bytesTarget = 
-			''''''.toString.getBytes();
-		val sourceTarget = new ByteArrayInputStream(bytesTarget)
-		targetFile.create(sourceTarget, false, null)
-
-		Assert.assertEquals(targetFile, refTargetHelper.findTargetFileInProject(tmodelFile, outputDirectory))
-	}
-
-		@Test
-		def void testFindTargetFileNonExistendFile() {
-		val outputDirectory = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val PROJECT_NAME = "testProjectWithoutTarget"
-		val projectWithoutTarget = root.getProject(PROJECT_NAME);
-		val folder = projectWithoutTarget.getFolder("target");
-		val tmodelFile = folder.getFile("target.tmodel");
-		projectWithoutTarget.create(null);
-		if (!projectWithoutTarget.isOpen()) { 
-			projectWithoutTarget.open(null)
-		}
-		folder.create(IResource.NONE, true, null);
-		val bytes = "
-			Target target {
-				
-			}".getBytes();
-		val sourceTarget = new ByteArrayInputStream(bytes);
-		tmodelFile.create(sourceTarget, IResource.NONE, null);
-
-		Assert.assertNull("File does not exist, so shoud be null", refTargetHelper.findTargetFileInProject(tmodelFile, outputDirectory))
-	}
-	
 	@Test
 	def void testFindTargetForReferencesFile() {
 		val outputDirectory = "./target"
