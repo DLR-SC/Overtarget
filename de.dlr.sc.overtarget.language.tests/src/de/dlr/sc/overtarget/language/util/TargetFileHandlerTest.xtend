@@ -14,18 +14,51 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IResource
 import java.io.ByteArrayInputStream
 import org.junit.Assert
+import org.junit.Rule
+import org.junit.rules.TemporaryFolder
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile
+import java.util.ArrayList
 
 class TargetFileHandlerTest {
 	
-	val targetFileHandler = new TargetFileHandler
+	val targetFileHandler = new TargetFileHandler	
+	
+	@Rule 
+	public TemporaryFolder tempFolder = new TemporaryFolder()
 	
 	@Test
-	def void getTargetFileTest() {
-	}
+	def void testGetTargetFile() {
+		val workspace = ResourcesPlugin.getWorkspace();
+		val root = workspace.getRoot();
+		val projectName = "testProject"
+		val projectWithTarget = root.getProject(projectName);
+		val folder = projectWithTarget.getFolder("target");
+		val tmodelFile = folder.getFile("target.tmodel");
+		projectWithTarget.create(null);
+		if (!projectWithTarget.isOpen()) { 
+			projectWithTarget.open(null)
+		}
+		folder.create(IResource.NONE, true, null);
+
+		val bytes = "
+			Target target {
+				
+			}".getBytes();
+		val source = new ByteArrayInputStream(bytes);
+		tmodelFile.create(source, IResource.NONE, null);
 	
-	@Test
-	def void getTargetFileWithProject() {
-		
+		val files = new ArrayList
+		val file = targetFileHandler.getTargetFile(tmodelFile, null)
+		val file2 = tempFolder.newFile
+		files.add(file)
+		files.add(file2)
+		for (f : files) {
+			if (f instanceof TargetFile) {
+				Assert.assertTrue("Method found targetFile", true)
+			} else {
+				Assert.assertFalse("Method didn't find targetFile", false)
+			}
+		}
 	}
 	
 	@Test 

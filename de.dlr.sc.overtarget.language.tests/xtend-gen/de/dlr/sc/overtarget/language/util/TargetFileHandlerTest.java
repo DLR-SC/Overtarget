@@ -9,8 +9,11 @@
  */
 package de.dlr.sc.overtarget.language.util;
 
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -21,18 +24,51 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 @SuppressWarnings("all")
 public class TargetFileHandlerTest {
   private final TargetFileHandler targetFileHandler = new TargetFileHandler();
   
-  @Test
-  public void getTargetFileTest() {
-  }
+  @Rule
+  public TemporaryFolder tempFolder = new TemporaryFolder();
   
   @Test
-  public void getTargetFileWithProject() {
+  public void testGetTargetFile() {
+    try {
+      final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+      final IWorkspaceRoot root = workspace.getRoot();
+      final String projectName = "testProject";
+      final IProject projectWithTarget = root.getProject(projectName);
+      final IFolder folder = projectWithTarget.getFolder("target");
+      final IFile tmodelFile = folder.getFile("target.tmodel");
+      projectWithTarget.create(null);
+      boolean _isOpen = projectWithTarget.isOpen();
+      boolean _not = (!_isOpen);
+      if (_not) {
+        projectWithTarget.open(null);
+      }
+      folder.create(IResource.NONE, true, null);
+      final byte[] bytes = "\r\n\t\t\tTarget target {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final ByteArrayInputStream source = new ByteArrayInputStream(bytes);
+      tmodelFile.create(source, IResource.NONE, null);
+      final ArrayList<Object> files = new ArrayList<Object>();
+      final TargetFile file = this.targetFileHandler.getTargetFile(tmodelFile, null);
+      final File file2 = this.tempFolder.newFile();
+      files.add(file);
+      files.add(file2);
+      for (final Object f : files) {
+        if ((f instanceof TargetFile)) {
+          Assert.assertTrue("Method found targetFile", true);
+        } else {
+          Assert.assertFalse("Method didn\'t find targetFile", false);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
