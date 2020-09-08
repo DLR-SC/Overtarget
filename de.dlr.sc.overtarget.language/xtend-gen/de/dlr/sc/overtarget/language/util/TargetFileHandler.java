@@ -37,20 +37,6 @@ public class TargetFileHandler {
     }
   }
   
-  public IFile getTargetFile(final IFile file, final String outputConfig, final IProject project) {
-    final String targetName = file.getName().replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
-    final String outputPath = outputConfig.replace(".", "");
-    boolean _equals = outputPath.equals("/");
-    if (_equals) {
-      final IFile targetFile = project.getFile(("/" + targetName));
-      return targetFile;
-    } else {
-      final String targetPath = ((outputPath + "/") + targetName);
-      final IFile targetFile_1 = project.getFile(targetPath);
-      return targetFile_1;
-    }
-  }
-  
   /**
    * In the project the targetFile is searched with the outputPath.
    * Checks if the targetFile is located directly in the project folder or in an extra folder.
