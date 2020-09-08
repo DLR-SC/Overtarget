@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-import org.eclipse.core.resources.IProject
 
 class TargetFileHandler {
 	
@@ -29,19 +28,6 @@ class TargetFileHandler {
 		} else {
 			val r = rs.getResource(uri, true)
 			val targetFile = r.contents.get(0) as TargetFile
-			return targetFile
-		}
-	}
-	
-	def getTargetFile(IFile file, String outputConfig, IProject project) {
-		val targetName = file.getName().replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION) 
-		val outputPath = outputConfig.replace(".", "") 
-		if (outputPath.equals("/")) {
-			val targetFile = project.getFile("/" + targetName);
-			return targetFile
-		} else {
-			val targetPath = outputPath + "/" + targetName;
-			val targetFile = project.getFile(targetPath); 
 			return targetFile
 		}
 	}
