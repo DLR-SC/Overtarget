@@ -71,7 +71,7 @@ public class TargetFileHandlerTest {
   }
   
   @Test
-  public void testGetTargetModelNonExistend() {
+  public void testGetTargetModelNonExistent() {
     try {
       final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
       final IProject testProject = root.getProject("de.dlr.sc.overtarget.language.tests");
@@ -128,7 +128,7 @@ public class TargetFileHandlerTest {
   }
   
   @Test
-  public void testFindTargetFileNonExistendFile() {
+  public void testFindTargetFileNonExistentFile() {
     try {
       final String outputDirectoryWithFolder = "./target";
       final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
