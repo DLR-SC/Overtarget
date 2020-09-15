@@ -19,7 +19,13 @@ import org.junit.rules.TemporaryFolder
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
+import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.junit.runner.RunWith
 
+@RunWith(XtextRunner)
+@InjectWith(OvertargetInjectorProvider)
 class TargetFileHandlerTest {
 	
 	val targetFileHandler = new TargetFileHandler
@@ -50,7 +56,6 @@ class TargetFileHandlerTest {
 		tmodelFile.create(source, IResource.NONE, null)
 
 		val tmodel = targetFileHandler.getTargetModel(tmodelFile, null)
-		
 		val tmodelPath = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel"
 		val uriTmodel = URI.createPlatformPluginURI(tmodelPath, true)
 		val rs = new ResourceSetImpl()

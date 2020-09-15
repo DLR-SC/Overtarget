@@ -10,6 +10,7 @@
 package de.dlr.sc.overtarget.language.util;
 
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
+import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
 import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import java.io.ByteArrayInputStream;
 import org.eclipse.core.resources.IFile;
@@ -23,12 +24,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
+@InjectWith(OvertargetInjectorProvider.class)
 @SuppressWarnings("all")
 public class TargetFileHandlerTest {
   private final TargetFileHandler targetFileHandler = new TargetFileHandler();
