@@ -14,22 +14,30 @@ import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 
+/**
+ * This class handles getting files, such as target resources (.tmodel) or targetFiles (.target).
+ */
 class TargetFileHandler {
 	
-	def getTargetFile(IFile file, ResourceSet rs) {
+	/**
+	 * This method gets a targetModel
+	 * 
+	 * @param file	target file (.target) located in a project
+	 * @param rs	resourceSet which can include tmodels
+	 * @return targetModel
+	 */
+	
+	def getTargetModel(IFile file, ResourceSet rs) {
 		val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		var resourceSet = rs
 		if (rs === null) {
-			val set = new ResourceSetImpl
-			val r = set.getResource(uri, true)
-			val targetFile = r.contents.get(0) as TargetFile
-			return targetFile
-		} else {
-			val r = rs.getResource(uri, true)
-			val targetFile = r.contents.get(0) as TargetFile
-			return targetFile
+			resourceSet = new ResourceSetImpl
 		}
+		val resource = resourceSet.getResource(uri, true)
+		val targetModel = resource.contents.get(0) as TargetModel
+		return targetModel
 	}
 	
 	/**

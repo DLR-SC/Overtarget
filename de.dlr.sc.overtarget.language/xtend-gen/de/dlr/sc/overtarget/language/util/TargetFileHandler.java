@@ -10,7 +10,7 @@
 package de.dlr.sc.overtarget.language.util;
 
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
@@ -19,22 +19,29 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+/**
+ * This class handles getting files, such as target resources (.tmodel) or targetFiles (.target).
+ */
 @SuppressWarnings("all")
 public class TargetFileHandler {
-  public TargetFile getTargetFile(final IFile file, final ResourceSet rs) {
+  /**
+   * This method gets a targetModel
+   * 
+   * @param file	target file (.target) located in a project
+   * @param rs	resourceSet which can include tmodels
+   * @return targetModel
+   */
+  public TargetModel getTargetModel(final IFile file, final ResourceSet rs) {
     final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+    ResourceSet resourceSet = rs;
     if ((rs == null)) {
-      final ResourceSetImpl set = new ResourceSetImpl();
-      final Resource r = set.getResource(uri, true);
-      EObject _get = r.getContents().get(0);
-      final TargetFile targetFile = ((TargetFile) _get);
-      return targetFile;
-    } else {
-      final Resource r_1 = rs.getResource(uri, true);
-      EObject _get_1 = r_1.getContents().get(0);
-      final TargetFile targetFile_1 = ((TargetFile) _get_1);
-      return targetFile_1;
+      ResourceSetImpl _resourceSetImpl = new ResourceSetImpl();
+      resourceSet = _resourceSetImpl;
     }
+    final Resource resource = resourceSet.getResource(uri, true);
+    EObject _get = resource.getContents().get(0);
+    final TargetModel targetModel = ((TargetModel) _get);
+    return targetModel;
   }
   
   /**
