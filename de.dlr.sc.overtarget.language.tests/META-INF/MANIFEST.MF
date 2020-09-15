@@ -15,7 +15,6 @@ Require-Bundle: de.dlr.sc.overtarget.language,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: de.dlr.sc.overtarget.language.generator,
  de.dlr.sc.overtarget.language.generator.util,
- de.dlr.sc.overtarget.language.targetmodel.tests,
  de.dlr.sc.overtarget.language.tests;x-internal=true,
  de.dlr.sc.overtarget.language.util,
  de.dlr.sc.overtarget.language.validation
