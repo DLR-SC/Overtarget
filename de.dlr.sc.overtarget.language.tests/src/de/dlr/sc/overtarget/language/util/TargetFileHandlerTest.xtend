@@ -16,76 +16,77 @@ import java.io.ByteArrayInputStream
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-import java.util.ArrayList
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 
 class TargetFileHandlerTest {
 	
-	val targetFileHandler = new TargetFileHandler	
+	val targetFileHandler = new TargetFileHandler
 	
 	@Rule 
 	public TemporaryFolder tempFolder = new TemporaryFolder()
 	
 	@Test
-	def void testGetTargetFile() {
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val projectName = "testProject"
-		val projectWithTarget = root.getProject(projectName);
-		val folder = projectWithTarget.getFolder("target");
-		val tmodelFile = folder.getFile("target.tmodel");
-		projectWithTarget.create(null);
-		if (!projectWithTarget.isOpen()) { 
-			projectWithTarget.open(null)
+	def void testGetTargetModel() {
+		val root = ResourcesPlugin.getWorkspace().getRoot()
+		val testProject = root.getProject("de.dlr.sc.overtarget.language.tests")
+		if (testProject.exists) {
+			testProject.delete(true, null)
 		}
-		folder.create(IResource.NONE, true, null);
-
+		testProject.create(null)
+		if (!testProject.isOpen()) {
+			testProject.open(null)
+		}
+		val folder = testProject.getFolder("resources")
+		folder.create(IResource.NONE, true, null)
+		
+		val tmodelFile = folder.getFile("target.tmodel")
 		val bytes = "
 			Target target {
 				
-			}".getBytes();
-		val source = new ByteArrayInputStream(bytes);
-		tmodelFile.create(source, IResource.NONE, null);
-	
-		val files = new ArrayList
-		val file = targetFileHandler.getTargetFile(tmodelFile, null)
-		val file2 = tempFolder.newFile
-		files.add(file)
-		files.add(file2)
-		for (f : files) {
-			if (f instanceof TargetFile) {
-				Assert.assertTrue("Method found targetFile", true)
-			} else {
-				Assert.assertFalse("Method didn't find targetFile", false)
-			}
-		}
+			}".getBytes()
+		val source = new ByteArrayInputStream(bytes)
+		tmodelFile.create(source, IResource.NONE, null)
+
+		val tmodel = targetFileHandler.getTargetModel(tmodelFile, null)
+		
+		val tmodelPath = "/de.dlr.sc.overtarget.language.tests/resources/target.tmodel"
+		val uriTmodel = URI.createPlatformPluginURI(tmodelPath, true)
+		val rs = new ResourceSetImpl()
+		val tmodelResource = rs.getResource(uriTmodel, true)
+		
+		val expectedTmodel = tmodelResource.contents.get(0) as TargetModel
+		Assert.assertEquals(expectedTmodel.name, tmodel.name)
 	}
 	
 	@Test 
 	def void testFindTargetFile() {
 		val outputDirectoryWithFolder = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val projectName = "testProjectWithTarget"
-		val projectWithTarget = root.getProject(projectName);
-		val folder = projectWithTarget.getFolder("target");
-		val tmodelFile = folder.getFile("target.tmodel");
-		projectWithTarget.create(null);
+		val root = ResourcesPlugin.getWorkspace().getRoot()
+		val projectWithTarget = root.getProject("testProjectWithTarget")
+		if (projectWithTarget.exists) {
+			projectWithTarget.delete(true, null)
+		}
+		projectWithTarget.create(null)
 		if (!projectWithTarget.isOpen()) { 
 			projectWithTarget.open(null)
 		}
-		folder.create(IResource.NONE, true, null);
-
+		val folder = projectWithTarget.getFolder("target")
+		folder.create(IResource.NONE, true, null)
+		
+		val tmodelFile = folder.getFile("target.tmodel")
 		val bytes = "
 			Target target {
 				
-			}".getBytes();
-		val source = new ByteArrayInputStream(bytes);
-		tmodelFile.create(source, IResource.NONE, null);
-		val targetFile = folder.getFile("target.target");
+			}".getBytes()
+		val source = new ByteArrayInputStream(bytes)
+		tmodelFile.create(source, IResource.NONE, null)
+
+		val targetFile = folder.getFile("target.target")
 
 		val bytesTarget = 
-			''''''.toString.getBytes();
+			''''''.toString.getBytes()
 		val sourceTarget = new ByteArrayInputStream(bytesTarget)
 		targetFile.create(sourceTarget, false, null)
 
@@ -95,24 +96,27 @@ class TargetFileHandlerTest {
 	@Test
 	def void testFindTargetFileNonExistendFile() {
 		val outputDirectoryWithFolder = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val PROJECT_NAME = "testProjectWithoutTarget"
-		val projectWithoutTarget = root.getProject(PROJECT_NAME);
-		val folder = projectWithoutTarget.getFolder("target");
-		val tmodelFile = folder.getFile("target.tmodel");
-		projectWithoutTarget.create(null);
+		val root = ResourcesPlugin.getWorkspace().getRoot()
+		val projectWithoutTarget = root.getProject("testProjectWithoutTarget")
+		if (projectWithoutTarget.exists) {
+			projectWithoutTarget.delete(true, null)
+		}
+		projectWithoutTarget.create(null)
+		
 		if (!projectWithoutTarget.isOpen()) { 
 			projectWithoutTarget.open(null)
 		}
-		folder.create(IResource.NONE, true, null);
+		val folder = projectWithoutTarget.getFolder("target")
+		folder.create(IResource.NONE, true, null)
+		
+		val tmodelFile = folder.getFile("target.tmodel")
 		val bytes = "
 			Target target {
 				
-			}".getBytes();
-		val sourceTarget = new ByteArrayInputStream(bytes);
-		tmodelFile.create(sourceTarget, IResource.NONE, null);
-
+			}".getBytes()
+		val sourceTarget = new ByteArrayInputStream(bytes)
+		tmodelFile.create(sourceTarget, IResource.NONE, null)
+		
 		Assert.assertNull("File does not exist, so should be null", targetFileHandler.findTargetFile(tmodelFile, outputDirectoryWithFolder, tmodelFile.name))
 	}
 }
