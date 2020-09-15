@@ -393,22 +393,13 @@ public interface TargetmodelPackage extends EPackage
   int UNIT = 4;
 
   /**
-   * The feature id for the '<em><b>Add All</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNIT__ADD_ALL = 0;
-
-  /**
    * The feature id for the '<em><b>Source</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int UNIT__SOURCE = 1;
+  int UNIT__SOURCE = 0;
 
   /**
    * The feature id for the '<em><b>Vers</b></em>' attribute.
@@ -417,7 +408,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNIT__VERS = 2;
+  int UNIT__VERS = 1;
 
   /**
    * The number of structural features of the '<em>Unit</em>' class.
@@ -426,7 +417,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNIT_FEATURE_COUNT = 3;
+  int UNIT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link de.dlr.sc.overtarget.language.targetmodel.impl.UrlExpressionImpl <em>Url Expression</em>}' class.
@@ -632,13 +623,22 @@ public interface TargetmodelPackage extends EPackage
   int REPOSITORY_LOCATION__URL = 2;
 
   /**
+   * The feature id for the '<em><b>Add All</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REPOSITORY_LOCATION__ADD_ALL = 3;
+
+  /**
    * The feature id for the '<em><b>Units</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION__UNITS = 3;
+  int REPOSITORY_LOCATION__UNITS = 4;
 
   /**
    * The number of structural features of the '<em>Repository Location</em>' class.
@@ -647,7 +647,7 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION_FEATURE_COUNT = 4;
+  int REPOSITORY_LOCATION_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link de.dlr.sc.overtarget.language.targetmodel.impl.ExcludeLocationImpl <em>Exclude Location</em>}' class.
@@ -1071,17 +1071,6 @@ public interface TargetmodelPackage extends EPackage
   EClass getUnit();
 
   /**
-   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.Unit#isAddAll <em>Add All</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Add All</em>'.
-   * @see de.dlr.sc.overtarget.language.targetmodel.Unit#isAddAll()
-   * @see #getUnit()
-   * @generated
-   */
-  EAttribute getUnit_AddAll();
-
-  /**
    * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.Unit#getSource <em>Source</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1229,6 +1218,17 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    */
   EReference getRepositoryLocation_Url();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll <em>Add All</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Add All</em>'.
+   * @see de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll()
+   * @see #getRepositoryLocation()
+   * @generated
+   */
+  EAttribute getRepositoryLocation_AddAll();
 
   /**
    * Returns the meta object for the containment reference list '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUnits <em>Units</em>}'.
@@ -1578,14 +1578,6 @@ public interface TargetmodelPackage extends EPackage
     EClass UNIT = eINSTANCE.getUnit();
 
     /**
-     * The meta object literal for the '<em><b>Add All</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute UNIT__ADD_ALL = eINSTANCE.getUnit_AddAll();
-
-    /**
      * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1706,6 +1698,14 @@ public interface TargetmodelPackage extends EPackage
      * @generated
      */
     EReference REPOSITORY_LOCATION__URL = eINSTANCE.getRepositoryLocation_Url();
+
+    /**
+     * The meta object literal for the '<em><b>Add All</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REPOSITORY_LOCATION__ADD_ALL = eINSTANCE.getRepositoryLocation_AddAll();
 
     /**
      * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.

@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.Unit#isAddAll <em>Add All</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.Unit#getSource <em>Source</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.Unit#getVers <em>Vers</em>}</li>
  * </ul>
@@ -31,28 +30,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Unit extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Add All</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Add All</em>' attribute.
-   * @see #setAddAll(boolean)
-   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getUnit_AddAll()
-   * @model
-   * @generated
-   */
-  boolean isAddAll();
-
-  /**
-   * Sets the value of the '{@link de.dlr.sc.overtarget.language.targetmodel.Unit#isAddAll <em>Add All</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Add All</em>' attribute.
-   * @see #isAddAll()
-   * @generated
-   */
-  void setAddAll(boolean value);
-
   /**
    * Returns the value of the '<em><b>Source</b></em>' attribute.
    * <!-- begin-user-doc -->

@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isReferencedTarget <em>Referenced Target</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUrl <em>Url</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isAddAll <em>Add All</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUnits <em>Units</em>}</li>
  * </ul>
  *
@@ -97,6 +98,26 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * @ordered
    */
   protected UrlExpression url;
+
+  /**
+   * The default value of the '{@link #isAddAll() <em>Add All</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isAddAll()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean ADD_ALL_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isAddAll() <em>Add All</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isAddAll()
+   * @generated
+   * @ordered
+   */
+  protected boolean addAll = ADD_ALL_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
@@ -235,6 +256,31 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
+  public boolean isAddAll()
+  {
+    return addAll;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAddAll(boolean newAddAll)
+  {
+    boolean oldAddAll = addAll;
+    addAll = newAddAll;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL, oldAddAll, addAll));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<Unit> getUnits()
   {
     if (units == null)
@@ -278,6 +324,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         return getName();
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         return getUrl();
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        return isAddAll();
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         return getUnits();
     }
@@ -303,6 +351,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         return;
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         setUrl((UrlExpression)newValue);
+        return;
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        setAddAll((Boolean)newValue);
         return;
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         getUnits().clear();
@@ -331,6 +382,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         setUrl((UrlExpression)null);
         return;
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        setAddAll(ADD_ALL_EDEFAULT);
+        return;
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         getUnits().clear();
         return;
@@ -354,6 +408,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         return url != null;
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        return addAll != ADD_ALL_EDEFAULT;
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         return units != null && !units.isEmpty();
     }
@@ -375,6 +431,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
     result.append(referencedTarget);
     result.append(", name: ");
     result.append(name);
+    result.append(", addAll: ");
+    result.append(addAll);
     result.append(')');
     return result.toString();
   }

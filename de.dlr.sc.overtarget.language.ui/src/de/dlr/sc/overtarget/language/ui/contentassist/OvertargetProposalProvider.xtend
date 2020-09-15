@@ -71,8 +71,8 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
 	}
 
-	override completeUnit_AddAll(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val proposal = createCompletionProposal("addAll", "addAll", getImage(grammarAccess.unitRule), context) as ConfigurableCompletionProposal;
+	override completeRepositoryLocation_AddAll(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val proposal = createCompletionProposal("addAll", "addAll", getImage(grammarAccess.repositoryLocationRule), context) as ConfigurableCompletionProposal;
   getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix())
 		if (proposal !== null) {
 			proposal.setPriority(proposal.getPriority() * 2);

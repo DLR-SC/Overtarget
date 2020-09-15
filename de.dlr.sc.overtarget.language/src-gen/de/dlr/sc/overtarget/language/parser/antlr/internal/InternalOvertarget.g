@@ -610,25 +610,11 @@ ruleUnit returns [EObject current=null]
 		}
 		(
 			(
-				lv_addAll_2_0='addAll'
-				{
-					newLeafNode(lv_addAll_2_0, grammarAccess.getUnitAccess().getAddAllAddAllKeyword_2_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getUnitRule());
-					}
-					setWithLastConsumed($current, "addAll", lv_addAll_2_0 != null, "addAll");
-				}
-			)
-		)?
-		(
-			(
 				(
 					{
-						newCompositeNode(grammarAccess.getUnitAccess().getSourceSourceParserRuleCall_3_0_0());
+						newCompositeNode(grammarAccess.getUnitAccess().getSourceSourceParserRuleCall_2_0_0());
 					}
-					lv_source_3_0=ruleSource
+					lv_source_2_0=ruleSource
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getUnitRule());
@@ -636,23 +622,23 @@ ruleUnit returns [EObject current=null]
 						set(
 							$current,
 							"source",
-							lv_source_3_0,
+							lv_source_2_0,
 							"de.dlr.sc.overtarget.language.Overtarget.Source");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_4='version'
+			otherlv_3='version'
 			{
-				newLeafNode(otherlv_4, grammarAccess.getUnitAccess().getVersionKeyword_3_1());
+				newLeafNode(otherlv_3, grammarAccess.getUnitAccess().getVersionKeyword_2_1());
 			}
 			(
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getUnitAccess().getVersVersionParserRuleCall_3_2_0_0());
+							newCompositeNode(grammarAccess.getUnitAccess().getVersVersionParserRuleCall_2_2_0_0());
 						}
-						lv_vers_5_1=ruleVersion
+						lv_vers_4_1=ruleVersion
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getUnitRule());
@@ -660,28 +646,28 @@ ruleUnit returns [EObject current=null]
 							set(
 								$current,
 								"vers",
-								lv_vers_5_1,
+								lv_vers_4_1,
 								"de.dlr.sc.overtarget.language.Overtarget.Version");
 							afterParserOrEnumRuleCall();
 						}
 						    |
-						lv_vers_5_2='newest'
+						lv_vers_4_2='newest'
 						{
-							newLeafNode(lv_vers_5_2, grammarAccess.getUnitAccess().getVersNewestKeyword_3_2_0_1());
+							newLeafNode(lv_vers_4_2, grammarAccess.getUnitAccess().getVersNewestKeyword_2_2_0_1());
 						}
 						{
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getUnitRule());
 							}
-							setWithLastConsumed($current, "vers", lv_vers_5_2, null);
+							setWithLastConsumed($current, "vers", lv_vers_4_2, null);
 						}
 					)
 				)
 			)
 		)?
-		otherlv_6=';'
+		otherlv_5=';'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getUnitAccess().getSemicolonKeyword_4());
+			newLeafNode(otherlv_5, grammarAccess.getUnitAccess().getSemicolonKeyword_3());
 		}
 	)
 ;
@@ -1022,26 +1008,49 @@ ruleRepositoryLocation returns [EObject current=null]
 		}
 		(
 			(
+				otherlv_6='Unit'
 				{
-					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_6_0());
+					newLeafNode(otherlv_6, grammarAccess.getRepositoryLocationAccess().getUnitKeyword_6_0_0());
 				}
-				lv_units_6_0=ruleUnit
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
-					}
-					add(
-						$current,
-						"units",
-						lv_units_6_0,
-						"de.dlr.sc.overtarget.language.Overtarget.Unit");
-					afterParserOrEnumRuleCall();
-				}
+				(
+					(
+						lv_addAll_7_0='addAll;'
+						{
+							newLeafNode(lv_addAll_7_0, grammarAccess.getRepositoryLocationAccess().getAddAllAddAllKeyword_6_0_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getRepositoryLocationRule());
+							}
+							setWithLastConsumed($current, "addAll", lv_addAll_7_0 != null, "addAll;");
+						}
+					)
+				)
 			)
-		)*
-		otherlv_7='}'
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_6_1_0());
+					}
+					lv_units_8_0=ruleUnit
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
+						}
+						add(
+							$current,
+							"units",
+							lv_units_8_0,
+							"de.dlr.sc.overtarget.language.Overtarget.Unit");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)*
+		)
+		otherlv_9='}'
 		{
-			newLeafNode(otherlv_7, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_7());
+			newLeafNode(otherlv_9, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;

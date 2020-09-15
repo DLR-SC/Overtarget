@@ -60,7 +60,7 @@ SimpleVersion:
 ;
 
 Unit:
-	{Unit} 'Unit' addAll?='addAll'? (source=Source 'version' vers= (Version | 'newest'))? ';'
+	{Unit} 'Unit' (source=Source 'version' vers= (Version | 'newest'))? ';'
 ;
 
 Source hidden():
@@ -89,7 +89,7 @@ UrlElementVariable:
 */
 RepositoryLocation:
 	(referencedTarget?='ReferencedTarget')? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
-		(units+=Unit)*	
+		('Unit' addAll?='addAll;' | (units+=Unit)*)
 	'}'
 ;
 

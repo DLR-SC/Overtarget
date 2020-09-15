@@ -11,7 +11,7 @@
 'OperatingSystem'=44
 'Override'=55
 'PA_RISC'=30
-'ReferencedTarget'=59
+'ReferencedTarget'=58
 'RepositoryLocation'=52
 'Target'=38
 'TargetJRE'=47
@@ -20,7 +20,7 @@
 'Variable'=57
 'WindowingSystem'=13
 'WorkingSystem'=14
-'addAll'=58
+'addAll;'=59
 'aix'=17
 'all;'=16
 'carbon'=24

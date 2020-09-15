@@ -102,8 +102,8 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   }
   
   @Override
-  public void completeUnit_AddAll(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal _createCompletionProposal = this.createCompletionProposal("addAll", "addAll", this.getImage(this.grammarAccess.getUnitRule()), context);
+  public void completeRepositoryLocation_AddAll(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal _createCompletionProposal = this.createCompletionProposal("addAll", "addAll", this.getImage(this.grammarAccess.getRepositoryLocationRule()), context);
     final ConfigurableCompletionProposal proposal = ((ConfigurableCompletionProposal) _createCompletionProposal);
     this.getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix());
     if ((proposal != null)) {

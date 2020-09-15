@@ -170,7 +170,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     RepositoryLocation returns RepositoryLocation
 	 *
 	 * Constraint:
-	 *     (referencedTarget?='ReferencedTarget'? name=ID url=UrlExpression units+=Unit*)
+	 *     (referencedTarget?='ReferencedTarget'? name=ID url=UrlExpression (addAll?='addAll;' | units+=Unit+)?)
 	 */
 	protected void sequence_RepositoryLocation(ISerializationContext context, RepositoryLocation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -220,7 +220,7 @@ public class OvertargetSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     Unit returns Unit
 	 *
 	 * Constraint:
-	 *     (addAll?='addAll'? (source=Source (vers=Version | vers='newest'))?)
+	 *     (source=Source (vers=Version | vers='newest'))?
 	 */
 	protected void sequence_Unit(ISerializationContext context, Unit semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

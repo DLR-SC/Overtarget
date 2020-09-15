@@ -494,7 +494,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getUnit_AddAll()
+  public EAttribute getUnit_Source()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(0);
   }
@@ -505,20 +505,9 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
-  public EAttribute getUnit_Source()
-  {
-    return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EAttribute getUnit_Vers()
   {
-    return (EAttribute)unitEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -659,9 +648,20 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
+  public EAttribute getRepositoryLocation_AddAll()
+  {
+    return (EAttribute)repositoryLocationEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getRepositoryLocation_Units()
   {
-    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(3);
+    return (EReference)repositoryLocationEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -824,7 +824,6 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEReference(targetModelEClass, TARGET_MODEL__EXCLUDED_LOCATIONS);
 
     unitEClass = createEClass(UNIT);
-    createEAttribute(unitEClass, UNIT__ADD_ALL);
     createEAttribute(unitEClass, UNIT__SOURCE);
     createEAttribute(unitEClass, UNIT__VERS);
 
@@ -844,6 +843,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__REFERENCED_TARGET);
     createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__NAME);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__URL);
+    createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__ADD_ALL);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__UNITS);
 
     excludeLocationEClass = createEClass(EXCLUDE_LOCATION);
@@ -928,7 +928,6 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEReference(getTargetModel_ExcludedLocations(), this.getExcludeLocation(), null, "excludedLocations", null, 0, -1, TargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getUnit_AddAll(), ecorePackage.getEBoolean(), "addAll", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnit_Source(), ecorePackage.getEString(), "source", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnit_Vers(), ecorePackage.getEString(), "vers", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -948,6 +947,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEAttribute(getRepositoryLocation_ReferencedTarget(), ecorePackage.getEBoolean(), "referencedTarget", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRepositoryLocation_Name(), ecorePackage.getEString(), "name", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Url(), this.getUrlExpression(), null, "url", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRepositoryLocation_AddAll(), ecorePackage.getEBoolean(), "addAll", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Units(), this.getUnit(), null, "units", null, 0, -1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(excludeLocationEClass, ExcludeLocation.class, "ExcludeLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

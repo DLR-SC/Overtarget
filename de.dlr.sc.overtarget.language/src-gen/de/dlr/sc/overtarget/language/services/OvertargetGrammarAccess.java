@@ -522,23 +522,21 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cUnitAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cUnitKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cAddAllAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final Keyword cAddAllAddAllKeyword_2_0 = (Keyword)cAddAllAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cSourceAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cSourceSourceParserRuleCall_3_0_0 = (RuleCall)cSourceAssignment_3_0.eContents().get(0);
-		private final Keyword cVersionKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
-		private final Assignment cVersAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
-		private final Alternatives cVersAlternatives_3_2_0 = (Alternatives)cVersAssignment_3_2.eContents().get(0);
-		private final RuleCall cVersVersionParserRuleCall_3_2_0_0 = (RuleCall)cVersAlternatives_3_2_0.eContents().get(0);
-		private final Keyword cVersNewestKeyword_3_2_0_1 = (Keyword)cVersAlternatives_3_2_0.eContents().get(1);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cSourceAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cSourceSourceParserRuleCall_2_0_0 = (RuleCall)cSourceAssignment_2_0.eContents().get(0);
+		private final Keyword cVersionKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cVersAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final Alternatives cVersAlternatives_2_2_0 = (Alternatives)cVersAssignment_2_2.eContents().get(0);
+		private final RuleCall cVersVersionParserRuleCall_2_2_0_0 = (RuleCall)cVersAlternatives_2_2_0.eContents().get(0);
+		private final Keyword cVersNewestKeyword_2_2_0_1 = (Keyword)cVersAlternatives_2_2_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Unit:
-		//	{Unit} 'Unit' addAll?='addAll'? (source=Source 'version' vers=(Version | 'newest'))? ';';
+		//	{Unit} 'Unit' (source=Source 'version' vers=(Version | 'newest'))? ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Unit} 'Unit' addAll?='addAll'? (source=Source 'version' vers=(Version | 'newest'))? ';'
+		//{Unit} 'Unit' (source=Source 'version' vers=(Version | 'newest'))? ';'
 		public Group getGroup() { return cGroup; }
 		
 		//{Unit}
@@ -547,38 +545,32 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//'Unit'
 		public Keyword getUnitKeyword_1() { return cUnitKeyword_1; }
 		
-		//addAll?='addAll'?
-		public Assignment getAddAllAssignment_2() { return cAddAllAssignment_2; }
-		
-		//'addAll'
-		public Keyword getAddAllAddAllKeyword_2_0() { return cAddAllAddAllKeyword_2_0; }
-		
 		//(source=Source 'version' vers=(Version | 'newest'))?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_2() { return cGroup_2; }
 		
 		//source=Source
-		public Assignment getSourceAssignment_3_0() { return cSourceAssignment_3_0; }
+		public Assignment getSourceAssignment_2_0() { return cSourceAssignment_2_0; }
 		
 		//Source
-		public RuleCall getSourceSourceParserRuleCall_3_0_0() { return cSourceSourceParserRuleCall_3_0_0; }
+		public RuleCall getSourceSourceParserRuleCall_2_0_0() { return cSourceSourceParserRuleCall_2_0_0; }
 		
 		//'version'
-		public Keyword getVersionKeyword_3_1() { return cVersionKeyword_3_1; }
+		public Keyword getVersionKeyword_2_1() { return cVersionKeyword_2_1; }
 		
 		//vers=(Version | 'newest')
-		public Assignment getVersAssignment_3_2() { return cVersAssignment_3_2; }
+		public Assignment getVersAssignment_2_2() { return cVersAssignment_2_2; }
 		
 		//(Version | 'newest')
-		public Alternatives getVersAlternatives_3_2_0() { return cVersAlternatives_3_2_0; }
+		public Alternatives getVersAlternatives_2_2_0() { return cVersAlternatives_2_2_0; }
 		
 		//Version
-		public RuleCall getVersVersionParserRuleCall_3_2_0_0() { return cVersVersionParserRuleCall_3_2_0_0; }
+		public RuleCall getVersVersionParserRuleCall_2_2_0_0() { return cVersVersionParserRuleCall_2_2_0_0; }
 		
 		//'newest'
-		public Keyword getVersNewestKeyword_3_2_0_1() { return cVersNewestKeyword_3_2_0_1; }
+		public Keyword getVersNewestKeyword_2_2_0_1() { return cVersNewestKeyword_2_2_0_1; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 	public class SourceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.Source");
@@ -727,19 +719,25 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Assignment cUrlAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cUrlUrlExpressionParserRuleCall_4_0 = (RuleCall)cUrlAssignment_4.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cUnitsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cUnitsUnitParserRuleCall_6_0 = (RuleCall)cUnitsAssignment_6.eContents().get(0);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Group cGroup_6_0 = (Group)cAlternatives_6.eContents().get(0);
+		private final Keyword cUnitKeyword_6_0_0 = (Keyword)cGroup_6_0.eContents().get(0);
+		private final Assignment cAddAllAssignment_6_0_1 = (Assignment)cGroup_6_0.eContents().get(1);
+		private final Keyword cAddAllAddAllKeyword_6_0_1_0 = (Keyword)cAddAllAssignment_6_0_1.eContents().get(0);
+		private final Assignment cUnitsAssignment_6_1 = (Assignment)cAlternatives_6.eContents().get(1);
+		private final RuleCall cUnitsUnitParserRuleCall_6_1_0 = (RuleCall)cUnitsAssignment_6_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		///* referencedTarget is used when the target has unresolved references. 
 		//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
 		//*/ RepositoryLocation:
-		//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
-		//	units+=Unit*
+		//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' ('Unit'
+		//	addAll?='addAll;' | units+=Unit*)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
+		//referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' ('Unit' addAll?='addAll;'
+		//| units+=Unit*) '}'
 		public Group getGroup() { return cGroup; }
 		
 		//referencedTarget?='ReferencedTarget'?
@@ -769,11 +767,26 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 		
+		//('Unit' addAll?='addAll;' | units+=Unit*)
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+		
+		//'Unit' addAll?='addAll;'
+		public Group getGroup_6_0() { return cGroup_6_0; }
+		
+		//'Unit'
+		public Keyword getUnitKeyword_6_0_0() { return cUnitKeyword_6_0_0; }
+		
+		//addAll?='addAll;'
+		public Assignment getAddAllAssignment_6_0_1() { return cAddAllAssignment_6_0_1; }
+		
+		//'addAll;'
+		public Keyword getAddAllAddAllKeyword_6_0_1_0() { return cAddAllAddAllKeyword_6_0_1_0; }
+		
 		//units+=Unit*
-		public Assignment getUnitsAssignment_6() { return cUnitsAssignment_6; }
+		public Assignment getUnitsAssignment_6_1() { return cUnitsAssignment_6_1; }
 		
 		//Unit
-		public RuleCall getUnitsUnitParserRuleCall_6_0() { return cUnitsUnitParserRuleCall_6_0; }
+		public RuleCall getUnitsUnitParserRuleCall_6_1_0() { return cUnitsUnitParserRuleCall_6_1_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
@@ -1410,7 +1423,7 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//Unit:
-	//	{Unit} 'Unit' addAll?='addAll'? (source=Source 'version' vers=(Version | 'newest'))? ';';
+	//	{Unit} 'Unit' (source=Source 'version' vers=(Version | 'newest'))? ';';
 	public UnitElements getUnitAccess() {
 		return pUnit;
 	}
@@ -1472,8 +1485,8 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 	///* referencedTarget is used when the target has unresolved references. 
 	//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
 	//*/ RepositoryLocation:
-	//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
-	//	units+=Unit*
+	//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' ('Unit'
+	//	addAll?='addAll;' | units+=Unit*)
 	//	'}';
 	public RepositoryLocationElements getRepositoryLocationAccess() {
 		return pRepositoryLocation;
