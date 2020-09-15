@@ -91,7 +91,7 @@ class ReferencedTargetHelperTest {
 	def void testRenameTmodel() {
 		val testTmodel = testTmodelResource.contents.get(0) as TargetModel
 		val renamedTmodel = refTargetHelper.renameTmodel(testTmodel)
-		val expectedRenamedTmodel = ReferencedTargetHelper.TARGET_NAME
+		val expectedRenamedTmodel = ReferencedTargetHelper.TARGET_FOR_REFERENCES_NAME
 		Assert.assertEquals("The name of the renamed target is correct", expectedRenamedTmodel, renamedTmodel)
 	}
 
@@ -131,85 +131,31 @@ class ReferencedTargetHelperTest {
 	}
 
 	@Test
-	def void testFindTargetFileInProject() {
-		val outputDirectory = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val PROJECT_NAME = "testProjectWithTarget"
-		val projectWithTarget = root.getProject(PROJECT_NAME);
-		val folder = projectWithTarget.getFolder("target");
-		val tmodelFile = folder.getFile("target.tmodel");
-		projectWithTarget.create(null);
-		if (!projectWithTarget.isOpen()) { 
-			projectWithTarget.open(null)
-		}
-		folder.create(IResource.NONE, true, null);
-
-		val bytes = "
-			Target target {
-				
-			}".getBytes();
-		val source = new ByteArrayInputStream(bytes);
-		tmodelFile.create(source, IResource.NONE, null);
-		val targetFile = folder.getFile("target.target");
-
-		val bytesTarget = 
-			''''''.toString.getBytes();
-		val sourceTarget = new ByteArrayInputStream(bytesTarget)
-		targetFile.create(sourceTarget, false, null)
-
-		Assert.assertEquals(targetFile, refTargetHelper.findTargetFileInProject(tmodelFile, outputDirectory))
-	}
-
-		@Test
-		def void testFindTargetFileNonExistendFile() {
-		val outputDirectory = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val PROJECT_NAME = "testProjectWithoutTarget"
-		val projectWithoutTarget = root.getProject(PROJECT_NAME);
-		val folder = projectWithoutTarget.getFolder("target");
-		val tmodelFile = folder.getFile("target.tmodel");
-		projectWithoutTarget.create(null);
-		if (!projectWithoutTarget.isOpen()) { 
-			projectWithoutTarget.open(null)
-		}
-		folder.create(IResource.NONE, true, null);
-		val bytes = "
-			Target target {
-				
-			}".getBytes();
-		val sourceTarget = new ByteArrayInputStream(bytes);
-		tmodelFile.create(sourceTarget, IResource.NONE, null);
-
-		Assert.assertNull("File does not exist, so shoud be null", refTargetHelper.findTargetFileInProject(tmodelFile, outputDirectory))
-	}
-	
-	@Test
 	def void testFindTargetForReferencesFile() {
 		val outputDirectory = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val PROJECT_NAME = "testProjectWithTargetForReferences"
-		val projectWithTarget = root.getProject(PROJECT_NAME);
-		val folder = projectWithTarget.getFolder("target");
-		val tmodelFile = folder.getFile("targetForReferences.tmodel");
+		val root = ResourcesPlugin.getWorkspace().getRoot()
+		val projectWithTarget = root.getProject("testProjectWithTargetForReferences")
+		if (projectWithTarget.exists) {
+			projectWithTarget.delete(true, null)
+		}
 		projectWithTarget.create(null);
 		if (!projectWithTarget.isOpen()) { 
 			projectWithTarget.open(null)
 		}
-		folder.create(IResource.NONE, true, null);
-
+		val folder = projectWithTarget.getFolder("target")
+		folder.create(IResource.NONE, true, null)
+	
+		val tmodelFile = folder.getFile("targetForReferences.tmodel")
 		val bytes = "
 			Target targetForReferences {
 				
-			}".getBytes();
-		val source = new ByteArrayInputStream(bytes);
-		tmodelFile.create(source, IResource.NONE, null);
-		val targetFile = folder.getFile("targetForReferences.target");
+			}".getBytes()
+		val source = new ByteArrayInputStream(bytes)
+		tmodelFile.create(source, IResource.NONE, null)
+		val targetFile = folder.getFile("targetForReferences.target")
 
 		val bytesTarget = 
-			''''''.toString.getBytes();
+			''''''.toString.getBytes()
 		val sourceTarget = new ByteArrayInputStream(bytesTarget)
 		targetFile.create(sourceTarget, false, null)
 
@@ -219,24 +165,26 @@ class ReferencedTargetHelperTest {
 		@Test
 		def void testFindTargetForReferencesFileNonExistendFile() {
 		val outputDirectory = "./target"
-		val workspace = ResourcesPlugin.getWorkspace();
-		val root = workspace.getRoot();
-		val PROJECT_NAME = "testProjectWithoutTargetForReferences"
-		val projectWithoutTarget = root.getProject(PROJECT_NAME);
-		val folder = projectWithoutTarget.getFolder("target");
-		val tmodelFile = folder.getFile("targetForReferences.tmodel");
+		val root = ResourcesPlugin.getWorkspace().getRoot()
+		val projectWithoutTarget = root.getProject("testProjectWithoutTargetForReferences")
+		if (projectWithoutTarget.exists) {
+			projectWithoutTarget.delete(true, null)
+		}
 		projectWithoutTarget.create(null);
 		if (!projectWithoutTarget.isOpen()) { 
 			projectWithoutTarget.open(null)
 		}
+		val folder = projectWithoutTarget.getFolder("target")
 		folder.create(IResource.NONE, true, null);
+		
+		val tmodelFile = folder.getFile("targetForReferences.tmodel")
 		val bytes = "
 			Target targetForReferences {
 				
-			}".getBytes();
-		val sourceTarget = new ByteArrayInputStream(bytes);
-		tmodelFile.create(sourceTarget, IResource.NONE, null);
+			}".getBytes()
+		val sourceTarget = new ByteArrayInputStream(bytes)
+		tmodelFile.create(sourceTarget, IResource.NONE, null)
 
-		Assert.assertNull("File does not exist, so shoud be null", refTargetHelper.findTargetForReferencesFile(tmodelFile, outputDirectory))
+		Assert.assertNull("File does not exist, so should be null", refTargetHelper.findTargetForReferencesFile(tmodelFile, outputDirectory))
 	}
 }
