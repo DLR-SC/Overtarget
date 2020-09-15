@@ -1,12 +1,12 @@
-/**
- * Copyright (c) 2018-2019 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
- * 
+/*******************************************************************************
+ * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
+ *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- */
+ *******************************************************************************/
 package de.dlr.sc.overtarget.language.targetmodel.tests;
 
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
@@ -51,15 +51,13 @@ public class TargetmodelExample {
 		
 		// Register the appropriate resource factory to handle all file extensions.
 		//
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put
-			(Resource.Factory.Registry.DEFAULT_EXTENSION, 
-			 new XMIResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
+				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
 		// Register the package to ensure it is available during loading.
 		//
-		resourceSet.getPackageRegistry().put
-			(TargetmodelPackage.eNS_URI, 
-			 TargetmodelPackage.eINSTANCE);
+		resourceSet.getPackageRegistry().put(
+				TargetmodelPackage.eNS_URI, TargetmodelPackage.eINSTANCE);
         
 		// If there are no arguments, emit an appropriate usage message.
 		//
@@ -69,13 +67,11 @@ public class TargetmodelExample {
 				Resource resource = resourceSet.createResource(URI.createURI("http:///My.tmodel"));
 				TargetFile root = TargetmodelFactory.eINSTANCE.createTargetFile();
 				resource.getContents().add(root);
-				resource.save(System.out, null);
-			}
-			catch (IOException exception) {
+				resource.save(System.out, null); 
+			} catch (IOException exception) {
 				exception.printStackTrace();
 			}
-		}
-		else {
+		} else {
 			// Iterate over all the arguments.
 			//
 			for (int i = 0; i < args.length; ++i) {
@@ -84,7 +80,7 @@ public class TargetmodelExample {
 				// Otherwise, it's directly treated as a URL.
 				//
 				File file = new File(args[i]);
-				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()): URI.createURI(args[i]);
+				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()) : URI.createURI(args[i]);
 
 				try {
 					// Demand load resource for this file.
@@ -100,8 +96,7 @@ public class TargetmodelExample {
 							printDiagnostic(diagnostic, "");
 						}
 					}
-				}
-				catch (RuntimeException exception) {
+				} catch (RuntimeException exception) {
 					System.out.println("Problem loading " + uri);
 					exception.printStackTrace();
 				}
