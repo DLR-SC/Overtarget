@@ -60,6 +60,25 @@ class TargetFileHandlerTest {
 		Assert.assertEquals(expectedTmodel.name, tmodel.name)
 	}
 	
+	@Test
+	def void testGetTargetModelNonExistent() {
+		val root = ResourcesPlugin.getWorkspace().getRoot()
+		val testProject = root.getProject("de.dlr.sc.overtarget.language.tests")
+		if (testProject.exists) {
+			testProject.delete(true, null)
+		}
+		testProject.create(null)
+		if (!testProject.isOpen()) {
+			testProject.open(null)
+		}
+		val folder = testProject.getFolder("resources")
+		folder.create(IResource.NONE, true, null)
+		
+		val tmodelFile = folder.getFile("target.tmodel")
+
+		Assert.assertNull("Tmodel does not exist, so should be null", targetFileHandler.getTargetModel(tmodelFile, null))
+	}
+	
 	@Test 
 	def void testFindTargetFile() {
 		val outputDirectoryWithFolder = "./target"
@@ -94,7 +113,7 @@ class TargetFileHandlerTest {
 	}
 	
 	@Test
-	def void testFindTargetFileNonExistendFile() {
+	def void testFindTargetFileNonExistentFile() {
 		val outputDirectoryWithFolder = "./target"
 		val root = ResourcesPlugin.getWorkspace().getRoot()
 		val projectWithoutTarget = root.getProject("testProjectWithoutTarget")

@@ -71,6 +71,30 @@ public class TargetFileHandlerTest {
   }
   
   @Test
+  public void testGetTargetModelNonExistend() {
+    try {
+      final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+      final IProject testProject = root.getProject("de.dlr.sc.overtarget.language.tests");
+      boolean _exists = testProject.exists();
+      if (_exists) {
+        testProject.delete(true, null);
+      }
+      testProject.create(null);
+      boolean _isOpen = testProject.isOpen();
+      boolean _not = (!_isOpen);
+      if (_not) {
+        testProject.open(null);
+      }
+      final IFolder folder = testProject.getFolder("resources");
+      folder.create(IResource.NONE, true, null);
+      final IFile tmodelFile = folder.getFile("target.tmodel");
+      Assert.assertNull("Tmodel does not exist, so should be null", this.targetFileHandler.getTargetModel(tmodelFile, null));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testFindTargetFile() {
     try {
       final String outputDirectoryWithFolder = "./target";
