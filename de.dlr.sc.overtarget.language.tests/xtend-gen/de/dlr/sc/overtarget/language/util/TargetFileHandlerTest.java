@@ -53,12 +53,12 @@ public class TargetFileHandlerTest {
       }
       final IFolder folder = testProject.getFolder("resources");
       folder.create(IResource.NONE, true, null);
-      final IFile tmodelFile = folder.getFile("target.tmodel");
-      final byte[] bytes = "\r\n\t\t\tTarget target {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final IFile tmodelFile = folder.getFile("test.tmodel");
+      final byte[] bytes = "\r\n\t\t\tTarget test {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
       final ByteArrayInputStream source = new ByteArrayInputStream(bytes);
       tmodelFile.create(source, IResource.NONE, null);
       final TargetModel tmodel = this.targetFileHandler.getTargetModel(tmodelFile, null);
-      final String tmodelPath = "/de.dlr.sc.overtarget.language.tests/resources/target.tmodel";
+      final String tmodelPath = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel";
       final URI uriTmodel = URI.createPlatformPluginURI(tmodelPath, true);
       final ResourceSetImpl rs = new ResourceSetImpl();
       final Resource tmodelResource = rs.getResource(uriTmodel, true);

@@ -41,9 +41,9 @@ class TargetFileHandlerTest {
 		val folder = testProject.getFolder("resources")
 		folder.create(IResource.NONE, true, null)
 		
-		val tmodelFile = folder.getFile("target.tmodel")
+		val tmodelFile = folder.getFile("test.tmodel")
 		val bytes = "
-			Target target {
+			Target test {
 				
 			}".getBytes()
 		val source = new ByteArrayInputStream(bytes)
@@ -51,7 +51,7 @@ class TargetFileHandlerTest {
 
 		val tmodel = targetFileHandler.getTargetModel(tmodelFile, null)
 		
-		val tmodelPath = "/de.dlr.sc.overtarget.language.tests/resources/target.tmodel"
+		val tmodelPath = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel"
 		val uriTmodel = URI.createPlatformPluginURI(tmodelPath, true)
 		val rs = new ResourceSetImpl()
 		val tmodelResource = rs.getResource(uriTmodel, true)
