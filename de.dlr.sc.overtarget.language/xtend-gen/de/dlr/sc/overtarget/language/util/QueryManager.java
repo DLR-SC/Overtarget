@@ -46,12 +46,10 @@ public class QueryManager {
       Object _service_1 = provisioningAgent.getService(
         IMetadataRepositoryManager.SERVICE_NAME);
       final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
-      final Unit unit = ((Unit) model);
-      EObject _eContainer = unit.eContainer();
-      final RepositoryLocation location = ((RepositoryLocation) _eContainer);
-      EObject _eContainer_1 = location.eContainer();
-      final TargetFile target = ((TargetFile) _eContainer_1);
-      String _urlAsString = GeneratorHelper.getUrlAsString(location.getUrl(), target);
+      final RepositoryLocation reposLoc = ((RepositoryLocation) model);
+      EObject _eContainer = reposLoc.eContainer();
+      final TargetFile target = ((TargetFile) _eContainer);
+      String _urlAsString = GeneratorHelper.getUrlAsString(reposLoc.getUrl(), target);
       final URI uri = new URI(_urlAsString);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);

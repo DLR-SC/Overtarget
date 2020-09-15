@@ -162,9 +162,9 @@ public class OvertargetGenerator extends AbstractGenerator {
   /**
    * If "addAll" is used, add all units to repository location
    */
-  public static ArrayList<Unit> addAllUnitsToRepositoryLocation(final Unit unit) {
+  public static ArrayList<Unit> addAllUnitsToRepositoryLocation(final RepositoryLocation reposLoc) {
     QueryManager queryManager = new QueryManager();
-    final ArrayList<Unit> allUnitsFromReposLoc = queryManager.getUnits(unit);
+    final ArrayList<Unit> allUnitsFromReposLoc = queryManager.getUnits(reposLoc);
     return allUnitsFromReposLoc;
   }
   
@@ -202,39 +202,38 @@ public class OvertargetGenerator extends AbstractGenerator {
         _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"true\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
         _builder.newLine();
         {
-          EList<Unit> _units = repositoryLocation.getUnits();
-          for(final Unit unit : _units) {
+          boolean _isAddAll = repositoryLocation.isAddAll();
+          if (_isAddAll) {
+            _builder.append("\t\t");
+            final ArrayList<Unit> allUnitsFromReposLoc = OvertargetGenerator.addAllUnitsToRepositoryLocation(repositoryLocation);
+            _builder.newLineIfNotEmpty();
             {
-              boolean _isAddAll = unit.isAddAll();
-              if (_isAddAll) {
-                _builder.append("\t\t");
-                final ArrayList<Unit> allUnitsFromReposLoc = OvertargetGenerator.addAllUnitsToRepositoryLocation(unit);
-                _builder.newLineIfNotEmpty();
-                {
-                  for(final Unit u : allUnitsFromReposLoc) {
-                    _builder.append("\t\t");
-                    _builder.append("<unit id=\"");
-                    String _source = u.getSource();
-                    _builder.append(_source, "\t\t");
-                    _builder.append("\" version=\"");
-                    String _printVersion = this.printVersion(u);
-                    _builder.append(_printVersion, "\t\t");
-                    _builder.append("\"/>");
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
-              } else {
+              for(final Unit u : allUnitsFromReposLoc) {
                 _builder.append("\t\t");
                 _builder.append("<unit id=\"");
-                String _source_1 = unit.getSource();
-                _builder.append(_source_1, "\t\t");
+                String _source = u.getSource();
+                _builder.append(_source, "\t\t");
                 _builder.append("\" version=\"");
-                String _printVersion_1 = this.printVersion(unit);
-                _builder.append(_printVersion_1, "\t\t");
+                String _printVersion = this.printVersion(u);
+                _builder.append(_printVersion, "\t\t");
                 _builder.append("\"/>");
                 _builder.newLineIfNotEmpty();
               }
             }
+          }
+        }
+        {
+          EList<Unit> _units = repositoryLocation.getUnits();
+          for(final Unit unit : _units) {
+            _builder.append("\t\t");
+            _builder.append("<unit id=\"");
+            String _source_1 = unit.getSource();
+            _builder.append(_source_1, "\t\t");
+            _builder.append("\" version=\"");
+            String _printVersion_1 = this.printVersion(unit);
+            _builder.append(_printVersion_1, "\t\t");
+            _builder.append("\"/>");
+            _builder.newLineIfNotEmpty();
           }
         }
         _builder.append("\t\t");

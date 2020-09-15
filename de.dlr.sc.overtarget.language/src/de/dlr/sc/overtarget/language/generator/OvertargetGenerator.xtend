@@ -121,9 +121,9 @@ class OvertargetGenerator extends AbstractGenerator {
 /**
 	 * If "addAll" is used, add all units to repository location
 	 */
-	def static addAllUnitsToRepositoryLocation(Unit unit) {
+	def static addAllUnitsToRepositoryLocation(RepositoryLocation reposLoc) {
 		var queryManager = new QueryManager()
-		val allUnitsFromReposLoc = queryManager.getUnits(unit)
+		val allUnitsFromReposLoc = queryManager.getUnits(reposLoc)
 		return allUnitsFromReposLoc
 	}
 
@@ -147,15 +147,14 @@ class OvertargetGenerator extends AbstractGenerator {
 					<locations>
 					«FOR repositoryLocation : target.repositoryLocations»
 						<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+						«IF repositoryLocation.addAll»
+							«val allUnitsFromReposLoc = addAllUnitsToRepositoryLocation(repositoryLocation)»
+							«FOR u : allUnitsFromReposLoc»
+								<unit id="«u.source»" version="«printVersion(u)»"/>
+							«ENDFOR»
+							«ENDIF»
 						«FOR unit : repositoryLocation.units»
-							«IF unit.addAll»
-								«val allUnitsFromReposLoc = addAllUnitsToRepositoryLocation(unit)»
-								«FOR u : allUnitsFromReposLoc»
-									<unit id="«u.source»" version="«printVersion(u)»"/>
-								«ENDFOR»
-							«ELSE»
 							<unit id="«unit.source»" version="«printVersion(unit)»"/>
-						«ENDIF»
 						«ENDFOR»
 						<repository location="«GeneratorHelper.getUrlAsString(repositoryLocation.url, target)»"/>
 						</location>

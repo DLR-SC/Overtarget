@@ -34,10 +34,9 @@ class QueryManager {
 		val provisioningAgent = provider.createAgent(null);
 		val metadataRepositoryManager = provisioningAgent.getService(
 			IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
-		val unit = model as Unit;
-		val location = unit.eContainer as RepositoryLocation;
-		val target = location.eContainer as TargetFile;
-		val uri = new URI(GeneratorHelper.getUrlAsString(location.url, target));
+		val reposLoc = model as RepositoryLocation
+		val target = reposLoc.eContainer as TargetFile;
+		val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
 		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
 		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
 		bundleContext.ungetService(providerRef);
