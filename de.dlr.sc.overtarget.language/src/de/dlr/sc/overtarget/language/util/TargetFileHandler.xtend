@@ -46,7 +46,7 @@ class TargetFileHandler {
 	}
 	
 	/**
-	 * In the project the targetFile is searched with the outputPath.
+	 * In the project the targetFile is searched within the outputPath.
 	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
 	 * 
 	 * @param file targetFile which is searched for
