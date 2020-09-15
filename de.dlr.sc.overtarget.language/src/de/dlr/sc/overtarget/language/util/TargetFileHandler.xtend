@@ -35,9 +35,14 @@ class TargetFileHandler {
 		if (rs === null) {
 			resourceSet = new ResourceSetImpl
 		}
-		val resource = resourceSet.getResource(uri, true)
-		val targetModel = resource.contents.get(0) as TargetModel
-		return targetModel
+		try {
+			val resource = resourceSet.getResource(uri, true)
+			val targetModel = resource.contents.get(0) as TargetModel
+			return targetModel
+		} catch (Exception e) {
+			println("Tmodel file does not exist.")
+			return null
+		}
 	}
 	
 	/**

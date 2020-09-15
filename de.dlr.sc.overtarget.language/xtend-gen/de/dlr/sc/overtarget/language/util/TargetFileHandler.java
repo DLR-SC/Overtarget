@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 
 /**
  * This class handles getting files, such as target resources (.tmodel) or targetFiles (.target).
@@ -38,10 +40,19 @@ public class TargetFileHandler {
       ResourceSetImpl _resourceSetImpl = new ResourceSetImpl();
       resourceSet = _resourceSetImpl;
     }
-    final Resource resource = resourceSet.getResource(uri, true);
-    EObject _get = resource.getContents().get(0);
-    final TargetModel targetModel = ((TargetModel) _get);
-    return targetModel;
+    try {
+      final Resource resource = resourceSet.getResource(uri, true);
+      EObject _get = resource.getContents().get(0);
+      final TargetModel targetModel = ((TargetModel) _get);
+      return targetModel;
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        InputOutput.<String>println("Tmodel file does not exist.");
+        return null;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   /**
