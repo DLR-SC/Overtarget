@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isReferencedTarget <em>Referenced Target</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUrl <em>Url</em>}</li>
- *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll <em>Add All</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUnits <em>Units</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll <em>Add All</em>}</li>
  * </ul>
  *
  * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation()
@@ -102,6 +102,18 @@ public interface RepositoryLocation extends EObject
   void setUrl(UrlExpression value);
 
   /**
+   * Returns the value of the '<em><b>Units</b></em>' containment reference list.
+   * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.Unit}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Units</em>' containment reference list.
+   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_Units()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Unit> getUnits();
+
+  /**
    * Returns the value of the '<em><b>Add All</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -122,17 +134,5 @@ public interface RepositoryLocation extends EObject
    * @generated
    */
   void setAddAll(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Units</b></em>' containment reference list.
-   * The list contents are of type {@link de.dlr.sc.overtarget.language.targetmodel.Unit}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Units</em>' containment reference list.
-   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_Units()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Unit> getUnits();
 
 } // RepositoryLocation

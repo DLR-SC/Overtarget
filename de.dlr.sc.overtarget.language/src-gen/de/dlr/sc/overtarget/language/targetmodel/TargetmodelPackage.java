@@ -623,22 +623,22 @@ public interface TargetmodelPackage extends EPackage
   int REPOSITORY_LOCATION__URL = 2;
 
   /**
-   * The feature id for the '<em><b>Add All</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REPOSITORY_LOCATION__ADD_ALL = 3;
-
-  /**
    * The feature id for the '<em><b>Units</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REPOSITORY_LOCATION__UNITS = 4;
+  int REPOSITORY_LOCATION__UNITS = 3;
+
+  /**
+   * The feature id for the '<em><b>Add All</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REPOSITORY_LOCATION__ADD_ALL = 4;
 
   /**
    * The number of structural features of the '<em>Repository Location</em>' class.
@@ -1220,17 +1220,6 @@ public interface TargetmodelPackage extends EPackage
   EReference getRepositoryLocation_Url();
 
   /**
-   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll <em>Add All</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Add All</em>'.
-   * @see de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll()
-   * @see #getRepositoryLocation()
-   * @generated
-   */
-  EAttribute getRepositoryLocation_AddAll();
-
-  /**
    * Returns the meta object for the containment reference list '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUnits <em>Units</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1240,6 +1229,17 @@ public interface TargetmodelPackage extends EPackage
    * @generated
    */
   EReference getRepositoryLocation_Units();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll <em>Add All</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Add All</em>'.
+   * @see de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll()
+   * @see #getRepositoryLocation()
+   * @generated
+   */
+  EAttribute getRepositoryLocation_AddAll();
 
   /**
    * Returns the meta object for class '{@link de.dlr.sc.overtarget.language.targetmodel.ExcludeLocation <em>Exclude Location</em>}'.
@@ -1700,20 +1700,20 @@ public interface TargetmodelPackage extends EPackage
     EReference REPOSITORY_LOCATION__URL = eINSTANCE.getRepositoryLocation_Url();
 
     /**
-     * The meta object literal for the '<em><b>Add All</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute REPOSITORY_LOCATION__ADD_ALL = eINSTANCE.getRepositoryLocation_AddAll();
-
-    /**
      * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference REPOSITORY_LOCATION__UNITS = eINSTANCE.getRepositoryLocation_Units();
+
+    /**
+     * The meta object literal for the '<em><b>Add All</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REPOSITORY_LOCATION__ADD_ALL = eINSTANCE.getRepositoryLocation_AddAll();
 
     /**
      * The meta object literal for the '{@link de.dlr.sc.overtarget.language.targetmodel.impl.ExcludeLocationImpl <em>Exclude Location</em>}' class.

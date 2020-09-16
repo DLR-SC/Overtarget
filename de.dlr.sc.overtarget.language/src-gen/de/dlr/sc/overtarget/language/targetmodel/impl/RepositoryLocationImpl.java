@@ -41,8 +41,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isReferencedTarget <em>Referenced Target</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUrl <em>Url</em>}</li>
- *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isAddAll <em>Add All</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUnits <em>Units</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isAddAll <em>Add All</em>}</li>
  * </ul>
  *
  * @generated
@@ -100,6 +100,16 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
   protected UrlExpression url;
 
   /**
+   * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUnits()
+   * @generated
+   * @ordered
+   */
+  protected EList<Unit> units;
+
+  /**
    * The default value of the '{@link #isAddAll() <em>Add All</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -118,16 +128,6 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * @ordered
    */
   protected boolean addAll = ADD_ALL_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getUnits()
-   * @generated
-   * @ordered
-   */
-  protected EList<Unit> units;
 
   /**
    * <!-- begin-user-doc -->
@@ -256,6 +256,21 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
+  public EList<Unit> getUnits()
+  {
+    if (units == null)
+    {
+      units = new EObjectContainmentEList<Unit>(Unit.class, this, TargetmodelPackage.REPOSITORY_LOCATION__UNITS);
+    }
+    return units;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public boolean isAddAll()
   {
     return addAll;
@@ -273,21 +288,6 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
     addAll = newAddAll;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL, oldAddAll, addAll));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Unit> getUnits()
-  {
-    if (units == null)
-    {
-      units = new EObjectContainmentEList<Unit>(Unit.class, this, TargetmodelPackage.REPOSITORY_LOCATION__UNITS);
-    }
-    return units;
   }
 
   /**
@@ -324,10 +324,10 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         return getName();
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         return getUrl();
-      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
-        return isAddAll();
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         return getUnits();
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        return isAddAll();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -352,12 +352,12 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         setUrl((UrlExpression)newValue);
         return;
-      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
-        setAddAll((Boolean)newValue);
-        return;
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         getUnits().clear();
         getUnits().addAll((Collection<? extends Unit>)newValue);
+        return;
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        setAddAll((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -382,11 +382,11 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         setUrl((UrlExpression)null);
         return;
-      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
-        setAddAll(ADD_ALL_EDEFAULT);
-        return;
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         getUnits().clear();
+        return;
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        setAddAll(ADD_ALL_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -408,10 +408,10 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TargetmodelPackage.REPOSITORY_LOCATION__URL:
         return url != null;
-      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
-        return addAll != ADD_ALL_EDEFAULT;
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         return units != null && !units.isEmpty();
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        return addAll != ADD_ALL_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }

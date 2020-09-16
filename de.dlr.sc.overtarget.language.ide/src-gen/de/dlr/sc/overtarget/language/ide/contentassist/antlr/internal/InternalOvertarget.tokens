@@ -2,7 +2,7 @@
 '-'=12
 '.'=11
 ':'=50
-';'=48
+';'=49
 '='=56
 'Architecture'=45
 'ExcludeLocation'=54
@@ -40,7 +40,7 @@
 'solaris'=22
 'sparc'=34
 'url'=53
-'version'=49
+'version'=48
 'win32'=23
 'wpf'=29
 'x86'=35
