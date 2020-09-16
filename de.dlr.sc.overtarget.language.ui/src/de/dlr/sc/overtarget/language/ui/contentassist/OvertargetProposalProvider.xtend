@@ -61,44 +61,36 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess;
-
-
 	
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
-		acceptor.accept(createCompletionProposal("version", "version", getImage(grammarAccess.unitRule), context))
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
 	}
 
 	override completeRepositoryLocation_AddAll(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val proposal = createCompletionProposal("addAll", "addAll", getImage(grammarAccess.repositoryLocationRule), context) as ConfigurableCompletionProposal;
+		val proposal = createCompletionProposal("addAll;", "addAll;", getImage(grammarAccess.repositoryLocationRule), context) as ConfigurableCompletionProposal;
   getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix())
 		if (proposal !== null) {
-			proposal.setPriority(proposal.getPriority() * 2);
-			acceptor.accept(proposal);
+			proposal.setPriority(proposal.getPriority() * 2)
+			acceptor.accept(proposal)
 		}
 	}
-	
 
 	override complete_Version(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val queryManager = new QueryManager(); 	
-		val unit = model as UnitImpl;
-		val results = queryManager.getUnits(model);
-		results.filter[source == unit.source].forEach[acceptor.accept(createCompletionProposal(vers, context))];
-		acceptor.accept(createCompletionProposal("version", context))
+		val queryManager = new QueryManager()
+		val unit = model as UnitImpl
+		val results = queryManager.getUnits(model)
+		results.filter[source == unit.source].forEach[acceptor.accept(createCompletionProposal(vers +";", context))]
 		super.complete_Version(model, ruleCall, context, acceptor)
 	}
 
 	override complete_Source(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
-		val queryManager = new QueryManager(); 	
-		acceptor.accept(createCompletionProposal("version", context))
-		val results = queryManager.getUnits(model);
-		results.forEach[acceptor.accept(createCompletionProposal(source, context))];
+		val queryManager = new QueryManager()
+		val results = queryManager.getUnits(model)
+		results.forEach[acceptor.accept(createCompletionProposal(source, context))]
 		super.complete_Source(model, ruleCall, context, acceptor)
 	}
-
-	
 }
