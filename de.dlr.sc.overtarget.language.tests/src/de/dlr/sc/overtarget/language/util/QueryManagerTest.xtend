@@ -32,11 +32,12 @@ class QueryManagerTest {
 	val rs = new ResourceSetImpl()
 	val uriTmodelWithUnits = URI.createPlatformPluginURI(TEST_TMODEL_PATH, true)
 	val tmodelWithUnitsResource = rs.getResource(uriTmodelWithUnits,true)
+	val expectedTmodelWithUnits = tmodelWithUnitsResource.contents.get(0) as TargetFile
+	val expectedReposLoc = expectedTmodelWithUnits.repositoryLocations.get(0) as RepositoryLocation
 	
 	@Test
 	def void getReposLocOfUnitTest() {
-		val expectedTmodelWithUnits = tmodelWithUnitsResource.contents.get(0) as TargetFile
-		val expectedReposLoc = expectedTmodelWithUnits.repositoryLocations.get(0) as RepositoryLocation
+		
 		val expectedUnit = expectedReposLoc.units.get(0) as Unit
 		
 		val locationWithUnit = queryManager.getReposLocOfUnit(expectedUnit)
@@ -53,6 +54,7 @@ class QueryManagerTest {
 	
 	@Test
 	def void loadUnitsTest() {
-		
+		val units = queryManager.loadUnits(expectedTmodelWithUnits, expectedReposLoc)
+		Assert.assertNotNull("Units are loaded", units)
 	}
 }

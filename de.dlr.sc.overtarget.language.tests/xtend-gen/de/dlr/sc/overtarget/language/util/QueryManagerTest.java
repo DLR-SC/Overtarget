@@ -14,8 +14,8 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
 import de.dlr.sc.overtarget.language.util.QueryManager;
+import java.util.ArrayList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.testing.InjectWith;
@@ -38,18 +38,18 @@ public class QueryManagerTest {
   
   private final Resource tmodelWithUnitsResource = this.rs.getResource(this.uriTmodelWithUnits, true);
   
+  private final TargetFile expectedTmodelWithUnits = ((TargetFile) this.tmodelWithUnitsResource.getContents().get(0));
+  
+  private final RepositoryLocation expectedReposLoc = ((RepositoryLocation) this.expectedTmodelWithUnits.getRepositoryLocations().get(0));
+  
   @Test
   public void getReposLocOfUnitTest() {
-    EObject _get = this.tmodelWithUnitsResource.getContents().get(0);
-    final TargetFile expectedTmodelWithUnits = ((TargetFile) _get);
-    RepositoryLocation _get_1 = expectedTmodelWithUnits.getRepositoryLocations().get(0);
-    final RepositoryLocation expectedReposLoc = ((RepositoryLocation) _get_1);
-    Unit _get_2 = expectedReposLoc.getUnits().get(0);
-    final Unit expectedUnit = ((Unit) _get_2);
+    Unit _get = this.expectedReposLoc.getUnits().get(0);
+    final Unit expectedUnit = ((Unit) _get);
     final RepositoryLocation locationWithUnit = this.queryManager.getReposLocOfUnit(expectedUnit);
-    final RepositoryLocation locationWithReposLoc = this.queryManager.getReposLocOfUnit(expectedReposLoc);
-    Assert.assertEquals(expectedReposLoc, locationWithUnit);
-    Assert.assertEquals(expectedReposLoc, locationWithReposLoc);
+    final RepositoryLocation locationWithReposLoc = this.queryManager.getReposLocOfUnit(this.expectedReposLoc);
+    Assert.assertEquals(this.expectedReposLoc, locationWithUnit);
+    Assert.assertEquals(this.expectedReposLoc, locationWithReposLoc);
   }
   
   @Test
@@ -58,5 +58,7 @@ public class QueryManagerTest {
   
   @Test
   public void loadUnitsTest() {
+    final ArrayList<Unit> units = this.queryManager.loadUnits(this.expectedTmodelWithUnits, this.expectedReposLoc);
+    Assert.assertNotNull("Units are loaded", units);
   }
 }
