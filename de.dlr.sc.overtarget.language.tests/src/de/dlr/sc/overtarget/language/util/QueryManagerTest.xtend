@@ -50,6 +50,6 @@ class QueryManagerTest {
 	@Test
 	def void loadUnitsTest() {
 		val units = queryManager.loadUnits(expectedTmodelWithUnits, expectedReposLoc)
-		Assert.assertNull("Units are loaded", units)
+		Assert.assertNotNull("Units are loaded", units)
 	}
 }

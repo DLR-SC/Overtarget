@@ -54,6 +54,7 @@ class QueryManager {
 		val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
 		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
 		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
+		
 		bundleContext.ungetService(providerRef);
 		
 		var resultsAsUnits = new ArrayList<Unit>;

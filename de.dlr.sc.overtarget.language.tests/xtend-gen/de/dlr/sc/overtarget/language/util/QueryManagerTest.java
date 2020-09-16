@@ -55,6 +55,6 @@ public class QueryManagerTest {
   @Test
   public void loadUnitsTest() {
     final ArrayList<Unit> units = this.queryManager.loadUnits(this.expectedTmodelWithUnits, this.expectedReposLoc);
-    Assert.assertNull("Units are loaded", units);
+    Assert.assertNotNull("Units are loaded", units);
   }
 }
