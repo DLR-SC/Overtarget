@@ -14,7 +14,6 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
 import de.dlr.sc.overtarget.language.util.QueryManager;
-import java.util.ArrayList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -50,11 +49,5 @@ public class QueryManagerTest {
     final RepositoryLocation locationWithReposLoc = this.queryManager.getReposLocOfUnit(this.expectedReposLoc);
     Assert.assertEquals(this.expectedReposLoc, locationWithUnit);
     Assert.assertEquals(this.expectedReposLoc, locationWithReposLoc);
-  }
-  
-  @Test
-  public void loadUnitsTest() {
-    final ArrayList<Unit> units = this.queryManager.loadUnits(this.expectedTmodelWithUnits, this.expectedReposLoc);
-    Assert.assertNotNull("Units are loaded", units);
   }
 }
