@@ -50,4 +50,8 @@ public class QueryManagerTest {
     Assert.assertEquals(this.expectedReposLoc, locationWithUnit);
     Assert.assertEquals(this.expectedReposLoc, locationWithReposLoc);
   }
+  
+  @Test
+  public void loadUnitsTest() {
+  }
 }
