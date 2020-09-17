@@ -20,6 +20,9 @@ import org.eclipse.ui.IFileEditorInput
 import org.eclipse.emf.common.util.URI
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import org.eclipse.xtext.ui.XtextUIMessages
+import org.eclipse.xtext.util.concurrent.IUnitOfWork
+import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.ui.editor.utils.EditorUtils
 
 class OvertargetXtextEditor extends XtextEditor {
 	
@@ -57,6 +60,16 @@ class OvertargetXtextEditor extends XtextEditor {
 				val targetFile = r.contents.get(0) as TargetFile
 				return targetFile
 			} else return null
+		}
+	}
+	
+	def getXtextDocument() {
+		if (EditorUtils.activeXtextEditor !== null) {
+			var xtextdocument = EditorUtils.getActiveXtextEditor().getDocument() 
+			xtextdocument.readOnly(new IUnitOfWork<XtextResource, XtextResource>() {
+				override XtextResource exec(XtextResource state) throws Exception {
+				return state 
+			}})
 		}
 	}
 	

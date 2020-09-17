@@ -24,9 +24,13 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 @SuppressWarnings("all")
 public class OvertargetXtextEditor extends XtextEditor {
@@ -74,6 +78,26 @@ public class OvertargetXtextEditor extends XtextEditor {
       }
     }
     return null;
+  }
+  
+  public XtextResource getXtextDocument() {
+    XtextResource _xifexpression = null;
+    XtextEditor _activeXtextEditor = EditorUtils.getActiveXtextEditor();
+    boolean _tripleNotEquals = (_activeXtextEditor != null);
+    if (_tripleNotEquals) {
+      XtextResource _xblockexpression = null;
+      {
+        IXtextDocument xtextdocument = EditorUtils.getActiveXtextEditor().getDocument();
+        _xblockexpression = xtextdocument.<XtextResource>readOnly(new IUnitOfWork<XtextResource, XtextResource>() {
+          @Override
+          public XtextResource exec(final XtextResource state) throws Exception {
+            return state;
+          }
+        });
+      }
+      _xifexpression = _xblockexpression;
+    }
+    return _xifexpression;
   }
   
   @Override
