@@ -13,18 +13,6 @@
 			name="Overtarget Editor">
 		</editor>
 	</extension>
- <extension
-       point="org.eclipse.ui.editors">
-    <editor
-          class="de.dlr.sc.overtarget.language.ui.OvertargetExecutableExtensionFactory:de.dlr.sc.overtarget.language.ui.editor.OvertargetXtextEditor"
-          contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-          default="true"
-          extensions="tmodel"
-          icon="resources/icons/TargetModelIcon.png"
-          id="de.dlr.sc.overtarget.language.ui.editor.OvertargetXtextEditor"
-          name="OvertargetXtextEditor">
-    </editor>
- </extension>
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
