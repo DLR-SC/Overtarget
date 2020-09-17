@@ -12,11 +12,19 @@ package de.dlr.sc.overtarget.language.ui.quickfix;
 import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
+import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -30,6 +38,8 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * Custom quickfixes.
@@ -77,10 +87,28 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
               genHandler.runGeneration(input);
               final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
               final IFile file = fileEditorInput.getFile();
-              final String outputDirectory = genHandler.getOutputConfigurations(input);
-              final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
-              targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
-              genHandler.runGeneration(input);
+              final TargetFileHandler targetFileHandler = new TargetFileHandler();
+              final TargetFile model = targetFileHandler.getTargetModel(file, null); 
+              final Function1<RepositoryLocation, Boolean> _function = (RepositoryLocation it) -> {
+                return Boolean.valueOf(it.isReferencedTarget());
+              };
+              final RepositoryLocation referencedTarget = IterableExtensions.<RepositoryLocation>findFirst(model.getRepositoryLocations(), _function);
+              if ((referencedTarget == null)) {
+                Shell _activeShell = Display.getCurrent().getActiveShell();
+                final MessageBox errorMessage = new MessageBox(_activeShell, 
+                  (SWT.OK + SWT.ICON_INFORMATION));
+                errorMessage.setText("Could not generate a ReferencedTarget!");
+                errorMessage.setMessage("Please specify one of the RepositoryLocations as ReferencedTarget container! (See Section 6.1 of the user manual for more information)");
+                errorMessage.open();
+              } else {
+                boolean _isReferencedTarget = referencedTarget.isReferencedTarget();
+                if (_isReferencedTarget) {
+                  final String outputDirectory = genHandler.getOutputConfigurations(input);
+                  final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
+                  targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
+                  genHandler.runGeneration(input);
+                }
+              }
             }
           }
         }
