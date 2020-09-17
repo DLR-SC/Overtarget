@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.MessageBox
 import org.eclipse.swt.SWT
 import com.google.inject.Inject
-import org.eclipse.jface.dialogs.MessageDialog
+import de.dlr.sc.overtarget.language.util.TargetFileHandler
 
 /**
  * Custom quickfixes.
@@ -78,9 +78,9 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 						val fileEditorInput = input as IFileEditorInput
 						val file = fileEditorInput.file
 						
-            val targetFileHandler = new TargetFileHandler
-            val model = targetFileHandler.getTargetModel(file, null)
-            
+						val targetFileHandler = new TargetFileHandler
+						val model = targetFileHandler.getTargetModel(file, null)
+
 						//check if a referencedTarget is set
 						val referencedTarget = model.repositoryLocations.findFirst[isReferencedTarget]
 						if (referencedTarget === null) { // if no referencedTarget is set -> errorMessage
