@@ -13,22 +13,16 @@ import org.eclipse.ui.texteditor.TextEditorAction
 import org.eclipse.ui.texteditor.ITextEditor
 import java.util.ResourceBundle
 import org.eclipse.ui.IFileEditorInput
-import org.eclipse.emf.common.util.URI
-import com.google.inject.Inject
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.xtext.ui.editor.XtextEditor
 
 class UpdateUnitManagerAction extends TextEditorAction {
-	
+		
 	protected new(ResourceBundle bundle, String prefix, ITextEditor editor) {
 		super(bundle, prefix, editor)
 	}
-	
-	@Inject
-	IResourceSetProvider resourceSetProvider;
-	
+
 	/**
 	 * This method calls the UnitManager to load units 
 	 * whenever there is a change in the editor
@@ -36,18 +30,16 @@ class UpdateUnitManagerAction extends TextEditorAction {
 	override update() {
 		super.update()
 		val editor= getTextEditor();
-		val input = editor.editorInput
-		if (input instanceof IFileEditorInput) {
-			val file = input.getFile();
-			val uri = URI.createPlatformResourceURI(file.fullPath.toString(), true);
-			val project = file.getProject();
-			val set = new ResourceSetImpl
-//			val rs = resourceSetProvider.get(project);
-			val r = set.getResource(uri, true);
-			if (!r.contents.empty) {
-				val target = r.contents.get(0) as TargetFile
-				val unitManager = UnitManager.instance
-				unitManager.loadUnits(target)
+		if (editor instanceof XtextEditor) {
+			val input = editor.editorInput
+			if (input instanceof IFileEditorInput) {
+				val overtargetEditor = new OvertargetXtextEditor
+				val document = overtargetEditor.getXtextDocument
+				if (document !== null) {
+					val target = document.contents.get(0) as TargetFile
+					val unitManager = UnitManager.instance
+					unitManager.loadUnits(target)
+				}
 			}
 		}
 	}

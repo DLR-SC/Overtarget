@@ -9,30 +9,23 @@
  */
 package de.dlr.sc.overtarget.language.ui.editor;
 
-import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
+import de.dlr.sc.overtarget.language.ui.editor.OvertargetXtextEditor;
 import java.util.ResourceBundle;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.TextEditorAction;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 @SuppressWarnings("all")
 public class UpdateUnitManagerAction extends TextEditorAction {
   protected UpdateUnitManagerAction(final ResourceBundle bundle, final String prefix, final ITextEditor editor) {
     super(bundle, prefix, editor);
   }
-  
-  @Inject
-  private IResourceSetProvider resourceSetProvider;
   
   /**
    * This method calls the UnitManager to load units
@@ -42,20 +35,17 @@ public class UpdateUnitManagerAction extends TextEditorAction {
   public void update() {
     super.update();
     final ITextEditor editor = this.getTextEditor();
-    final IEditorInput input = editor.getEditorInput();
-    if ((input instanceof IFileEditorInput)) {
-      final IFile file = ((IFileEditorInput)input).getFile();
-      final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-      final IProject project = file.getProject();
-      final ResourceSetImpl set = new ResourceSetImpl();
-      final Resource r = set.getResource(uri, true);
-      boolean _isEmpty = r.getContents().isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        EObject _get = r.getContents().get(0);
-        final TargetFile target = ((TargetFile) _get);
-        final UnitManager unitManager = UnitManager.getInstance();
-        unitManager.loadUnits(target);
+    if ((editor instanceof XtextEditor)) {
+      final IEditorInput input = ((XtextEditor)editor).getEditorInput();
+      if ((input instanceof IFileEditorInput)) {
+        final OvertargetXtextEditor overtargetEditor = new OvertargetXtextEditor();
+        final XtextResource document = overtargetEditor.getXtextDocument();
+        if ((document != null)) {
+          EObject _get = document.getContents().get(0);
+          final TargetFile target = ((TargetFile) _get);
+          final UnitManager unitManager = UnitManager.getInstance();
+          unitManager.loadUnits(target);
+        }
       }
     }
   }
