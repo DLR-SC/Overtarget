@@ -29,7 +29,9 @@ import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.MessageBox
 import org.eclipse.swt.SWT
 import com.google.inject.Inject
-import org.eclipse.jface.dialogs.MessageDialog
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.ui.resource.IResourceSetProvider
 
 /**
  * Custom quickfixes.
@@ -40,6 +42,9 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess
+	
+	@Inject
+	IResourceSetProvider resourceSetProvider
 	
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {

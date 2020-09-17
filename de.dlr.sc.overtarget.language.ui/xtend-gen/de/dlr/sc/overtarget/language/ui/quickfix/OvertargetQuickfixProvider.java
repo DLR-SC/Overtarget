@@ -13,11 +13,17 @@ import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
@@ -34,6 +40,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -47,6 +54,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   @Inject
   private OvertargetGrammarAccess grammarAccess;
+  
+  @Inject
+  private IResourceSetProvider resourceSetProvider;
   
   @Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
   public void fixDeprecatedWsStatement(final Issue issue, final IssueResolutionAcceptor acceptor) {
