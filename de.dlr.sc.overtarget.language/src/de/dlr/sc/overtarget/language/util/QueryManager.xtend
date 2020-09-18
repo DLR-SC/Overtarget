@@ -22,6 +22,7 @@ import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
 import de.dlr.sc.overtarget.language.Activator
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
+import java.util.concurrent.TimeUnit
 
 /**
  * This class queries a p2 Repository for the available installable units
@@ -44,26 +45,32 @@ class QueryManager {
 		loadUnits(target, location)
 	}
 	
+	 
+
+	
 	def loadUnits(TargetFile target, RepositoryLocation reposLoc) {
-		val bundleContext = Activator.^default.bundle.bundleContext;
-		val providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
-		val provider = bundleContext.getService(providerRef) as IProvisioningAgentProvider;
-		val provisioningAgent = provider.createAgent(null);
-		val metadataRepositoryManager = provisioningAgent.getService(
-			IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
-		val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
-		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
-		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
-		
-		bundleContext.ungetService(providerRef);
-		
-		var resultsAsUnits = new ArrayList<Unit>;
-		for(result : results ) {
-			var unitFromResult = TargetmodelFactory.eINSTANCE.createUnit;
-			unitFromResult.source = result.id;
-			unitFromResult.vers = result.version.toString;
-			resultsAsUnits.add(unitFromResult);
-		}
-		return resultsAsUnits;
+		try {
+			TimeUnit.SECONDS.sleep( 60 );
+			val bundleContext = Activator.^default.bundle.bundleContext;
+			val providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
+			val provider = bundleContext.getService(providerRef) as IProvisioningAgentProvider;
+			val provisioningAgent = provider.createAgent(null);
+			val metadataRepositoryManager = provisioningAgent.getService(
+				IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
+			val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
+			val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
+			val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
+			
+			bundleContext.ungetService(providerRef);
+			
+			var resultsAsUnits = new ArrayList<Unit>;
+			for(result : results ) {
+				var unitFromResult = TargetmodelFactory.eINSTANCE.createUnit;
+				unitFromResult.source = result.id;
+				unitFromResult.vers = result.version.toString;
+				resultsAsUnits.add(unitFromResult);
+			}
+			return resultsAsUnits;
+				} catch ( InterruptedException e ) { }
 	}
 }

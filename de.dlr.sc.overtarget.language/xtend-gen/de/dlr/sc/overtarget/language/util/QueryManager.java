@@ -17,6 +17,7 @@ import de.dlr.sc.overtarget.language.targetmodel.TargetmodelFactory;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
@@ -64,32 +65,43 @@ public class QueryManager {
   
   public ArrayList<Unit> loadUnits(final TargetFile target, final RepositoryLocation reposLoc) {
     try {
-      final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
-      final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
-      Object _service = bundleContext.getService(providerRef);
-      final IProvisioningAgentProvider provider = ((IProvisioningAgentProvider) _service);
-      final IProvisioningAgent provisioningAgent = provider.createAgent(null);
-      Object _service_1 = provisioningAgent.getService(
-        IMetadataRepositoryManager.SERVICE_NAME);
-      final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
-      String _urlAsString = GeneratorHelper.getUrlAsString(reposLoc.getUrl(), target);
-      final URI uri = new URI(_urlAsString);
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
-      IQuery<IInstallableUnit> _createIUGroupQuery = QueryUtil.createIUGroupQuery();
-      NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-      final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
-      bundleContext.ungetService(providerRef);
-      ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
-      for (final IInstallableUnit result : results) {
-        {
-          Unit unitFromResult = TargetmodelFactory.eINSTANCE.createUnit();
-          unitFromResult.setSource(result.getId());
-          unitFromResult.setVers(result.getVersion().toString());
-          resultsAsUnits.add(unitFromResult);
+      Object _xtrycatchfinallyexpression = null;
+      try {
+        TimeUnit.SECONDS.sleep(60);
+        final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
+        final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
+        Object _service = bundleContext.getService(providerRef);
+        final IProvisioningAgentProvider provider = ((IProvisioningAgentProvider) _service);
+        final IProvisioningAgent provisioningAgent = provider.createAgent(null);
+        Object _service_1 = provisioningAgent.getService(
+          IMetadataRepositoryManager.SERVICE_NAME);
+        final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
+        String _urlAsString = GeneratorHelper.getUrlAsString(reposLoc.getUrl(), target);
+        final URI uri = new URI(_urlAsString);
+        NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+        final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
+        IQuery<IInstallableUnit> _createIUGroupQuery = QueryUtil.createIUGroupQuery();
+        NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+        final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
+        bundleContext.ungetService(providerRef);
+        ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
+        for (final IInstallableUnit result : results) {
+          {
+            Unit unitFromResult = TargetmodelFactory.eINSTANCE.createUnit();
+            unitFromResult.setSource(result.getId());
+            unitFromResult.setVers(result.getVersion().toString());
+            resultsAsUnits.add(unitFromResult);
+          }
+        }
+        return resultsAsUnits;
+      } catch (final Throwable _t) {
+        if (_t instanceof InterruptedException) {
+          _xtrycatchfinallyexpression = null;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      return resultsAsUnits;
+      return ((ArrayList<Unit>)_xtrycatchfinallyexpression);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

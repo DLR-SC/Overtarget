@@ -41,7 +41,6 @@ class QueryManagerTest {
 	
 	@Test
 	def void getReposLocOfUnitTest() {
-		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val tmodelWithUnitsResource = rs.getResource(uriTmodelWithUnits,true)
 		val expectedTmodelWithUnits = tmodelWithUnitsResource.contents.get(0) as TargetFile
@@ -55,9 +54,8 @@ class QueryManagerTest {
 		Assert.assertEquals(expectedReposLoc, locationWithReposLoc)
 	}
 	
-	@Test(timeout = 900000)
+	@Test
 	def void loadUnitsTest() {
-		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
 		val tmodelWithUnitsResource = rs.getResource(uriTmodelWithUnits,true)
 		val expectedTmodelWithUnits = tmodelWithUnitsResource.contents.get(0) as TargetFile
