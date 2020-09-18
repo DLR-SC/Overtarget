@@ -58,7 +58,7 @@ public class QueryManagerTest {
     Assert.assertEquals(expectedReposLoc, locationWithReposLoc);
   }
   
-  @Test(timeout = 90000)
+  @Test(timeout = 900000)
   public void loadUnitsTest() {
     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", this.resourceFactory);
     final Resource tmodelWithUnitsResource = this.rs.getResource(this.uriTmodelWithUnits, true);
