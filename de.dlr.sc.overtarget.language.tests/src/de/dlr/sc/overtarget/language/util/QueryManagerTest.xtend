@@ -55,7 +55,7 @@ class QueryManagerTest {
 		Assert.assertEquals(expectedReposLoc, locationWithReposLoc)
 	}
 	
-	@Test
+	@Test(timeout = 10000)
 	def void loadUnitsTest() {
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tmodel_inv", resourceFactory);
