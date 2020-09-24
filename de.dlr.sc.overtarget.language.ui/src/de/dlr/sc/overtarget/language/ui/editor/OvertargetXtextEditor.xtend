@@ -38,7 +38,9 @@ class OvertargetXtextEditor extends XtextEditor {
 		val target = getTargetFile(input)
 		if (target !== null) {
 			val unitManager = UnitManager.instance;
-			unitManager.loadUnits(target)
+			for(reposLoc : target.repositoryLocations) {
+				unitManager.loadUnits(reposLoc)
+			}
 		} else return
 	}
 	

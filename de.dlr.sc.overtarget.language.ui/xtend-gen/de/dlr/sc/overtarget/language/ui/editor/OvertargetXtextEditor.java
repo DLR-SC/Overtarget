@@ -10,12 +10,14 @@
 package de.dlr.sc.overtarget.language.ui.editor;
 
 import com.google.inject.Inject;
+import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
 import de.dlr.sc.overtarget.language.ui.editor.UpdateUnitManagerAction;
 import java.util.ResourceBundle;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -47,7 +49,10 @@ public class OvertargetXtextEditor extends XtextEditor {
     final TargetFile target = this.getTargetFile(input);
     if ((target != null)) {
       final UnitManager unitManager = UnitManager.getInstance();
-      unitManager.loadUnits(target);
+      EList<RepositoryLocation> _repositoryLocations = target.getRepositoryLocations();
+      for (final RepositoryLocation reposLoc : _repositoryLocations) {
+        unitManager.loadUnits(reposLoc);
+      }
     } else {
       return;
     }
