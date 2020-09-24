@@ -11,7 +11,6 @@ package de.dlr.sc.overtarget.language.ui.contentassist;
 
 import de.dlr.sc.overtarget.language.Activator;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.util.QueryManager;
 import java.io.IOException;
@@ -22,7 +21,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
@@ -72,36 +70,34 @@ public class UnitManager {
    * @return			<code>Status.OK_STATUS</code> if the units are loaded successfully <br>
    * 					<code>Status.CANCEL_STATUS</code> if loading units failed
    */
-  public void loadUnits(final TargetFile target) {
-    EList<RepositoryLocation> _repositoryLocations = target.getRepositoryLocations();
-    for (final RepositoryLocation reposLoc : _repositoryLocations) {
-      boolean _checkIfUnitsLoaded = this.checkIfUnitsLoaded(reposLoc.getName());
-      boolean _equals = (_checkIfUnitsLoaded == false);
-      if (_equals) {
-        final Job job = new Job("Loading units") {
-          @Override
-          protected IStatus run(final IProgressMonitor monitor) {
-            try {
-              final QueryManager queryManager = new QueryManager();
-              final ArrayList<Unit> units = queryManager.getUnits(reposLoc);
-              UnitManager.this.mapOfUnits.put(reposLoc.getName(), units);
-              return Status.OK_STATUS;
-            } catch (final Throwable _t) {
-              if (_t instanceof CoreException || _t instanceof IOException) {
-                final Exception e = (Exception)_t;
-                String _pluginId = Activator.getPluginId();
-                final Status status = new Status(Status.ERROR, _pluginId, 
-                  "Loading units failed", e);
-                StatusManager.getManager().handle(status, StatusManager.SHOW);
-                return Status.CANCEL_STATUS;
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
-            }
+  public void loadUnits(final RepositoryLocation reposLoc) {
+    final Job job = new Job("Loading units") {
+      @Override
+      protected IStatus run(final IProgressMonitor monitor) {
+        final QueryManager queryManager = new QueryManager();
+        try {
+          final ArrayList<Unit> units = queryManager.getUnits(reposLoc);
+          boolean _isEmpty = units.isEmpty();
+          if (_isEmpty) {
+            return Status.CANCEL_STATUS;
+          } else {
+            UnitManager.this.mapOfUnits.put(reposLoc.getName(), units);
+            return Status.OK_STATUS;
           }
-        };
-        job.schedule();
+        } catch (final Throwable _t) {
+          if (_t instanceof CoreException || _t instanceof IOException) {
+            final Exception e = (Exception)_t;
+            String _pluginId = Activator.getPluginId();
+            final Status status = new Status(Status.ERROR, _pluginId, 
+              "Loading units failed", e);
+            StatusManager.getManager().handle(status, StatusManager.SHOW);
+            return Status.CANCEL_STATUS;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
       }
-    }
+    };
+    job.schedule();
   }
 }

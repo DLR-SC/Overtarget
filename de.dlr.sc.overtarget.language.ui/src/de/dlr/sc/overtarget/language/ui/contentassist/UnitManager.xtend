@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.CoreException
 import java.io.IOException
 import de.dlr.sc.overtarget.language.Activator
 import org.eclipse.ui.statushandlers.StatusManager
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile
+import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 
 class UnitManager {
 	
@@ -64,26 +64,26 @@ class UnitManager {
 	 * @return			<code>Status.OK_STATUS</code> if the units are loaded successfully <br>
 	 * 					<code>Status.CANCEL_STATUS</code> if loading units failed
 	 */
-	def loadUnits(TargetFile target) {
-		for (reposLoc : target.repositoryLocations) {
-			if (checkIfUnitsLoaded(reposLoc.name) == false){
-				val job = new Job("Loading units") {
-					override protected IStatus run(IProgressMonitor monitor) {
-						try { 
-							val queryManager = new QueryManager();
-							val units = queryManager.getUnits(reposLoc)
-							mapOfUnits.put(reposLoc.name, units)
-							return Status.OK_STATUS;
-						} catch (CoreException | IOException e) {
-							val status = new Status(Status.ERROR, Activator.getPluginId(), 
-								"Loading units failed", e);
-							StatusManager.getManager().handle(status, StatusManager.SHOW);
-							return Status.CANCEL_STATUS;
-						}
+	def loadUnits(RepositoryLocation reposLoc) {
+		val job = new Job("Loading units") {
+			override protected IStatus run(IProgressMonitor monitor) {
+				val queryManager = new QueryManager();
+				try { 
+					val units = queryManager.getUnits(reposLoc)
+					if (units.empty) {
+						return Status.CANCEL_STATUS
+					} else {
+						mapOfUnits.put(reposLoc.name, units)
+						return Status.OK_STATUS;
 					}
+				} catch (CoreException | IOException e) {
+					val status = new Status(Status.ERROR, Activator.getPluginId(), 
+						"Loading units failed", e);
+					StatusManager.getManager().handle(status, StatusManager.SHOW);
+					return Status.CANCEL_STATUS;
 				}
-				job.schedule();
 			}
 		}
+		job.schedule();
 	}
 }
