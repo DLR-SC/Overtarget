@@ -9,16 +9,16 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.editor
 
-import org.eclipse.ui.texteditor.TextEditorAction
-import org.eclipse.ui.texteditor.ITextEditor
+import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager
 import java.util.ResourceBundle
 import org.eclipse.ui.IFileEditorInput
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager
+import org.eclipse.ui.texteditor.ITextEditor
+import org.eclipse.ui.texteditor.TextEditorAction
 import org.eclipse.xtext.ui.editor.XtextEditor
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 
 class UpdateUnitManagerAction extends TextEditorAction {
-		
+
 	protected new(ResourceBundle bundle, String prefix, ITextEditor editor) {
 		super(bundle, prefix, editor)
 	}
@@ -29,16 +29,27 @@ class UpdateUnitManagerAction extends TextEditorAction {
 	 */
 	override update() {
 		super.update()
-		val editor= getTextEditor();
+		val editor = getTextEditor();
 		if (editor instanceof XtextEditor) {
 			val input = editor.editorInput
 			if (input instanceof IFileEditorInput) {
+
+				// get current document from editor which represents the tmodel
 				val overtargetEditor = new OvertargetXtextEditor
 				val document = overtargetEditor.getXtextDocument
 				if (document !== null) {
-					val target = document.contents.get(0) as TargetFile
-					val unitManager = UnitManager.instance
-					unitManager.loadUnits(target)
+					try {
+						val target = document.contents.get(0) as TargetFile
+						val repositoryLocations = target.repositoryLocations
+						for (reposLoc : repositoryLocations) {
+							val unitManager = UnitManager.instance
+							if (!unitManager.checkIfUnitsLoaded(reposLoc.name)) {
+								unitManager.loadUnits(reposLoc)
+							}
+						}
+					} catch (Exception e) {
+						
+					}
 				}
 			}
 		}
