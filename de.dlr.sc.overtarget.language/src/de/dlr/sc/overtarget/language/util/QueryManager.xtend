@@ -51,17 +51,22 @@ class QueryManager {
 		val provisioningAgent = provider.createAgent(null);
 		val metadataRepositoryManager = provisioningAgent.getService(
 			IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
-		val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
-		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
-		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
-		bundleContext.ungetService(providerRef);
-		var resultsAsUnits = new ArrayList<Unit>;
-		for(result:results ){
-			var unitFromResult = TargetmodelFactory.eINSTANCE.createUnit;
-			unitFromResult.source = result.id;
-			unitFromResult.vers = result.version.toString;
-			resultsAsUnits.add(unitFromResult);
+		try {
+			val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
+			val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
+			val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
+			bundleContext.ungetService(providerRef);
+			var resultsAsUnits = new ArrayList<Unit>;
+			for (result : results) {
+				var unitFromResult = TargetmodelFactory.eINSTANCE.createUnit;
+				unitFromResult.source = result.id;
+				unitFromResult.vers = result.version.toString;
+				resultsAsUnits.add(unitFromResult);
+			}
+			return resultsAsUnits;
+		} catch (Exception e) {
+			val emptyList = new ArrayList<Unit>
+			return emptyList
 		}
-		return resultsAsUnits;
 	}
 }
