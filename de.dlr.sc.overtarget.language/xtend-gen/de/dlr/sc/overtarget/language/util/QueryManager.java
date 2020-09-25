@@ -57,30 +57,17 @@ public class QueryManager {
       final RepositoryLocation location = this.getReposLocOfUnit(model);
       EObject _eContainer = location.eContainer();
       final TargetFile target = ((TargetFile) _eContainer);
-      _xblockexpression = this.loadUnits(target, location);
+      _xblockexpression = this.getUnitsInList(target, location);
     }
     return _xblockexpression;
   }
   
-  public ArrayList<Unit> loadUnits(final TargetFile target, final RepositoryLocation reposLoc) {
+  public ArrayList<Unit> getUnitsInList(final TargetFile target, final RepositoryLocation reposLoc) {
     try {
-      final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
-      final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
-      Object _service = bundleContext.getService(providerRef);
-      final IProvisioningAgentProvider provider = ((IProvisioningAgentProvider) _service);
-      final IProvisioningAgent provisioningAgent = provider.createAgent(null);
-      Object _service_1 = provisioningAgent.getService(
-        IMetadataRepositoryManager.SERVICE_NAME);
-      final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
       try {
         String _urlAsString = GeneratorHelper.getUrlAsString(reposLoc.getUrl(), target);
         final URI uri = new URI(_urlAsString);
-        NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-        final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
-        IQuery<IInstallableUnit> _createIUGroupQuery = QueryUtil.createIUGroupQuery();
-        NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-        final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
-        bundleContext.ungetService(providerRef);
+        final IQueryResult<IInstallableUnit> results = this.doLoadUnits(uri);
         ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
         for (final IInstallableUnit result : results) {
           {
@@ -92,13 +79,35 @@ public class QueryManager {
         }
         return resultsAsUnits;
       } catch (final Throwable _t) {
-        if (_t instanceof Exception) {
+        if (_t instanceof NullPointerException) {
           final ArrayList<Unit> emptyList = new ArrayList<Unit>();
           return emptyList;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected IQueryResult<IInstallableUnit> doLoadUnits(final URI uri) {
+    try {
+      final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
+      final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
+      Object _service = bundleContext.getService(providerRef);
+      final IProvisioningAgentProvider provider = ((IProvisioningAgentProvider) _service);
+      final IProvisioningAgent provisioningAgent = provider.createAgent(null);
+      Object _service_1 = provisioningAgent.getService(
+        IMetadataRepositoryManager.SERVICE_NAME);
+      final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
+      bundleContext.ungetService(providerRef);
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
+      IQuery<IInstallableUnit> _createIUGroupQuery = QueryUtil.createIUGroupQuery();
+      NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+      final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
+      return results;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
