@@ -25,6 +25,10 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -142,6 +146,12 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
       }
       super.complete_Version(model, ruleCall, context, acceptor);
     } else {
+      Shell _activeShell = Display.getCurrent().getActiveShell();
+      MessageBox errorMessage = new MessageBox(_activeShell, 
+        (SWT.OK | SWT.ICON_WORKING));
+      errorMessage.setText("Warning");
+      errorMessage.setMessage("Please wait until the units finished loading");
+      errorMessage.open();
     }
   }
 }

@@ -21,6 +21,9 @@ import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 import java.util.ArrayList
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
+import org.eclipse.swt.widgets.Display
+import org.eclipse.swt.widgets.MessageBox
+import org.eclipse.swt.SWT
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -61,7 +64,7 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess;
-	
+
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
@@ -102,11 +105,13 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 				sourceProposals.add(u)
 				acceptor.accept(createCompletionProposal(u.source, context));
 			}
-
 			super.complete_Version(model, ruleCall, context, acceptor)
 		} else {
-			
-			
+			var MessageBox errorMessage = new MessageBox(Display.getCurrent().getActiveShell(),
+				SWT.OK.bitwiseOr(SWT.ICON_WORKING))
+			errorMessage.setText("Warning")
+			errorMessage.setMessage("Please wait until the units finished loading")
+			errorMessage.open()
 		}
 	}
 }
