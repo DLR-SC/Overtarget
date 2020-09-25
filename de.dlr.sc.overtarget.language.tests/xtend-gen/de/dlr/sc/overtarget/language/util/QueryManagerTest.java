@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +68,13 @@ public class QueryManagerTest {
     RepositoryLocation _get_1 = expectedTmodelWithUnits.getRepositoryLocations().get(0);
     final RepositoryLocation expectedReposLoc = ((RepositoryLocation) _get_1);
     final ArrayList<Unit> units = this.queryManager.loadUnits(expectedTmodelWithUnits, expectedReposLoc);
-    Assert.assertNotNull("Units are loaded", units);
+    RepositoryLocation _get_2 = expectedTmodelWithUnits.getRepositoryLocations().get(2);
+    final RepositoryLocation emptyReposLoc = ((RepositoryLocation) _get_2);
+    final ArrayList<Unit> emptyList = this.queryManager.loadUnits(expectedTmodelWithUnits, emptyReposLoc);
+    final ArrayList<Object> expectedEmptyList = new ArrayList<Object>();
+    boolean _isEmpty = units.isEmpty();
+    boolean _not = (!_isEmpty);
+    Assert.assertTrue("units are loaded", _not);
+    Assert.assertArrayEquals(((Object[])Conversions.unwrapArray(expectedEmptyList, Object.class)), ((Object[])Conversions.unwrapArray(emptyList, Object.class)));
   }
 }

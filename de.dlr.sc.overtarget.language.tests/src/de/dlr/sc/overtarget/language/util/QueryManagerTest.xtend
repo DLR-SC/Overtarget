@@ -23,6 +23,7 @@ import org.junit.Assert
 import org.eclipse.emf.ecore.resource.Resource
 import com.google.inject.Inject
 import org.eclipse.xtext.resource.IResourceFactory
+import java.util.ArrayList
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
@@ -61,6 +62,13 @@ class QueryManagerTest {
 		val expectedTmodelWithUnits = tmodelWithUnitsResource.contents.get(0) as TargetFile
 		val expectedReposLoc = expectedTmodelWithUnits.repositoryLocations.get(0) as RepositoryLocation
 		val units = queryManager.loadUnits(expectedTmodelWithUnits, expectedReposLoc)
-		Assert.assertNotNull("Units are loaded", units)
+		
+		val emptyReposLoc = expectedTmodelWithUnits.repositoryLocations.get(2) as RepositoryLocation
+		val emptyList = queryManager.loadUnits(expectedTmodelWithUnits, emptyReposLoc)
+		val expectedEmptyList = new ArrayList()
+		
+		Assert.assertTrue("units are loaded", !units.empty)
+		Assert.assertArrayEquals(expectedEmptyList, emptyList)
+		
 	}
 }
