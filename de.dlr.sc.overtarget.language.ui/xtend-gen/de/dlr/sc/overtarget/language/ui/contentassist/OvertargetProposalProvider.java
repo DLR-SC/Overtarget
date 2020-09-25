@@ -141,6 +141,7 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
         }
       }
       super.complete_Version(model, ruleCall, context, acceptor);
+    } else {
     }
   }
 }

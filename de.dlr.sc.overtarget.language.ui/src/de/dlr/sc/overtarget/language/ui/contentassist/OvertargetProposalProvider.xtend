@@ -102,7 +102,11 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 				sourceProposals.add(u)
 				acceptor.accept(createCompletionProposal(u.source, context));
 			}
+
 			super.complete_Version(model, ruleCall, context, acceptor)
+		} else {
+			
+			
 		}
 	}
 }
