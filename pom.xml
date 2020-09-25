@@ -16,7 +16,7 @@
 	<name>DLR Overtarget</name>
 	
 	<packaging>pom</packaging>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.2.1-SNAPSHOT</version>
 
 	<modules>
 		<module>de.dlr.sc.overtarget.feature</module>
