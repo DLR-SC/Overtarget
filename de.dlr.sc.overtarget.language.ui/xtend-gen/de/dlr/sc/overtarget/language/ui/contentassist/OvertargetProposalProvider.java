@@ -150,7 +150,7 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
       MessageBox errorMessage = new MessageBox(_activeShell, 
         (SWT.OK | SWT.ICON_WORKING));
       errorMessage.setText("Warning");
-      errorMessage.setMessage("Please wait until the units finished loading");
+      errorMessage.setMessage((("Units are not loaded yet (repository location: " + reposLocName) + ")."));
       errorMessage.open();
     }
   }
