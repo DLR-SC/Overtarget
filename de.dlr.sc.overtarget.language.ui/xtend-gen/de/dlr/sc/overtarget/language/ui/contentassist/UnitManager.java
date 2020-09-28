@@ -12,21 +12,26 @@ package de.dlr.sc.overtarget.language.ui.contentassist;
 import de.dlr.sc.overtarget.language.Activator;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
+import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter;
 import de.dlr.sc.overtarget.language.util.QueryManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
 public class UnitManager {
   private static UnitManager instance;
+  
+  private Job job = null;
+  
+  private OvertargetRunnableAdapter runnable = null;
   
   private UnitManager() {
   }
@@ -63,26 +68,43 @@ public class UnitManager {
     }
   }
   
+  public ArrayList<Unit> getUnits(final String reposLocName) {
+    try {
+      final HashMap<String, ArrayList<Unit>> mapOfUnits = this.mapOfUnits;
+      boolean _containsKey = mapOfUnits.containsKey(reposLocName);
+      if (_containsKey) {
+        final ArrayList<Unit> listOfUnits = mapOfUnits.get(reposLocName);
+        return listOfUnits;
+      } else {
+        if (((this.job != null) && (this.runnable != null))) {
+          PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setActive();
+          PlatformUI.getWorkbench().getProgressService().busyCursorWhile(this.runnable);
+        }
+      }
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   /**
    * This method starts for every repository location of a given TargetFile a job to load units in the background
    * 
-   * @param target	the targetFile with repository locations which contain units that have to be loaded
+   * @param reposLoc	the repository location which contains units that have to be loaded
    * @return			<code>Status.OK_STATUS</code> if the units are loaded successfully <br>
    * 					<code>Status.CANCEL_STATUS</code> if loading units failed
    */
   public void loadUnits(final RepositoryLocation reposLoc) {
-    final Job job = new Job("Loading units") {
+    this.runnable = new OvertargetRunnableAdapter() {
       @Override
-      protected IStatus run(final IProgressMonitor monitor) {
+      public void doRun(final IProgressMonitor monitor) {
         final QueryManager queryManager = new QueryManager();
         try {
           final ArrayList<Unit> units = queryManager.getUnits(reposLoc);
           boolean _isEmpty = units.isEmpty();
-          if (_isEmpty) {
-            return Status.CANCEL_STATUS;
-          } else {
+          boolean _not = (!_isEmpty);
+          if (_not) {
             UnitManager.this.mapOfUnits.put(reposLoc.getName(), units);
-            return Status.OK_STATUS;
           }
         } catch (final Throwable _t) {
           if (_t instanceof CoreException || _t instanceof IOException) {
@@ -91,13 +113,13 @@ public class UnitManager {
             final Status status = new Status(Status.ERROR, _pluginId, 
               "Loading units failed", e);
             StatusManager.getManager().handle(status, StatusManager.SHOW);
-            return Status.CANCEL_STATUS;
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
         }
       }
     };
-    job.schedule();
+    this.job = Job.create("Loading units", this.runnable);
+    this.job.schedule();
   }
 }

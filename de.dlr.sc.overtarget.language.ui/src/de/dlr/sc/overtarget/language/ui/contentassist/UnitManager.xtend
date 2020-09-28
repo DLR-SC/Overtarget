@@ -13,7 +13,6 @@ import java.util.HashMap
 import java.util.ArrayList
 import de.dlr.sc.overtarget.language.targetmodel.Unit
 import org.eclipse.core.runtime.jobs.Job
-import org.eclipse.core.runtime.IStatus
 import org.eclipse.core.runtime.IProgressMonitor
 import de.dlr.sc.overtarget.language.util.QueryManager
 import org.eclipse.core.runtime.Status
@@ -22,10 +21,14 @@ import java.io.IOException
 import de.dlr.sc.overtarget.language.Activator
 import org.eclipse.ui.statushandlers.StatusManager
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
+import org.eclipse.ui.PlatformUI
+import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter
 
 class UnitManager {
 	
 	static UnitManager instance;
+	Job job = null
+	OvertargetRunnableAdapter runnable = null
 	
 	private new () {
 	}
@@ -57,33 +60,43 @@ class UnitManager {
 		} else return true
 	}
 
+	def getUnits(String reposLocName) {
+		val mapOfUnits = mapOfUnits
+		if (mapOfUnits.containsKey(reposLocName)) {
+			val listOfUnits = mapOfUnits.get(reposLocName)
+		return listOfUnits
+		} else {
+			if (job !== null && runnable !== null) {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setActive();
+				PlatformUI.getWorkbench().getProgressService().busyCursorWhile(runnable)
+			}
+		}
+	}
+
 	/**
 	 * This method starts for every repository location of a given TargetFile a job to load units in the background
 	 * 
-	 * @param target	the targetFile with repository locations which contain units that have to be loaded
+	 * @param reposLoc	the repository location which contains units that have to be loaded
 	 * @return			<code>Status.OK_STATUS</code> if the units are loaded successfully <br>
 	 * 					<code>Status.CANCEL_STATUS</code> if loading units failed
 	 */
 	def loadUnits(RepositoryLocation reposLoc) {
-		val job = new Job("Loading units") {
-			override protected IStatus run(IProgressMonitor monitor) {
+		runnable = new OvertargetRunnableAdapter() {
+			override doRun(IProgressMonitor monitor) {
 				val queryManager = new QueryManager();
 				try { 
 					val units = queryManager.getUnits(reposLoc)
-					if (units.empty) {
-						return Status.CANCEL_STATUS
-					} else {
+					if (!units.empty) {
 						mapOfUnits.put(reposLoc.name, units)
-						return Status.OK_STATUS;
 					}
 				} catch (CoreException | IOException e) {
 					val status = new Status(Status.ERROR, Activator.getPluginId(), 
 						"Loading units failed", e);
 					StatusManager.getManager().handle(status, StatusManager.SHOW);
-					return Status.CANCEL_STATUS;
 				}
 			}
 		}
+		job = Job.create("Loading units", runnable)
 		job.schedule();
 	}
 }
