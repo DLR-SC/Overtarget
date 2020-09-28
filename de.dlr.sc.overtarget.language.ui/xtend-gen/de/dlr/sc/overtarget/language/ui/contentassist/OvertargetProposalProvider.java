@@ -25,10 +25,6 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -115,14 +111,15 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
     boolean _containsKey = mapOfUnits.containsKey(reposLocName);
     if (_containsKey) {
       final ArrayList<Unit> listOfUnits = mapOfUnits.get(reposLocName);
-      for (final Unit u : listOfUnits) {
-        {
-          versionProposals.add(u);
-          acceptor.accept(this.createCompletionProposal(u.getVers(), context));
+      if ((listOfUnits != null)) {
+        for (final Unit u : listOfUnits) {
+          {
+            versionProposals.add(u);
+            acceptor.accept(this.createCompletionProposal(u.getVers(), context));
+          }
         }
       }
     }
-    acceptor.accept(this.createCompletionProposal("version", context));
     super.complete_Version(model, ruleCall, context, acceptor);
   }
   
@@ -134,10 +131,8 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
     EObject _eContainer = unit.eContainer();
     final RepositoryLocation reposLoc = ((RepositoryLocation) _eContainer);
     final String reposLocName = reposLoc.getName();
-    final HashMap<String, ArrayList<Unit>> mapOfUnits = unitManager.getMapOfUnits();
-    boolean _containsKey = mapOfUnits.containsKey(reposLocName);
-    if (_containsKey) {
-      final ArrayList<Unit> listOfUnits = mapOfUnits.get(reposLocName);
+    final ArrayList<Unit> listOfUnits = unitManager.getUnits(reposLocName);
+    if ((listOfUnits != null)) {
       for (final Unit u : listOfUnits) {
         {
           sourceProposals.add(u);
@@ -145,13 +140,6 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
         }
       }
       super.complete_Version(model, ruleCall, context, acceptor);
-    } else {
-      Shell _activeShell = Display.getCurrent().getActiveShell();
-      MessageBox errorMessage = new MessageBox(_activeShell, 
-        (SWT.OK | SWT.ICON_WORKING));
-      errorMessage.setText("Warning");
-      errorMessage.setMessage((("Units are not loaded yet (repository location: " + reposLocName) + ")."));
-      errorMessage.open();
     }
   }
 }

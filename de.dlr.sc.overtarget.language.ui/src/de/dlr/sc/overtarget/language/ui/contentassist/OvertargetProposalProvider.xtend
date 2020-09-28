@@ -21,9 +21,6 @@ import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 import java.util.ArrayList
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
-import org.eclipse.swt.widgets.Display
-import org.eclipse.swt.widgets.MessageBox
-import org.eclipse.swt.SWT
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -82,12 +79,13 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		val mapOfUnits = unitManager.mapOfUnits
 		if (mapOfUnits.containsKey(reposLocName)) {
 			val listOfUnits = mapOfUnits.get(reposLocName)
-			for (u : listOfUnits) {
-				versionProposals.add(u)
-				acceptor.accept(createCompletionProposal(u.vers, context))
+			if (listOfUnits !== null) {
+				for (u : listOfUnits) {
+					versionProposals.add(u)
+					acceptor.accept(createCompletionProposal(u.vers, context))
+				}
 			}
 		}
-		acceptor.accept(createCompletionProposal("version", context))
 		super.complete_Version(model, ruleCall, context, acceptor)
 	}
 
@@ -98,20 +96,13 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		val unit = model as UnitImpl
 		val reposLoc = unit.eContainer as RepositoryLocation
 		val reposLocName = reposLoc.name
-		val mapOfUnits = unitManager.mapOfUnits
-		if (mapOfUnits.containsKey(reposLocName)) {
-			val listOfUnits = mapOfUnits.get(reposLocName)
+		val listOfUnits = unitManager.getUnits(reposLocName)
+		if (listOfUnits !== null) {
 			for (u : listOfUnits) {
 				sourceProposals.add(u)
 				acceptor.accept(createCompletionProposal(u.source, context));
 			}
 			super.complete_Version(model, ruleCall, context, acceptor)
-		} else {
-			var MessageBox errorMessage = new MessageBox(Display.getCurrent().getActiveShell(),
-				SWT.OK.bitwiseOr(SWT.ICON_WORKING))
-			errorMessage.setText("Warning")
-			errorMessage.setMessage("Units are not loaded yet (repository location: " + reposLocName + ").")
-			errorMessage.open()
 		}
 	}
 }
