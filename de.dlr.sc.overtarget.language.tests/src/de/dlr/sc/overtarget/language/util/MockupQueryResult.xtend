@@ -14,6 +14,11 @@ import org.eclipse.equinox.p2.query.IQueryResult
 import org.eclipse.equinox.p2.query.IQuery
 import org.eclipse.core.runtime.IProgressMonitor
 
+/**
+ * This class is necessary to mock units as a query result 
+ * to test the class QueryManager
+ */
+
 class MockupQueryResult<T> extends ArrayList<T> implements IQueryResult<T> {
 	
 	override toArray(Class<T> clazz) {

@@ -12,10 +12,13 @@ package de.dlr.sc.overtarget.language.util
 import java.net.URI
 import org.eclipse.equinox.p2.metadata.IInstallableUnit
 
+/**
+ * This class loads dummy units for testing the class QueryManager
+ */
+
 class TestQueryManager extends QueryManager{
 	
 	var dummyUnits = new MockupQueryResult<IInstallableUnit>
-	
 	
 	override doLoadUnits(URI uri) {
 		return dummyUnits

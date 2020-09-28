@@ -15,6 +15,9 @@ import java.net.URI;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.query.IQueryResult;
 
+/**
+ * This class loads dummy units for testing the class QueryManager
+ */
 @SuppressWarnings("all")
 public class TestQueryManager extends QueryManager {
   private MockupQueryResult<IInstallableUnit> dummyUnits = new MockupQueryResult<IInstallableUnit>();
