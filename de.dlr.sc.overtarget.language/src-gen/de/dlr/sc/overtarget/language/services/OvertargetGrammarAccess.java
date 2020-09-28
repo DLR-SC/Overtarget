@@ -24,11 +24,11 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
+public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class TargetFileElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.dlr.sc.overtarget.language.Overtarget.TargetFile");
@@ -189,7 +189,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//OperatingSys
 		public RuleCall getOsOperatingSysParserRuleCall_5_0() { return cOsOperatingSysParserRuleCall_5_0; }
 		
-		//'WindowingSystem' | 'WorkingSystem'
+		//('WindowingSystem' | 'WorkingSystem')
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 		
 		//'WindowingSystem'
@@ -375,7 +375,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//(('WindowingSystem' | 'WorkingSystem') ws=WindowingSys)?
 		public Group getGroup_6() { return cGroup_6; }
 		
-		//'WindowingSystem' | 'WorkingSystem'
+		//('WindowingSystem' | 'WorkingSystem')
 		public Alternatives getAlternatives_6_0() { return cAlternatives_6_0; }
 		
 		//'WindowingSystem'
@@ -805,7 +805,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//units+=Unit* | 'all;'
+		//(units+=Unit* | 'all;')
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//units+=Unit*
@@ -947,7 +947,7 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 		//'-'
 		public Keyword getHyphenMinusKeyword_1_0() { return cHyphenMinusKeyword_1_0; }
 		
-		//INT | ID
+		//(INT | ID)
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 		
 		//INT
@@ -1652,7 +1652,8 @@ public class OvertargetGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
