@@ -29,9 +29,7 @@ import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.MessageBox
 import org.eclipse.swt.SWT
 import com.google.inject.Inject
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
+import de.dlr.sc.overtarget.language.util.TargetFileHandler
 
 /**
  * Custom quickfixes.
@@ -42,9 +40,6 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess
-	
-	@Inject
-	IResourceSetProvider resourceSetProvider
 	
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
@@ -83,12 +78,9 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 						val fileEditorInput = input as IFileEditorInput
 						val file = fileEditorInput.file
 						
-						val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-						val project = file.getProject();
-						val rs = resourceSetProvider.get(project);
-						val r = rs.getResource(uri, true);
-						val model = r.contents.get(0) as TargetFile
-						
+						val targetFileHandler = new TargetFileHandler
+						val model = targetFileHandler.getTargetModel(file, null)
+
 						//check if a referencedTarget is set
 						val referencedTarget = model.repositoryLocations.findFirst[isReferencedTarget]
 						if (referencedTarget === null) { // if no referencedTarget is set -> errorMessage

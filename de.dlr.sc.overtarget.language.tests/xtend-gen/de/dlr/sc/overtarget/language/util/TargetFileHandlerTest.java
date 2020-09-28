@@ -39,14 +39,21 @@ import org.junit.runner.RunWith;
 public class TargetFileHandlerTest {
   private final TargetFileHandler targetFileHandler = new TargetFileHandler();
   
+  private static final String PROJECT_NAME = "de.dlr.sc.overtarget.language.tests";
+  
+  private static final String TMODEL_PATH = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel";
+  
+  private static final String TMODEL_NAME = "test.tmodel";
+  
+  private static final String TARGET_NAME = "test.target";
+  
   @Rule
   public TemporaryFolder tempFolder = new TemporaryFolder();
   
-  @Test
-  public void testGetTargetModel() {
+  public IProject cleanCreateProject() {
     try {
       final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-      final IProject testProject = root.getProject("de.dlr.sc.overtarget.language.tests");
+      final IProject testProject = root.getProject(TargetFileHandlerTest.PROJECT_NAME);
       boolean _exists = testProject.exists();
       if (_exists) {
         testProject.delete(true, null);
@@ -57,15 +64,24 @@ public class TargetFileHandlerTest {
       if (_not) {
         testProject.open(null);
       }
+      return testProject;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testGetTargetModel() {
+    try {
+      IProject testProject = this.cleanCreateProject();
       final IFolder folder = testProject.getFolder("resources");
       folder.create(IResource.NONE, true, null);
-      final IFile tmodelFile = folder.getFile("test.tmodel");
+      final IFile tmodelFile = folder.getFile(TargetFileHandlerTest.TMODEL_NAME);
       final byte[] bytes = "\r\n\t\t\tTarget test {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
       final ByteArrayInputStream source = new ByteArrayInputStream(bytes);
       tmodelFile.create(source, IResource.NONE, null);
       final TargetModel tmodel = this.targetFileHandler.getTargetModel(tmodelFile, null);
-      final String tmodelPath = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel";
-      final URI uriTmodel = URI.createPlatformPluginURI(tmodelPath, true);
+      final URI uriTmodel = URI.createPlatformPluginURI(TargetFileHandlerTest.TMODEL_PATH, true);
       final ResourceSetImpl rs = new ResourceSetImpl();
       final Resource tmodelResource = rs.getResource(uriTmodel, true);
       EObject _get = tmodelResource.getContents().get(0);
@@ -79,21 +95,10 @@ public class TargetFileHandlerTest {
   @Test
   public void testGetTargetModelNonExistent() {
     try {
-      final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-      final IProject testProject = root.getProject("de.dlr.sc.overtarget.language.tests");
-      boolean _exists = testProject.exists();
-      if (_exists) {
-        testProject.delete(true, null);
-      }
-      testProject.create(null);
-      boolean _isOpen = testProject.isOpen();
-      boolean _not = (!_isOpen);
-      if (_not) {
-        testProject.open(null);
-      }
+      IProject testProject = this.cleanCreateProject();
       final IFolder folder = testProject.getFolder("resources");
       folder.create(IResource.NONE, true, null);
-      final IFile tmodelFile = folder.getFile("target.tmodel");
+      final IFile tmodelFile = folder.getFile(TargetFileHandlerTest.TMODEL_NAME);
       Assert.assertNull("Tmodel does not exist, so should be null", this.targetFileHandler.getTargetModel(tmodelFile, null));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -104,25 +109,14 @@ public class TargetFileHandlerTest {
   public void testFindTargetFile() {
     try {
       final String outputDirectoryWithFolder = "./target";
-      final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-      final IProject projectWithTarget = root.getProject("testProjectWithTarget");
-      boolean _exists = projectWithTarget.exists();
-      if (_exists) {
-        projectWithTarget.delete(true, null);
-      }
-      projectWithTarget.create(null);
-      boolean _isOpen = projectWithTarget.isOpen();
-      boolean _not = (!_isOpen);
-      if (_not) {
-        projectWithTarget.open(null);
-      }
+      IProject projectWithTarget = this.cleanCreateProject();
       final IFolder folder = projectWithTarget.getFolder("target");
       folder.create(IResource.NONE, true, null);
-      final IFile tmodelFile = folder.getFile("target.tmodel");
-      final byte[] bytes = "\r\n\t\t\tTarget target {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final IFile tmodelFile = folder.getFile(TargetFileHandlerTest.TMODEL_NAME);
+      final byte[] bytes = "\r\n\t\t\tTarget test {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
       final ByteArrayInputStream source = new ByteArrayInputStream(bytes);
       tmodelFile.create(source, IResource.NONE, null);
-      final IFile targetFile = folder.getFile("target.target");
+      final IFile targetFile = folder.getFile(TargetFileHandlerTest.TARGET_NAME);
       StringConcatenation _builder = new StringConcatenation();
       final byte[] bytesTarget = _builder.toString().getBytes();
       final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytesTarget);
@@ -137,22 +131,11 @@ public class TargetFileHandlerTest {
   public void testFindTargetFileNonExistentFile() {
     try {
       final String outputDirectoryWithFolder = "./target";
-      final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-      final IProject projectWithoutTarget = root.getProject("testProjectWithoutTarget");
-      boolean _exists = projectWithoutTarget.exists();
-      if (_exists) {
-        projectWithoutTarget.delete(true, null);
-      }
-      projectWithoutTarget.create(null);
-      boolean _isOpen = projectWithoutTarget.isOpen();
-      boolean _not = (!_isOpen);
-      if (_not) {
-        projectWithoutTarget.open(null);
-      }
+      IProject projectWithoutTarget = this.cleanCreateProject();
       final IFolder folder = projectWithoutTarget.getFolder("target");
       folder.create(IResource.NONE, true, null);
-      final IFile tmodelFile = folder.getFile("target.tmodel");
-      final byte[] bytes = "\r\n\t\t\tTarget target {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final IFile tmodelFile = folder.getFile(TargetFileHandlerTest.TMODEL_NAME);
+      final byte[] bytes = "\r\n\t\t\tTarget test {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
       final ByteArrayInputStream sourceTarget = new ByteArrayInputStream(bytes);
       tmodelFile.create(sourceTarget, IResource.NONE, null);
       Assert.assertNull("File does not exist, so should be null", this.targetFileHandler.findTargetFile(tmodelFile, outputDirectoryWithFolder, tmodelFile.getName()));

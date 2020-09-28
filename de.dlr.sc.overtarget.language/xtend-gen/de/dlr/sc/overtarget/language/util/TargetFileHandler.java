@@ -30,7 +30,7 @@ public class TargetFileHandler {
    * This method gets a targetModel
    * 
    * @param file	target file (.target) located in a project
-   * @param rs	resourceSet which can include tmodels
+   * @param rs	resourceSet which can include tmodels, can be null
    * @return targetModel
    */
   public TargetModel getTargetModel(final IFile file, final ResourceSet rs) {

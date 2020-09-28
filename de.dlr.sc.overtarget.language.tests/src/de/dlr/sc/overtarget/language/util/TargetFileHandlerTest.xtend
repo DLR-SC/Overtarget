@@ -29,14 +29,18 @@ import org.junit.runner.RunWith
 class TargetFileHandlerTest {
 	
 	val targetFileHandler = new TargetFileHandler
+
+	static final String PROJECT_NAME = "de.dlr.sc.overtarget.language.tests"
+	static final String TMODEL_PATH = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel"
+	static final String TMODEL_NAME = "test.tmodel"
+	static final String TARGET_NAME = "test.target"
 	
 	@Rule 
 	public TemporaryFolder tempFolder = new TemporaryFolder()
 	
-	@Test
-	def void testGetTargetModel() {
+	def cleanCreateProject() {
 		val root = ResourcesPlugin.getWorkspace().getRoot()
-		val testProject = root.getProject("de.dlr.sc.overtarget.language.tests")
+		val testProject = root.getProject(PROJECT_NAME)
 		if (testProject.exists) {
 			testProject.delete(true, null)
 		}
@@ -44,10 +48,16 @@ class TargetFileHandlerTest {
 		if (!testProject.isOpen()) {
 			testProject.open(null)
 		}
+		return testProject
+	}
+	
+	@Test
+	def void testGetTargetModel() {
+		var testProject = cleanCreateProject
 		val folder = testProject.getFolder("resources")
 		folder.create(IResource.NONE, true, null)
 		
-		val tmodelFile = folder.getFile("test.tmodel")
+		val tmodelFile = folder.getFile(TMODEL_NAME)
 		val bytes = "
 			Target test {
 				
@@ -56,8 +66,7 @@ class TargetFileHandlerTest {
 		tmodelFile.create(source, IResource.NONE, null)
 
 		val tmodel = targetFileHandler.getTargetModel(tmodelFile, null)
-		val tmodelPath = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel"
-		val uriTmodel = URI.createPlatformPluginURI(tmodelPath, true)
+		val uriTmodel = URI.createPlatformPluginURI(TMODEL_PATH, true)
 		val rs = new ResourceSetImpl()
 		val tmodelResource = rs.getResource(uriTmodel, true)
 		
@@ -67,19 +76,11 @@ class TargetFileHandlerTest {
 	
 	@Test
 	def void testGetTargetModelNonExistent() {
-		val root = ResourcesPlugin.getWorkspace().getRoot()
-		val testProject = root.getProject("de.dlr.sc.overtarget.language.tests")
-		if (testProject.exists) {
-			testProject.delete(true, null)
-		}
-		testProject.create(null)
-		if (!testProject.isOpen()) {
-			testProject.open(null)
-		}
+		var testProject = cleanCreateProject
 		val folder = testProject.getFolder("resources")
 		folder.create(IResource.NONE, true, null)
 		
-		val tmodelFile = folder.getFile("target.tmodel")
+		val tmodelFile = folder.getFile(TMODEL_NAME)
 
 		Assert.assertNull("Tmodel does not exist, so should be null", targetFileHandler.getTargetModel(tmodelFile, null))
 	}
@@ -87,27 +88,18 @@ class TargetFileHandlerTest {
 	@Test 
 	def void testFindTargetFile() {
 		val outputDirectoryWithFolder = "./target"
-		val root = ResourcesPlugin.getWorkspace().getRoot()
-		val projectWithTarget = root.getProject("testProjectWithTarget")
-		if (projectWithTarget.exists) {
-			projectWithTarget.delete(true, null)
-		}
-		projectWithTarget.create(null)
-		if (!projectWithTarget.isOpen()) { 
-			projectWithTarget.open(null)
-		}
+		var projectWithTarget = cleanCreateProject
 		val folder = projectWithTarget.getFolder("target")
 		folder.create(IResource.NONE, true, null)
 		
-		val tmodelFile = folder.getFile("target.tmodel")
+		val tmodelFile = folder.getFile(TMODEL_NAME)
 		val bytes = "
-			Target target {
+			Target test {
 				
 			}".getBytes()
 		val source = new ByteArrayInputStream(bytes)
 		tmodelFile.create(source, IResource.NONE, null)
-
-		val targetFile = folder.getFile("target.target")
+		val targetFile = folder.getFile(TARGET_NAME)
 
 		val bytesTarget = 
 			''''''.toString.getBytes()
@@ -120,22 +112,13 @@ class TargetFileHandlerTest {
 	@Test
 	def void testFindTargetFileNonExistentFile() {
 		val outputDirectoryWithFolder = "./target"
-		val root = ResourcesPlugin.getWorkspace().getRoot()
-		val projectWithoutTarget = root.getProject("testProjectWithoutTarget")
-		if (projectWithoutTarget.exists) {
-			projectWithoutTarget.delete(true, null)
-		}
-		projectWithoutTarget.create(null)
-		
-		if (!projectWithoutTarget.isOpen()) { 
-			projectWithoutTarget.open(null)
-		}
+		var projectWithoutTarget = cleanCreateProject
 		val folder = projectWithoutTarget.getFolder("target")
 		folder.create(IResource.NONE, true, null)
 		
-		val tmodelFile = folder.getFile("target.tmodel")
+		val tmodelFile = folder.getFile(TMODEL_NAME)
 		val bytes = "
-			Target target {
+			Target test {
 				
 			}".getBytes()
 		val sourceTarget = new ByteArrayInputStream(bytes)
