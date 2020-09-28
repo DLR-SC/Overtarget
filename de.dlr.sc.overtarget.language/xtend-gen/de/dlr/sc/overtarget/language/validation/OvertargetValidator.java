@@ -36,7 +36,7 @@ public class OvertargetValidator extends AbstractOvertargetValidator {
     boolean _equals = fileName.equals(target.getName());
     boolean _not = (!_equals);
     if (_not) {
-      this.warning("File name and tmodel name are not the same!", target, TargetmodelPackage.eINSTANCE.getTargetFile_Name(), OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME);
+      this.warning("File name and tmodel name are not the same!", target, target.eContainingFeature(), OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME);
     }
   }
   

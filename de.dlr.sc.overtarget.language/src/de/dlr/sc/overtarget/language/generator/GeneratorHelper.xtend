@@ -22,6 +22,7 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * This class processes the model data for generation
@@ -91,7 +92,7 @@ class GeneratorHelper {
 	def static addLocationWithMerge(List<RepositoryLocation> locations, RepositoryLocation location){
 		var locationToAdd = contains(locations, location);
 		if (locationToAdd === null) {
-			locations.add(location);
+			locations.add(EcoreUtil.copy(location));
 		} else {
 			mergeUnits(locationToAdd, location);
 		}
