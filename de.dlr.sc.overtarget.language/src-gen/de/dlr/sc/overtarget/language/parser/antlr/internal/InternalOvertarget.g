@@ -944,7 +944,7 @@ ruleRepositoryLocation returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getRepositoryLocationRule());
 					}
-					setWithLastConsumed($current, "referencedTarget", true, "ReferencedTarget");
+					setWithLastConsumed($current, "referencedTarget", lv_referencedTarget_0_0 != null, "ReferencedTarget");
 				}
 			)
 		)?
