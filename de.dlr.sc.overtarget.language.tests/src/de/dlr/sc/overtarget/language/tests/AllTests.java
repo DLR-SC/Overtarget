@@ -16,6 +16,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidatorTest;
 import de.dlr.sc.overtarget.language.generator.GeneratorHelperTest;
 import de.dlr.sc.overtarget.language.util.QueryManagerTest;
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelperTest;
+import de.dlr.sc.overtarget.language.util.TargetFileHandlerTest;
 import junit.framework.JUnit4TestAdapter;
 
 /** * */
@@ -24,7 +26,9 @@ import junit.framework.JUnit4TestAdapter;
 	OvertargetParsingTest.class,
 	OvertargetValidatorTest.class, 
 	GeneratorHelperTest.class,
-	QueryManagerTest.class
+	QueryManagerTest.class,
+	ReferencedTargetHelperTest.class,
+	TargetFileHandlerTest.class
 	})
 /** * * Test Collection * */
 public class AllTests {
