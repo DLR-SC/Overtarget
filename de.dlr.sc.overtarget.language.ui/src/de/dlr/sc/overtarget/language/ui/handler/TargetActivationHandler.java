@@ -17,9 +17,6 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
@@ -29,17 +26,15 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
-import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
+import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 
 public class TargetActivationHandler extends AbstractHandler implements IHandler {
@@ -55,13 +50,7 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 	}
 
 	@Inject
-	private IResourceSetProvider resourceSetProvider;
-	
-	@Inject
 	private Provider<EclipseOutputConfigurationProvider> eclipseOutputConfigProvider;
-	
-	@Inject 
-	OvertargetGrammarAccess grammarAccess;
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -71,27 +60,14 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 			if (editorPart != null) {
 				input = editorPart.getEditorInput();
 			}
-
 			IFile file = ((FileEditorInput) input).getFile();
-			String targetName = file.getName().replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
 			IProject project = file.getProject();
 			String outputConfig = getOutputConfigurations(project);
-			IFile targetFile;
-			String outputPath = outputConfig.replace(".", "");
+			TargetFileHandler fileHandler = new TargetFileHandler();
+			IFile targetFile = fileHandler.findTargetFile(file, outputConfig, file.getName());
+			TargetFile tmodel = fileHandler.getTmodel(file, null);
 			
-			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			ResourceSet rs = resourceSetProvider.get(project);
-			Resource r = rs.getResource(uri, true);
-			
-			TargetFile target = (TargetFile) r.getContents().get(0);
-			
-			if (outputPath.equals("/")) {
-				targetFile = project.getFile("/" + targetName);
-			} else {
-				String targetPath = outputPath + "/" + targetName;
-				targetFile = project.getFile(targetPath);
-			}
-			if (target instanceof TargetModel && targetFile.exists()) {
+			if (tmodel instanceof TargetModel && targetFile.exists()) {
 				try {
 					TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
 					targetPlatHelper.setAsActiveTarget(targetFile);
@@ -103,7 +79,7 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 					errorMessage.setMessage(file.getName() + " could not be set as active target.");
 					errorMessage.open();
 				}
-			} else if (target instanceof TargetLibrary) {
+			} else if (tmodel instanceof TargetLibrary) {
 				MessageBox errorMessage = new MessageBox(
 						Display.getCurrent().getActiveShell(), 
 						SWT.OK | SWT.ICON_ERROR);
@@ -119,7 +95,6 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 				errorMessage.open();
 			}
 		}
-
 		return null;
 	}
 
