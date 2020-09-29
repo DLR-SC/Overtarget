@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * This class processes the model data for generation
@@ -114,7 +115,7 @@ public class GeneratorHelper {
       RepositoryLocation locationToAdd = GeneratorHelper.contains(locations, location);
       boolean _xifexpression = false;
       if ((locationToAdd == null)) {
-        _xifexpression = locations.add(location);
+        _xifexpression = locations.add(EcoreUtil.<RepositoryLocation>copy(location));
       } else {
         _xifexpression = GeneratorHelper.mergeUnits(locationToAdd, location);
       }

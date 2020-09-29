@@ -11,7 +11,6 @@ package de.dlr.sc.overtarget.language.util
 
 import de.dlr.sc.overtarget.language.generator.GeneratorHelper
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
-import de.dlr.sc.overtarget.language.targetmodel.TargetModel
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelFactory
 import de.dlr.sc.overtarget.language.targetmodel.Unit
 import java.net.URI
@@ -22,6 +21,7 @@ import org.eclipse.equinox.p2.core.IProvisioningAgentProvider
 import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
 import de.dlr.sc.overtarget.language.Activator
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 
 /**
  * This class queries a p2 Repository for the available installable units
@@ -36,7 +36,7 @@ class QueryManager {
 			IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
 		val unit = model as Unit;
 		val location = unit.eContainer as RepositoryLocation;
-		val target = location.eContainer as TargetModel;
+		val target = location.eContainer as TargetFile;
 		val uri = new URI(GeneratorHelper.getUrlAsString(location.url, target));
 		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
 		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());

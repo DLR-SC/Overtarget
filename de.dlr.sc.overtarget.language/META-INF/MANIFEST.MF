@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Overtarget Language
 Bundle-Vendor: DLR (German Aerospace Center)
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 1.2.1.qualifier
 Bundle-SymbolicName: de.dlr.sc.overtarget.language;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
@@ -40,6 +40,5 @@ Export-Package: de.dlr.sc.overtarget.language,
  de.dlr.sc.overtarget.language.util,
  de.dlr.sc.overtarget.language.validation
 Bundle-Activator: de.dlr.sc.overtarget.language.Activator
-Import-Package: org.apache.log4j,
- org.eclipse.ui.plugin
+Import-Package: org.apache.log4j
 Automatic-Module-Name: de.dlr.sc.overtarget.language

@@ -2,7 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
-		<package 
+		<package
 			uri = "de.dlr.sc.overtarget.language"
 			class = "de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage"
 			genModel = "model/generated/Overtarget.genmodel" />

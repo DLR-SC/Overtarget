@@ -1,6 +1,12 @@
 Overtarget Release Notes
 -------------------------
 
+Release 1.2.1 (24th July 2020)
+----------------------------
+
+Bugfix:
+  - Fixed empty generated targets
+
 Release 1.2.0 (6th May 2020)
 ----------------------------
 

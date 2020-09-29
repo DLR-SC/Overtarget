@@ -9,14 +9,21 @@
  */
 package de.dlr.sc.overtarget.language.ui.quickfix;
 
+import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
+import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
+import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
-import javax.inject.Inject;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -30,6 +37,8 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * Custom quickfixes.
@@ -77,13 +86,50 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
               genHandler.runGeneration(input);
               final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
               final IFile file = fileEditorInput.getFile();
-              final String outputDirectory = genHandler.getOutputConfigurations(input);
-              final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
-              targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
-              genHandler.runGeneration(input);
+              final TargetFileHandler targetFileHandler = new TargetFileHandler();
+              final TargetModel model = targetFileHandler.getTargetModel(file, null);
+              final Function1<RepositoryLocation, Boolean> _function = (RepositoryLocation it) -> {
+                return Boolean.valueOf(it.isReferencedTarget());
+              };
+              final RepositoryLocation referencedTarget = IterableExtensions.<RepositoryLocation>findFirst(model.getRepositoryLocations(), _function);
+              if ((referencedTarget == null)) {
+                Shell _activeShell = Display.getCurrent().getActiveShell();
+                final MessageBox errorMessage = new MessageBox(_activeShell, 
+                  (SWT.OK + SWT.ICON_INFORMATION));
+                errorMessage.setText("Could not generate a ReferencedTarget!");
+                errorMessage.setMessage("Please specify one of the RepositoryLocations as ReferencedTarget container! (See Section 6.1 of the user manual for more information)");
+                errorMessage.open();
+              } else {
+                boolean _isReferencedTarget = referencedTarget.isReferencedTarget();
+                if (_isReferencedTarget) {
+                  final String outputDirectory = genHandler.getOutputConfigurations(input);
+                  final IFile targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory);
+                  targetPlatHelper.setAsActiveTarget(targetForReferencesFile);
+                  genHandler.runGeneration(input);
+                }
+              }
             }
           }
         }
       }, 1);
+  }
+  
+  @Fix(OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME)
+  public void fixFileNameLikeTargetName(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = (IModificationContext context) -> {
+      final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+      if ((editor instanceof ITextEditor)) {
+        final NullProgressMonitor progressMonitor = new NullProgressMonitor();
+        ((ITextEditor)editor).doSave(progressMonitor);
+        final ITextEditor ite = ((ITextEditor) editor);
+        final IEditorInput input = ite.getEditorInput();
+        final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
+        final IFile file = fileEditorInput.getFile();
+        final String fileName = file.getName().replace(".tmodel", "");
+        final IXtextDocument xtextDocument = context.getXtextDocument();
+        xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fileName);
+      }
+    };
+    acceptor.accept(issue, "Replace with correct tmodel name", "", "upcase.png", _function);
   }
 }
