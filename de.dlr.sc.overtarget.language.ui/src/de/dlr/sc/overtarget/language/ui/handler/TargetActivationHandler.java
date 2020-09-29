@@ -65,6 +65,7 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 			String outputConfig = getOutputConfigurations(project);
 			TargetFileHandler fileHandler = new TargetFileHandler();
 			IFile targetFile = fileHandler.findTargetFile(file, outputConfig, file.getName());
+
 			TargetFile tmodel = fileHandler.getTmodel(file, null);
 			
 			if (tmodel instanceof TargetModel && targetFile.exists()) {
