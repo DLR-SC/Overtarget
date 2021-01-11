@@ -272,7 +272,7 @@ jobs:
         with:
           build_profile: ${{ steps.build_decision.outputs.build_type }}
           gh_token: ${{ secrets.GITHUB_TOKEN }}
-      #  if: ${{ steps.build_decision.outputs.deploy_type == 'deploy' }}
+        if: ${{ steps.build_decision.outputs.deploy_type == 'deploy' }}
         
       # ----------------------------------------------
       # SF Deploy still to be done
@@ -285,5 +285,5 @@ jobs:
           ssh_key_pass: ${{ secrets.SF_SSH_KEY_PASS }}
           local_dir: Overtarget
           remote_dir: overtarget
-       # if: ${{ steps.build_decision.outputs.deploy_type == 'deploy' }}
+        if: ${{ steps.build_decision.outputs.deploy_type == 'deploy' }}
       
