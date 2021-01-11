@@ -284,6 +284,6 @@ jobs:
           openssl_pass: ${{ secrets.SF_SSH_KEY_OPENSSL_PASS }}
           ssh_key_pass: ${{ secrets.SF_SSH_KEY_PASS }}
           local_dir: Overtarget
-          remote_dir: Overtarget
+          remote_dir: overtarget
        # if: ${{ steps.build_decision.outputs.deploy_type == 'deploy' }}
       
