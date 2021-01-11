@@ -6,3 +6,4 @@
 **/*.xtendbin
 /bin/
 /deploy/
+id_ed25519
