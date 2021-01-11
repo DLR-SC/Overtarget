@@ -39,7 +39,6 @@ jobs:
   spotbugs:
     name: Build and Test - Spotbugs
     runs-on: ubuntu-18.04
-    needs: [verify]
 
     steps:
       # --------------------------------------------
@@ -93,7 +92,6 @@ jobs:
   surefire:
     name: Build and Test - Surefire
     runs-on: ubuntu-18.04
-    needs: [verify]
 
     steps:
       # --------------------------------------------
@@ -167,7 +165,6 @@ jobs:
   checkstyle:
     name: Build and Test - Checkstyle
     runs-on: ubuntu-18.04
-    needs: [verify]
 
     steps:
       # --------------------------------------------
