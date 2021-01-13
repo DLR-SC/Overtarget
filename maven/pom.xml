@@ -90,9 +90,9 @@
 			<properties>
 				<build.deploy.release>true</build.deploy.release>
 				<target.platform.name>${target.platform.name.default}</target.platform.name>
-				<build.folder.type>release/${build.version}/${env.github_sha}</build.folder.type>
+				<build.folder.type>release/${build.version}/${env.GITHUB_SHA}</build.folder.type>
 				<build.qualifier>'r'yyyyMMddHHmm</build.qualifier>
-				<build.file>Overtarget_Release_${build.version}_${env.github_sha}</build.file>
+				<build.file>Overtarget_Release_${build.version}_${env.GITHUB_SHA}</build.file>
 			</properties>
 		</profile>
 
