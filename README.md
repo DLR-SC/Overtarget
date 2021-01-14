@@ -8,11 +8,11 @@ Overtarget is an eclipse plug-in that helps you managing your target platform fi
 
 ## Project Status
 
-Status [![Build Status](https://github.com/virtualsatellite/VirtualSatellite4-DEV-IDE/workflows/Build/badge.svg?branch=development)](https://github.com/DLR-SC/Overtarget/workflows/Build) [![Coverage Status](https://codecov.io/gh/DLR-SC/overtarget/branch/development/graph/badge.svg)](https://codecov.io/gh/DLR-SC/overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/development/) for *Development* build.
+Status [![Build Status](https://github.com/DLR-SC/Overtarget/workflows/Build/badge.svg?branch=development)](https://github.com/DLR-SC/Overtarget/actions) [![Coverage Status](https://codecov.io/gh/DLR-SC/overtarget/branch/development/graph/badge.svg)](https://codecov.io/gh/DLR-SC/overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/development/) for *Development* build.
 
-Status [![Build Status](https://github.com/virtualsatellite/VirtualSatellite4-DEV-IDE/workflows/Build/badge.svg?branch=integration)](https://github.com/DLR-SC/Overtarget/workflows/Build) [![Coverage Status](https://codecov.io/gh/DLR-SC/Overtarget/branch/integration/graph/badge.svg)](https://codecov.io/gh/DLR-SC/Overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/integration/) for *Integration* build.
+Status [![Build Status](https://github.com/DLR-SC/Overtarget/workflows/Build/badge.svg?branch=integration)](https://github.com/DLR-SC/Overtarget/actions) [![Coverage Status](https://codecov.io/gh/DLR-SC/Overtarget/branch/integration/graph/badge.svg)](https://codecov.io/gh/DLR-SC/Overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/integration/) for *Integration* build.
 
-Status [![Build Status](https://github.com/virtualsatellite/VirtualSatellite4-DEV-IDE/workflows/Build/badge.svg?branch=master)](https://github.com/DLR-SC/Overtarget/workflows/Build) [![Coverage Status](https://codecov.io/gh/DLR-SC/Overtarget/branch/master/graph/badge.svg)](https://codecov.io/gh/DLR-SC/Overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/release/) for *Master* build.
+Status [![Build Status](https://github.com/DLR-SC/Overtarget/workflows/Build/badge.svg?branch=master)](https://github.com/DLR-SC/Overtarget/actions) [![Coverage Status](https://codecov.io/gh/DLR-SC/Overtarget/branch/master/graph/badge.svg)](https://codecov.io/gh/DLR-SC/Overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/release/) for *Master* build.
 
 ## Purpose
 
