@@ -29,6 +29,7 @@ import org.junit.runner.RunWith
 class TargetFileHandlerTest {
 	
 	val targetFileHandler = new TargetFileHandler
+
 	static final String PROJECT_NAME = "de.dlr.sc.overtarget.language.tests"
 	static final String TMODEL_PATH = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel"
 	static final String TMODEL_NAME = "test.tmodel"
@@ -98,7 +99,6 @@ class TargetFileHandlerTest {
 			}".getBytes()
 		val source = new ByteArrayInputStream(bytes)
 		tmodelFile.create(source, IResource.NONE, null)
-
 		val targetFile = folder.getFile(TARGET_NAME)
 
 		val bytesTarget = 
