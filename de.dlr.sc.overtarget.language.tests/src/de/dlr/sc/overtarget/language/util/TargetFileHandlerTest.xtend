@@ -23,6 +23,7 @@ import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.junit.runner.RunWith
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary
 
 @RunWith(XtextRunner)
 @InjectWith(OvertargetInjectorProvider)
@@ -31,6 +32,7 @@ class TargetFileHandlerTest {
 	val targetFileHandler = new TargetFileHandler
 	static final String PROJECT_NAME = "de.dlr.sc.overtarget.language.tests"
 	static final String TMODEL_PATH = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel"
+	static final String TMODEL_LIBRARY_PATH = "de.dlr.sc.overtarget.language.tests/resources/testLibrary.tmodel"
 	static final String TMODEL_NAME = "test.tmodel"
 	static final String TARGET_NAME = "test.target"
 	
@@ -51,7 +53,7 @@ class TargetFileHandlerTest {
 	}
 	
 	@Test
-	def void testGetTargetModel() {
+	def void testGetTmodel() {
 		var testProject = cleanCreateProject
 		val folder = testProject.getFolder("resources")
 		folder.create(IResource.NONE, true, null)
@@ -64,7 +66,7 @@ class TargetFileHandlerTest {
 		val source = new ByteArrayInputStream(bytes)
 		tmodelFile.create(source, IResource.NONE, null)
 
-		val tmodel = targetFileHandler.getTargetModel(tmodelFile, null)
+		val tmodel = targetFileHandler.getTmodel(tmodelFile, null)
 		val uriTmodel = URI.createPlatformPluginURI(TMODEL_PATH, true)
 		val rs = new ResourceSetImpl()
 		val tmodelResource = rs.getResource(uriTmodel, true)
@@ -74,14 +76,37 @@ class TargetFileHandlerTest {
 	}
 	
 	@Test
-	def void testGetTargetModelNonExistent() {
+	def void testGetTmodelIsLibrary() {
+		var testProject = cleanCreateProject
+		val folder = testProject.getFolder("resources")
+		folder.create(IResource.NONE, true, null)
+		
+		val tmodelFile = folder.getFile(TMODEL_NAME)
+		val bytes = "
+			Target testLibrary {
+				
+			}".getBytes()
+		val source = new ByteArrayInputStream(bytes)
+		tmodelFile.create(source, IResource.NONE, null)
+
+		val tmodel = targetFileHandler.getTmodel(tmodelFile, null)
+		val uriTmodel = URI.createPlatformPluginURI(TMODEL_LIBRARY_PATH, true)
+		val rs = new ResourceSetImpl()
+		val tmodelResource = rs.getResource(uriTmodel, true)
+		
+		val expectedTmodel = tmodelResource.contents.get(0) as TargetLibrary
+		Assert.assertEquals(expectedTmodel.name, tmodel.name)
+	}
+	
+	@Test
+	def void testGetmodelNonExistent() {
 		var testProject = cleanCreateProject
 		val folder = testProject.getFolder("resources")
 		folder.create(IResource.NONE, true, null)
 		
 		val tmodelFile = folder.getFile(TMODEL_NAME)
 
-		Assert.assertNull("Tmodel does not exist, so should be null", targetFileHandler.getTargetModel(tmodelFile, null))
+		Assert.assertNull("Tmodel does not exist, so should be null", targetFileHandler.getTmodel(tmodelFile, null))
 	}
 	
 	@Test 

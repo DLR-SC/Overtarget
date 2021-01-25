@@ -15,6 +15,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile
 
 /**
  * This class handles getting files, such as target resources (.tmodel) or targetFiles (.target).
@@ -29,7 +31,7 @@ class TargetFileHandler {
 	 * @return targetModel
 	 */
 	
-	def getTargetModel(IFile file, ResourceSet rs) {
+	def getTmodel(IFile file, ResourceSet rs) {
 		val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		var resourceSet = rs
 		if (rs === null) {
@@ -37,8 +39,14 @@ class TargetFileHandler {
 		}
 		try {
 			val resource = resourceSet.getResource(uri, true)
-			val targetModel = resource.contents.get(0) as TargetModel
-			return targetModel
+			val tmodel = resource.contents.get(0) as TargetFile
+			if (tmodel instanceof TargetModel) {
+				var targetModel = tmodel
+				return targetModel
+			} else if (tmodel instanceof TargetLibrary) {
+				var targetLibrary = tmodel
+				return targetLibrary
+			}
 		} catch (Exception e) {
 			println("Tmodel file does not exist.")
 			return null

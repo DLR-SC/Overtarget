@@ -30,6 +30,9 @@ import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
 import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
@@ -63,7 +66,9 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 			TargetFileHandler fileHandler = new TargetFileHandler();
 			IFile targetFile = fileHandler.findTargetFile(file, outputConfig, file.getName());
 
-			if (targetFile.exists()) {
+			TargetFile tmodel = fileHandler.getTmodel(file, null);
+			
+			if (tmodel instanceof TargetModel && targetFile.exists()) {
 				try {
 					TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
 					targetPlatHelper.setAsActiveTarget(targetFile);
@@ -75,6 +80,13 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 					errorMessage.setMessage(file.getName() + " could not be set as active target.");
 					errorMessage.open();
 				}
+			} else if (tmodel instanceof TargetLibrary) {
+				MessageBox errorMessage = new MessageBox(
+						Display.getCurrent().getActiveShell(), 
+						SWT.OK | SWT.ICON_ERROR);
+				errorMessage.setText("Error");
+				errorMessage.setMessage("A TargetLibrary cannot be set as active target.");
+				errorMessage.open();
 			} else {
 				MessageBox errorMessage = new MessageBox(
 						Display.getCurrent().getActiveShell(), 
@@ -84,7 +96,6 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 				errorMessage.open();
 			}
 		}
-
 		return null;
 	}
 

@@ -9,6 +9,8 @@
  */
 package de.dlr.sc.overtarget.language.util;
 
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
 import de.dlr.sc.overtarget.language.util.TargetFileHandler;
@@ -43,6 +45,8 @@ public class TargetFileHandlerTest {
   
   private static final String TMODEL_PATH = "de.dlr.sc.overtarget.language.tests/resources/test.tmodel";
   
+  private static final String TMODEL_LIBRARY_PATH = "de.dlr.sc.overtarget.language.tests/resources/testLibrary.tmodel";
+  
   private static final String TMODEL_NAME = "test.tmodel";
   
   private static final String TARGET_NAME = "test.target";
@@ -71,7 +75,7 @@ public class TargetFileHandlerTest {
   }
   
   @Test
-  public void testGetTargetModel() {
+  public void testGetTmodel() {
     try {
       IProject testProject = this.cleanCreateProject();
       final IFolder folder = testProject.getFolder("resources");
@@ -80,7 +84,7 @@ public class TargetFileHandlerTest {
       final byte[] bytes = "\r\n\t\t\tTarget test {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
       final ByteArrayInputStream source = new ByteArrayInputStream(bytes);
       tmodelFile.create(source, IResource.NONE, null);
-      final TargetModel tmodel = this.targetFileHandler.getTargetModel(tmodelFile, null);
+      final TargetFile tmodel = this.targetFileHandler.getTmodel(tmodelFile, null);
       final URI uriTmodel = URI.createPlatformPluginURI(TargetFileHandlerTest.TMODEL_PATH, true);
       final ResourceSetImpl rs = new ResourceSetImpl();
       final Resource tmodelResource = rs.getResource(uriTmodel, true);
@@ -93,13 +97,35 @@ public class TargetFileHandlerTest {
   }
   
   @Test
-  public void testGetTargetModelNonExistent() {
+  public void testGetTmodelIsLibrary() {
     try {
       IProject testProject = this.cleanCreateProject();
       final IFolder folder = testProject.getFolder("resources");
       folder.create(IResource.NONE, true, null);
       final IFile tmodelFile = folder.getFile(TargetFileHandlerTest.TMODEL_NAME);
-      Assert.assertNull("Tmodel does not exist, so should be null", this.targetFileHandler.getTargetModel(tmodelFile, null));
+      final byte[] bytes = "\r\n\t\t\tTarget testLibrary {\r\n\t\t\t\t\r\n\t\t\t}".getBytes();
+      final ByteArrayInputStream source = new ByteArrayInputStream(bytes);
+      tmodelFile.create(source, IResource.NONE, null);
+      final TargetFile tmodel = this.targetFileHandler.getTmodel(tmodelFile, null);
+      final URI uriTmodel = URI.createPlatformPluginURI(TargetFileHandlerTest.TMODEL_LIBRARY_PATH, true);
+      final ResourceSetImpl rs = new ResourceSetImpl();
+      final Resource tmodelResource = rs.getResource(uriTmodel, true);
+      EObject _get = tmodelResource.getContents().get(0);
+      final TargetLibrary expectedTmodel = ((TargetLibrary) _get);
+      Assert.assertEquals(expectedTmodel.getName(), tmodel.getName());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testGetmodelNonExistent() {
+    try {
+      IProject testProject = this.cleanCreateProject();
+      final IFolder folder = testProject.getFolder("resources");
+      folder.create(IResource.NONE, true, null);
+      final IFile tmodelFile = folder.getFile(TargetFileHandlerTest.TMODEL_NAME);
+      Assert.assertNull("Tmodel does not exist, so should be null", this.targetFileHandler.getTmodel(tmodelFile, null));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

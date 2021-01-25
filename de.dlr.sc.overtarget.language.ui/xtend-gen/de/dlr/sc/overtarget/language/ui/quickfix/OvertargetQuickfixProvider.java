@@ -13,7 +13,7 @@ import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
-import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.handler.GenerationHandler;
 import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
@@ -87,7 +87,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
               final IFileEditorInput fileEditorInput = ((IFileEditorInput) input);
               final IFile file = fileEditorInput.getFile();
               final TargetFileHandler targetFileHandler = new TargetFileHandler();
-              final TargetModel model = targetFileHandler.getTargetModel(file, null);
+              final TargetFile model = targetFileHandler.getTmodel(file, null);
               final Function1<RepositoryLocation, Boolean> _function = (RepositoryLocation it) -> {
                 return Boolean.valueOf(it.isReferencedTarget());
               };

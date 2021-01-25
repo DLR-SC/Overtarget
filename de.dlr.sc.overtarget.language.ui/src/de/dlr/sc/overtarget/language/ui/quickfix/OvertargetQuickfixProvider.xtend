@@ -79,7 +79,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 						val file = fileEditorInput.file
 						
 						val targetFileHandler = new TargetFileHandler
-						val model = targetFileHandler.getTargetModel(file, null)
+						val model = targetFileHandler.getTmodel(file, null)
 
 						//check if a referencedTarget is set
 						val referencedTarget = model.repositoryLocations.findFirst[isReferencedTarget]
