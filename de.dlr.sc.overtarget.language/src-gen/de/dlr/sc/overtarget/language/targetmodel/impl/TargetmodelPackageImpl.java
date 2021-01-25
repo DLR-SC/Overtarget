@@ -659,6 +659,17 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
    * @generated
    */
   @Override
+  public EAttribute getRepositoryLocation_AddAll()
+  {
+    return (EAttribute)repositoryLocationEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getExcludeLocation()
   {
     return excludeLocationEClass;
@@ -833,6 +844,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__NAME);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__URL);
     createEReference(repositoryLocationEClass, REPOSITORY_LOCATION__UNITS);
+    createEAttribute(repositoryLocationEClass, REPOSITORY_LOCATION__ADD_ALL);
 
     excludeLocationEClass = createEClass(EXCLUDE_LOCATION);
     createEReference(excludeLocationEClass, EXCLUDE_LOCATION__REPOSITORY_LOCATION);
@@ -936,6 +948,7 @@ public class TargetmodelPackageImpl extends EPackageImpl implements TargetmodelP
     initEAttribute(getRepositoryLocation_Name(), ecorePackage.getEString(), "name", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Url(), this.getUrlExpression(), null, "url", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRepositoryLocation_Units(), this.getUnit(), null, "units", null, 0, -1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRepositoryLocation_AddAll(), ecorePackage.getEBoolean(), "addAll", null, 0, 1, RepositoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(excludeLocationEClass, ExcludeLocation.class, "ExcludeLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExcludeLocation_RepositoryLocation(), this.getRepositoryLocation(), null, "repositoryLocation", null, 0, 1, ExcludeLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

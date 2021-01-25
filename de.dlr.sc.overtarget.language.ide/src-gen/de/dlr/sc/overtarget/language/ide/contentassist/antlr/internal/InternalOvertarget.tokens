@@ -20,6 +20,7 @@
 'Variable'=57
 'WindowingSystem'=13
 'WorkingSystem'=14
+'addAll;'=59
 'aix'=17
 'all;'=16
 'carbon'=24
@@ -101,3 +102,4 @@ T__55=55
 T__56=56
 T__57=57
 T__58=58
+T__59=59

@@ -54,6 +54,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//RepositoryLocation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//RepositoryLocation/url"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Overtarget.ecore#//RepositoryLocation/units"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Overtarget.ecore#//RepositoryLocation/addAll"/>
     </genClasses>
     <genClasses ecoreClass="Overtarget.ecore#//ExcludeLocation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Overtarget.ecore#//ExcludeLocation/repositoryLocation"/>

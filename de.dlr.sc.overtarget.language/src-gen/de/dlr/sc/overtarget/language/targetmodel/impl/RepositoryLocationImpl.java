@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#getUnits <em>Units</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.impl.RepositoryLocationImpl#isAddAll <em>Add All</em>}</li>
  * </ul>
  *
  * @generated
@@ -107,6 +108,26 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * @ordered
    */
   protected EList<Unit> units;
+
+  /**
+   * The default value of the '{@link #isAddAll() <em>Add All</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isAddAll()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean ADD_ALL_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isAddAll() <em>Add All</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isAddAll()
+   * @generated
+   * @ordered
+   */
+  protected boolean addAll = ADD_ALL_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -250,6 +271,31 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
+  public boolean isAddAll()
+  {
+    return addAll;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAddAll(boolean newAddAll)
+  {
+    boolean oldAddAll = addAll;
+    addAll = newAddAll;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL, oldAddAll, addAll));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -280,6 +326,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         return getUrl();
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         return getUnits();
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        return isAddAll();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -308,6 +356,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         getUnits().clear();
         getUnits().addAll((Collection<? extends Unit>)newValue);
         return;
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        setAddAll((Boolean)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -334,6 +385,9 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         getUnits().clear();
         return;
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        setAddAll(ADD_ALL_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -356,6 +410,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
         return url != null;
       case TargetmodelPackage.REPOSITORY_LOCATION__UNITS:
         return units != null && !units.isEmpty();
+      case TargetmodelPackage.REPOSITORY_LOCATION__ADD_ALL:
+        return addAll != ADD_ALL_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -375,6 +431,8 @@ public class RepositoryLocationImpl extends MinimalEObjectImpl.Container impleme
     result.append(referencedTarget);
     result.append(", name: ");
     result.append(name);
+    result.append(", addAll: ");
+    result.append(addAll);
     result.append(')');
     return result.toString();
   }

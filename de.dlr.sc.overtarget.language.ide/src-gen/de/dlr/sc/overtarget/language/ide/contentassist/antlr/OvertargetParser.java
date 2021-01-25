@@ -43,6 +43,7 @@ public class OvertargetParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getUnitAccess().getVersAlternatives_3_0(), "rule__Unit__VersAlternatives_3_0");
 			builder.put(grammarAccess.getSourceAccess().getAlternatives_1(), "rule__Source__Alternatives_1");
 			builder.put(grammarAccess.getUrlElementAccess().getAlternatives(), "rule__UrlElement__Alternatives");
+			builder.put(grammarAccess.getRepositoryLocationAccess().getAlternatives_6(), "rule__RepositoryLocation__Alternatives_6");
 			builder.put(grammarAccess.getExcludeLocationAccess().getAlternatives_4(), "rule__ExcludeLocation__Alternatives_4");
 			builder.put(grammarAccess.getVariableDefinitionAccess().getAlternatives(), "rule__VariableDefinition__Alternatives");
 			builder.put(grammarAccess.getQualifierAccess().getAlternatives_0(), "rule__Qualifier__Alternatives_0");
@@ -76,6 +77,7 @@ public class OvertargetParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getUrlExpressionAccess().getGroup(), "rule__UrlExpression__Group__0");
 			builder.put(grammarAccess.getUrlExpressionAccess().getGroup_1(), "rule__UrlExpression__Group_1__0");
 			builder.put(grammarAccess.getRepositoryLocationAccess().getGroup(), "rule__RepositoryLocation__Group__0");
+			builder.put(grammarAccess.getRepositoryLocationAccess().getGroup_6_1(), "rule__RepositoryLocation__Group_6_1__0");
 			builder.put(grammarAccess.getExcludeLocationAccess().getGroup(), "rule__ExcludeLocation__Group__0");
 			builder.put(grammarAccess.getAlreadyDeclaredVariableAccess().getGroup(), "rule__AlreadyDeclaredVariable__Group__0");
 			builder.put(grammarAccess.getNewVariableDefinitionAccess().getGroup(), "rule__NewVariableDefinition__Group__0");
@@ -115,7 +117,8 @@ public class OvertargetParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getRepositoryLocationAccess().getReferencedTargetAssignment_0(), "rule__RepositoryLocation__ReferencedTargetAssignment_0");
 			builder.put(grammarAccess.getRepositoryLocationAccess().getNameAssignment_2(), "rule__RepositoryLocation__NameAssignment_2");
 			builder.put(grammarAccess.getRepositoryLocationAccess().getUrlAssignment_4(), "rule__RepositoryLocation__UrlAssignment_4");
-			builder.put(grammarAccess.getRepositoryLocationAccess().getUnitsAssignment_6(), "rule__RepositoryLocation__UnitsAssignment_6");
+			builder.put(grammarAccess.getRepositoryLocationAccess().getUnitsAssignment_6_0(), "rule__RepositoryLocation__UnitsAssignment_6_0");
+			builder.put(grammarAccess.getRepositoryLocationAccess().getAddAllAssignment_6_1_1(), "rule__RepositoryLocation__AddAllAssignment_6_1_1");
 			builder.put(grammarAccess.getExcludeLocationAccess().getRepositoryLocationAssignment_2(), "rule__ExcludeLocation__RepositoryLocationAssignment_2");
 			builder.put(grammarAccess.getExcludeLocationAccess().getUnitsAssignment_4_0(), "rule__ExcludeLocation__UnitsAssignment_4_0");
 			builder.put(grammarAccess.getAlreadyDeclaredVariableAccess().getRefAssignment_1(), "rule__AlreadyDeclaredVariable__RefAssignment_1");

@@ -1,0 +1,11 @@
+Target testModelWithAddAllunits {
+	ReferencedTarget RepositoryLocation VirSat4CoreDevelopment url "https://sourceforge.net/projects/virtualsatellite/files/VirtualSatellite4-Core/development/" {
+		Unit addAll;
+	}
+	RepositoryLocation VirSat4CoreDevelopment url "https://sourceforge.net/projects/virtualsatellite/files/VirtualSatellite4-Core/development/" {
+		Unit de.dlr.sc.virsat.target.feature.feature.group version newest;
+	}
+	RepositoryLocation testRepository url "www.testRepository.de" {
+		Unit addAll;
+	}
+}

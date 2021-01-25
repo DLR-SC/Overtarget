@@ -89,7 +89,7 @@ UrlElementVariable:
 */
 RepositoryLocation:
 	(referencedTarget?='ReferencedTarget')? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
-		(units+=Unit)*	
+		  ((units+=Unit)* | 'Unit' addAll?='addAll;')
 	'}'
 ;
 
