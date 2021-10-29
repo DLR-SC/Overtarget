@@ -22,8 +22,10 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -94,8 +96,20 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   @Override
   public void completeRepositoryLocation_Units(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("Unit", "Unit", this.getImage(this.grammarAccess.getUnitRule()), context));
-    acceptor.accept(this.createCompletionProposal("version", "version", this.getImage(this.grammarAccess.getUnitRule()), context));
     super.completeRepositoryLocation_Units(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeRepositoryLocation_AddAll(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal _createCompletionProposal = this.createCompletionProposal("addAll;", "addAll;", this.getImage(this.grammarAccess.getRepositoryLocationRule()), context);
+    final ConfigurableCompletionProposal proposal = ((ConfigurableCompletionProposal) _createCompletionProposal);
+    this.getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix());
+    if ((proposal != null)) {
+      int _priority = proposal.getPriority();
+      int _multiply = (_priority * 2);
+      proposal.setPriority(_multiply);
+      acceptor.accept(proposal);
+    }
   }
   
   @Override
@@ -109,17 +123,17 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
       return Boolean.valueOf(Objects.equal(_source, _source_1));
     };
     final Consumer<Unit> _function_1 = (Unit it) -> {
-      acceptor.accept(this.createCompletionProposal(it.getVers(), context));
+      String _vers = it.getVers();
+      String _plus = (_vers + ";");
+      acceptor.accept(this.createCompletionProposal(_plus, context));
     };
     IterableExtensions.<Unit>filter(results, _function).forEach(_function_1);
-    acceptor.accept(this.createCompletionProposal("version", context));
     super.complete_Version(model, ruleCall, context, acceptor);
   }
   
   @Override
   public void complete_Source(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final QueryManager queryManager = new QueryManager();
-    acceptor.accept(this.createCompletionProposal("version", context));
     final ArrayList<Unit> results = queryManager.getUnits(model);
     final Consumer<Unit> _function = (Unit it) -> {
       acceptor.accept(this.createCompletionProposal(it.getSource(), context));
