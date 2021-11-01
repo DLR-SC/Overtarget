@@ -55,6 +55,26 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	}
 	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
+	def fixPlaceholderForReferencedTarget(Issue issue, IssueResolutionAcceptor acceptor) {
+		val placeholder = "\n\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {" 
+		+ "\n \t \t" 
+		+ "// add necessary Units here;"
+		+ "\n \t}" 
+		acceptor.accept(issue, 'Create placeholder for referencedTarget', '', '',
+			new IModification() {
+				override apply(IModificationContext context) throws Exception {
+					val editor = PlatformUI.workbench.activeWorkbenchWindow.activePage.activeEditor
+					if (editor instanceof ITextEditor) {
+						val dp = editor.getDocumentProvider()
+						val doc = dp.getDocument(editor.getEditorInput())
+						val offset = doc.getLineOffset(doc.getNumberOfLines() - 1)
+						doc.replace(offset, 0, placeholder + "\n")
+					}
+				}
+			}, 1)
+	}
+	
+	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Use temporary target to resolve tmodel references', 'Generates a temporary target for resolving tmodel references and sets it as active target.', '', 
 			new IModification() {
