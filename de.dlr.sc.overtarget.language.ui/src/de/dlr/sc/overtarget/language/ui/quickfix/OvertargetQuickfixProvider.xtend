@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
- * 
+ *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.quickfix
@@ -53,17 +53,15 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 				deprecatedWorkingSystemKeyword.length, windowingSystemKeyword)
 		]
 	}
-	
+
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixPlaceholderForReferencedTarget(Issue issue, IssueResolutionAcceptor acceptor) {
-		
 		val placeholder = "\n\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {" 
 		+ "\n \t \t" 
 		+ "// add necessary Units here;"
 		+ "\n \t}" 
 		acceptor.accept(issue, 'Create placeholder for referencedTarget', '', '',
 			new IModification() {
-	
 				override apply(IModificationContext context) throws Exception {
 					val editor = PlatformUI.workbench.activeWorkbenchWindow.activePage.activeEditor
 					if (editor instanceof ITextEditor) {
@@ -73,16 +71,14 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 						doc.replace(offset, 0, placeholder + "\n")
 					}
 				}
-			}	
-		)
+			}, 1)
 	}
-	
+
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixCannotResolveReference(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Use temporary target to resolve tmodel references',
 			'Generates a temporary target for resolving tmodel references and sets it as active target.', '',
 			new IModification() {
-	
 				override apply(IModificationContext context) throws Exception {
 					if (issue.message.contains("Couldn't resolve reference to")) {
 						val genHandler = new GenerationHandler();
@@ -95,7 +91,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 							editor.doSave(progressMonitor) // saves the made changes in the file
 							val ite = editor as ITextEditor
 							val input = ite.editorInput
-	
+
 							genHandler.runGeneration(input);
 	
 							// find targetForReferences.target in directory and set it as active target

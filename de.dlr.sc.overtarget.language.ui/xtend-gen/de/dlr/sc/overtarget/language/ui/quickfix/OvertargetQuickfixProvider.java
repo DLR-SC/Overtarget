@@ -86,7 +86,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
             doc.replace(offset, 0, (placeholder + "\n"));
           }
         }
-      });
+      }, 1);
   }
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
