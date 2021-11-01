@@ -10,6 +10,8 @@
 package de.dlr.sc.overtarget.language.util;
 
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -33,7 +35,7 @@ public class TargetFileHandler {
    * @param rs	resourceSet which can include tmodels, can be null
    * @return targetModel
    */
-  public TargetModel getTargetModel(final IFile file, final ResourceSet rs) {
+  public TargetFile getTmodel(final IFile file, final ResourceSet rs) {
     final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
     ResourceSet resourceSet = rs;
     if ((rs == null)) {
@@ -43,8 +45,16 @@ public class TargetFileHandler {
     try {
       final Resource resource = resourceSet.getResource(uri, true);
       EObject _get = resource.getContents().get(0);
-      final TargetModel targetModel = ((TargetModel) _get);
-      return targetModel;
+      final TargetFile tmodel = ((TargetFile) _get);
+      if ((tmodel instanceof TargetModel)) {
+        TargetModel targetModel = ((TargetModel)tmodel);
+        return targetModel;
+      } else {
+        if ((tmodel instanceof TargetLibrary)) {
+          TargetLibrary targetLibrary = ((TargetLibrary)tmodel);
+          return targetLibrary;
+        }
+      }
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         InputOutput.<String>println("Tmodel file does not exist.");
@@ -53,6 +63,7 @@ public class TargetFileHandler {
         throw Exceptions.sneakyThrow(_t);
       }
     }
+    return null;
   }
   
   /**
