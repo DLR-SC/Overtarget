@@ -9,8 +9,6 @@
  */
 package de.dlr.sc.overtarget.language.ide;
 
-import de.dlr.sc.overtarget.language.ide.AbstractOvertargetIdeModule;
-
 /**
  * Use this class to register ide components.
  */

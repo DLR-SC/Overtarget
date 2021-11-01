@@ -10,7 +10,6 @@
 package de.dlr.sc.overtarget.language.generator;
 
 import com.google.inject.Inject;
-import de.dlr.sc.overtarget.language.generator.GeneratorHelper;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.UrlExpression;
