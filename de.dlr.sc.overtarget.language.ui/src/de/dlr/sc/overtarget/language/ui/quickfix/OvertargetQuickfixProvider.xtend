@@ -57,10 +57,10 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
 	def fixPlaceholderForReferencedTarget(Issue issue, IssueResolutionAcceptor acceptor) {
 		
-		val placeholder = "\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {" 
+		val placeholder = "\n\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {" 
 		+ "\n \t \t" 
-		+ "Unit addAll"
-		+ "\n}" 
+		+ "// add necessary Units here;"
+		+ "\n \t}" 
 		acceptor.accept(issue, 'Create placeholder for referencedTarget', '', '',
 			new IModification() {
 	
@@ -69,7 +69,7 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 					if (editor instanceof ITextEditor) {
 						val dp = editor.getDocumentProvider()
 						val doc = dp.getDocument(editor.getEditorInput())
-						val offset = doc.getLineOffset(doc.getNumberOfLines()-10)
+						val offset = doc.getLineOffset(doc.getNumberOfLines() - 1)
 						doc.replace(offset, 0, placeholder + "\n")
 					}
 				}

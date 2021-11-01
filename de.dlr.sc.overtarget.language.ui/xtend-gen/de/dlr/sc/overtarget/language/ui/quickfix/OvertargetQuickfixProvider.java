@@ -71,7 +71,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
   public void fixPlaceholderForReferencedTarget(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    final String placeholder = (((("\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {") + "\n \t \t") + "Unit addAll") + "\n}");
+    final String placeholder = (((("\n\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {") + "\n \t \t") + "// add necessary Units here;") + "\n \t}");
     acceptor.accept(issue, "Create placeholder for referencedTarget", "", "", 
       new IModification() {
         @Override
@@ -81,7 +81,7 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
             final IDocumentProvider dp = ((ITextEditor)editor).getDocumentProvider();
             final IDocument doc = dp.getDocument(((ITextEditor)editor).getEditorInput());
             int _numberOfLines = doc.getNumberOfLines();
-            int _minus = (_numberOfLines - 10);
+            int _minus = (_numberOfLines - 1);
             final int offset = doc.getLineOffset(_minus);
             doc.replace(offset, 0, (placeholder + "\n"));
           }
