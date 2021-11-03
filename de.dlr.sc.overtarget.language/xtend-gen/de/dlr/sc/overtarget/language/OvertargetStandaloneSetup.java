@@ -9,8 +9,6 @@
  */
 package de.dlr.sc.overtarget.language;
 
-import de.dlr.sc.overtarget.language.OvertargetStandaloneSetupGenerated;
-
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
  */

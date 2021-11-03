@@ -10,8 +10,6 @@
 package de.dlr.sc.overtarget.language.generator;
 
 import com.google.common.collect.Iterables;
-import de.dlr.sc.overtarget.language.generator.GeneratorHelper;
-import de.dlr.sc.overtarget.language.generator.OvertargetOutputConfigurationProvider;
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.targetmodel.ExcludeLocation;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;

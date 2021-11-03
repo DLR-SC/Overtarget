@@ -11,7 +11,6 @@ package de.dlr.sc.overtarget.language;
 
 import com.google.inject.Binder;
 import com.google.inject.Singleton;
-import de.dlr.sc.overtarget.language.AbstractOvertargetRuntimeModule;
 import de.dlr.sc.overtarget.language.generator.OvertargetOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 

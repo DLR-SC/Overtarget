@@ -9,8 +9,6 @@
  */
 package de.dlr.sc.overtarget.language.util;
 
-import de.dlr.sc.overtarget.language.util.MockupQueryResult;
-import de.dlr.sc.overtarget.language.util.QueryManager;
 import java.net.URI;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.query.IQueryResult;

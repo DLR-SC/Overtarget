@@ -13,8 +13,6 @@ import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
-import de.dlr.sc.overtarget.language.validation.AbstractOvertargetValidator;
-import de.dlr.sc.overtarget.language.validation.ValidatorHelper;
 import javax.inject.Inject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;

@@ -13,7 +13,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.dlr.sc.overtarget.language.OvertargetRuntimeModule;
 import de.dlr.sc.overtarget.language.OvertargetStandaloneSetup;
-import de.dlr.sc.overtarget.language.ide.OvertargetIdeModule;
 import org.eclipse.xtext.util.Modules2;
 
 /**
