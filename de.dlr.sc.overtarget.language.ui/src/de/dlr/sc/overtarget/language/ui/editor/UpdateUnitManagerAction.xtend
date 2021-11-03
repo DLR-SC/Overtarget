@@ -34,21 +34,17 @@ class UpdateUnitManagerAction extends TextEditorAction {
 			val input = editor.editorInput
 			if (input instanceof IFileEditorInput) {
 
-				// get current document from editor which represents the tmodel
-				val overtargetEditor = new OvertargetXtextEditor
-				val document = overtargetEditor.getXtextDocument
-				if (document !== null) {
-					try {
-						val target = document.contents.get(0) as TargetFile
-						val repositoryLocations = target.repositoryLocations
-						for (reposLoc : repositoryLocations) {
-							val unitManager = UnitManager.instance
-							if (!unitManager.checkIfUnitsLoaded(reposLoc.name)) {
-								unitManager.loadUnits(reposLoc)
-							}
+			// get current document from editor which represents the tmodel
+			val overtargetEditor = new OvertargetXtextEditor
+			val document = overtargetEditor.getXtextDocument
+			if (document !== null) {
+					val target = document.contents.get(0) as TargetFile
+					val repositoryLocations = target.repositoryLocations
+					for (reposLoc : repositoryLocations) {
+						val unitManager = UnitManager.instance
+						if (!unitManager.checkIfUnitsLoaded(reposLoc.name)) {
+							unitManager.loadUnits(reposLoc)
 						}
-					} catch (Exception e) {
-						
 					}
 				}
 			}

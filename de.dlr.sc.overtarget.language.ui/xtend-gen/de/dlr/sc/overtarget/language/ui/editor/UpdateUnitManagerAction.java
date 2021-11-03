@@ -12,7 +12,6 @@ package de.dlr.sc.overtarget.language.ui.editor;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
-import de.dlr.sc.overtarget.language.ui.editor.OvertargetXtextEditor;
 import java.util.ResourceBundle;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -22,7 +21,6 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.TextEditorAction;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
 public class UpdateUnitManagerAction extends TextEditorAction {
@@ -44,24 +42,17 @@ public class UpdateUnitManagerAction extends TextEditorAction {
         final OvertargetXtextEditor overtargetEditor = new OvertargetXtextEditor();
         final XtextResource document = overtargetEditor.getXtextDocument();
         if ((document != null)) {
-          try {
-            EObject _get = document.getContents().get(0);
-            final TargetFile target = ((TargetFile) _get);
-            final EList<RepositoryLocation> repositoryLocations = target.getRepositoryLocations();
-            for (final RepositoryLocation reposLoc : repositoryLocations) {
-              {
-                final UnitManager unitManager = UnitManager.getInstance();
-                boolean _checkIfUnitsLoaded = unitManager.checkIfUnitsLoaded(reposLoc.getName());
-                boolean _not = (!_checkIfUnitsLoaded);
-                if (_not) {
-                  unitManager.loadUnits(reposLoc);
-                }
+          EObject _get = document.getContents().get(0);
+          final TargetFile target = ((TargetFile) _get);
+          final EList<RepositoryLocation> repositoryLocations = target.getRepositoryLocations();
+          for (final RepositoryLocation reposLoc : repositoryLocations) {
+            {
+              final UnitManager unitManager = UnitManager.getInstance();
+              boolean _checkIfUnitsLoaded = unitManager.checkIfUnitsLoaded(reposLoc.getName());
+              boolean _not = (!_checkIfUnitsLoaded);
+              if (_not) {
+                unitManager.loadUnits(reposLoc);
               }
-            }
-          } catch (final Throwable _t) {
-            if (_t instanceof Exception) {
-            } else {
-              throw Exceptions.sneakyThrow(_t);
             }
           }
         }
