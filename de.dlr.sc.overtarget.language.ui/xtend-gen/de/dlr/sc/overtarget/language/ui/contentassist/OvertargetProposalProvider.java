@@ -14,8 +14,6 @@ import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl;
-import de.dlr.sc.overtarget.language.ui.contentassist.AbstractOvertargetProposalProvider;
-import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;

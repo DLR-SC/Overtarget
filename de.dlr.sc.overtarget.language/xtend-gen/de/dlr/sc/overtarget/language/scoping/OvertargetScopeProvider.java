@@ -9,8 +9,6 @@
  */
 package de.dlr.sc.overtarget.language.scoping;
 
-import de.dlr.sc.overtarget.language.scoping.AbstractOvertargetScopeProvider;
-
 /**
  * This class contains custom scoping description.
  * 

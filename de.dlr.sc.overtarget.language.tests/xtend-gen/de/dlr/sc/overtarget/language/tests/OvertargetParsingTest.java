@@ -15,7 +15,6 @@ import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelFactory;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
-import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
 import de.dlr.sc.overtarget.language.util.QueryManager;
 import de.dlr.sc.overtarget.language.util.VersionHandlerHelper;
 import java.util.ArrayList;

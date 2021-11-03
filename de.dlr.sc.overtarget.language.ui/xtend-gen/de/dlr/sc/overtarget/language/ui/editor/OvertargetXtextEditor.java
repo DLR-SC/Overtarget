@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
-import de.dlr.sc.overtarget.language.ui.editor.UpdateUnitManagerAction;
 import java.util.ResourceBundle;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
