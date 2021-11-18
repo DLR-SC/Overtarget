@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getName <em>Name</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUrl <em>Url</em>}</li>
  *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#getUnits <em>Units</em>}</li>
+ *   <li>{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll <em>Add All</em>}</li>
  * </ul>
  *
  * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation()
@@ -111,5 +112,27 @@ public interface RepositoryLocation extends EObject
    * @generated
    */
   EList<Unit> getUnits();
+
+  /**
+   * Returns the value of the '<em><b>Add All</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Add All</em>' attribute.
+   * @see #setAddAll(boolean)
+   * @see de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage#getRepositoryLocation_AddAll()
+   * @model
+   * @generated
+   */
+  boolean isAddAll();
+
+  /**
+   * Sets the value of the '{@link de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation#isAddAll <em>Add All</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Add All</em>' attribute.
+   * @see #isAddAll()
+   * @generated
+   */
+  void setAddAll(boolean value);
 
 } // RepositoryLocation
