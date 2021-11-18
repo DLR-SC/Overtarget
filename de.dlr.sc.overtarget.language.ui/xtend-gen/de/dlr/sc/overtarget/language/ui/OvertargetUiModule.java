@@ -10,7 +10,6 @@
 package de.dlr.sc.overtarget.language.ui;
 
 import de.dlr.sc.overtarget.language.ide.KeywordsSemanticHighlightingCalculator;
-import de.dlr.sc.overtarget.language.ui.AbstractOvertargetUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;

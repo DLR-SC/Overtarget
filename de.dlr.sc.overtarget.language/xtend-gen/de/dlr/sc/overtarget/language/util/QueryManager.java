@@ -36,7 +36,62 @@ import org.osgi.framework.ServiceReference;
  */
 @SuppressWarnings("all")
 public class QueryManager {
+  public RepositoryLocation getReposLocOfUnit(final EObject model) {
+    if ((model instanceof Unit)) {
+      final Unit unit = ((Unit) model);
+      EObject _eContainer = unit.eContainer();
+      final RepositoryLocation location = ((RepositoryLocation) _eContainer);
+      return location;
+    } else {
+      if ((model instanceof RepositoryLocation)) {
+        final RepositoryLocation location_1 = ((RepositoryLocation)model);
+        return location_1;
+      }
+    }
+    return null;
+  }
+  
   public ArrayList<Unit> getUnits(final EObject model) {
+    ArrayList<Unit> _xblockexpression = null;
+    {
+      final RepositoryLocation location = this.getReposLocOfUnit(model);
+      EObject _eContainer = location.eContainer();
+      final TargetFile target = ((TargetFile) _eContainer);
+      _xblockexpression = this.getUnitsInList(target, location);
+    }
+    return _xblockexpression;
+  }
+  
+  public ArrayList<Unit> getUnitsInList(final TargetFile target, final RepositoryLocation reposLoc) {
+    try {
+      try {
+        String _urlAsString = GeneratorHelper.getUrlAsString(reposLoc.getUrl(), target);
+        final URI uri = new URI(_urlAsString);
+        final IQueryResult<IInstallableUnit> results = this.doLoadUnits(uri);
+        ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
+        for (final IInstallableUnit result : results) {
+          {
+            Unit unitFromResult = TargetmodelFactory.eINSTANCE.createUnit();
+            unitFromResult.setSource(result.getId());
+            unitFromResult.setVers(result.getVersion().toString());
+            resultsAsUnits.add(unitFromResult);
+          }
+        }
+        return resultsAsUnits;
+      } catch (final Throwable _t) {
+        if (_t instanceof NullPointerException) {
+          final ArrayList<Unit> emptyList = new ArrayList<Unit>();
+          return emptyList;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected IQueryResult<IInstallableUnit> doLoadUnits(final URI uri) {
     try {
       final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
       final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
@@ -46,29 +101,13 @@ public class QueryManager {
       Object _service_1 = provisioningAgent.getService(
         IMetadataRepositoryManager.SERVICE_NAME);
       final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
-      final Unit unit = ((Unit) model);
-      EObject _eContainer = unit.eContainer();
-      final RepositoryLocation location = ((RepositoryLocation) _eContainer);
-      EObject _eContainer_1 = location.eContainer();
-      final TargetFile target = ((TargetFile) _eContainer_1);
-      String _urlAsString = GeneratorHelper.getUrlAsString(location.getUrl(), target);
-      final URI uri = new URI(_urlAsString);
+      bundleContext.ungetService(providerRef);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
       IQuery<IInstallableUnit> _createIUGroupQuery = QueryUtil.createIUGroupQuery();
       NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
       final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
-      bundleContext.ungetService(providerRef);
-      ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
-      for (final IInstallableUnit result : results) {
-        {
-          Unit unitFromResult = TargetmodelFactory.eINSTANCE.createUnit();
-          unitFromResult.setSource(result.getId());
-          unitFromResult.setVers(result.getVersion().toString());
-          resultsAsUnits.add(unitFromResult);
-        }
-      }
-      return resultsAsUnits;
+      return results;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
