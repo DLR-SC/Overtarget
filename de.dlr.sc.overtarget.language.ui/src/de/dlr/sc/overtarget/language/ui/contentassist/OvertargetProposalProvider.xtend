@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import javax.inject.Inject
 import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
+import org.eclipse.jface.text.templates.TemplateContext
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -90,7 +91,10 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		val queryManager = new QueryManager()
 		val results = queryManager.getUnits(model)
-		results.forEach[acceptor.accept(createCompletionProposal(source, context))]
+		for (result : results) {
+			val unitName = queryManager.getNamefromUnit(result.source)
+			acceptor.accept(createCompletionProposal(unitName + " – " + result.source, context))
+		}
 		super.complete_Source(model, ruleCall, context, acceptor)
 	}
 }

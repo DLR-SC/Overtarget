@@ -22,11 +22,16 @@ import org.eclipse.equinox.p2.query.QueryUtil
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager
 import de.dlr.sc.overtarget.language.Activator
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile
+import org.eclipse.equinox.p2.query.IQueryResult
+import org.eclipse.equinox.p2.metadata.IInstallableUnit
 
 /**
  * This class queries a p2 Repository for the available installable units
  */
 class QueryManager {
+	
+	IQueryResult<IInstallableUnit> results
+	
 	def getReposLocOfUnit(EObject model) {
 		if (model instanceof Unit) {
 			val unit = model as Unit;
@@ -47,7 +52,7 @@ class QueryManager {
 	def getUnitsInList(TargetFile target, RepositoryLocation reposLoc) {
 		try {
 			val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
-			val results = doLoadUnits(uri)
+			results = doLoadUnits(uri)
 
 			var resultsAsUnits = new ArrayList<Unit>;
 			for (result : results) {
@@ -74,8 +79,17 @@ class QueryManager {
 		bundleContext.ungetService(providerRef);
 
 		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
-		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
+		results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
 
 		return results
+	}	
+	
+	def getNamefromUnit(String source) {
+		for (result : results) {
+			if (result.id.equals(source)) {
+				val featureName = result.properties.get("df_LT.featureName")
+				return featureName
+			}
+		}
 	}
 }

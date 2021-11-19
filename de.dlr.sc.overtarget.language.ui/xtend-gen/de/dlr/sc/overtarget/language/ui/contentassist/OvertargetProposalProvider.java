@@ -136,10 +136,14 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   public void complete_Source(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final QueryManager queryManager = new QueryManager();
     final ArrayList<Unit> results = queryManager.getUnits(model);
-    final Consumer<Unit> _function = (Unit it) -> {
-      acceptor.accept(this.createCompletionProposal(it.getSource(), context));
-    };
-    results.forEach(_function);
+    for (final Unit result : results) {
+      {
+        final String unitName = queryManager.getNamefromUnit(result.getSource());
+        String _source = result.getSource();
+        String _plus = ((unitName + " – ") + _source);
+        acceptor.accept(this.createCompletionProposal(_plus, context));
+      }
+    }
     super.complete_Source(model, ruleCall, context, acceptor);
   }
 }

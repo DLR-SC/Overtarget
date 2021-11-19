@@ -36,6 +36,8 @@ import org.osgi.framework.ServiceReference;
  */
 @SuppressWarnings("all")
 public class QueryManager {
+  private IQueryResult<IInstallableUnit> results;
+  
   public RepositoryLocation getReposLocOfUnit(final EObject model) {
     if ((model instanceof Unit)) {
       final Unit unit = ((Unit) model);
@@ -67,9 +69,9 @@ public class QueryManager {
       try {
         String _urlAsString = GeneratorHelper.getUrlAsString(reposLoc.getUrl(), target);
         final URI uri = new URI(_urlAsString);
-        final IQueryResult<IInstallableUnit> results = this.doLoadUnits(uri);
+        this.results = this.doLoadUnits(uri);
         ArrayList<Unit> resultsAsUnits = new ArrayList<Unit>();
-        for (final IInstallableUnit result : results) {
+        for (final IInstallableUnit result : this.results) {
           {
             Unit unitFromResult = TargetmodelFactory.eINSTANCE.createUnit();
             unitFromResult.setSource(result.getId());
@@ -106,10 +108,21 @@ public class QueryManager {
       final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
       IQuery<IInstallableUnit> _createIUGroupQuery = QueryUtil.createIUGroupQuery();
       NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-      final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
-      return results;
+      this.results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
+      return this.results;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public String getNamefromUnit(final String source) {
+    for (final IInstallableUnit result : this.results) {
+      boolean _equals = result.getId().equals(source);
+      if (_equals) {
+        final String featureName = result.getProperties().get("df_LT.featureName");
+        return featureName;
+      }
+    }
+    return null;
   }
 }
