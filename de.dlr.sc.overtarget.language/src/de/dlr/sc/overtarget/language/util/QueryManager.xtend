@@ -37,25 +37,18 @@ class QueryManager {
 			return location
 		}
 	}
-	
+
 	def getUnits(EObject model) {
 		val location = getReposLocOfUnit(model)
 		val target = location.eContainer as TargetFile
-		loadUnits(target, location)
+		getUnitsInList(target, location)
 	}
-	
-	def loadUnits(TargetFile target, RepositoryLocation reposLoc) {
-		val bundleContext = Activator.^default.bundle.bundleContext;
-		val providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
-		val provider = bundleContext.getService(providerRef) as IProvisioningAgentProvider;
-		val provisioningAgent = provider.createAgent(null);
-		val metadataRepositoryManager = provisioningAgent.getService(
-			IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
+
+	def getUnitsInList(TargetFile target, RepositoryLocation reposLoc) {
 		try {
 			val uri = new URI(GeneratorHelper.getUrlAsString(reposLoc.url, target));
-			val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
-			val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
-			bundleContext.ungetService(providerRef);
+			val results = doLoadUnits(uri)
+
 			var resultsAsUnits = new ArrayList<Unit>;
 			for (result : results) {
 				var unitFromResult = TargetmodelFactory.eINSTANCE.createUnit;
@@ -64,9 +57,25 @@ class QueryManager {
 				resultsAsUnits.add(unitFromResult);
 			}
 			return resultsAsUnits;
-		} catch (Exception e) {
+		} catch (NullPointerException npe) {
 			val emptyList = new ArrayList<Unit>
 			return emptyList
 		}
+	}
+
+	def protected doLoadUnits(URI uri) {
+		val bundleContext = Activator.^default.bundle.bundleContext;
+		val providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
+		val provider = bundleContext.getService(providerRef) as IProvisioningAgentProvider;
+		val provisioningAgent = provider.createAgent(null);
+		val metadataRepositoryManager = provisioningAgent.getService(
+			IMetadataRepositoryManager.SERVICE_NAME) as IMetadataRepositoryManager;
+
+		bundleContext.ungetService(providerRef);
+
+		val metadataRepository = metadataRepositoryManager.loadRepository(uri, new NullProgressMonitor());
+		val results = metadataRepository.query(QueryUtil.createIUGroupQuery, new NullProgressMonitor());
+
+		return results
 	}
 }

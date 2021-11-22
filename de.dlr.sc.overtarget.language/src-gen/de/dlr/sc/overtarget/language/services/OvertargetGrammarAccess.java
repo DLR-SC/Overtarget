@@ -711,19 +711,25 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Assignment cUrlAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cUrlUrlExpressionParserRuleCall_4_0 = (RuleCall)cUrlAssignment_4.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cUnitsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cUnitsUnitParserRuleCall_6_0 = (RuleCall)cUnitsAssignment_6.eContents().get(0);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Assignment cUnitsAssignment_6_0 = (Assignment)cAlternatives_6.eContents().get(0);
+		private final RuleCall cUnitsUnitParserRuleCall_6_0_0 = (RuleCall)cUnitsAssignment_6_0.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
+		private final Keyword cUnitKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Assignment cAddAllAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
+		private final Keyword cAddAllAddAllKeyword_6_1_1_0 = (Keyword)cAddAllAssignment_6_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		///* referencedTarget is used when the target has unresolved references. 
 		//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
 		//*/ RepositoryLocation:
-		//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
-		//	units+=Unit*
+		//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' (units+=Unit* | 'Unit'
+		//	addAll?='addAll;')
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' units+=Unit* '}'
+		//referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' (units+=Unit* | 'Unit'
+		//addAll?='addAll;') '}'
 		public Group getGroup() { return cGroup; }
 		
 		//referencedTarget?='ReferencedTarget'?
@@ -753,11 +759,26 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 		
+		//(units+=Unit* | 'Unit' addAll?='addAll;')
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+		
 		//units+=Unit*
-		public Assignment getUnitsAssignment_6() { return cUnitsAssignment_6; }
+		public Assignment getUnitsAssignment_6_0() { return cUnitsAssignment_6_0; }
 		
 		//Unit
-		public RuleCall getUnitsUnitParserRuleCall_6_0() { return cUnitsUnitParserRuleCall_6_0; }
+		public RuleCall getUnitsUnitParserRuleCall_6_0_0() { return cUnitsUnitParserRuleCall_6_0_0; }
+		
+		//'Unit' addAll?='addAll;'
+		public Group getGroup_6_1() { return cGroup_6_1; }
+		
+		//'Unit'
+		public Keyword getUnitKeyword_6_1_0() { return cUnitKeyword_6_1_0; }
+		
+		//addAll?='addAll;'
+		public Assignment getAddAllAssignment_6_1_1() { return cAddAllAssignment_6_1_1; }
+		
+		//'addAll;'
+		public Keyword getAddAllAddAllKeyword_6_1_1_0() { return cAddAllAddAllKeyword_6_1_1_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
@@ -1456,8 +1477,8 @@ public class OvertargetGrammarAccess extends AbstractElementFinder.AbstractGramm
 	///* referencedTarget is used when the target has unresolved references. 
 	//*  The referencedTarget keyword identifies the repositoryLocation as the reference to the unresolved target.
 	//*/ RepositoryLocation:
-	//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{'
-	//	units+=Unit*
+	//	referencedTarget?='ReferencedTarget'? 'RepositoryLocation' name=ID 'url' url=UrlExpression '{' (units+=Unit* | 'Unit'
+	//	addAll?='addAll;')
 	//	'}';
 	public RepositoryLocationElements getRepositoryLocationAccess() {
 		return pRepositoryLocation;

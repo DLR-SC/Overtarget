@@ -61,12 +61,24 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess;
-
+	
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
-		acceptor.accept(createCompletionProposal("version", "version", getImage(grammarAccess.unitRule), context))
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
+	}
+
+	override completeRepositoryLocation_AddAll(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val proposal = createCompletionProposal("addAll;", "addAll;", getImage(grammarAccess.repositoryLocationRule), context) as 
+    
+    
+    
+    ;
+  getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix())
+		if (proposal !== null) {
+			proposal.setPriority(proposal.getPriority() * 2)
+			acceptor.accept(proposal)
+		}
 	}
 
 	override complete_Version(EObject model, RuleCall ruleCall, ContentAssistContext context,
@@ -82,7 +94,7 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 			if (listOfUnits !== null) {
 				for (u : listOfUnits) {
 					versionProposals.add(u)
-					acceptor.accept(createCompletionProposal(u.vers, context))
+					acceptor.accept(createCompletionProposal(u.vers + ";", context))
 				}
 			}
 		}
