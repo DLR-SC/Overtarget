@@ -9,19 +9,19 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.contentassist
 
+import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
+import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
+import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
 import java.text.DateFormat
+import java.util.ArrayList
+import javax.inject.Inject
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
-import javax.inject.Inject
-import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
-import java.util.ArrayList
-import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
-import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
-import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -104,8 +104,7 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		val sourceProposals = new ArrayList
 		val unitManager = UnitManager.instance
-		val unit = model as UnitImpl
-		val reposLoc = unit.eContainer as RepositoryLocation
+		val reposLoc = unitManager.getRepositoryLocation(model)
 		val reposLocName = reposLoc.name
 		val listOfUnits = unitManager.getUnits(reposLocName)
 		if (listOfUnits !== null) {

@@ -143,9 +143,7 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
   public void complete_Source(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final ArrayList<Unit> sourceProposals = new ArrayList<Unit>();
     final UnitManager unitManager = UnitManager.getInstance();
-    final UnitImpl unit = ((UnitImpl) model);
-    EObject _eContainer = unit.eContainer();
-    final RepositoryLocation reposLoc = ((RepositoryLocation) _eContainer);
+    final RepositoryLocation reposLoc = unitManager.getRepositoryLocation(model);
     final String reposLocName = reposLoc.getName();
     final ArrayList<Unit> listOfUnits = unitManager.getUnits(reposLocName);
     if ((listOfUnits != null)) {
