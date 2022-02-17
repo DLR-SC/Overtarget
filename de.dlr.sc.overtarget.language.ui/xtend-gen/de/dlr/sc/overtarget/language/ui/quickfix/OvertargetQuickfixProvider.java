@@ -20,6 +20,7 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
@@ -28,6 +29,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -64,6 +66,26 @@ public class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
       xtextDocument.replace(_minus_1, deprecatedWorkingSystemKeyword.length(), windowingSystemKeyword);
     };
     acceptor.accept(issue, "Fix Working System", "Replace with correct Windowing System.", "upcase.png", _function);
+  }
+  
+  @Fix(Diagnostic.LINKING_DIAGNOSTIC)
+  public void fixPlaceholderForReferencedTarget(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final String placeholder = (((("\n\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {") + "\n \t \t") + "// add necessary Units here;") + "\n \t}");
+    acceptor.accept(issue, "Create placeholder for referencedTarget", "", "", 
+      new IModification() {
+        @Override
+        public void apply(final IModificationContext context) throws Exception {
+          final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+          if ((editor instanceof ITextEditor)) {
+            final IDocumentProvider dp = ((ITextEditor)editor).getDocumentProvider();
+            final IDocument doc = dp.getDocument(((ITextEditor)editor).getEditorInput());
+            int _numberOfLines = doc.getNumberOfLines();
+            int _minus = (_numberOfLines - 1);
+            final int offset = doc.getLineOffset(_minus);
+            doc.replace(offset, 0, (placeholder + "\n"));
+          }
+        }
+      }, 1);
   }
   
   @Fix(Diagnostic.LINKING_DIAGNOSTIC)
