@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
- *
+ * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.contentassist
@@ -21,6 +21,7 @@ import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess
 import java.util.ArrayList
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -61,20 +62,18 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 
 	@Inject
 	OvertargetGrammarAccess grammarAccess;
-	
+
 	override completeRepositoryLocation_Units(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("Unit", "Unit", getImage(grammarAccess.unitRule), context))
 		super.completeRepositoryLocation_Units(model, assignment, context, acceptor)
 	}
 
-	override completeRepositoryLocation_AddAll(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val proposal = createCompletionProposal("addAll;", "addAll;", getImage(grammarAccess.repositoryLocationRule), context) as 
-    
-    
-    
-    ;
-  getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix())
+	override completeRepositoryLocation_AddAll(EObject model, Assignment assignment, ContentAssistContext context,
+		ICompletionProposalAcceptor acceptor) {
+		val proposal = createCompletionProposal("addAll;", "addAll;", getImage(grammarAccess.repositoryLocationRule),
+			context) as ConfigurableCompletionProposal;
+		getPriorityHelper().adjustKeywordPriority(proposal, context.getPrefix())
 		if (proposal !== null) {
 			proposal.setPriority(proposal.getPriority() * 2)
 			acceptor.accept(proposal)
@@ -84,7 +83,7 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 	override complete_Version(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		val versionProposals = new ArrayList
-		val unit = model as UnitImpl;
+		val unit = model as UnitImpl
 		val reposLoc = unit.eContainer as RepositoryLocation
 		val reposLocName = reposLoc.name
 		val unitManager = UnitManager.instance

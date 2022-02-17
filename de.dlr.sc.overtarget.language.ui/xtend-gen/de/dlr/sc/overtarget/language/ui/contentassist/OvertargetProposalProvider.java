@@ -14,6 +14,8 @@ import de.dlr.sc.overtarget.language.services.OvertargetGrammarAccess;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.targetmodel.impl.UnitImpl;
+import de.dlr.sc.overtarget.language.ui.contentassist.AbstractOvertargetProposalProvider;
+import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -127,7 +129,9 @@ public class OvertargetProposalProvider extends AbstractOvertargetProposalProvid
         for (final Unit u : listOfUnits) {
           {
             versionProposals.add(u);
-            acceptor.accept(this.createCompletionProposal(u.getVers() + ";", context));
+            String _vers = u.getVers();
+            String _plus = (_vers + ";");
+            acceptor.accept(this.createCompletionProposal(_plus, context));
           }
         }
       }
