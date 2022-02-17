@@ -83,7 +83,7 @@ class OvertargetProposalProvider extends AbstractOvertargetProposalProvider {
 	override complete_Version(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		val versionProposals = new ArrayList
-		val unit = model as UnitImpl;
+		val unit = model as UnitImpl
 		val reposLoc = unit.eContainer as RepositoryLocation
 		val reposLocName = reposLoc.name
 		val unitManager = UnitManager.instance
