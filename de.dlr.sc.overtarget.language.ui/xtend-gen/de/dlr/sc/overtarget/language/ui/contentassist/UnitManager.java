@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -121,5 +122,20 @@ public class UnitManager {
     };
     this.job = Job.create("Loading units", this.runnable);
     this.job.schedule();
+  }
+  
+  public RepositoryLocation getRepositoryLocation(final EObject model) {
+    if ((model instanceof RepositoryLocation)) {
+      final RepositoryLocation reposLoc = ((RepositoryLocation) model);
+      return reposLoc;
+    } else {
+      if ((model instanceof Unit)) {
+        final Unit unit = ((Unit) model);
+        EObject _eContainer = unit.eContainer();
+        final RepositoryLocation reposLoc_1 = ((RepositoryLocation) _eContainer);
+        return reposLoc_1;
+      }
+    }
+    return null;
   }
 }
