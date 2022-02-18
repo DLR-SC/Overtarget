@@ -14,6 +14,8 @@ import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
 import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
+import de.dlr.sc.overtarget.language.util.MockupQueryResult;
+import de.dlr.sc.overtarget.language.util.TestQueryManager;
 import java.util.ArrayList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;

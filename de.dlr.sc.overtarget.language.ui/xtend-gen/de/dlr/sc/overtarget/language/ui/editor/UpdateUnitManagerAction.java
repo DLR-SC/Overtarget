@@ -12,6 +12,7 @@ package de.dlr.sc.overtarget.language.ui.editor;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
+import de.dlr.sc.overtarget.language.ui.editor.OvertargetXtextEditor;
 import java.util.ResourceBundle;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;

@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.targetmodel.TargetmodelPackage;
 import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
+import de.dlr.sc.overtarget.language.validation.OvertargetValidator;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
