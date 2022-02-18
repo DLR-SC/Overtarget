@@ -1,10 +1,10 @@
 /*******************************************************************************
  * Copyright (c) 2020 German Aerospace Center (DLR), Simulation and Software Technology, Germany.
- *
+ * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.editor
@@ -34,16 +34,18 @@ class UpdateUnitManagerAction extends TextEditorAction {
 			val input = editor.editorInput
 			if (input instanceof IFileEditorInput) {
 
-			// get current document from editor which represents the tmodel
-			val overtargetEditor = new OvertargetXtextEditor
-			val document = overtargetEditor.getXtextDocument
-			if (document !== null) {
+				// get current document from editor which represents the tmodel
+				val overtargetEditor = new OvertargetXtextEditor
+				val document = overtargetEditor.getXtextDocument
+				if (document !== null) {
 					val target = document.contents.get(0) as TargetFile
 					val repositoryLocations = target.repositoryLocations
 					for (reposLoc : repositoryLocations) {
 						val unitManager = UnitManager.instance
-						if (!unitManager.checkIfUnitsLoaded(reposLoc.name)) {
-							unitManager.loadUnits(reposLoc)
+						if (unitManager.checkUriIsValid(reposLoc)) {
+							if (!unitManager.checkIfUnitsLoaded(reposLoc.name)) {
+								unitManager.loadUnits(reposLoc)
+							}
 						}
 					}
 				}

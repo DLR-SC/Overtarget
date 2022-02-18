@@ -12,6 +12,7 @@ package de.dlr.sc.overtarget.language.ui.editor;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
 import de.dlr.sc.overtarget.language.ui.contentassist.UnitManager;
+import de.dlr.sc.overtarget.language.ui.editor.OvertargetXtextEditor;
 import java.util.ResourceBundle;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -48,10 +49,13 @@ public class UpdateUnitManagerAction extends TextEditorAction {
           for (final RepositoryLocation reposLoc : repositoryLocations) {
             {
               final UnitManager unitManager = UnitManager.getInstance();
-              boolean _checkIfUnitsLoaded = unitManager.checkIfUnitsLoaded(reposLoc.getName());
-              boolean _not = (!_checkIfUnitsLoaded);
-              if (_not) {
-                unitManager.loadUnits(reposLoc);
+              boolean _checkUriIsValid = unitManager.checkUriIsValid(reposLoc);
+              if (_checkUriIsValid) {
+                boolean _checkIfUnitsLoaded = unitManager.checkIfUnitsLoaded(reposLoc.getName());
+                boolean _not = (!_checkIfUnitsLoaded);
+                if (_not) {
+                  unitManager.loadUnits(reposLoc);
+                }
               }
             }
           }
