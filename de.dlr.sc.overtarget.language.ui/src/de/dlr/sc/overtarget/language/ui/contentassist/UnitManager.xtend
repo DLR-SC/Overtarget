@@ -125,7 +125,7 @@ class UnitManager {
 				new URI(uri.content.toString)
 				return true;
 			} catch (URISyntaxException e) {
-				Activator.getDefault().getLog().error(e.getMessage());
+				Activator.getDefault.getLog.info(e.message);
 				return false;
 			}
 		}
