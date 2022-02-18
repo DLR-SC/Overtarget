@@ -12,9 +12,13 @@ package de.dlr.sc.overtarget.language.ui.contentassist;
 import de.dlr.sc.overtarget.language.Activator;
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation;
 import de.dlr.sc.overtarget.language.targetmodel.Unit;
+import de.dlr.sc.overtarget.language.targetmodel.UrlExpression;
+import de.dlr.sc.overtarget.language.targetmodel.impl.UrlElementStringImpl;
 import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter;
 import de.dlr.sc.overtarget.language.util.QueryManager;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.eclipse.core.runtime.CoreException;
@@ -95,31 +99,62 @@ public class UnitManager {
    * 					<code>Status.CANCEL_STATUS</code> if loading units failed
    */
   public void loadUnits(final RepositoryLocation reposLoc) {
-    this.runnable = new OvertargetRunnableAdapter() {
-      @Override
-      public void doRun(final IProgressMonitor monitor) {
-        final QueryManager queryManager = new QueryManager();
-        try {
-          final ArrayList<Unit> units = queryManager.getUnits(reposLoc);
-          boolean _isEmpty = units.isEmpty();
-          boolean _not = (!_isEmpty);
-          if (_not) {
-            UnitManager.this.mapOfUnits.put(reposLoc.getName(), units);
-          }
-        } catch (final Throwable _t) {
-          if (_t instanceof CoreException || _t instanceof IOException) {
-            final Exception e = (Exception)_t;
-            String _pluginId = Activator.getPluginId();
-            final Status status = new Status(Status.ERROR, _pluginId, 
-              "Loading units failed", e);
-            StatusManager.getManager().handle(status, StatusManager.SHOW);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
+    boolean _checkUriIsValid = this.checkUriIsValid(reposLoc);
+    if (_checkUriIsValid) {
+      this.runnable = new OvertargetRunnableAdapter() {
+        @Override
+        public void doRun(final IProgressMonitor monitor) {
+          final QueryManager queryManager = new QueryManager();
+          try {
+            final ArrayList<Unit> units = queryManager.getUnits(reposLoc);
+            boolean _isEmpty = units.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              UnitManager.this.mapOfUnits.put(reposLoc.getName(), units);
+            }
+          } catch (final Throwable _t) {
+            if (_t instanceof CoreException || _t instanceof IOException) {
+              final Exception e = (Exception)_t;
+              String _pluginId = Activator.getPluginId();
+              final Status status = new Status(Status.ERROR, _pluginId, "Loading units failed", e);
+              StatusManager.getManager().handle(status, StatusManager.SHOW);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
           }
         }
+      };
+      this.job = Job.create("Loading units", this.runnable);
+      this.job.schedule();
+    }
+  }
+  
+  /**
+   * This method checks if the uri of a repository location is not empty and valid
+   * 
+   * @param reposLoc	the repository location which contains a uri to a repository
+   * @return false	if the uri is empty or not valid
+   * @return true		if the uri is valid
+   */
+  public boolean checkUriIsValid(final RepositoryLocation reposLoc) {
+    final UrlExpression uri = reposLoc.getUrl();
+    if ((uri instanceof UrlElementStringImpl)) {
+      boolean _isEmpty = ((UrlElementStringImpl)uri).getContent().isEmpty();
+      if (_isEmpty) {
+        return false;
       }
-    };
-    this.job = Job.create("Loading units", this.runnable);
-    this.job.schedule();
+      try {
+        String _string = ((UrlElementStringImpl)uri).getContent().toString();
+        new URI(_string);
+        return true;
+      } catch (final Throwable _t) {
+        if (_t instanceof URISyntaxException) {
+          return false;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
+    return false;
   }
 }
