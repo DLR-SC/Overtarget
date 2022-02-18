@@ -40,8 +40,8 @@
 		<build.file.zip>Overtarget.zip</build.file.zip>
 		<build.deploy.release>false</build.deploy.release>
 
-		<eclipse.simultaneous.release.name>2019-06 Release</eclipse.simultaneous.release.name>
-		<eclipse.simultaneous.release.repository>http://download.eclipse.org/releases/2019-06/</eclipse.simultaneous.release.repository>
+		<eclipse.simultaneous.release.name>2021-12 Release</eclipse.simultaneous.release.name>
+		<eclipse.simultaneous.release.repository>http://download.eclipse.org/releases/2021-12/</eclipse.simultaneous.release.repository>
 		
 		<build.file.core.win32>${build.file}.zip</build.file.core.win32>
 		<build.file.core.linux>${build.file}.tar.gz</build.file.core.linux>
