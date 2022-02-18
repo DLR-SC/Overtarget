@@ -9,23 +9,24 @@
  *******************************************************************************/
 package de.dlr.sc.overtarget.language.ui.contentassist
 
-import java.util.HashMap
-import java.util.ArrayList
-import de.dlr.sc.overtarget.language.targetmodel.Unit
-import org.eclipse.core.runtime.jobs.Job
-import org.eclipse.core.runtime.IProgressMonitor
-import de.dlr.sc.overtarget.language.util.QueryManager
-import org.eclipse.core.runtime.Status
-import org.eclipse.core.runtime.CoreException
-import java.io.IOException
 import de.dlr.sc.overtarget.language.Activator
-import org.eclipse.ui.statushandlers.StatusManager
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
-import org.eclipse.ui.PlatformUI
+import de.dlr.sc.overtarget.language.targetmodel.Unit
 import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter
 import de.dlr.sc.overtarget.language.targetmodel.impl.UrlElementStringImpl
 import java.net.URI
 import java.net.URISyntaxException
+import de.dlr.sc.overtarget.language.util.QueryManager
+import java.io.IOException
+import java.util.ArrayList
+import java.util.HashMap
+import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.Status
+import org.eclipse.core.runtime.jobs.Job
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.ui.PlatformUI
+import org.eclipse.ui.statushandlers.StatusManager
 
 class UnitManager {
 
@@ -106,6 +107,7 @@ class UnitManager {
 
 		}
 	}
+
 		/**
 		 * This method checks if the uri of a repository location is not empty and valid
 		 * 
@@ -128,4 +130,20 @@ class UnitManager {
 		}
 	}
 
+	/**
+	* This method gets the current repository location out of the tmodel
+	*
+	* @param model		the current tmodel
+	* @return reposLoc 	the repository location, either from a unit or a repository location
+	*/
+	def getRepositoryLocation(EObject model) {
+		if (model instanceof RepositoryLocation) {
+			val reposLoc = model as RepositoryLocation
+			return reposLoc
+		} else if (model instanceof Unit) {
+			val unit = model as Unit
+			val reposLoc = unit.eContainer as RepositoryLocation
+			return reposLoc
+		}
+	}
 }
