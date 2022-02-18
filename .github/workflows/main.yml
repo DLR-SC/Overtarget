@@ -119,7 +119,9 @@ jobs:
       # Perform various setup operations
       # --------------------------------------------      
       - name: Setup - Prepare OS
-        uses: virtualsatellite/ci-actions/ci-setup-action@v2
+        uses: virtualsatellite/ci-actions/ci-setup-action@v5-beta
+        with:
+           jdk: 11
        
       # --------------------------------------------
       # Development and Feature branches
@@ -192,9 +194,9 @@ jobs:
       # Perform various setup operations
       # --------------------------------------------      
       - name: Setup - Prepare OS
-        uses: virtualsatellite/ci-actions/ci-setup-action@v2
+        uses: virtualsatellite/ci-actions/ci-setup-action@v5-beta
         with:
-           pkgs_file: apt_vtk_zmq_packages
+           jdk: 11
 
       # --------------------------------------------
       # Development and Feature branches
@@ -246,7 +248,9 @@ jobs:
       # Perform various setup operations
       # --------------------------------------------
       - name: Setup - Prepare OS
-        uses: virtualsatellite/ci-actions/ci-setup-action@v2
+        uses: virtualsatellite/ci-actions/ci-setup-action@v5-beta
+        with:
+           jdk: 11
    
       # --------------------------------------------
       # Development and Feature branches
