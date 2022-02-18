@@ -9,7 +9,7 @@ Require-Bundle: de.dlr.sc.overtarget.language,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: de.dlr.sc.overtarget.language.ide,
  de.dlr.sc.overtarget.language.ide.contentassist.antlr,
  de.dlr.sc.overtarget.language.ide.contentassist.antlr.internal
