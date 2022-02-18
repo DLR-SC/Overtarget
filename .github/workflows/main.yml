@@ -263,7 +263,7 @@ jobs:
       # Development and Feature branches
       # --------------------------------------------
       - name: Build - Assemble
-        uses: virtualsatellite/ci-actions/ci-maven-simple-build-action@v2
+        uses: virtualsatellite/ci-actions/ci-maven-simple-build-action@v5-beta
         with:
           build_job: assemble
           build_profile: ${{ steps.build_decision.outputs.build_type }}
