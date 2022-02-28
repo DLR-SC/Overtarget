@@ -22,6 +22,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
@@ -151,7 +152,10 @@ public class UnitManager {
       } catch (final Throwable _t) {
         if (_t instanceof URISyntaxException) {
           final URISyntaxException e = (URISyntaxException)_t;
-          Activator.getDefault().getLog().info(e.getMessage());
+          ILog _log = Activator.getDefault().getLog();
+          String _pluginId = Activator.getPluginId();
+          Status _status = new Status(Status.ERROR, _pluginId, "Could not resolve URI", e);
+          _log.log(_status);
           return false;
         } else {
           throw Exceptions.sneakyThrow(_t);

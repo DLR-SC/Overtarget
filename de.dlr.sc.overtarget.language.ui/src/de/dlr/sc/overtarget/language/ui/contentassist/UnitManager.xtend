@@ -12,12 +12,12 @@ package de.dlr.sc.overtarget.language.ui.contentassist
 import de.dlr.sc.overtarget.language.Activator
 import de.dlr.sc.overtarget.language.targetmodel.RepositoryLocation
 import de.dlr.sc.overtarget.language.targetmodel.Unit
-import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter
 import de.dlr.sc.overtarget.language.targetmodel.impl.UrlElementStringImpl
-import java.net.URI
-import java.net.URISyntaxException
+import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter
 import de.dlr.sc.overtarget.language.util.QueryManager
 import java.io.IOException
+import java.net.URI
+import java.net.URISyntaxException
 import java.util.ArrayList
 import java.util.HashMap
 import org.eclipse.core.runtime.CoreException
@@ -123,10 +123,10 @@ class UnitManager {
 			}
 			try {
 				new URI(uri.content.toString)
-				return true;
+				return true
 			} catch (URISyntaxException e) {
-				Activator.^default.log.info(e.message);
-				return false;
+				Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.getPluginId(), "Could not resolve URI", e));
+				return false
 			}
 		}
 	}
