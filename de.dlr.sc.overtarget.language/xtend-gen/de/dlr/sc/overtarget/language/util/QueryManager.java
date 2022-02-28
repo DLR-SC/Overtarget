@@ -57,7 +57,6 @@ public class QueryManager {
       final RepositoryLocation location = this.getReposLocOfUnit(model);
       EObject _eContainer = location.eContainer();
       final TargetFile target = ((TargetFile) _eContainer);
-
       _xblockexpression = this.getUnitsInList(target, location);
     }
     return _xblockexpression;
@@ -93,7 +92,6 @@ public class QueryManager {
   }
   
   protected IQueryResult<IInstallableUnit> doLoadUnits(final URI uri) {
-
     try {
       final BundleContext bundleContext = Activator.getDefault().getBundle().getBundleContext();
       final ServiceReference<?> providerRef = bundleContext.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
@@ -103,7 +101,6 @@ public class QueryManager {
       Object _service_1 = provisioningAgent.getService(
         IMetadataRepositoryManager.SERVICE_NAME);
       final IMetadataRepositoryManager metadataRepositoryManager = ((IMetadataRepositoryManager) _service_1);
-
       bundleContext.ungetService(providerRef);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       final IMetadataRepository metadataRepository = metadataRepositoryManager.loadRepository(uri, _nullProgressMonitor);
@@ -111,7 +108,6 @@ public class QueryManager {
       NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
       final IQueryResult<IInstallableUnit> results = metadataRepository.query(_createIUGroupQuery, _nullProgressMonitor_1);
       return results;
-
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
