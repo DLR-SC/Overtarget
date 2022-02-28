@@ -150,6 +150,8 @@ public class UnitManager {
         return true;
       } catch (final Throwable _t) {
         if (_t instanceof URISyntaxException) {
+          final URISyntaxException e = (URISyntaxException)_t;
+          Activator.getDefault().getLog().info(e.getMessage());
           return false;
         } else {
           throw Exceptions.sneakyThrow(_t);
