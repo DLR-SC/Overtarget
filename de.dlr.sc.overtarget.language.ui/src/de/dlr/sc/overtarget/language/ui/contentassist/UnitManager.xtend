@@ -27,6 +27,8 @@ import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.statushandlers.StatusManager
+import java.net.MalformedURLException
+import java.net.URL
 
 class UnitManager {
 
@@ -122,7 +124,7 @@ class UnitManager {
 				return false
 			}
 			try {
-				new URI(uri.content.toString)
+				new URL(uri.content.toString)
 				return true
 			} catch (URISyntaxException e) {
 				Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.getPluginId(), "Could not resolve URI", e));

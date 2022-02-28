@@ -17,8 +17,8 @@ import de.dlr.sc.overtarget.language.targetmodel.impl.UrlElementStringImpl;
 import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter;
 import de.dlr.sc.overtarget.language.util.QueryManager;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.eclipse.core.runtime.CoreException;
@@ -139,30 +139,34 @@ public class UnitManager {
    * @return true		if the uri is valid
    */
   public boolean checkUriIsValid(final RepositoryLocation reposLoc) {
-    final UrlExpression uri = reposLoc.getUrl();
-    if ((uri instanceof UrlElementStringImpl)) {
-      boolean _isEmpty = ((UrlElementStringImpl)uri).getContent().isEmpty();
-      if (_isEmpty) {
-        return false;
-      }
-      try {
-        String _string = ((UrlElementStringImpl)uri).getContent().toString();
-        new URI(_string);
-        return true;
-      } catch (final Throwable _t) {
-        if (_t instanceof URISyntaxException) {
-          final URISyntaxException e = (URISyntaxException)_t;
-          ILog _log = Activator.getDefault().getLog();
-          String _pluginId = Activator.getPluginId();
-          Status _status = new Status(Status.ERROR, _pluginId, "Could not resolve URI", e);
-          _log.log(_status);
+    try {
+      final UrlExpression uri = reposLoc.getUrl();
+      if ((uri instanceof UrlElementStringImpl)) {
+        boolean _isEmpty = ((UrlElementStringImpl)uri).getContent().isEmpty();
+        if (_isEmpty) {
           return false;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+        }
+        try {
+          String _string = ((UrlElementStringImpl)uri).getContent().toString();
+          new URL(_string);
+          return true;
+        } catch (final Throwable _t) {
+          if (_t instanceof URISyntaxException) {
+            final URISyntaxException e = (URISyntaxException)_t;
+            ILog _log = Activator.getDefault().getLog();
+            String _pluginId = Activator.getPluginId();
+            Status _status = new Status(Status.ERROR, _pluginId, "Could not resolve URI", e);
+            _log.log(_status);
+            return false;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
         }
       }
+      return false;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return false;
   }
   
   /**
