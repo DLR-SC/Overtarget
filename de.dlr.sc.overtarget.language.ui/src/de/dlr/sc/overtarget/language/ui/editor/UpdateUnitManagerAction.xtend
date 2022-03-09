@@ -42,10 +42,8 @@ class UpdateUnitManagerAction extends TextEditorAction {
 					val repositoryLocations = target.repositoryLocations
 					for (reposLoc : repositoryLocations) {
 						val unitManager = UnitManager.instance
-						if (unitManager.checkUriIsValid(reposLoc)) {
-							if (!unitManager.checkIfUnitsLoaded(reposLoc.name)) {
+						if (unitManager.checkUriIsValid(reposLoc) && !unitManager.checkIfUnitsLoaded(reposLoc.name)) {
 								unitManager.loadUnits(reposLoc)
-							}
 						}
 					}
 				}

@@ -16,8 +16,8 @@ import de.dlr.sc.overtarget.language.targetmodel.impl.UrlElementStringImpl
 import de.dlr.sc.overtarget.language.ui.OvertargetRunnableAdapter
 import de.dlr.sc.overtarget.language.util.QueryManager
 import java.io.IOException
-import java.net.URI
 import java.net.URISyntaxException
+import java.net.URL
 import java.util.ArrayList
 import java.util.HashMap
 import org.eclipse.core.runtime.CoreException
@@ -27,8 +27,6 @@ import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.statushandlers.StatusManager
-import java.net.MalformedURLException
-import java.net.URL
 
 class UnitManager {
 
@@ -63,8 +61,9 @@ class UnitManager {
 	def checkIfUnitsLoaded(String reposLocName) {
 		if (!mapOfUnits.containsKey(reposLocName)) {
 			return false
-		} else
+		} else {
 			return true
+		}
 	}
 
 	def getUnits(String reposLocName) {
@@ -103,20 +102,18 @@ class UnitManager {
 					}
 				}
 			}
-
 			job = Job.create("Loading units", runnable)
 			job.schedule();
-
 		}
 	}
 
-		/**
-		 * This method checks if the uri of a repository location is not empty and valid
-		 * 
-		 * @param reposLoc	the repository location which contains a uri to a repository
-		 * @return false	if the uri is empty or not valid
-		 * @return true		if the uri is valid
-		 */
+	/**
+	 * This method checks if the uri of a repository location is not empty and valid
+	 * 
+	 * @param reposLoc	the repository location which contains a uri to a repository
+	 * @return false	if the uri is empty or not valid
+	 * @return true		if the uri is valid
+	 */
 	def checkUriIsValid(RepositoryLocation reposLoc) {
 		val uri = reposLoc.url
 		if (uri instanceof UrlElementStringImpl) {
@@ -127,18 +124,19 @@ class UnitManager {
 				new URL(uri.content.toString)
 				return true
 			} catch (URISyntaxException e) {
-				Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.getPluginId(), "Could not resolve URI", e));
+				Activator.getDefault().getLog().log(
+					new Status(Status.ERROR, Activator.getPluginId(), "Could not resolve URI", e));
 				return false
 			}
 		}
 	}
 
 	/**
-	* This method gets the current repository location out of the tmodel
-	*
-	* @param model		the current tmodel
-	* @return reposLoc 	the repository location, either from a unit or a repository location
-	*/
+	 * This method gets the current repository location out of the tmodel
+	 * 
+	 * @param model		the current tmodel
+	 * @return reposLoc 	the repository location, either from a unit or a repository location
+	 */
 	def getRepositoryLocation(EObject model) {
 		if (model instanceof RepositoryLocation) {
 			val reposLoc = model as RepositoryLocation

@@ -49,13 +49,8 @@ public class UpdateUnitManagerAction extends TextEditorAction {
           for (final RepositoryLocation reposLoc : repositoryLocations) {
             {
               final UnitManager unitManager = UnitManager.getInstance();
-              boolean _checkUriIsValid = unitManager.checkUriIsValid(reposLoc);
-              if (_checkUriIsValid) {
-                boolean _checkIfUnitsLoaded = unitManager.checkIfUnitsLoaded(reposLoc.getName());
-                boolean _not = (!_checkIfUnitsLoaded);
-                if (_not) {
-                  unitManager.loadUnits(reposLoc);
-                }
+              if ((unitManager.checkUriIsValid(reposLoc) && (!unitManager.checkIfUnitsLoaded(reposLoc.getName())))) {
+                unitManager.loadUnits(reposLoc);
               }
             }
           }
