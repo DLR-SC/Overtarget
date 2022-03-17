@@ -10,6 +10,7 @@
 package de.dlr.sc.overtarget.language.generator.util;
 
 import com.google.inject.Inject;
+import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper;
 import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.tests.OvertargetInjectorProvider;
 import java.io.ByteArrayInputStream;
