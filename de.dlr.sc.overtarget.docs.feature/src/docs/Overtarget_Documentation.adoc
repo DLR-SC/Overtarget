@@ -132,7 +132,7 @@ for a ReferencedTarget.
 | There is a quick fix to create a placeholder for a ReferencedTarget. After executing the quick fix, 
 the name and url of the repositoryLocation and the unit which leads to the unresolved references.
 |image:quickfix_placeholder.png[Quick fix placeholder]
-_Quick fix to create placeholder for ReferencedTarget_
+_Quick fix to create placeholder_
 
 |There is a quick fix which suggests to generate a targetForReferences. 
 Executing that quick fix will generate a targetForReferences. 
