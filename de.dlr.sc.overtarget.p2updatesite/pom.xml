@@ -13,7 +13,7 @@
 	<parent>
 		<artifactId>de.dlr.sc.overtarget.parent</artifactId>
 		<groupId>de.dlr.sc.overtarget</groupId>
-		<version>1.2.1-SNAPSHOT</version>
+		<version>1.3.0-SNAPSHOT</version>
 		<relativePath>../maven/pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
@@ -24,7 +24,10 @@
 
 	<properties>
 		<build.folder.application>Overtarget</build.folder.application>
-		<build.folder.fullpath>${build.folder.target.p2}/${build.folder.application}/${build.folder.type}</build.folder.fullpath>
+		<build.folder.fullpath.p2>${build.folder.target.p2}/${build.folder.application}/${build.folder.type}</build.folder.fullpath.p2>
+		<build.folder.fullpath.bin>${build.folder.target.bin}/${build.folder.application}/${build.folder.type}</build.folder.fullpath.bin>
+		<build.file.core.win32.fullpath>${build.folder.target.bin}/${build.folder.application}/${build.folder.type}/${build.file.core.win32}</build.file.core.win32.fullpath>
+		<build.file.core.linux.fullpath>${build.folder.target.bin}/${build.folder.application}/${build.folder.type}/${build.file.core.linux}</build.file.core.linux.fullpath>
 	</properties>
 
 	<build>
@@ -59,19 +62,35 @@
 							<!-- ANT Script Start -->
 							<target>
 								<fail
-									message="Cannot Release!!! Release folder already exists !!! Potential overwrite to ${build.folder.fullpath} !!!">
+									message="Cannot Release!!! Release folder already exists !!! Potential overwrite to ${build.folder.fullpath.p2} !!!">
 									<condition>
 										<and>
 											<equals arg1="${build.deploy.release}" arg2="true" />
-											<available file="${build.folder.fullpath}" type="dir" />
+											<available file="${build.folder.fullpath.p2}" type="dir" />
 										</and>
 									</condition>
 								</fail>
-								<delete dir="${build.folder.fullpath}" />
-								<copy todir="${build.folder.fullpath}">
+								
+								<delete dir="${build.folder.fullpath.p2}" />
+								<mkdir dir="${build.folder.fullpath.p2}" />
+								
+								<copy todir="${build.folder.fullpath.p2}">
 									<fileset dir="./target/repository">
 									</fileset>
 								</copy>
+								
+								<delete dir="${build.folder.fullpath.bin}" />
+								<mkdir dir="${build.folder.fullpath.bin}" />
+								
+								<delete file="${build.file.core.win32.fullpath}" />
+								<delete file="${build.file.core.linux.fullpath}" />
+								
+								<zip destfile="${build.file.core.win32.fullpath}"
+									basedir="./target/repository" />
+								<tar destfile="${build.file.core.linux.fullpath}"
+									basedir="./target/repository"
+									compression="gzip" 
+									longfile="gnu" />
 							</target>
 							<!-- ANT Script Stop -->
 						</configuration>

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Overtarget UI
 Bundle-Vendor: DLR (German Aerospace Center)
-Bundle-Version: 1.2.1.qualifier
+Bundle-Version: 1.3.0.qualifier
 Bundle-SymbolicName: de.dlr.sc.overtarget.language.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.dlr.sc.overtarget.language,
@@ -30,6 +30,7 @@ Require-Bundle: de.dlr.sc.overtarget.language,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: de.dlr.sc.overtarget.language.ui,
  de.dlr.sc.overtarget.language.ui.contentassist,
+ de.dlr.sc.overtarget.language.ui.editor,
  de.dlr.sc.overtarget.language.ui.handler,
  de.dlr.sc.overtarget.language.ui.internal,
  de.dlr.sc.overtarget.language.ui.labeling,

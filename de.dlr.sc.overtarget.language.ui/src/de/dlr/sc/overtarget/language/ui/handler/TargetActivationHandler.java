@@ -30,8 +30,11 @@ import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import de.dlr.sc.overtarget.language.generator.OvertargetGenerator;
+import de.dlr.sc.overtarget.language.targetmodel.TargetFile;
+import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary;
+import de.dlr.sc.overtarget.language.targetmodel.TargetModel;
 import de.dlr.sc.overtarget.language.ui.internal.LanguageActivator;
+import de.dlr.sc.overtarget.language.util.TargetFileHandler;
 import de.dlr.sc.overtarget.language.util.TargetPlatformHelper;
 
 public class TargetActivationHandler extends AbstractHandler implements IHandler {
@@ -57,20 +60,15 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 			if (editorPart != null) {
 				input = editorPart.getEditorInput();
 			}
-
 			IFile file = ((FileEditorInput) input).getFile();
-			String targetName = file.getName().replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION);
 			IProject project = file.getProject();
 			String outputConfig = getOutputConfigurations(project);
-			IFile targetFile;
-			String outputPath = outputConfig.replace(".", "");
-			if (outputPath.equals("/")) {
-				targetFile = project.getFile("/" + targetName);
-			} else {
-				String targetPath = outputPath + "/" + targetName;
-				targetFile = project.getFile(targetPath);
-			}
-			if (targetFile.exists()) {
+			TargetFileHandler fileHandler = new TargetFileHandler();
+			IFile targetFile = fileHandler.findTargetFile(file, outputConfig, file.getName());
+
+			TargetFile tmodel = fileHandler.getTmodel(file, null);
+			
+			if (tmodel instanceof TargetModel && targetFile.exists()) {
 				try {
 					TargetPlatformHelper targetPlatHelper = new TargetPlatformHelper();
 					targetPlatHelper.setAsActiveTarget(targetFile);
@@ -82,6 +80,13 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 					errorMessage.setMessage(file.getName() + " could not be set as active target.");
 					errorMessage.open();
 				}
+			} else if (tmodel instanceof TargetLibrary) {
+				MessageBox errorMessage = new MessageBox(
+						Display.getCurrent().getActiveShell(), 
+						SWT.OK | SWT.ICON_ERROR);
+				errorMessage.setText("Error");
+				errorMessage.setMessage("A TargetLibrary cannot be set as active target.");
+				errorMessage.open();
 			} else {
 				MessageBox errorMessage = new MessageBox(
 						Display.getCurrent().getActiveShell(), 
@@ -91,7 +96,6 @@ public class TargetActivationHandler extends AbstractHandler implements IHandler
 				errorMessage.open();
 			}
 		}
-
 		return null;
 	}
 

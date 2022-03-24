@@ -944,7 +944,7 @@ ruleRepositoryLocation returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getRepositoryLocationRule());
 					}
-					setWithLastConsumed($current, "referencedTarget", true, "ReferencedTarget");
+					setWithLastConsumed($current, "referencedTarget", lv_referencedTarget_0_0 != null, "ReferencedTarget");
 				}
 			)
 		)?
@@ -999,26 +999,49 @@ ruleRepositoryLocation returns [EObject current=null]
 		}
 		(
 			(
-				{
-					newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_6_0());
-				}
-				lv_units_6_0=ruleUnit
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getRepositoryLocationAccess().getUnitsUnitParserRuleCall_6_0_0());
 					}
-					add(
-						$current,
-						"units",
-						lv_units_6_0,
-						"de.dlr.sc.overtarget.language.Overtarget.Unit");
-					afterParserOrEnumRuleCall();
+					lv_units_6_0=ruleUnit
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getRepositoryLocationRule());
+						}
+						add(
+							$current,
+							"units",
+							lv_units_6_0,
+							"de.dlr.sc.overtarget.language.Overtarget.Unit");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)*
+			    |
+			(
+				otherlv_7='Unit'
+				{
+					newLeafNode(otherlv_7, grammarAccess.getRepositoryLocationAccess().getUnitKeyword_6_1_0());
 				}
+				(
+					(
+						lv_addAll_8_0='addAll;'
+						{
+							newLeafNode(lv_addAll_8_0, grammarAccess.getRepositoryLocationAccess().getAddAllAddAllKeyword_6_1_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getRepositoryLocationRule());
+							}
+							setWithLastConsumed($current, "addAll", lv_addAll_8_0 != null, "addAll;");
+						}
+					)
+				)
 			)
-		)*
-		otherlv_7='}'
+		)
+		otherlv_9='}'
 		{
-			newLeafNode(otherlv_7, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_7());
+			newLeafNode(otherlv_9, grammarAccess.getRepositoryLocationAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;

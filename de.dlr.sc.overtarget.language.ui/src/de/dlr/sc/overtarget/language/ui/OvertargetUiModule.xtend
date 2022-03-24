@@ -13,6 +13,8 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 import de.dlr.sc.overtarget.language.ide.KeywordsSemanticHighlightingCalculator
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.ui.editor.XtextEditor
+import de.dlr.sc.overtarget.language.ui.editor.OvertargetXtextEditor
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -21,5 +23,9 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 class OvertargetUiModule extends AbstractOvertargetUiModule {
 	def Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator () {
 		KeywordsSemanticHighlightingCalculator
+	}
+	
+	def Class <? extends XtextEditor> bindXtextEditor() {
+		OvertargetXtextEditor
 	}
 }

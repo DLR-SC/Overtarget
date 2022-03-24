@@ -48,6 +48,7 @@ In an existing project create a new file and add the file extension ".tmodel".
 
 |A tmodel file starts with the keyword "Target" followed by the name of the tmodel. 
 Within the curly brackets you can define your tmodel the way you like. 
+When a repository location should include all of its units, the keyword "addAll" can be used.
 A target file is automatically generated when saving the tmodel file.
  |
 
@@ -121,17 +122,22 @@ and shows errors in the tmodel file. It is not possible to generate a target wit
 Overtarget solves the problem by generating a targetForReferences. This target includes the repository locations 
 which lead to the unresolved references. By setting this target as active target, the references are 
 then resolved. In order to generate a targetForReferences, the repositoryLocation to the 
-referenced target has to be added with the keyword "ReferencedTarget".
+referenced target has to be added with the keyword "ReferencedTarget". Overtarget offers a quick fix to create a placeholder 
+for a ReferencedTarget.
 
-[cols="62a,40a"]
+
+[cols="50a,50a"]
 |===
+
+| There is a quick fix to create a placeholder for a ReferencedTarget. After executing the quick fix, 
+the name and url of the repositoryLocation and the unit which leads to the unresolved references.
+|image:quickfix_placeholder.png[Quick fix placeholder]
+_Quick fix to create placeholder_
 
 |There is a quick fix which suggests to generate a targetForReferences. 
 Executing that quick fix will generate a targetForReferences. 
-The target will also be set as an active target to resolve all references. |
-
-image:generateReferencedTarget.png[Generate referencedTarget]
-
+The target will also be set as an active target to resolve all references. 
+|image:generateReferencedTarget.png[Generate referencedTarget]
 _Generate targetForReferences_
 
 |===
@@ -140,6 +146,8 @@ Now there should no longer be problems with unresolved references in the actual 
 without complications and then be set as the active target platform. 
 
 NOTE: If there are still unresolved references, please check if you need to add dependencies to the manifest file.
+
+<<<
 
 === Updating versions
 

@@ -16,12 +16,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import java.util.ArrayList
 import org.eclipse.core.resources.IFile
 import de.dlr.sc.overtarget.language.generator.OvertargetGenerator
+import de.dlr.sc.overtarget.language.util.TargetFileHandler
 
 /**
  * This class processes the model data for generation
  */
 class ReferencedTargetHelper {
-	public static val TARGET_NAME = "targetForReferences"
+	public static val TARGET_FOR_REFERENCES_NAME = "targetForReferences"
 	
 	/**
 	 * This method copies the original tmodel and
@@ -51,7 +52,7 @@ class ReferencedTargetHelper {
 	}
 
 	def renameTmodel(TargetModel model) {
-		val renamedTmodel = TARGET_NAME
+		val renamedTmodel = TARGET_FOR_REFERENCES_NAME
 		model.name = renamedTmodel
 		return model.name
 		}
@@ -77,48 +78,6 @@ class ReferencedTargetHelper {
 			return false
 		}
 	}
-
-/**
-	 * In the project the targetFile is searched with the outputPath.
-	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
-	 * 
-	 * @param file targetFile which is searched for
-	 * @param outputDirectory output directory of generated targetFile
-	 * @param fileName name of the tmodel/targetFile
-	 * @return targetFile
-	 */
-	def findTargetFileInProject(IFile file, String outputDirectory, String fileName) {
-		val project = file.getProject
-		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
-		val outputPath = outputDirectory.toString.replaceFirst(".","")
-		if (outputPath.equals("/")) {
-			val targetFile = project.getFile(targetFileName)
-			if (targetFile.exists){
-				return targetFile
-			}
-		} else {
-			val targetPath = outputPath + targetFileName
-			val targetFileWithFolder = project.getFile(targetPath)
-			if (targetFileWithFolder.exists){
-				return targetFileWithFolder
-			}
-		}
-	}
-
-
-	/**
-	 * In the project the targetFile is searched with the outputPath.
-	 * Checks if the targetFile is located directly in the project folder or in an extra folder.
-	 * 
-	 * @param file targetFile which is searched for
-	 * @param outputDirectory output directory of generated targetFile
-	 * @return targetFile
-	 */
-	def findTargetFileInProject(IFile file, String outputDirectory) {
-		val fileName = "/" + file.name
-		val targetFileName = fileName.replace(".tmodel", OvertargetGenerator.TARGET_FILE_EXTENSION)
-		return findTargetFileInProject(file, outputDirectory, targetFileName)
-	}
 	
 	/**
 	 * In the project the targetForReferences file is searched with the outputPath.
@@ -129,7 +88,8 @@ class ReferencedTargetHelper {
 	 * @return targetForReferences 
 	 */
 	def findTargetForReferencesFile(IFile file, String outputDirectory) {
-		val fileName = "/" + TARGET_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
-		return findTargetFileInProject(file, outputDirectory, fileName)
+		val fileName = TARGET_FOR_REFERENCES_NAME + OvertargetGenerator.TARGET_FILE_EXTENSION
+		val targetFileHandler = new TargetFileHandler
+		return targetFileHandler.findTargetFile(file, outputDirectory, fileName)
 	}
 }

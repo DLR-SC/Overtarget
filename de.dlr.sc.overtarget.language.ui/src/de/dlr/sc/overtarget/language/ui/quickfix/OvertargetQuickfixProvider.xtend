@@ -25,12 +25,11 @@ import de.dlr.sc.overtarget.language.util.TargetPlatformHelper
 import de.dlr.sc.overtarget.language.generator.util.ReferencedTargetHelper
 import org.eclipse.ui.IFileEditorInput
 import org.eclipse.core.runtime.NullProgressMonitor
-import de.dlr.sc.overtarget.language.targetmodel.TargetModel
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
+import org.eclipse.swt.widgets.Display
+import org.eclipse.swt.widgets.MessageBox
+import org.eclipse.swt.SWT
 import com.google.inject.Inject
-import de.dlr.sc.overtarget.language.targetmodel.TargetLibrary
-import de.dlr.sc.overtarget.language.targetmodel.TargetFile
+import de.dlr.sc.overtarget.language.util.TargetFileHandler
 
 /**
  * Custom quickfixes.
@@ -42,7 +41,6 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	OvertargetGrammarAccess grammarAccess
 	
-
 	@Fix(OvertargetValidator.DEPRECATED_WS_STATEMENT)
 	def fixDeprecatedWsStatement(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, 'Fix Working System', 'Replace with correct Windowing System.', 'upcase.png') [
@@ -54,6 +52,26 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 			val xtextDocument = context.xtextDocument
 			xtextDocument.replace(issue.offset - WHITESPACE_SEPARATOR - deprecatedWorkingSystemKeyword.length, deprecatedWorkingSystemKeyword.length, windowingSystemKeyword)
 		]
+	}
+	
+	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
+	def fixPlaceholderForReferencedTarget(Issue issue, IssueResolutionAcceptor acceptor) {
+		val placeholder = "\n\t" + "ReferencedTarget RepositoryLocation <placeholder:virsat> url \"<location>\" {" 
+		+ "\n \t \t" 
+		+ "// add necessary Units here;"
+		+ "\n \t}" 
+		acceptor.accept(issue, 'Create placeholder for referencedTarget', '', '',
+			new IModification() {
+				override apply(IModificationContext context) throws Exception {
+					val editor = PlatformUI.workbench.activeWorkbenchWindow.activePage.activeEditor
+					if (editor instanceof ITextEditor) {
+						val dp = editor.getDocumentProvider()
+						val doc = dp.getDocument(editor.getEditorInput())
+						val offset = doc.getLineOffset(doc.getNumberOfLines() - 1)
+						doc.replace(offset, 0, placeholder + "\n")
+					}
+				}
+			}, 1)
 	}
 	
 	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
@@ -73,24 +91,38 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 						editor.doSave(progressMonitor) //saves the made changes in the file
 						val ite = editor as ITextEditor
 						val input = ite.editorInput
+						
 						genHandler.runGeneration(input);
 						
 						//find targetForReferences.target in directory and set it as active target
 						val fileEditorInput = input as IFileEditorInput
 						val file = fileEditorInput.file
-						val outputDirectory = genHandler.getOutputConfigurations(input)
-						val targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory)
-						targetPlatHelper.asActiveTarget = targetForReferencesFile;
 						
-						genHandler.runGeneration(input);
+						val targetFileHandler = new TargetFileHandler
+						val model = targetFileHandler.getTmodel(file, null)
+
+						//check if a referencedTarget is set
+						val referencedTarget = model.repositoryLocations.findFirst[isReferencedTarget]
+						if (referencedTarget === null) { // if no referencedTarget is set -> errorMessage
+							val errorMessage = new MessageBox(
+								Display.getCurrent().getActiveShell(), 
+								SWT::OK + SWT::ICON_INFORMATION
+								);
+							errorMessage.setText("Could not generate a ReferencedTarget!");
+							errorMessage.setMessage("Please specify one of the RepositoryLocations as ReferencedTarget container! (See Section 6.1 of the user manual for more information)");
+							errorMessage.open();
+						} else if (referencedTarget.referencedTarget) { // if referencedTarget set -> generate referencedTarget and set it
+							val outputDirectory = genHandler.getOutputConfigurations(input)
+							val targetForReferencesFile = refTargetHelper.findTargetForReferencesFile(file, outputDirectory)
+							targetPlatHelper.asActiveTarget = targetForReferencesFile;
+							
+							genHandler.runGeneration(input);
+						}
 					}
 				}
 			}
 		}, 1)
 	}
-	
-	@Inject
-	IResourceSetProvider resourceSetProvider
 	
 	@Fix(OvertargetValidator.FILE_NAME_LIKE_TARGET_NAME)
 	def fixFileNameLikeTargetName(Issue issue, IssueResolutionAcceptor acceptor) {
@@ -106,20 +138,8 @@ class OvertargetQuickfixProvider extends DefaultQuickfixProvider {
 				val fileEditorInput = input as IFileEditorInput
 				val file = fileEditorInput.file
 				val fileName = file.name.replace(".tmodel", "")
-
-				val uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-				val project = file.getProject();
-				val rs = resourceSetProvider.get(project);
-				val r = rs.getResource(uri, true);
-				val model = r.contents.get(0) as TargetFile
-				
 				val xtextDocument = context.xtextDocument
-				
-				if (model instanceof TargetModel) {
-					xtextDocument.replace(issue.offset, issue.length, fileName)
-				} else if (model instanceof TargetLibrary) {
-					xtextDocument.replace(issue.offset, issue.length, fileName)
-				}
+				xtextDocument.replace(issue.offset, issue.length, fileName)
 			}
 		]
 	}

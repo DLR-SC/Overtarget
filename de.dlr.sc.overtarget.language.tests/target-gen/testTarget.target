@@ -4,7 +4,7 @@
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="parentTargetUnit" version="0.0.0"/>
 		<repository location="test/parentTarget.tmodel"/>
-		</location>              
+		</location>
 		</locations>
 		<environment>
 		<os></os>
