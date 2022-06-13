@@ -25,7 +25,7 @@ Require-Bundle: org.eclipse.xtext,
  com.google.guava,
  org.eclipse.pde,
  org.eclipse.pde.core
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: de.dlr.sc.overtarget.language,
  de.dlr.sc.overtarget.language.generator,
  de.dlr.sc.overtarget.language.generator.util,

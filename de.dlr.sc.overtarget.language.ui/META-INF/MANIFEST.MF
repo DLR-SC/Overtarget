@@ -27,7 +27,7 @@ Require-Bundle: de.dlr.sc.overtarget.language,
  org.eclipse.e4.ui.di,
  org.eclipse.pde,
  org.eclipse.pde.core
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: de.dlr.sc.overtarget.language.ui,
  de.dlr.sc.overtarget.language.ui.contentassist,
  de.dlr.sc.overtarget.language.ui.editor,

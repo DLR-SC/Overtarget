@@ -38,7 +38,7 @@ jobs:
   # -----------------------------------------------------
   spotbugs:
     name: Build and Test - Spotbugs
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
       # --------------------------------------------
@@ -66,9 +66,9 @@ jobs:
       # Perform various setup operations
       # --------------------------------------------      
       - name: Setup - Prepare OS
-        uses: virtualsatellite/ci-actions/ci-setup-action@v2
+        uses: virtualsatellite/ci-actions/ci-setup-action@v5-beta
         with:
-           pkgs_file: apt_vtk_zmq_packages
+           jdk: 11
 
       # --------------------------------------------
       # Development and Feature branches
@@ -91,7 +91,7 @@ jobs:
   # -----------------------------------------------------
   surefire:
     name: Build and Test - Surefire
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
       # --------------------------------------------
@@ -119,7 +119,9 @@ jobs:
       # Perform various setup operations
       # --------------------------------------------      
       - name: Setup - Prepare OS
-        uses: virtualsatellite/ci-actions/ci-setup-action@v2
+        uses: virtualsatellite/ci-actions/ci-setup-action@v5-beta
+        with:
+           jdk: 11
        
       # --------------------------------------------
       # Development and Feature branches
@@ -164,7 +166,7 @@ jobs:
   # -----------------------------------------------------
   checkstyle:
     name: Build and Test - Checkstyle
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
       # --------------------------------------------
@@ -192,9 +194,9 @@ jobs:
       # Perform various setup operations
       # --------------------------------------------      
       - name: Setup - Prepare OS
-        uses: virtualsatellite/ci-actions/ci-setup-action@v2
+        uses: virtualsatellite/ci-actions/ci-setup-action@v5-beta
         with:
-           pkgs_file: apt_vtk_zmq_packages
+           jdk: 11
 
       # --------------------------------------------
       # Development and Feature branches
@@ -217,7 +219,7 @@ jobs:
   # -----------------------------------------------------
   deploy:
     name: Build, Assemble and Deploy
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     needs: [spotbugs, surefire, checkstyle]
     
     steps:
@@ -246,7 +248,9 @@ jobs:
       # Perform various setup operations
       # --------------------------------------------
       - name: Setup - Prepare OS
-        uses: virtualsatellite/ci-actions/ci-setup-action@v2
+        uses: virtualsatellite/ci-actions/ci-setup-action@v5-beta
+        with:
+           jdk: 11
    
       # --------------------------------------------
       # Development and Feature branches
@@ -259,7 +263,7 @@ jobs:
       # Development and Feature branches
       # --------------------------------------------
       - name: Build - Assemble
-        uses: virtualsatellite/ci-actions/ci-maven-simple-build-action@v2
+        uses: virtualsatellite/ci-actions/ci-maven-simple-build-action@v5-beta
         with:
           build_job: assemble
           build_profile: ${{ steps.build_decision.outputs.build_type }}
