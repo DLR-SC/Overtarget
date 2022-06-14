@@ -24,7 +24,7 @@ Overtarget lets you define your dependencies in textual *.tmodel* file. Every ch
 ## Requirements 
 
 Overtarget is based on Java / Eclipse and provides an installable feature with plug-ins for your personal eclipse IDE. The following infrastructure is required:
- - Java Development Kit (JDK) 8
+ - Java Development Kit (JDK) 11
  - Eclipse Oxygen or newer
    - Including Checkstyle
    - Including Spotbugs
