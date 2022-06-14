@@ -6,6 +6,7 @@
 
 Overtarget is an eclipse plug-in that helps you managing your target platform files with dependencies across project boundaries.
 
+
 ## Project Status
 
 Status [![Build Status](https://github.com/DLR-SC/Overtarget/workflows/Build/badge.svg?branch=development)](https://github.com/DLR-SC/Overtarget/actions) [![Coverage Status](https://codecov.io/gh/DLR-SC/overtarget/branch/development/graph/badge.svg)](https://codecov.io/gh/DLR-SC/overtarget) [![Download overtarget](https://img.shields.io/sourceforge/dt/overtarget.svg)](https://sourceforge.net/projects/overtarget/files/development/) for *Development* build.
@@ -23,7 +24,7 @@ Overtarget lets you define your dependencies in textual *.tmodel* file. Every ch
 ## Requirements 
 
 Overtarget is based on Java / Eclipse and provides an installable feature with plug-ins for your personal eclipse IDE. The following infrastructure is required:
- - Java Development Kit (JDK) 8
+ - Java Development Kit (JDK) 11
  - Eclipse Oxygen or newer
    - Including Checkstyle
    - Including Spotbugs
